@@ -43,6 +43,15 @@ export default function LoadingScreen() {
   const [burstActive, setBurstActive] = useState(false);
   const [flashActive, setFlashActive] = useState(false);
   const rafRef = useRef<number>(0);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const doneRef = useRef(false);
+
+  const finish = () => {
+    if (doneRef.current) return;
+    doneRef.current = true;
+    timersRef.current.forEach(clearTimeout);
+    setPhase("done");
+  };
 
   useEffect(() => {
     const already = sessionStorage.getItem("nuu-loaded");
@@ -53,33 +62,46 @@ export default function LoadingScreen() {
     sessionStorage.setItem("nuu-loaded", "1");
     setPhase("playing");
 
-    // Pre-slide (0) → Slide 1 (1) → Slide 2 (2) → Logo reveal (3)
-    // Timings: 2200, 3200, 3200, 2500
-    const durations = [2200, 3200, 3200, 2500];
+    // Skip on any scroll or touch — user wants to see the site
+    const onSkip = () => finish();
+    window.addEventListener("wheel", onSkip, { once: true, passive: true });
+    window.addEventListener("touchmove", onSkip, { once: true, passive: true });
+    window.addEventListener("keydown", onSkip, { once: true });
+
+    // Reduced timings: 1400 / 2000 / 2000 / 1600 = ~7s total (was 11.9s)
+    const durations = [1400, 2000, 2000, 1600];
     let current = 0;
+
+    const t = (fn: () => void, ms: number) => {
+      const id = setTimeout(fn, ms);
+      timersRef.current.push(id);
+      return id;
+    };
 
     const advance = () => {
       current++;
       if (current < 4) {
-        // Flash between slides
         setFlashActive(true);
-        setTimeout(() => setFlashActive(false), 160);
-
+        t(() => setFlashActive(false), 160);
         setSlide(current);
         if (current === 3) {
-          // Trigger particle burst for logo reveal
-          setTimeout(() => setBurstActive(true), 600);
-          setTimeout(() => setBurstActive(false), 1800);
+          t(() => setBurstActive(true), 600);
+          t(() => setBurstActive(false), 1800);
         }
-        setTimeout(advance, durations[current]);
+        t(advance, durations[current]);
       } else {
-        setTimeout(() => setPhase("done"), 800);
+        t(() => finish(), 600);
       }
     };
 
-    setTimeout(advance, durations[0]);
+    t(advance, durations[0]);
 
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      window.removeEventListener("wheel", onSkip);
+      window.removeEventListener("touchmove", onSkip);
+      window.removeEventListener("keydown", onSkip);
+      timersRef.current.forEach(clearTimeout);
+    };
   }, []);
 
   const show = phase !== "done";
