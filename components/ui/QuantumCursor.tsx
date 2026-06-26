@@ -9,6 +9,8 @@ export default function QuantumCursor() {
   const [state, setState] = useState<CursorState>("default");
   const [label, setLabel] = useState("");
   const [visible, setVisible] = useState(false);
+  const isTouch = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  if (isTouch) return null;
   const dotX = useMotionValue(0);
   const dotY = useMotionValue(0);
   const ringX = useSpring(dotX, { stiffness: 180, damping: 22 });

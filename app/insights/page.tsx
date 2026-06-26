@@ -1,7 +1,5 @@
-import { getAllPosts } from "@/lib/content";
-import InsightsFeed from "@/components/insights/InsightsFeed";
+import { redirect } from "next/navigation";
 
 export default function InsightsPage() {
-  const posts = getAllPosts();
-  return <InsightsFeed posts={posts} />;
+  redirect("/");
 }

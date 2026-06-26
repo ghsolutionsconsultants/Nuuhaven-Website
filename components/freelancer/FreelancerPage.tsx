@@ -208,7 +208,7 @@ export default function FreelancerPage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "1.5rem" }}>
             {WHY.map((item, i) => (
               <motion.div key={item.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}>
-                <HolographicCard style={{ padding: "2rem", height: "100%" }}>
+                <HolographicCard style={{ padding: isMobile ? "1.25rem" : "2rem", height: "100%" }}>
                   <div style={{ fontSize: "1.5rem", color: "var(--accent)", marginBottom: "1.25rem" }}>{item.icon}</div>
                   <h3 style={{ fontWeight: 700, fontSize: "1rem", marginBottom: "0.75rem" }}>{item.title}</h3>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.875rem", lineHeight: 1.85 }}>{item.desc}</p>

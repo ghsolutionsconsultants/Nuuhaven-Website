@@ -13,7 +13,6 @@ const leftLinks = [
 ];
 
 const rightLinks = [
-  { href: "/insights", label: "Insights" },
   { href: "/tools", label: "Free Tools" },
   { href: "/freelancer", label: "Freelancer?" },
 ];
