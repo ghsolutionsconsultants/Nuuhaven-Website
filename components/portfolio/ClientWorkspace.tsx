@@ -140,16 +140,27 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                   </a>
                 </div>
                 <div
-                  className="flex-1 rounded-xl overflow-hidden"
+                  className="flex-1 rounded-xl overflow-hidden relative"
                   style={{ minHeight: 400, border: "1px solid var(--border-subtle)" }}
                 >
                   <iframe
                     src={client.url}
-                    className="w-full h-full border-0"
+                    className="border-0 previewer-frame"
                     title={client.name}
-                    style={{ minHeight: 400 }}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "166.67%",
+                      maxWidth: "none",
+                      height: "166.67%",
+                      transform: "scale(0.6)",
+                      transformOrigin: "top left",
+                      pointerEvents: "none",
+                    }}
                     sandbox="allow-scripts allow-same-origin allow-forms"
                   />
+                  <div className="absolute inset-0" style={{ zIndex: 1 }} />
                 </div>
               </div>
             )}

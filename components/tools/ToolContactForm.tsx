@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface ToolContactFormProps {
   toolName: string;
@@ -15,6 +16,7 @@ interface ToolContactFormProps {
 function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<ToolContactFormProps, "inline">) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const isMobile = useIsMobile();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,10 +64,10 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
           <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.8, maxWidth: "26rem", margin: "0 auto 2.5rem" }}>
             We&apos;ve received your {toolName} results. Tshepang will personally review them and respond within 24 hours with specific recommendations.
           </p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/work" className="btn-accent" style={{ fontSize: "0.8rem" }}>See Our Work →</Link>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "0.875rem", justifyContent: "center", alignItems: "center" }}>
+            <Link href="/work" className="btn-accent" style={{ fontSize: "0.8rem", textAlign: "center", width: isMobile ? "100%" : "auto" }}>See Our Work →</Link>
             {onReset && (
-              <button onClick={onReset} className="btn-outline" style={{ fontSize: "0.8rem" }}>Start Over ↺</button>
+              <button onClick={onReset} className="btn-outline" style={{ fontSize: "0.8rem", width: isMobile ? "100%" : "auto" }}>Start Over ↺</button>
             )}
           </div>
         </motion.div>
@@ -100,7 +102,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
           )}
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "0.75rem" }}>
               {[
                 { id: "name", label: "Full Name *", type: "text", required: true, placeholder: "Jane Smith" },
                 { id: "email", label: "Email Address *", type: "email", required: true, placeholder: "jane@business.co.za" },
@@ -154,16 +156,16 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
               </p>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap", paddingTop: "0.25rem" }}>
+            <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "stretch" : "center", justifyContent: "space-between", gap: "0.875rem", paddingTop: "0.25rem" }}>
               <button
                 type="submit"
                 disabled={status === "sending"}
                 className="btn-accent"
-                style={{ padding: "0.9rem 2.25rem", fontSize: "0.875rem", opacity: status === "sending" ? 0.7 : 1 }}
+                style={{ padding: "0.9rem 2.25rem", fontSize: "0.875rem", opacity: status === "sending" ? 0.7 : 1, textAlign: "center" }}
               >
                 {status === "sending" ? "Sending…" : "Send My Results & Get a Plan →"}
               </button>
-              <p style={{ color: "var(--text-muted)", fontSize: "0.7rem", lineHeight: 1.6 }}>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.7rem", lineHeight: 1.6, textAlign: isMobile ? "center" : "right" }}>
                 Replied within 24 hours · Subject to conflict assessment
               </p>
             </div>

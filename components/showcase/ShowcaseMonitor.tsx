@@ -171,14 +171,27 @@ export default function ShowcaseMonitor() {
                         </a>
                       </div>
                     ) : (
-                      <iframe
-                        src={active.url}
-                        className="w-full h-full border-0"
-                        title={active.name}
-                        onError={() => setIframeError(true)}
-                        style={{ pointerEvents: "auto" }}
-                        sandbox="allow-scripts allow-same-origin allow-forms"
-                      />
+                      <>
+                        <iframe
+                          src={active.url}
+                          className="border-0 previewer-frame"
+                          title={active.name}
+                          onError={() => setIframeError(true)}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "166.67%",
+                            maxWidth: "none",
+                            height: "166.67%",
+                            transform: "scale(0.6)",
+                            transformOrigin: "top left",
+                            pointerEvents: "none",
+                          }}
+                          sandbox="allow-scripts allow-same-origin allow-forms"
+                        />
+                        <div className="absolute inset-0" style={{ zIndex: 1 }} />
+                      </>
                     )}
                   </motion.div>
                 )}
