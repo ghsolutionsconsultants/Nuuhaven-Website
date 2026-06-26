@@ -14,9 +14,8 @@ const leftLinks = [
 
 const rightLinks = [
   { href: "/insights", label: "Insights" },
-  { href: "/tools", label: "Tools" },
+  { href: "/tools", label: "Free Tools" },
   { href: "/freelancer", label: "Freelancer?" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {

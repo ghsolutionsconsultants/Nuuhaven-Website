@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import HolographicCard from "@/components/ui/HolographicCard";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const values = [
   {
@@ -37,10 +38,11 @@ const values = [
 ];
 
 export default function WhyNuuhaven() {
+  const isMobile = useIsMobile();
   return (
     <section className="section" style={{ background: "var(--bg-secondary)" }}>
       <div className="section-inner">
-        <div className="flex flex-col lg:flex-row gap-20">
+        <div className={`flex flex-col lg:flex-row ${isMobile ? "gap-10" : "gap-20"}`}>
           <div className="lg:w-2/5 lg:sticky lg:top-24 lg:self-start">
             <div className="accent-line">
               <span className="label-mono">Why Nuuhaven</span>
@@ -53,7 +55,7 @@ export default function WhyNuuhaven() {
             </p>
           </div>
 
-          <div className="lg:w-3/5 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className={`lg:w-3/5 grid grid-cols-1 sm:grid-cols-2 ${isMobile ? "gap-4" : "gap-8"}`}>
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
@@ -62,7 +64,7 @@ export default function WhyNuuhaven() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.6, delay: i * 0.07 }}
               >
-                <HolographicCard className="h-full" style={{ padding: "2.5rem" }}>
+                <HolographicCard className="h-full" style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
                   <div
                     className="font-mono font-bold text-2xl"
                     style={{ color: "rgba(223,255,0,0.35)", marginBottom: "2rem" }}

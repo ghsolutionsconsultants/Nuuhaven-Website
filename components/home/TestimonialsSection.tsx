@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import HolographicCard from "@/components/ui/HolographicCard";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const testimonials = [
   {
@@ -11,10 +12,10 @@ const testimonials = [
     initials: "NS",
   },
   {
-    quote: "From day one, Tshepang understood our vision. The company profile and marketing materials opened doors we didn't think possible at our stage of growth.",
-    name: "Client, Lona Premium Shuttles",
-    industry: "Transportation & Mobility",
-    initials: "LP",
+    quote: "Nuuhaven brought our outdoor cinema brand to life. The identity, marketing materials, and website perfectly captured the cinematic experience we deliver.",
+    name: "Client, Outdoor Movie Nights",
+    industry: "Entertainment & Events",
+    initials: "OM",
   },
   {
     quote: "Working with Nuuhaven was a game-changer. Our billboard and advertising business finally looks as serious as we are. The digital presence speaks for itself.",
@@ -22,20 +23,27 @@ const testimonials = [
     industry: "Outdoor Advertising",
     initials: "HM",
   },
+  {
+    quote: "From day one, Tshepang understood our vision. The company profile and marketing materials opened doors we didn't think possible at our stage of growth.",
+    name: "Client, Lona Premium Shuttles",
+    industry: "Transportation & Mobility",
+    initials: "LP",
+  },
 ];
 
 export default function TestimonialsSection() {
+  const isMobile = useIsMobile();
   return (
     <section className="section" style={{ background: "var(--bg-primary)" }}>
       <div className="section-inner">
         <div className="accent-line">
           <span className="label-mono">Client Voices</span>
         </div>
-        <h2 className="display-xl" style={{ maxWidth: "18ch", marginBottom: "5rem" }}>
+        <h2 className="display-xl" style={{ maxWidth: "18ch", marginBottom: isMobile ? "2.5rem" : "5rem" }}>
           Results That<br />Speak For<br />Themselves.
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -44,16 +52,16 @@ export default function TestimonialsSection() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
-              <HolographicCard className="h-full flex flex-col" style={{ padding: "2.5rem" }}>
+              <HolographicCard className="h-full flex flex-col" style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
                 {/* Stars */}
-                <div className="flex gap-1.5 mb-7">
+                <div className="flex gap-1.5 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <span key={j} style={{ color: "var(--accent)", fontSize: "0.85rem" }}>★</span>
                   ))}
                 </div>
 
                 <blockquote
-                  className="text-sm flex-1 mb-9 italic"
+                  className="text-sm flex-1 mb-5 italic"
                   style={{ color: "var(--text-muted)", lineHeight: 2 }}
                 >
                   &ldquo;{t.quote}&rdquo;

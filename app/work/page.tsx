@@ -1,21 +1,23 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
+// Gantt: Jan 2026 (0) → Jun 2026 (5), total 6 months
 const CLIENTS = [
   {
     id: "nucleus",
     name: "Nucleus Systems",
     code: "NUC-001",
     industry: "Technology",
-    status: "Active Retainer",
+    status: "Ongoing",
     statusColor: "#dfff00",
     phase: "Retainer",
     progress: 100,
-    startDate: "Mar 2024",
+    startDate: "Jan 2026",
     endDate: "Ongoing",
     lastUpdate: "Jun 2026",
     nextMilestone: "Content refresh, Jul 2026",
@@ -27,11 +29,10 @@ const CLIENTS = [
     challenge: "Nucleus needed to enter the market with a credible, professional presence to compete with established players, they had the expertise but lacked the visual identity to communicate it.",
     services: ["Visual Brand Identity","Corporate Website","Social Media Setup","Marketing Collateral","Corporate Documentation","Content Development","Ongoing Retainer"],
     outcomes: ["Professional market presence from day one","Clear communication of value proposition","Integrated brand ecosystem across all touchpoints","Project evolved into a long-term retainer"],
-    colors: ["#000000","#ffffff","#1a1a2e"],
-    colorNames: ["Black","White","Navy"],
-    // Gantt: months from Jan 2024 (0-indexed)
-    ganttStart: 2,  // Mar 2024
-    ganttEnd: 30,   // Jun 2026 (ongoing)
+    colors: ["#ffffff","#1a6bff","#ff6b00"],
+    colorNames: ["White","Blue","Orange"],
+    ganttStart: 0,  // Jan 2026
+    ganttEnd: 6,    // ongoing
     isOngoing: true,
     timeline: [
       { label: "Discovery", done: true, date: "Mar 2024" },
@@ -47,17 +48,95 @@ const CLIENTS = [
     ],
   },
   {
+    id: "omn",
+    name: "Outdoor Movie Nights",
+    code: "OMN-004",
+    industry: "Entertainment",
+    status: "Ongoing",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Jun 2026",
+    endDate: "Ongoing",
+    lastUpdate: "Jun 2026",
+    nextMilestone: "Season 2 collateral",
+    health: "green",
+    url: "https://outdoormovienights.co.za",
+    accent: "#e63946",
+    tagline: "Cinematic brand and digital presence for South Africa's outdoor film experience.",
+    about: "Outdoor Movie Nights brings premium cinema experiences to outdoor venues, parks, estates, and corporate events.",
+    challenge: "Capturing the magic of outdoor cinema in every brand touchpoint, from website to social to event proposals.",
+    services: ["Event Branding & Identity","Marketing Assets","Event Proposal Design","Website Development","Social Media Assets"],
+    outcomes: ["Distinctive cinematic brand identity","Professional proposals enabling corporate bookings","Strong digital presence for event discovery","Consistent visual language across all touchpoints"],
+    colors: ["#ffffff","#e63946","#d4af37"],
+    colorNames: ["White","Red","Gold"],
+    ganttStart: 5,  // Jun 2026
+    ganttEnd: 6,
+    isOngoing: true,
+    timeline: [
+      { label: "Discovery", done: true, date: "Jun 2026" },
+      { label: "Brand Identity", done: true, date: "Jun 2026" },
+      { label: "Website & Social", done: true, date: "Jun 2026" },
+      { label: "Event Collateral", done: true, date: "Jun 2026" },
+      { label: "Launch", done: true, date: "Jun 2026" },
+    ],
+    activity: [
+      { text: "Season 2 collateral scoping started", time: "Jun 2026", type: "review" },
+      { text: "Website launched", time: "Jun 2026", type: "milestone" },
+      { text: "Brand identity approved", time: "Jun 2026", type: "milestone" },
+    ],
+  },
+  {
+    id: "hlophe",
+    name: "Hlophe Outdoor Media",
+    code: "HOM-003",
+    industry: "Advertising",
+    status: "Ongoing",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Mar 2026",
+    endDate: "Ongoing",
+    lastUpdate: "Jun 2026",
+    nextMilestone: "Scope expansion discussion",
+    health: "green",
+    url: "https://hlophemedia.co.za",
+    accent: "#7c3aed",
+    tagline: "Township-focused outdoor advertising brand built for corporate credibility.",
+    about: "Hlophe Outdoor Media operates billboards and media spaces in township markets across South Africa, competing credibly in the broader advertising industry.",
+    challenge: "A clear vision with no brand to back it. They needed to present professionally to corporate advertisers.",
+    services: ["Brand Identity Development","Corporate Website","Social Media Setup","Company Profile","Marketing Materials","Branded Digital Assets"],
+    outcomes: ["Early-stage concept transformed into branded organisation","Credible presence in the advertising industry","Professional communication to corporate clients","Enhanced market perception with larger advertisers"],
+    colors: ["#ffffff","#7c3aed","#a855f7"],
+    colorNames: ["White","Royal Purple","Purple"],
+    ganttStart: 2,  // Mar 2026
+    ganttEnd: 6,
+    isOngoing: true,
+    timeline: [
+      { label: "Discovery", done: true, date: "Mar 2026" },
+      { label: "Brand Identity", done: true, date: "Apr 2026" },
+      { label: "Website", done: true, date: "May 2026" },
+      { label: "Collateral", done: true, date: "Jun 2026" },
+      { label: "Launch", done: true, date: "Jun 2026" },
+    ],
+    activity: [
+      { text: "Final deliverables handed over", time: "Jun 2026", type: "milestone" },
+      { text: "Brand guidelines delivered", time: "May 2026", type: "delivery" },
+      { text: "Website development complete", time: "May 2026", type: "delivery" },
+    ],
+  },
+  {
     id: "lona",
     name: "Lona Premium Shuttles",
     code: "LON-002",
     industry: "Transportation",
-    status: "Delivered",
-    statusColor: "#22c55e",
+    status: "Ongoing",
+    statusColor: "#dfff00",
     phase: "Live",
     progress: 100,
-    startDate: "Nov 2024",
-    endDate: "Feb 2025",
-    lastUpdate: "Feb 2025",
+    startDate: "May 2026",
+    endDate: "Ongoing",
+    lastUpdate: "Jun 2026",
     nextMilestone: "Quarterly brand check-in",
     health: "green",
     url: "https://lonapremiumshuttles.com",
@@ -67,100 +146,22 @@ const CLIENTS = [
     challenge: "Lona needed to differentiate through brand quality, positioning themselves as the premium choice in a competitive shuttle market.",
     services: ["Brand Strategy & Visual Identity","Corporate Website","Social Media Setup","Company Profile","Marketing Materials","Branded Digital Assets","Content Creation"],
     outcomes: ["Professional, market-ready brand presence","Entered market with credible premium identity","Consistent visual identity across all touchpoints","Strong brand foundation for long-term growth"],
-    colors: ["#0a0a0a","#d4af37","#ffffff"],
-    colorNames: ["Black","Gold","White"],
-    ganttStart: 10, // Nov 2024
-    ganttEnd: 13,   // Feb 2025
-    isOngoing: false,
+    colors: ["#ffffff","#d4af37","#b8963e"],
+    colorNames: ["White","Gold","Dark Gold"],
+    ganttStart: 4,  // May 2026
+    ganttEnd: 6,
+    isOngoing: true,
     timeline: [
-      { label: "Discovery", done: true, date: "Nov 2024" },
-      { label: "Brand Identity", done: true, date: "Dec 2024" },
-      { label: "Website", done: true, date: "Jan 2025" },
-      { label: "Collateral", done: true, date: "Feb 2025" },
-      { label: "Launch", done: true, date: "Feb 2025" },
+      { label: "Discovery", done: true, date: "May 2026" },
+      { label: "Brand Identity", done: true, date: "May 2026" },
+      { label: "Website", done: true, date: "Jun 2026" },
+      { label: "Collateral", done: true, date: "Jun 2026" },
+      { label: "Launch", done: true, date: "Jun 2026" },
     ],
     activity: [
-      { text: "All deliverables signed off", time: "Feb 2025", type: "milestone" },
-      { text: "Company profile finalised", time: "Feb 2025", type: "delivery" },
-      { text: "Website launched", time: "Jan 2025", type: "milestone" },
-    ],
-  },
-  {
-    id: "hlophe",
-    name: "Hlophe Outdoor Media",
-    code: "HOM-003",
-    industry: "Advertising",
-    status: "Delivered",
-    statusColor: "#22c55e",
-    phase: "Live",
-    progress: 100,
-    startDate: "Sep 2024",
-    endDate: "Dec 2024",
-    lastUpdate: "Dec 2024",
-    nextMilestone: "Scope expansion discussion",
-    health: "green",
-    url: "https://hlophemedia.co.za",
-    accent: "#e63946",
-    tagline: "Township-focused outdoor advertising brand built for corporate credibility.",
-    about: "Hlophe Outdoor Media operates billboards and media spaces in township markets across South Africa, competing credibly in the broader advertising industry.",
-    challenge: "A clear vision with no brand to back it. They needed to present professionally to corporate advertisers.",
-    services: ["Brand Identity Development","Corporate Website","Social Media Setup","Company Profile","Marketing Materials","Branded Digital Assets"],
-    outcomes: ["Early-stage concept transformed into branded organisation","Credible presence in the advertising industry","Professional communication to corporate clients","Enhanced market perception with larger advertisers"],
-    colors: ["#000000","#e63946","#ffffff"],
-    colorNames: ["Black","Red","White"],
-    ganttStart: 8,  // Sep 2024
-    ganttEnd: 11,   // Dec 2024
-    isOngoing: false,
-    timeline: [
-      { label: "Discovery", done: true, date: "Sep 2024" },
-      { label: "Brand Identity", done: true, date: "Oct 2024" },
-      { label: "Website", done: true, date: "Nov 2024" },
-      { label: "Collateral", done: true, date: "Dec 2024" },
-      { label: "Launch", done: true, date: "Dec 2024" },
-    ],
-    activity: [
-      { text: "Final deliverables handed over", time: "Dec 2024", type: "milestone" },
-      { text: "Brand guidelines delivered", time: "Nov 2024", type: "delivery" },
-      { text: "Website development complete", time: "Nov 2024", type: "delivery" },
-    ],
-  },
-  {
-    id: "omn",
-    name: "Outdoor Movie Nights",
-    code: "OMN-004",
-    industry: "Entertainment",
-    status: "Delivered",
-    statusColor: "#22c55e",
-    phase: "Live",
-    progress: 100,
-    startDate: "Jan 2025",
-    endDate: "Mar 2025",
-    lastUpdate: "Mar 2025",
-    nextMilestone: "Season 2 collateral",
-    health: "amber",
-    url: "https://outdoormovienights.co.za",
-    accent: "#ff9500",
-    tagline: "Cinematic brand and digital presence for South Africa's outdoor film experience.",
-    about: "Outdoor Movie Nights brings premium cinema experiences to outdoor venues, parks, estates, and corporate events.",
-    challenge: "Capturing the magic of outdoor cinema in every brand touchpoint, from website to social to event proposals.",
-    services: ["Event Branding & Identity","Marketing Assets","Event Proposal Design","Website Development","Social Media Assets"],
-    outcomes: ["Distinctive cinematic brand identity","Professional proposals enabling corporate bookings","Strong digital presence for event discovery","Consistent visual language across all touchpoints"],
-    colors: ["#0d0d0d","#ff9500","#ffffff"],
-    colorNames: ["Dark","Amber","White"],
-    ganttStart: 12, // Jan 2025
-    ganttEnd: 14,   // Mar 2025
-    isOngoing: false,
-    timeline: [
-      { label: "Discovery", done: true, date: "Jan 2025" },
-      { label: "Brand Identity", done: true, date: "Feb 2025" },
-      { label: "Website & Social", done: true, date: "Feb 2025" },
-      { label: "Event Collateral", done: true, date: "Mar 2025" },
-      { label: "Launch", done: true, date: "Mar 2025" },
-    ],
-    activity: [
-      { text: "Season 1 event proposals delivered", time: "Mar 2025", type: "delivery" },
-      { text: "Website launched", time: "Feb 2025", type: "milestone" },
-      { text: "Brand identity approved", time: "Feb 2025", type: "milestone" },
+      { text: "All deliverables signed off", time: "Jun 2026", type: "milestone" },
+      { text: "Company profile finalised", time: "Jun 2026", type: "delivery" },
+      { text: "Website launched", time: "Jun 2026", type: "milestone" },
     ],
   },
 ];
@@ -172,29 +173,15 @@ const PIPELINE = [
 
 const FEED = [
   { text: "Monthly retainer content delivered", time: "Jun 26, 2026", type: "delivery", client: "Nucleus Systems", clientColor: "#dfff00" },
-  { text: "Retainer renewed, Q3 2026", time: "Jun 1, 2026", type: "milestone", client: "Nucleus Systems", clientColor: "#dfff00" },
   { text: "Proposal sent, Attorney websites", time: "Jun 18, 2026", type: "proposal", client: "Pipeline", clientColor: "#ff9500" },
-  { text: "Quarterly check-in completed", time: "May 22, 2026", type: "meeting", client: "Lona Premium Shuttles", clientColor: "#d4af37" },
-  { text: "Season 2 collateral scoping started", time: "May 10, 2026", type: "review", client: "Outdoor Movie Nights", clientColor: "#ff9500" },
+  { text: "OMN Season 2 scoping started", time: "Jun 10, 2026", type: "review", client: "Outdoor Movie Nights", clientColor: "#e63946" },
+  { text: "HOM deliverables signed off", time: "Jun 5, 2026", type: "milestone", client: "Hlophe Outdoor Media", clientColor: "#7c3aed" },
+  { text: "LPS website launched", time: "Jun 1, 2026", type: "milestone", client: "Lona Premium Shuttles", clientColor: "#d4af37" },
 ];
 
-// ── Gantt months axis: Jan 2024 → Jun 2026 = 30 months total ─────────────────
-const GANTT_TOTAL = 30;
-const GANTT_LABELS = [
-  "Jan '24","","Mar '24","","","Jun '24","","","Sep '24","","","Dec '24",
-  "","","Mar '25","","","Jun '25","","","Sep '25","","","Dec '25",
-  "","","Mar '26","","","Jun '26",
-];
-
-// ── Service distribution data ─────────────────────────────────────────────────
-const SERVICES_DIST = [
-  { name: "Brand Identity", count: 4, color: "#dfff00" },
-  { name: "Website", count: 4, color: "#60a5fa" },
-  { name: "Marketing Assets", count: 4, color: "#e63946" },
-  { name: "Social Media Setup", count: 3, color: "#d4af37" },
-  { name: "Company Profile", count: 2, color: "#ff9500" },
-  { name: "Retainer", count: 1, color: "#a78bfa" },
-];
+// ── Gantt: Jan 2026 → Jun 2026 = 6 months ────────────────────────────────────
+const GANTT_TOTAL = 6;
+const GANTT_LABELS = ["Jan '26", "Feb '26", "Mar '26", "Apr '26", "May '26", "Jun '26"];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function LiveClock() {
@@ -226,7 +213,7 @@ function ProgressRing({ pct, color, size = 60, stroke = 3 }: { pct: number; colo
   );
 }
 
-function DonutChart({ data }: { data: typeof SERVICES_DIST }) {
+function DonutChart({ data }: { data: { name: string; count: number; color: string }[] }) {
   const total = data.reduce((s, d) => s + d.count, 0);
   let offset = 0;
   const cx = 70, cy = 70, r = 52, stroke = 18;
@@ -298,6 +285,7 @@ function SitePortal({ url, accent, name }: { url: string; accent: string; name: 
 
 // ── Dashboard Overview ────────────────────────────────────────────────────────
 function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
+  const isMobile = useIsMobile();
   return (
     <div style={{ padding: "0 0 4rem" }}>
 
@@ -317,25 +305,16 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
       </div>
 
       {/* KPI Cards */}
-      <div style={{ padding: "1.5rem 2rem", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem" }}>
+      <div style={{ padding: isMobile ? "1rem" : "1.5rem 2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(3, 1fr)", gap: "0.75rem" }}>
         {[
           {
             label: "Active Projects",
             value: "4",
-            sub: "All currently live",
+            sub: "All currently ongoing",
             icon: "◈",
             color: "#dfff00",
             bg: "rgba(223,255,0,0.05)",
             border: "rgba(223,255,0,0.15)",
-          },
-          {
-            label: "Active Retainer",
-            value: "1",
-            sub: "Nucleus Systems",
-            icon: "↻",
-            color: "#60a5fa",
-            bg: "rgba(96,165,250,0.05)",
-            border: "rgba(96,165,250,0.15)",
           },
           {
             label: "Industries Served",
@@ -378,12 +357,12 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.5 }}
-        style={{ margin: "0 2rem 1.5rem", background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "hidden" }}
+        style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem", background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "hidden" }}
       >
         <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
             <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: "0.15rem" }}>Project Timeline</div>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>Jan 2024 → Jun 2026 · All active ecosystems</div>
+            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>Jan 2026 → Jun 2026 · All active ecosystems</div>
           </div>
           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "var(--accent)", letterSpacing: "0.1em" }}>4 PROJECTS</div>
         </div>
@@ -483,12 +462,12 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
       </motion.div>
 
       {/* Project Cards Grid */}
-      <div style={{ margin: "0 2rem 1.5rem" }}>
-        <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem" }}>
+        <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
           <div style={{ fontWeight: 700, fontSize: "0.95rem" }}>Client Workspaces</div>
           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>Click any card to open workspace</div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "1rem" }}>
           {CLIENTS.map((c, i) => (
             <motion.button
               key={c.id}
@@ -563,36 +542,8 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
         </div>
       </div>
 
-      {/* Bottom 3-col: Services donut | Pipeline | Activity */}
-      <div style={{ margin: "0 2rem", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-
-        {/* Services Distribution */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-          style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "1.25rem" }}
-        >
-          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: "1rem" }}>Services Delivered</div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
-            <div style={{ position: "relative", flexShrink: 0 }}>
-              <DonutChart data={SERVICES_DIST} />
-              <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.4rem", fontWeight: 900, color: "#fff", lineHeight: 1 }}>18</div>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.48rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase" }}>deliveries</div>
-              </div>
-            </div>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-              {SERVICES_DIST.map((s) => (
-                <div key={s.name} style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: s.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.55)", flex: 1 }}>{s.name}</span>
-                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: s.color }}>{s.count}x</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+      {/* Bottom 2-col: Pipeline | Activity */}
+      <div style={{ margin: isMobile ? "0 1rem" : "0 2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem" }}>
 
         {/* Sales Pipeline */}
         <motion.div
@@ -675,6 +626,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
 
 // ── Client Workspace ──────────────────────────────────────────────────────────
 function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack: () => void }) {
+  const isMobile = useIsMobile();
   return (
     <div>
       {/* Header */}
@@ -697,11 +649,11 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
       </div>
 
       {/* Content */}
-      <div style={{ padding: "2rem", display: "grid", gridTemplateColumns: "1fr 300px", gap: "1.5rem" }}>
+      <div style={{ padding: isMobile ? "1rem" : "2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 300px", gap: "1.5rem" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
 
           {/* Project stats row */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: "0.75rem" }}>
             {[
               { label: "Phase", value: client.phase, color: client.accent },
               { label: "Started", value: client.startDate, color: "rgba(255,255,255,0.7)" },

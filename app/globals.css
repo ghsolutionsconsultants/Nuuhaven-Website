@@ -270,3 +270,20 @@ body {
 :focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
 
 @media (hover: none) { body { cursor: auto; } }
+
+html, body { overflow-x: hidden; }
+img, iframe, video { max-width: 100%; }
+
+@media (max-width: 768px) {
+  .display-xl {
+    font-size: clamp(1.75rem, 8vw, 2.8rem);
+  }
+  .section {
+    padding-left: 1.125rem;
+    padding-right: 1.125rem;
+  }
+  .accent-line { margin-bottom: 1.5rem; }
+
+  /* Prevent fixed-width elements causing overflow */
+  .section-inner { overflow-x: hidden; }
+}

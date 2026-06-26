@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import HolographicCard from "@/components/ui/HolographicCard";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const projects = [
   {
@@ -18,15 +19,15 @@ const projects = [
     outcome: "Full digital ecosystem from ground up, brand, web, social, documentation.",
   },
   {
-    id: "lona",
-    name: "Lona Premium Shuttles",
-    industry: "Transportation & Mobility",
-    status: "Active",
-    statusColor: "#dfff00",
-    services: ["Brand Identity", "Website", "Company Profile", "Email Signature", "Marketing"],
-    url: "https://lonapremiumshuttles.com",
-    accent: "#d4af37",
-    outcome: "Premium brand presence enabling market entry and client acquisition.",
+    id: "omn",
+    name: "Outdoor Movie Nights",
+    industry: "Entertainment & Events",
+    status: "Project",
+    statusColor: "#ff9500",
+    services: ["Event Branding", "Marketing Assets", "Proposal", "Website"],
+    url: "https://outdoormovienights.co.za",
+    accent: "#ff9500",
+    outcome: "Cinematic brand identity and digital presence for outdoor entertainment.",
   },
   {
     id: "hlophe",
@@ -40,15 +41,15 @@ const projects = [
     outcome: "From concept to credible, market-ready outdoor advertising brand.",
   },
   {
-    id: "omn",
-    name: "Outdoor Movie Nights",
-    industry: "Entertainment & Events",
-    status: "Project",
-    statusColor: "#ff9500",
-    services: ["Event Branding", "Marketing Assets", "Proposal", "Website"],
-    url: "https://outdoormovienights.co.za",
-    accent: "#ff9500",
-    outcome: "Cinematic brand identity and digital presence for outdoor entertainment.",
+    id: "lona",
+    name: "Lona Premium Shuttles",
+    industry: "Transportation & Mobility",
+    status: "Active",
+    statusColor: "#dfff00",
+    services: ["Brand Identity", "Website", "Company Profile", "Email Signature", "Marketing"],
+    url: "https://lonapremiumshuttles.com",
+    accent: "#d4af37",
+    outcome: "Premium brand presence enabling market entry and client acquisition.",
   },
 ];
 
@@ -118,6 +119,7 @@ function SitePreviewer({ url, name, accent }: { url: string; name: string; accen
 
 export default function SelectedWork() {
   const [active, setActive] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <section className="section noise-overlay" style={{ background: "var(--bg-primary)" }}>
@@ -150,7 +152,7 @@ export default function SelectedWork() {
                 <SitePreviewer url={p.url} name={p.name} accent={p.accent} />
 
                 {/* Info */}
-                <div style={{ padding: "2.5rem" }}>
+                <div style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
                   <div className="flex items-center justify-between" style={{ marginBottom: "1.5rem" }}>
                     <div className="label-mono" style={{ color: p.accent }}>{p.industry}</div>
                     <div className="flex items-center gap-2">
@@ -178,7 +180,7 @@ export default function SelectedWork() {
                     ))}
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col gap-2 sm:flex-row">
                     <Link href="/work" className="btn-accent text-xs px-4 py-2.5" data-cursor="OPEN">
                       View Workspace
                     </Link>

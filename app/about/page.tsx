@@ -7,6 +7,7 @@ import Link from "next/link";
 import HolographicCard from "@/components/ui/HolographicCard";
 import EcosystemVisualizer from "@/components/widgets/EcosystemVisualizer";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const TIMELINE = [
   {
@@ -81,14 +82,15 @@ const STATS = [
 
 export default function AboutPage() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ background: "var(--bg-primary)", paddingTop: 64 }}>
 
       {/* ── Hero ── */}
-      <section className="noise-overlay" style={{ background: "var(--bg-secondary)", padding: "5rem 0 4.5rem" }}>
+      <section className="section noise-overlay" style={{ background: "var(--bg-secondary)", paddingTop: "5rem", paddingBottom: "4.5rem" }}>
         <div className="section-inner">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "5rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr auto", gap: isMobile ? "2.5rem" : "5rem", alignItems: "center" }}>
 
             {/* Copy */}
             <div style={{ maxWidth: "38rem" }}>
@@ -107,16 +109,16 @@ export default function AboutPage() {
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "2.5rem" }}>
                 The result is a strategic partner unlike any other: one that thinks like a CFO and executes like a creative director.
               </p>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-start" }}>
                 <MagneticButton href="/contact" variant="accent">Work With Us</MagneticButton>
                 <MagneticButton href="/work" variant="outline">See Our Work</MagneticButton>
               </div>
             </div>
 
             {/* Founder card */}
-            <div style={{ flexShrink: 0 }}>
-              <HolographicCard style={{ padding: 0, overflow: "hidden", width: 290 }}>
-                <div style={{ position: "relative", width: 290, height: 340, background: "#0a0a0a" }}>
+            <div style={{ flexShrink: 0, display: "flex", justifyContent: "center" }}>
+              <HolographicCard style={{ padding: 0, overflow: "hidden", width: isMobile ? "100%" : 290, maxWidth: 360 }}>
+                <div style={{ position: "relative", width: "100%", height: 340, background: "#0a0a0a" }}>
                   <Image
                     src="/images/founder.jpg"
                     alt="Tshepang Ramatsoma, Founder & MD, Nuuhaven"
@@ -154,9 +156,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section style={{ background: "var(--bg-primary)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <section className="section" style={{ background: "var(--bg-primary)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingTop: 0, paddingBottom: 0 }}>
         <div className="section-inner">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", padding: "2.75rem 0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", padding: "2.75rem 0" }}>
             {STATS.map((s, i) => (
               <div key={s.label} style={{ textAlign: "center", borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none", padding: "0 2rem" }}>
                 <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "2rem", fontWeight: 800, color: "var(--accent)", marginBottom: "0.5rem", lineHeight: 1 }}>{s.value}</div>
@@ -168,7 +170,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Timeline ── */}
-      <section style={{ padding: "5rem 0", background: "var(--bg-primary)" }}>
+      <section className="section" style={{ background: "var(--bg-primary)", paddingTop: "5rem", paddingBottom: "5rem" }}>
         <div className="section-inner">
           <div className="accent-line" style={{ marginBottom: "1.25rem" }}>
             <span className="label-mono">The Journey</span>
@@ -260,12 +262,12 @@ export default function AboutPage() {
       </section>
 
       {/* ── Strategic Advisory ── */}
-      <section className="noise-overlay" style={{ padding: "5rem 0", background: "var(--bg-secondary)" }}>
+      <section className="section noise-overlay" style={{ background: "var(--bg-secondary)", paddingTop: "5rem", paddingBottom: "5rem" }}>
         <div className="section-inner">
           <div className="accent-line" style={{ marginBottom: "1.25rem" }}>
             <span className="label-mono">Strategic Advisory</span>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4.5rem", alignItems: "start" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2.5rem" : "4.5rem", alignItems: "start" }}>
 
             <div>
               <h2 className="display-xl" style={{ maxWidth: "15ch", marginBottom: "1.75rem" }}>
@@ -308,7 +310,7 @@ export default function AboutPage() {
       <EcosystemVisualizer />
 
       {/* ── CTA ── */}
-      <section className="noise-overlay" style={{ padding: "5rem 0", background: "var(--bg-secondary)" }}>
+      <section className="section noise-overlay" style={{ background: "var(--bg-secondary)", paddingTop: "5rem", paddingBottom: "5rem" }}>
         <div className="section-inner" style={{ textAlign: "center" }}>
           <div className="accent-line" style={{ marginBottom: "1.25rem", justifyContent: "center" }}>
             <span className="label-mono">Ready?</span>

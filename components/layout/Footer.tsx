@@ -272,6 +272,32 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* ── Conflict of Interest Notice ── */}
+        <div
+          style={{
+            borderTop: "1px solid rgba(255,200,0,0.15)",
+            borderBottom: "1px solid rgba(255,200,0,0.15)",
+            padding: "2rem 0",
+            margin: "0.5rem 0",
+          }}
+        >
+          <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+            <div style={{ flexShrink: 0, marginTop: "0.1rem" }}>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(255,200,0,0.1)", border: "1px solid rgba(255,200,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#ffc800", fontSize: "0.75rem", fontWeight: 700 }}>!</span>
+              </div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.75rem", fontWeight: 700 }}>
+                Conflict of Interest Notice
+              </div>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.78rem", lineHeight: 1.85, maxWidth: "72rem" }}>
+                Nuuhaven is operated alongside a primary employment role at one of the Big 4 professional services firms, where the principal specialises in <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>debt and capital advisory</strong>. Every prospective client and project scope is individually assessed to determine whether it presents a conflict of interest with this primary role. <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after a proposal has been accepted — should a conflict of interest be identified.</strong> Submitting an enquiry or receiving a proposal does not constitute a guarantee of engagement. Clients are encouraged to disclose the full nature of their business upfront to expedite this assessment.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* ── Bottom bar ── */}
         <div
           style={{

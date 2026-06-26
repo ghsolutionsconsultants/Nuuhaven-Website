@@ -7,6 +7,8 @@ import LenisProvider from "@/components/layout/LenisProvider";
 import QuantumCursor from "@/components/ui/QuantumCursor";
 import NeuralMesh from "@/components/ui/NeuralMesh";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import FloatingActions from "@/components/ui/FloatingActions";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,10 +44,12 @@ export default function RootLayout({
         <NeuralMesh />
         <QuantumCursor />
         <LenisProvider>
+          <ScrollToTop />
           <Nav />
           <main className="flex-1 relative z-10">{children}</main>
           <Footer />
         </LenisProvider>
+        <FloatingActions />
       </body>
     </html>
   );

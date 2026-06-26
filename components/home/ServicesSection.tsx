@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import HolographicCard from "@/components/ui/HolographicCard";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const services = [
   {
@@ -50,6 +51,7 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const isMobile = useIsMobile();
   return (
     <section className="section noise-overlay" style={{ background: "var(--bg-secondary)" }}>
       <div className="section-inner">
@@ -82,7 +84,7 @@ export default function ServicesSection() {
               transition={{ duration: 0.6, delay: i * 0.08 }}
               className={i === services.length - 1 && services.length % 3 === 1 ? "lg:col-span-3" : ""}
             >
-              <HolographicCard className="h-full group" style={{ padding: "2.5rem" }}>
+              <HolographicCard className="h-full group" style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
                 <div
                   className="text-3xl transition-all duration-300 group-hover:scale-110"
                   style={{ color: "var(--accent)", marginBottom: "2rem" }}
@@ -105,6 +107,31 @@ export default function ServicesSection() {
           <Link href="/tools/solution-finder" className="btn-outline" data-cursor="EXPLORE">
             Find Your Solution →
           </Link>
+        </div>
+
+        {/* Conflict of Interest Notice */}
+        <div style={{
+          marginTop: "3.5rem",
+          padding: "1.375rem 1.75rem",
+          background: "rgba(255,200,0,0.03)",
+          border: "1px solid rgba(255,200,0,0.18)",
+          borderRadius: 12,
+          display: "flex",
+          gap: "1.125rem",
+          alignItems: "flex-start",
+        }}>
+          <div style={{ flexShrink: 0, width: 26, height: 26, borderRadius: "50%", background: "rgba(255,200,0,0.1)", border: "1px solid rgba(255,200,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.1rem" }}>
+            <span style={{ color: "#ffc800", fontSize: "0.72rem", fontWeight: 900 }}>!</span>
+          </div>
+          <div>
+            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.5rem", fontWeight: 700 }}>
+              Conflict of Interest Notice
+            </div>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>
+              Nuuhaven is operated alongside a primary employment role at one of the Big 4 professional services firms, where the principal specialises in <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>debt and capital advisory</strong>. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
+              <strong style={{ color: "#ffc800", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
+            </p>
+          </div>
         </div>
       </div>
     </section>
