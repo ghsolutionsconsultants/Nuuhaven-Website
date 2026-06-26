@@ -213,6 +213,8 @@ body {
   will-change: transform;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 0.5rem;
 }
 .btn-accent:hover { box-shadow: var(--glow-accent-strong); }
@@ -232,6 +234,8 @@ body {
   will-change: transform;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 0.5rem;
 }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
