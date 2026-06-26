@@ -256,7 +256,7 @@ function SitePortal({ url, accent, name }: { url: string; accent: string; name: 
         <button onClick={() => setLive(l => !l)} style={{ padding: "0.2rem 0.5rem", borderRadius: 4, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.08em", textTransform: "uppercase", border: `1px solid ${live ? accent : "rgba(255,255,255,0.1)"}`, background: live ? `${accent}18` : "transparent", color: live ? accent : "rgba(255,255,255,0.35)", cursor: "pointer", transition: "all 0.2s" }}>{live ? "◉ Live" : "○ Preview"}</button>
         <a href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "rgba(255,255,255,0.35)", textDecoration: "none", padding: "0.2rem 0.5rem", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 4 }}>↗</a>
       </div>
-      <div style={{ height: 420, position: "relative", background: "#080808" }}>
+      <div style={{ height: 420, position: "relative", background: "#080808", overflow: "hidden" }}>
         {state === "loading" && (
           <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", zIndex: 2 }}>
             <div style={{ width: 28, height: 28, borderRadius: "50%", border: `2px solid ${accent}`, borderTopColor: "transparent", animation: "spin 0.8s linear infinite" }} />
@@ -270,11 +270,36 @@ function SitePortal({ url, accent, name }: { url: string; accent: string; name: 
             <a href={url} target="_blank" rel="noopener noreferrer" className="btn-accent" style={{ fontSize: "0.75rem", padding: "0.6rem 1.25rem" }}>Visit Live Site ↗</a>
           </div>
         ) : (
-          <iframe key={url} src={url} title={name} style={{ width: live ? "100%" : "142.86%", height: live ? "100%" : "142.86%", border: "none", transform: live ? "none" : "scale(0.7)", transformOrigin: "top left", pointerEvents: live ? "auto" : "none", opacity: state === "loading" ? 0 : 1, transition: "opacity 0.4s" }} sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation" onLoad={() => setState("loaded")} onError={() => setState("blocked")} loading="lazy" />
+          <iframe
+            key={url}
+            src={url}
+            title={name}
+            className="previewer-frame"
+            style={{
+              position: "absolute",
+              top: 0, left: 0,
+              width: live ? "100%" : "142.86%",
+              maxWidth: "none",
+              height: live ? "100%" : "142.86%",
+              border: "none",
+              transform: live ? "none" : "scale(0.7)",
+              transformOrigin: "top left",
+              pointerEvents: live ? "auto" : "none",
+              opacity: state === "loading" ? 0 : 1,
+              transition: "opacity 0.4s",
+            }}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
+            onLoad={() => setState("loaded")}
+            onError={() => setState("blocked")}
+            loading="lazy"
+          />
         )}
         {!live && state === "loaded" && (
-          <div onClick={() => setLive(true)} style={{ position: "absolute", inset: 0, cursor: "pointer", zIndex: 1, display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "0.875rem" }}>
-            <div style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", border: `1px solid ${accent}35`, borderRadius: 6, padding: "0.4rem 0.75rem", fontSize: "0.65rem", fontFamily: "var(--font-geist-mono)", color: accent, textTransform: "uppercase", letterSpacing: "0.1em" }}>Click to interact ↑</div>
+          <div
+            onClick={() => setLive(true)}
+            style={{ position: "absolute", inset: 0, cursor: "pointer", zIndex: 1, display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "0.875rem", pointerEvents: "auto", touchAction: "pan-y" }}
+          >
+            <div style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", border: `1px solid ${accent}35`, borderRadius: 6, padding: "0.4rem 0.75rem", fontSize: "0.65rem", fontFamily: "var(--font-geist-mono)", color: accent, textTransform: "uppercase", letterSpacing: "0.1em", pointerEvents: "none" }}>Click to interact ↑</div>
           </div>
         )}
       </div>
@@ -787,7 +812,7 @@ export default function PortfolioPage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingTop: 68 }}>
       {/* Mobile pills */}
-      <div className="lg:hidden" style={{ display: "flex", gap: "0.4rem", overflowX: "auto", padding: "0.625rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(5,5,5,0.95)", position: "sticky", top: 68, zIndex: 10 }}>
+      <div className="lg:hidden hide-scrollbar" style={{ display: "flex", gap: "0.4rem", overflowX: "auto", padding: "0.625rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(5,5,5,0.95)", position: "sticky", top: 68, zIndex: 10 }}>
         {[{ id: "overview", label: "Dashboard" }, ...CLIENTS.map(c => ({ id: c.id, label: c.name }))].map(item => (
           <button key={item.id} onClick={() => setActive(item.id)}
             style={{ flexShrink: 0, padding: "0.375rem 0.75rem", borderRadius: 999, fontSize: "0.7rem", fontWeight: 600, cursor: "pointer", background: active === item.id ? "var(--accent)" : "rgba(255,255,255,0.05)", color: active === item.id ? "#000" : "rgba(255,255,255,0.45)", border: "none", transition: "all 0.2s" }}>

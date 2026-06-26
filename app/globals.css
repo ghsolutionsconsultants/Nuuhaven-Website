@@ -289,6 +289,10 @@ html { overflow-x: clip; }
 img, video { max-width: 100%; }
 iframe:not(.previewer-frame) { max-width: 100%; }
 
+/* Hide scrollbar track while keeping element scrollable (for horizontal pill navs etc) */
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
 @media (max-width: 768px) {
   .display-xl {
     font-size: clamp(1.75rem, 8vw, 2.8rem);
@@ -299,5 +303,7 @@ iframe:not(.previewer-frame) { max-width: 100%; }
   }
   .accent-line { margin-bottom: 1.5rem; }
 
-  /* section-inner overflow is handled by html-level clip, not here */
+  /* Kill any rogue internal scrollbars on mobile — one universal page scroll only */
+  * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+  *::-webkit-scrollbar { display: none !important; }
 }
