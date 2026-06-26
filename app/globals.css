@@ -272,7 +272,8 @@ body {
 @media (hover: none) { body { cursor: auto; } }
 
 html, body { overflow-x: hidden; }
-img, iframe, video { max-width: 100%; }
+img, video { max-width: 100%; }
+iframe:not(.previewer-frame) { max-width: 100%; }
 
 @media (max-width: 768px) {
   .display-xl {

@@ -86,15 +86,29 @@ function SitePreviewer({ url, name, accent }: { url: string; name: string; accen
       {/* iframe or fallback */}
       <div className="relative overflow-hidden" style={{ height: 320 }}>
         {!failed ? (
-          <iframe
-            src={url}
-            title={name}
-            className="w-full h-full border-0"
-            style={{ transform: "scale(0.6)", transformOrigin: "top left", width: "166.67%", height: "166.67%", pointerEvents: "none" }}
-            sandbox="allow-scripts allow-same-origin"
-            onError={() => setFailed(true)}
-            loading="lazy"
-          />
+          <>
+            <iframe
+              src={url}
+              title={name}
+              className="border-0 previewer-frame"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "166.67%",
+                maxWidth: "none",
+                height: "166.67%",
+                transform: "scale(0.6)",
+                transformOrigin: "top left",
+                pointerEvents: "none",
+              }}
+              sandbox="allow-scripts allow-same-origin"
+              onError={() => setFailed(true)}
+              loading="lazy"
+            />
+            {/* Transparent overlay so touch scroll passes through to the page, not the iframe */}
+            <div className="absolute inset-0" style={{ zIndex: 1 }} />
+          </>
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="text-2xl" style={{ color: accent }}>◎</div>
@@ -122,7 +136,7 @@ export default function SelectedWork() {
   const isMobile = useIsMobile();
 
   return (
-    <section className="section noise-overlay" style={{ background: "var(--bg-primary)" }}>
+    <section className="section noise-overlay" style={{ background: "var(--bg-primary)", overflowX: "hidden" }}>
       <div className="section-inner">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-10" style={{ marginBottom: "5rem" }}>
           <div>
