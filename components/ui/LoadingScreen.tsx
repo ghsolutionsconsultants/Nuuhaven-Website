@@ -162,7 +162,7 @@ export default function LoadingScreen() {
                   }}
                 />
                 {/* Stacked thin label lines */}
-                {["JOHANNESBURG · SOUTH AFRICA", "EST. 2023", "DIGITAL INFRASTRUCTURE"].map((txt, i) => (
+                {["JOHANNESBURG · SOUTH AFRICA", "EST. 2023", "DIGITAL ASSETS"].map((txt, i) => (
                   <motion.div
                     key={txt}
                     initial={{ opacity: 0, letterSpacing: "0.05em" }}
