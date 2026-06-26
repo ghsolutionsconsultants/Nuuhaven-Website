@@ -106,8 +106,8 @@ function SitePreviewer({ url, name, accent }: { url: string; name: string; accen
               onError={() => setFailed(true)}
               loading="lazy"
             />
-            {/* Transparent overlay so touch scroll passes through to the page, not the iframe */}
-            <div className="absolute inset-0" style={{ zIndex: 1 }} />
+            {/* Sits above iframe to block iframe from capturing touch/pointer — pointer-events none so scroll reaches the page */}
+            <div className="absolute inset-0" style={{ zIndex: 1, pointerEvents: "none" }} />
           </>
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">

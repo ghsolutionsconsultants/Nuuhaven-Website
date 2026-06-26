@@ -190,7 +190,7 @@ export default function ShowcaseMonitor() {
                           }}
                           sandbox="allow-scripts allow-same-origin allow-forms"
                         />
-                        <div className="absolute inset-0" style={{ zIndex: 1 }} />
+                        <div className="absolute inset-0" style={{ zIndex: 1, pointerEvents: "none" }} />
                       </>
                     )}
                   </motion.div>

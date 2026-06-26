@@ -72,9 +72,12 @@ body {
     radial-gradient(ellipse 80% 40% at 80% 110%, rgba(223,255,0,0.02) 0%, transparent 50%);
 }
 
-::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 1px; }
+/* Hide custom scrollbar on mobile — native scroll indicators only */
+@media (hover: hover) {
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 1px; }
+}
 
 .display-hero {
   font-size: clamp(2.5rem, 7vw, 7rem);
@@ -271,7 +274,8 @@ body {
 
 @media (hover: none) { body { cursor: auto; } }
 
-html, body { overflow-x: hidden; }
+/* Only lock overflow-x on html — setting it on body too causes iOS to block ALL scroll */
+html { overflow-x: hidden; }
 img, video { max-width: 100%; }
 iframe:not(.previewer-frame) { max-width: 100%; }
 
@@ -285,6 +289,5 @@ iframe:not(.previewer-frame) { max-width: 100%; }
   }
   .accent-line { margin-bottom: 1.5rem; }
 
-  /* Prevent fixed-width elements causing overflow */
-  .section-inner { overflow-x: hidden; }
+  /* section-inner overflow is handled by html-level clip, not here */
 }

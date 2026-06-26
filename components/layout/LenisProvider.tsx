@@ -14,8 +14,11 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
   const pathname = usePathname();
 
   useEffect(() => {
-    // Disable Lenis on touch devices — native scroll is smoother on mobile
-    const isTouch = window.matchMedia("(hover: none)").matches;
+    // Disable Lenis on any touch/mobile device — native scroll must remain free
+    const isTouch =
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
     const lenis = new Lenis({
