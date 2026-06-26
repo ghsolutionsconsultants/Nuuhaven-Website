@@ -84,7 +84,7 @@ function SitePreviewer({ url, name, accent }: { url: string; name: string; accen
       </div>
 
       {/* iframe or fallback */}
-      <div className="relative" style={{ height: 320 }}>
+      <div className="relative overflow-hidden" style={{ height: 320 }}>
         {!failed ? (
           <iframe
             src={url}
