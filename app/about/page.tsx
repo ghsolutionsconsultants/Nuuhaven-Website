@@ -76,8 +76,8 @@ const ADVISORY = [
 const STATS = [
   { value: "BCom", label: "Honours, UP" },
   { value: "Big 4", label: "Advisory Background" },
-  { value: "4+", label: "Ecosystems Built" },
-  { value: "JHB", label: "Based In" },
+  { value: "10+", label: "Ecosystems Built" },
+  { value: "98%", label: "Client Satisfaction" },
 ];
 
 export default function AboutPage() {

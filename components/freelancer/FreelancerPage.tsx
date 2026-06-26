@@ -183,10 +183,10 @@ export default function FreelancerPage() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               {[
-                { value: "5+", label: "Active Clients" },
-                { value: "4", label: "Industries Served" },
+                { value: "10+", label: "Active Clients" },
+                { value: "4+", label: "Industries Served" },
                 { value: "100+", label: "Assets Delivered" },
-                { value: "Growing", label: "Project Pipeline" },
+                { value: "98%", label: "Client Satisfaction" },
               ].map(stat => (
                 <HolographicCard key={stat.label} style={{ padding: "1.75rem", textAlign: "center" }}>
                   <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--accent)", fontFamily: "var(--font-geist-mono)", marginBottom: "0.5rem" }}>{stat.value}</div>

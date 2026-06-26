@@ -21,14 +21,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nuuhaven | Building Businesses That Look As Professional As They Operate",
-  description:
-    "Nuuhaven is a strategic partner helping businesses establish professional brand identities, digital platforms, business documentation and marketing assets that strengthen credibility and support long-term growth.",
-  keywords: ["brand development", "website design", "business documentation", "marketing assets", "South Africa"],
+  title: "Nuuhaven | Your Digital Haven For Business",
+  description: "Nuuhaven helps South African businesses establish professional brand identities, websites, company profiles, and marketing assets. 10+ clients, 98% satisfaction. Based in Johannesburg.",
+  keywords: [
+    "brand development South Africa",
+    "website design Johannesburg",
+    "company profile design",
+    "digital agency South Africa",
+    "business branding Johannesburg",
+    "marketing assets",
+    "business documentation",
+    "brand identity South Africa",
+    "digital presence",
+    "Nuuhaven",
+  ],
+  authors: [{ name: "Nuuhaven" }],
+  creator: "Nuuhaven",
+  metadataBase: new URL("https://nuuhaven.com"),
+  alternates: { canonical: "https://nuuhaven.com" },
   openGraph: {
     title: "Nuuhaven | Your Digital Haven For Business",
-    description: "Strategic brand, digital presence & business transformation.",
+    description: "10+ South African businesses transformed. Professional brand identities, websites, and digital assets that build real credibility.",
     type: "website",
+    url: "https://nuuhaven.com",
+    siteName: "Nuuhaven",
+    locale: "en_ZA",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuuhaven | Your Digital Haven For Business",
+    description: "Professional brand identities, websites, and digital assets for South African businesses.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
 };
 

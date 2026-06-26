@@ -3,11 +3,12 @@
 import { motion } from "framer-motion";
 
 const items = [
-  { value: "5+", label: "Websites Built" },
-  { value: "5+", label: "Brands Developed" },
-  { value: "4", label: "Industries Served" },
+  { value: "10+", label: "Websites Built" },
+  { value: "10+", label: "Clients Served" },
+  { value: "10+", label: "Brands Developed" },
+  { value: "4+", label: "Industries Served" },
   { value: "100+", label: "Assets Delivered" },
-  { value: "3", label: "Active Retainers" },
+  { value: "98%", label: "Client Satisfaction" },
   { value: "2023", label: "Est." },
 ];
 
