@@ -55,7 +55,7 @@ export default function WhyNuuhaven() {
             </p>
           </div>
 
-          <div className={`lg:w-3/5 grid grid-cols-1 sm:grid-cols-2 ${isMobile ? "gap-4" : "gap-8"}`}>
+          <div className="lg:w-3/5 grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "1rem" : "2rem" }}>
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
