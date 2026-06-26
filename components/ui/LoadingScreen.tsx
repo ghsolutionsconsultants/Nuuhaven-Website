@@ -229,7 +229,7 @@ export default function LoadingScreen() {
                     { text: "Forget", delay: 0.05 },
                     { text: "everything", delay: 0.22 },
                     { text: "you know about", delay: 0.40 },
-                    { text: "digital.", delay: 0.58 },
+                    { text: "Digital Assets.", delay: 0.58 },
                   ].map(({ text, delay }, i) => (
                     <motion.div
                       key={text}
