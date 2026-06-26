@@ -241,7 +241,7 @@ body {
   padding-bottom: clamp(3rem, 6vw, 5.5rem);
   padding-left: clamp(1.25rem, 4vw, 4rem);
   padding-right: clamp(1.25rem, 4vw, 4rem);
-  overflow: clip; /* clips whileInView y-offset bleed without creating a scroll container */
+  overflow-x: clip; /* prevent any child from causing horizontal scroll */
 }
 .section-inner {
   max-width: 1200px;
@@ -284,8 +284,8 @@ body {
 
 @media (hover: none) { body { cursor: auto; } }
 
-/* Only lock overflow-x on html — setting it on body too causes iOS to block ALL scroll */
-html { overflow-x: hidden; }
+/* clip on html only — never on body, never overflow:hidden which iOS can lock vertically */
+html { overflow-x: clip; }
 img, video { max-width: 100%; }
 iframe:not(.previewer-frame) { max-width: 100%; }
 

@@ -133,7 +133,7 @@ export default function HeroSection() {
       style={{ minHeight: "100svh", background: "var(--bg-primary)" }}
     >
       {/* Three.js canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
 
       {/* Radial gradient overlay */}
       <div
