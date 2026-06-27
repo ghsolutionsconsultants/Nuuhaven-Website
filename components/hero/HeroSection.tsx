@@ -246,7 +246,7 @@ export default function HeroSection() {
               <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "var(--accent)", letterSpacing: "0.1em", textTransform: "uppercase" }}>noun</span>
             </div>
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: "0.625rem" }}>
-              A new place of safety, clarity, and professional refuge, a foundation built to protect and elevate a business&apos;s identity in the world.
+              A new place of safety, clarity, and professional refuge, a foundation built to protect and elevate a business&apos; identity in the world.
             </p>
             <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "0.5rem" }}>
               &ldquo;We finally found our <span style={{ color: "var(--accent)", fontStyle: "normal" }}>Nuuhaven</span>, the brand, website, and presence that matched how we actually operate.&rdquo;
