@@ -103,12 +103,6 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        <div className="flex justify-center" style={{ marginTop: "3rem" }}>
-          <Link href="/tools/solution-finder" className="btn-outline" data-cursor="EXPLORE">
-            Find Your Solution →
-          </Link>
-        </div>
-
         {/* Conflict of Interest Notice */}
         <div style={{
           marginTop: "3.5rem",
@@ -132,6 +126,12 @@ export default function ServicesSection() {
               <strong style={{ color: "#ffc800", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
             </p>
           </div>
+        </div>
+
+        <div className="flex justify-center" style={{ marginTop: "3rem" }}>
+          <Link href="/tools/solution-finder" className="btn-outline" data-cursor="EXPLORE">
+            Find Your Solution →
+          </Link>
         </div>
       </div>
     </section>
