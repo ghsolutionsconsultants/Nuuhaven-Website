@@ -152,7 +152,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
             <div style={{ background: "rgba(255,200,0,0.04)", border: "1px solid rgba(255,200,0,0.2)", borderRadius: 8, padding: "1rem 1.125rem", display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
               <span style={{ color: "#ffc800", fontSize: "0.7rem", fontWeight: 900, flexShrink: 0, marginTop: "0.1rem" }}>!</span>
               <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem", lineHeight: 1.8, margin: 0 }}>
-                <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>Conflict of Interest Notice:</strong> Nuuhaven operates alongside a primary role at one of the Big 4 (debt &amp; capital advisory). All enquiries are assessed for conflicts before engagement. <strong style={{ color: "#ffc800", fontWeight: 600 }}>We reserve the right to decline or terminate any engagement at any stage — including after acceptance — if a conflict is identified.</strong>
+                <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>Conflict of Interest Notice:</strong> Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 (debt &amp; capital advisory). All enquiries are assessed for conflicts before engagement. <strong style={{ color: "#ffc800", fontWeight: 600 }}>We reserve the right to decline or terminate any engagement at any stage — including after acceptance — if a conflict is identified.</strong>
               </p>
             </div>
 

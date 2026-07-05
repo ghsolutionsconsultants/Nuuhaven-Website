@@ -122,7 +122,7 @@ export default function ServicesSection() {
               Conflict of Interest Notice
             </div>
             <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>
-              Nuuhaven is operated alongside a primary employment role at one of the Big 4 professional services firms, where the principal specialises in <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>debt and capital advisory</strong>. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
+              Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms, specialising in <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>debt and capital advisory</strong>. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
               <strong style={{ color: "#ffc800", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
             </p>
           </div>
