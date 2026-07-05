@@ -1,11 +1,20 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import HolographicCard from "@/components/ui/HolographicCard";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const services: { icon: string; title: string; sub: string; desc: string; featured?: boolean }[] = [
+const ShoppingCartIcon = (
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="9" cy="21" r="1" />
+    <circle cx="20" cy="21" r="1" />
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+  </svg>
+);
+
+const services: { icon: React.ReactNode; title: string; sub: string; desc: string; featured?: boolean }[] = [
   {
     icon: "◎",
     title: "Establish A Professional Digital Presence",
@@ -13,7 +22,7 @@ const services: { icon: string; title: string; sub: string; desc: string; featur
     desc: "Custom-designed websites built to communicate credibility, drive trust, and convert visitors — positioned precisely for the clients you want.",
   },
   {
-    icon: "🛒",
+    icon: ShoppingCartIcon,
     title: "Open Your Online Store. Sell Directly.",
     sub: "E-Commerce Website",
     desc: "A fully integrated online store that lets your customers browse, add to cart, and pay — without leaving your site. Turn your products into consistent online revenue. From R 5,000.",
