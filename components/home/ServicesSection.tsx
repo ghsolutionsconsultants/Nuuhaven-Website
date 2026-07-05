@@ -23,7 +23,7 @@ const services: { icon: React.ReactNode; title: string; sub: string; desc: strin
     icon: ShoppingCartIcon,
     title: "Open Your Online Store. Sell Directly.",
     sub: "E-Commerce Website",
-    desc: "A fully integrated online store that lets your customers browse, add to cart, and pay — without leaving your site. Turn your products into consistent online revenue. From R 5,000.",
+    desc: "A fully integrated online store that lets your customers browse, add to cart, and pay — without leaving your site. Turn your products into consistent online revenue.",
     featured: true,
   },
   {
