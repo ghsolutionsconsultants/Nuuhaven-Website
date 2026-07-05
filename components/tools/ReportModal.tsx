@@ -77,6 +77,7 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
 
       {/* Scroll area — absolute with explicit top/bottom, no flexbox ambiguity */}
       <div
+        className="report-scroll-area"
         style={{
           position: "absolute",
           top: TOOLBAR_H,

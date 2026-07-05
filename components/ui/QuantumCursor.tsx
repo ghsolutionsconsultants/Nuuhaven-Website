@@ -59,8 +59,8 @@ export default function QuantumCursor() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-[9999]"
-      style={{ opacity: visible ? 1 : 0 }}
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex: 100001, opacity: visible ? 1 : 0 }}
     >
       {/* Ring */}
       <motion.div

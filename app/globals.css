@@ -314,13 +314,13 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 
 /* ─── Print / Report PDF styles ─────────────────────────────── */
 @media print {
-  /* Hide everything via visibility (allows #nuuhaven-report to override) */
-  body { visibility: hidden; }
-  /* Show only the report document */
-  #nuuhaven-report { visibility: visible !important; position: fixed !important; inset: 0 !important; width: 100% !important; max-width: 100% !important; border-radius: 0 !important; margin: 0 !important; box-shadow: none !important; overflow: visible !important; }
-  #nuuhaven-report * { visibility: visible !important; }
-  /* Hide toolbar and close button */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { visibility: hidden; margin: 0; padding: 0; }
   .report-no-print { display: none !important; }
-  /* Reset modal backdrop for printing */
-  .report-modal-backdrop { position: static !important; overflow: visible !important; padding: 0 !important; background: transparent !important; }
+  /* Ancestor chain must be visible and non-clipping for content to flow */
+  .report-modal-backdrop { visibility: visible !important; position: static !important; overflow: visible !important; background: white !important; padding: 0 !important; }
+  .report-scroll-area { visibility: visible !important; position: static !important; overflow: visible !important; height: auto !important; padding: 0 !important; }
+  /* Report content — static flow so pages don't overlap */
+  #nuuhaven-report { visibility: visible !important; position: static !important; width: 100% !important; max-width: 100% !important; border-radius: 0 !important; margin: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  #nuuhaven-report * { visibility: visible !important; }
 }
