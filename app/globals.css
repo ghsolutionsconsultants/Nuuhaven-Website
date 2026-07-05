@@ -311,3 +311,16 @@ iframe:not(.previewer-frame) { max-width: 100%; }
   * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
   *::-webkit-scrollbar { display: none !important; }
 }
+
+/* ─── Print / Report PDF styles ─────────────────────────────── */
+@media print {
+  /* Hide everything via visibility (allows #nuuhaven-report to override) */
+  body { visibility: hidden; }
+  /* Show only the report document */
+  #nuuhaven-report { visibility: visible !important; position: fixed !important; inset: 0 !important; width: 100% !important; max-width: 100% !important; border-radius: 0 !important; margin: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  #nuuhaven-report * { visibility: visible !important; }
+  /* Hide toolbar and close button */
+  .report-no-print { display: none !important; }
+  /* Reset modal backdrop for printing */
+  .report-modal-backdrop { position: static !important; overflow: visible !important; padding: 0 !important; background: transparent !important; }
+}

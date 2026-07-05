@@ -5,12 +5,19 @@ import HolographicCard from "@/components/ui/HolographicCard";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const services = [
+const services: { icon: string; title: string; sub: string; desc: string; featured?: boolean }[] = [
   {
     icon: "◎",
     title: "Establish A Professional Digital Presence",
     sub: "Website Development",
-    desc: "Custom-designed websites and e-commerce stores that communicate credibility, drive trust, and position your business for growth — whether you need a corporate site or an online store to sell directly.",
+    desc: "Custom-designed websites built to communicate credibility, drive trust, and convert visitors — positioned precisely for the clients you want.",
+  },
+  {
+    icon: "◈",
+    title: "Open Your Online Store. Sell Directly.",
+    sub: "E-Commerce Website",
+    desc: "A fully integrated online store that lets your customers browse, add to cart, and pay — without leaving your site. Turn your products into consistent online revenue. From R 5,000.",
+    featured: true,
   },
   {
     icon: "◈",
@@ -84,12 +91,25 @@ export default function ServicesSection() {
               transition={{ duration: 0.6, delay: i * 0.08 }}
               className={i === services.length - 1 && services.length % 3 === 1 ? "lg:col-span-3" : ""}
             >
-              <HolographicCard className="h-full group" style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
-                <div
-                  className="text-3xl transition-all duration-300 group-hover:scale-110"
-                  style={{ color: "var(--accent)", marginBottom: "2rem" }}
-                >
-                  {s.icon}
+              <HolographicCard
+                className="h-full group"
+                style={{
+                  padding: isMobile ? "1.25rem" : "2.5rem",
+                  ...(s.featured ? { border: "1px solid rgba(223,255,0,0.35)", boxShadow: "0 0 40px rgba(223,255,0,0.07), inset 0 0 40px rgba(223,255,0,0.02)" } : {}),
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "2rem" }}>
+                  <div
+                    className="text-3xl transition-all duration-300 group-hover:scale-110"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    {s.icon}
+                  </div>
+                  {s.featured && (
+                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 700, color: "#000", background: "var(--accent)", padding: "0.2rem 0.55rem", borderRadius: 4 }}>
+                      Most In-Demand
+                    </div>
+                  )}
                 </div>
                 <div className="label-mono" style={{ color: "var(--accent)", marginBottom: "1rem" }}>
                   {s.sub}

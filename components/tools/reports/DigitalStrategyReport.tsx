@@ -1,0 +1,331 @@
+import React from "react";
+
+interface Recommendation {
+  name: string;
+  badge: string;
+  desc: string;
+  services: string[];
+  why: string;
+  estimatorParams: string;
+}
+
+interface DigitalStrategyReportProps {
+  answers: Record<string, string | string[]>;
+  recommendation: Recommendation;
+  serviceCosts: Record<string, string>;
+}
+
+const QUESTION_LABELS: Record<string, string> = {
+  stage: "Business Stage",
+  challenges: "Key Challenges",
+  clients: "Target Client",
+  impression: "Brand Impression Goal",
+  finding: "Current Discovery Channels",
+  have: "Assets Already In Place",
+  outcome: "Most Important Outcome",
+  timeline: "Target Timeline",
+};
+
+const ANSWER_LABELS: Record<string, Record<string, string>> = {
+  stage: {
+    startup: "Just Starting Out",
+    growing: "Growing — Need to Look More Professional",
+    established: "Established — Ready for a Rebrand",
+    enterprise: "Enterprise — Need Ongoing Support",
+  },
+  clients: {
+    b2b: "Other Businesses (B2B)",
+    b2c: "General Public (B2C)",
+    both: "Both B2B and B2C",
+    unsure: "Still Figuring It Out",
+  },
+  impression: {
+    credible: "Credible & Trustworthy",
+    premium: "Premium & Exclusive",
+    approachable: "Approachable & Friendly",
+    authoritative: "Authoritative & Expert",
+  },
+  outcome: {
+    leads: "Generate More Leads",
+    credibility: "Build Credibility & Trust",
+    investors: "Attract Investors or Partners",
+    brand: "Build a Recognisable Brand",
+  },
+  timeline: {
+    asap: "As Soon As Possible",
+    month: "Within 30 Days",
+    quarter: "Within 3 Months",
+    planning: "Just Planning Ahead",
+  },
+  challenges: {
+    "no-brand": "No Professional Brand Identity",
+    "no-website": "No Website or Outdated Website",
+    "no-profile": "No Company Profile or Documentation",
+    "no-marketing": "Inconsistent or No Marketing Assets",
+  },
+  finding: {
+    wom: "Word of Mouth",
+    social: "Social Media",
+    website: "My Website",
+    nowhere: "Not Currently Being Found",
+  },
+  have: {
+    logo: "A Logo",
+    website: "A Website",
+    profile: "A Company Profile",
+    nothing: "Starting From Scratch (No Existing Assets)",
+  },
+};
+
+const PACKAGE_INSIGHTS: Record<string, { headline: string; context: string; priority: string[] }> = {
+  "Foundation Package": {
+    headline: "Start right — first impressions are permanent.",
+    context: "At this stage, every touchpoint your business makes is either building or eroding trust. Without a professional brand, website, and company profile, opportunities slip away before a conversation even starts. The Foundation Package gives you everything you need to show up credibly from day one.",
+    priority: ["Brand identity first — it informs everything else.", "Website second — your digital home base.", "Company profile third — for B2B credibility.", "Social media setup last — amplify what's in place."],
+  },
+  "Growth Package": {
+    headline: "Your business has momentum — your presentation must match it.",
+    context: "You've proven your concept and you're generating business. But a misaligned brand or outdated website is quietly costing you. Potential clients are judging you before you've spoken. The Growth Package closes the credibility gap and positions you to win the clients you actually want.",
+    priority: ["Website redesign first — it's where prospects go to decide.", "Brand refresh second — gives everything a unified foundation.", "Company profile third — upgrade your B2B collateral.", "Marketing assets last — amplify the new identity."],
+  },
+  "Transformation Package": {
+    headline: "You're ready to operate at the highest level.",
+    context: "At this stage, the difference between good and exceptional is execution and consistency. Strategic advisory positions you commercially. Premium brand and enterprise website place you in a league of your own. The retainer keeps you there. This package is for businesses ready to compound their competitive advantage.",
+    priority: ["Strategic advisory first — strategy before execution.", "Brand identity second — the foundation of everything.", "Website third — the flagship digital asset.", "Ongoing retainer — consistency sustains the edge."],
+  },
+  "Custom Strategy Package": {
+    headline: "A bespoke roadmap, built for your specific situation.",
+    context: "Your situation doesn't fit a standard template — and that means a generic package would either over-scope or miss the mark. Starting with strategic advisory ensures every subsequent decision and investment is calibrated to your actual goals.",
+    priority: ["Strategic advisory session first.", "Business positioning assessment.", "Identify the highest-impact deliverables.", "Build a phased, prioritised execution plan."],
+  },
+};
+
+function getAnswerLabel(questionId: string, answer: string | string[]): string {
+  if (Array.isArray(answer)) {
+    const map = ANSWER_LABELS[questionId];
+    if (!map) return answer.join(", ");
+    const labels = answer.map(id => map[id] || id);
+    return labels.length === 0 ? "None selected" : labels.join(", ");
+  }
+  return ANSWER_LABELS[questionId]?.[answer] || answer;
+}
+
+function parseRangeMin(rangeStr: string): number {
+  const match = rangeStr.match(/[\d\s]+/g);
+  if (!match) return 0;
+  const nums = match.map(s => parseInt(s.replace(/\s/g, ""))).filter(n => !isNaN(n) && n > 0);
+  return nums[0] || 0;
+}
+
+function parseRangeMax(rangeStr: string): number {
+  const match = rangeStr.match(/[\d\s]+/g);
+  if (!match) return 0;
+  const nums = match.map(s => parseInt(s.replace(/\s/g, ""))).filter(n => !isNaN(n) && n > 0);
+  return nums[nums.length - 1] || 0;
+}
+
+function formatZAR(n: number) {
+  if (n === 0) return "—";
+  return `R ${n.toLocaleString("en-ZA")}`;
+}
+
+function formatDate() {
+  return new Date().toLocaleDateString("en-ZA", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function generateRef() {
+  const ts = Date.now().toString(36).toUpperCase().slice(-6);
+  return `DSR-${ts}`;
+}
+
+const ref = generateRef();
+
+export default function DigitalStrategyReport({ answers, recommendation, serviceCosts }: DigitalStrategyReportProps) {
+  const rStyle: React.CSSProperties = { fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" };
+  const monoStyle: React.CSSProperties = { fontFamily: "'Courier New', Courier, monospace" };
+
+  const insights = PACKAGE_INSIGHTS[recommendation.name] || PACKAGE_INSIGHTS["Custom Strategy Package"];
+
+  // Compute total investment
+  const prices = recommendation.services.map(s => serviceCosts[s] || "");
+  const totalMin = prices.reduce((sum, p) => sum + (p.includes("/") ? 0 : parseRangeMin(p)), 0);
+  const totalMax = prices.reduce((sum, p) => sum + (p.includes("/") ? 0 : parseRangeMax(p)), 0);
+
+  const profileQuestions = ["stage", "challenges", "clients", "impression", "finding", "have", "outcome", "timeline"];
+
+  return (
+    <div style={{ ...rStyle, background: "#fff", color: "#111" }}>
+
+      {/* Header */}
+      <div style={{ background: "#111", padding: "2rem 2.5rem", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div>
+          <div style={{ color: "#dfff00", fontWeight: 900, fontSize: "1.375rem", letterSpacing: "-0.02em", marginBottom: "0.25rem" }}>NUUHAVEN</div>
+          <div style={{ ...monoStyle, fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
+            Digital Business Solutions
+          </div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: "0.3rem" }}>Digital Strategy Report</div>
+          <div style={{ ...monoStyle, fontSize: "0.7rem", color: "#dfff00", fontWeight: 700 }}>{ref}</div>
+          <div style={{ ...monoStyle, fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", marginTop: "0.2rem" }}>{formatDate()}</div>
+        </div>
+      </div>
+
+      {/* Title strip */}
+      <div style={{ background: "#f5f5f5", padding: "1.25rem 2.5rem", borderBottom: "1px solid #e8e8e8" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#888", marginBottom: "0.3rem" }}>Document Type</div>
+        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111" }}>Personalised Digital Strategy & Package Recommendation</div>
+        <div style={{ fontSize: "0.8rem", color: "#666", marginTop: "0.25rem", lineHeight: 1.5 }}>Based on your {Object.keys(answers).length}-question business profiling session.</div>
+      </div>
+
+      {/* Business profile */}
+      <div style={{ padding: "1.75rem 2.5rem", borderBottom: "1px solid #e8e8e8" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Your Business Profile</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {profileQuestions.filter(qId => answers[qId] !== undefined).map((qId, i) => (
+            <div
+              key={qId}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "180px 1fr",
+                gap: "1rem",
+                padding: "0.75rem 1rem",
+                background: i % 2 === 0 ? "#fafafa" : "#fff",
+                borderRadius: 6,
+                alignItems: "flex-start",
+              }}
+            >
+              <div style={{ ...monoStyle, fontSize: "0.6rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#888", fontWeight: 600 }}>
+                {QUESTION_LABELS[qId] || qId}
+              </div>
+              <div style={{ fontSize: "0.8rem", color: "#222", fontWeight: 500, lineHeight: 1.5 }}>
+                {getAnswerLabel(qId, answers[qId])}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Recommendation */}
+      <div style={{ padding: "1.75rem 2.5rem", borderBottom: "1px solid #e8e8e8", background: "#fffde7" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Recommended Solution</div>
+
+        <div style={{ background: "#111", borderRadius: 10, padding: "1.75rem", marginBottom: "1.25rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.875rem" }}>
+            <div style={{ color: "#dfff00", fontWeight: 900, fontSize: "1.25rem", letterSpacing: "-0.02em" }}>{recommendation.name}</div>
+            <div style={{ ...monoStyle, fontSize: "0.58rem", color: "#111", background: "#dfff00", padding: "0.2rem 0.6rem", borderRadius: 4, fontWeight: 700, whiteSpace: "nowrap" }}>
+              {recommendation.badge}
+            </div>
+          </div>
+          <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.75 }}>{recommendation.desc}</div>
+        </div>
+
+        <div style={{ padding: "1.25rem", background: "#fff", border: "1px solid #e8e8e8", borderRadius: 8 }}>
+          <div style={{ ...monoStyle, fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#888", marginBottom: "0.75rem" }}>Our Analysis</div>
+          <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#111", marginBottom: "0.5rem" }}>{insights.headline}</div>
+          <div style={{ fontSize: "0.78rem", color: "#444", lineHeight: 1.75 }}>{insights.context}</div>
+        </div>
+      </div>
+
+      {/* Services & investment */}
+      <div style={{ padding: "1.75rem 2.5rem", borderBottom: "1px solid #e8e8e8" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Services Included & Investment Range</div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", marginBottom: "1.25rem" }}>
+          {recommendation.services.map((service, i) => {
+            const price = serviceCosts[service];
+            return (
+              <div
+                key={service}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr auto",
+                  gap: "1rem",
+                  alignItems: "center",
+                  padding: "0.75rem 1rem",
+                  background: i % 2 === 0 ? "#fafafa" : "#fff",
+                  borderRadius: 6,
+                  border: "1px solid #f0f0f0",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#dfff00", flexShrink: 0 }} />
+                  <div style={{ fontSize: "0.8rem", fontWeight: 500, color: "#222" }}>{service}</div>
+                </div>
+                <div style={{ ...monoStyle, fontSize: "0.7rem", color: "#555", fontWeight: 600, whiteSpace: "nowrap", textAlign: "right" }}>
+                  {price || "Scoped per project"}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {(totalMin > 0 && totalMax > 0) && (
+          <div style={{ background: "#111", borderRadius: 8, padding: "1.25rem 1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ ...monoStyle, fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Combined Indicative Investment</div>
+            <div>
+              <span style={{ ...monoStyle, fontSize: "1.1rem", fontWeight: 800, color: "#dfff00" }}>{formatZAR(totalMin)}</span>
+              <span style={{ ...monoStyle, fontSize: "0.8rem", color: "rgba(255,255,255,0.4)" }}> – {formatZAR(totalMax)}</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Implementation priority */}
+      <div style={{ padding: "1.75rem 2.5rem", borderBottom: "1px solid #e8e8e8", background: "#fafafa" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Recommended Implementation Order</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {insights.priority.map((step, i) => (
+            <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.75rem 1rem", background: "#fff", borderRadius: 6, border: "1px solid #ececec" }}>
+              <div style={{ ...monoStyle, fontSize: "0.6rem", fontWeight: 700, color: "#dfff00", background: "#111", width: 22, height: 22, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                {i + 1}
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#333", lineHeight: 1.6 }}>{step}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Next steps */}
+      <div style={{ padding: "1.75rem 2.5rem", borderBottom: "1px solid #e8e8e8" }}>
+        <div style={{ ...monoStyle, fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Your Next Steps</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+          {[
+            { action: "Send this report to Nuuhaven", detail: "Email it to tshepang@nuuhaven.com — our team will follow up with a personalised response within 24 hours." },
+            { action: "Book a discovery session", detail: "A focused 30–45 minute call to confirm scope, answer your questions, and align on priorities." },
+            { action: "Receive your formal proposal", detail: "A written proposal with exact pricing and a clear delivery plan — within 24–48 hours of your session." },
+          ].map(({ action, detail }, i) => (
+            <div key={i} style={{ display: "flex", gap: "0.875rem", padding: "1rem 1.25rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
+              <div style={{ ...monoStyle, fontSize: "0.65rem", fontWeight: 700, color: "#fff", background: "#111", width: 24, height: 24, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                {i + 1}
+              </div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: "0.82rem", marginBottom: "0.2rem" }}>{action}</div>
+                <div style={{ fontSize: "0.73rem", color: "#666", lineHeight: 1.55 }}>{detail}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pricing note */}
+      <div style={{ padding: "1.25rem 2.5rem", borderBottom: "1px solid #e8e8e8", background: "#fffde7" }}>
+        <div style={{ fontSize: "0.72rem", color: "#555", lineHeight: 1.7 }}>
+          <strong style={{ color: "#111" }}>Pricing Note:</strong> All investment figures shown are indicative ranges only. Final pricing is confirmed in a formal proposal after a discovery session. Nuuhaven operates exclusively on fixed-price agreements — you always know the full cost before any work begins. All engagements are subject to a conflict-of-interest assessment prior to commencement.
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div style={{ background: "#111", padding: "1.5rem 2.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
+        <div>
+          <div style={{ color: "#dfff00", fontWeight: 800, fontSize: "0.9rem", marginBottom: "0.25rem" }}>NUUHAVEN</div>
+          <div style={{ ...monoStyle, fontSize: "0.58rem", color: "rgba(255,255,255,0.3)" }}>Your Digital Haven for Business</div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ ...monoStyle, fontSize: "0.62rem", color: "rgba(255,255,255,0.5)", marginBottom: "0.15rem" }}>tshepang@nuuhaven.com</div>
+          <div style={{ ...monoStyle, fontSize: "0.62rem", color: "rgba(255,255,255,0.4)" }}>+27 67 717 9269 · nuuhaven.com</div>
+        </div>
+      </div>
+    </div>
+  );
+}

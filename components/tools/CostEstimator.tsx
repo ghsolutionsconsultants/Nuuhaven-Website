@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ToolContactForm from "@/components/tools/ToolContactForm";
+import ReportModal from "@/components/tools/ReportModal";
+import ProjectScopeReport from "@/components/tools/reports/ProjectScopeReport";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Service {
@@ -21,7 +23,7 @@ const SERVICES: Service[] = [
   { id: "basic", category: "Website", label: "Basic Website", subLabel: "3–5 pages, custom design", baseMin: 2500, baseMax: 4000, durationWeeks: 2, complexity: 1 },
   { id: "multi", category: "Website", label: "Professional Website", subLabel: "5–8 pages, full corporate site", baseMin: 5000, baseMax: 8000, durationWeeks: 3, complexity: 2 },
   { id: "enterprise", category: "Website", label: "Enterprise Website", subLabel: "10+ pages, advanced functionality", baseMin: 10000, baseMax: 20000, durationWeeks: 6, complexity: 3 },
-  { id: "ecommerce", category: "Website", label: "E-Commerce Website", subLabel: "Online store — sell products or services directly", baseMin: 8000, baseMax: 18000, durationWeeks: 4, complexity: 3 },
+  { id: "ecommerce", category: "Website", label: "E-Commerce Website", subLabel: "Online store — sell products or services directly", baseMin: 5000, baseMax: 18000, durationWeeks: 4, complexity: 3 },
   { id: "brand-basic", category: "Brand", label: "Brand Identity", subLabel: "Logo, colours, typography", baseMin: 2000, baseMax: 4000, durationWeeks: 1, complexity: 1 },
   { id: "brand-premium", category: "Brand", label: "Premium Brand Identity", subLabel: "Full brand standards + guidelines", baseMin: 5000, baseMax: 10000, durationWeeks: 2, complexity: 2 },
   { id: "profile-std", category: "Documentation", label: "Company Profile", subLabel: "Standard (8–12 pages)", baseMin: 1500, baseMax: 3000, durationWeeks: 1, complexity: 1 },
@@ -47,6 +49,7 @@ export default function CostEstimator() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [showForm, setShowForm] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   const toggle = (id: string) => {
     setSelected((prev) => {
@@ -189,8 +192,15 @@ export default function CostEstimator() {
                             {isSelected ? "✓" : "+"}
                           </div>
                         </div>
-                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.72rem", fontWeight: 700, color: isSelected ? "var(--accent)" : "rgba(255,255,255,0.35)" }}>
-                          {formatZAR(service.baseMin)} – {formatZAR(service.baseMax)}
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.72rem", fontWeight: 700, color: isSelected ? "var(--accent)" : "rgba(255,255,255,0.35)" }}>
+                            {formatZAR(service.baseMin)} – {formatZAR(service.baseMax)}
+                          </div>
+                          {service.id === "ecommerce" && (
+                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, color: "#000", background: "var(--accent)", padding: "0.15rem 0.4rem", borderRadius: 3, flexShrink: 0 }}>
+                              Popular
+                            </div>
+                          )}
                         </div>
                       </motion.button>
                     );
@@ -301,6 +311,13 @@ export default function CostEstimator() {
                           >
                             Get An Exact Quote →
                           </button>
+                          <button
+                            onClick={() => setShowReport(true)}
+                            className="btn-outline"
+                            style={{ display: "block", width: "100%", textAlign: "center", fontSize: "0.75rem", padding: "0.75rem 1rem", marginTop: "0.5rem" }}
+                          >
+                            ↓ Download Scope Report
+                          </button>
                         </div>
                       </motion.div>
                     )}
@@ -336,6 +353,20 @@ export default function CostEstimator() {
           </div>
         </section>
       )}
+
+      <ReportModal
+        isOpen={showReport}
+        onClose={() => setShowReport(false)}
+        title="Project Scope Report"
+      >
+        <ProjectScopeReport
+          services={selectedServices}
+          totalMin={totalMin}
+          totalMax={totalMax}
+          totalWeeks={totalWeeks}
+          complexityLevel={complexityLevel}
+        />
+      </ReportModal>
     </div>
   );
 }

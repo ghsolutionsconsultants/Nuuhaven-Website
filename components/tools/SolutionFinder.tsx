@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import ToolContactForm from "@/components/tools/ToolContactForm";
+import ReportModal from "@/components/tools/ReportModal";
+import DigitalStrategyReport from "@/components/tools/reports/DigitalStrategyReport";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const SERVICE_COSTS: Record<string, string> = {
@@ -20,7 +22,7 @@ const SERVICE_COSTS: Record<string, string> = {
   "Professional Multi-Page Website": "R 5,000 – R 8,000",
   "Strategic Advisory & Commercial Roadmap": "R 2,000 – R 8,000",
   "Enterprise Website (10+ pages)": "R 10,000 – R 20,000",
-  "E-Commerce Website (Online Store)": "R 8,000 – R 18,000",
+  "E-Commerce Website (Online Store)": "R 5,000 – R 18,000",
   "Monthly Retainer Support": "R 1,000 – R 3,000/mo",
   "Strategic Advisory Session": "R 2,000 – R 4,000",
   "Business Positioning Assessment": "Complimentary",
@@ -219,6 +221,7 @@ export default function SolutionFinder() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [complete, setComplete] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   const question = QUESTIONS[step];
 
@@ -445,6 +448,17 @@ export default function SolutionFinder() {
                       <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>{recommendation?.why}</p>
                     </div>
 
+                    {/* Download report button */}
+                    <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                      <button
+                        onClick={() => setShowReport(true)}
+                        className="btn-outline"
+                        style={{ width: "100%", textAlign: "center", fontSize: "0.78rem", padding: "0.875rem 1rem" }}
+                      >
+                        ↓ Download Your Digital Strategy Report
+                      </button>
+                    </div>
+
                     <ToolContactForm
                       inline
                       toolName="Solution Finder"
@@ -459,6 +473,20 @@ export default function SolutionFinder() {
           </AnimatePresence>
         </div>
       </section>
+
+      {recommendation && (
+        <ReportModal
+          isOpen={showReport}
+          onClose={() => setShowReport(false)}
+          title="Digital Strategy Report"
+        >
+          <DigitalStrategyReport
+            answers={answers}
+            recommendation={recommendation}
+            serviceCosts={SERVICE_COSTS}
+          />
+        </ReportModal>
+      )}
     </div>
   );
 }

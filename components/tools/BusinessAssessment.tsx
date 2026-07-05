@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import ToolContactForm from "@/components/tools/ToolContactForm";
+import ReportModal from "@/components/tools/ReportModal";
+import BusinessMaturityReport from "@/components/tools/reports/BusinessMaturityReport";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const QUESTIONS = [
@@ -62,6 +64,7 @@ export default function BusinessAssessment() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [complete, setComplete] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   useEffect(() => {
     const pre = searchParams.get("q_logo") as Answer | null;
@@ -290,6 +293,21 @@ export default function BusinessAssessment() {
                   </div>
                 )}
 
+                {/* Download report */}
+                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "1.5rem 2rem" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Your Full Report</div>
+                  <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                    Download a detailed PDF report with your full breakdown, gap analysis, priority recommendations, and estimated investment to close each gap.
+                  </p>
+                  <button
+                    onClick={() => setShowReport(true)}
+                    className="btn-accent"
+                    style={{ width: "100%", textAlign: "center", fontSize: "0.82rem", padding: "0.9rem 1rem" }}
+                  >
+                    ↓ Download My Business Assessment Report
+                  </button>
+                </div>
+
                 {/* Inline contact form */}
                 <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
                   <ToolContactForm
@@ -305,6 +323,21 @@ export default function BusinessAssessment() {
           </AnimatePresence>
         </div>
       </section>
+
+      <ReportModal
+        isOpen={showReport}
+        onClose={() => setShowReport(false)}
+        title="Business Maturity Assessment Report"
+      >
+        <BusinessMaturityReport
+          answers={answers}
+          overall={overall}
+          scoreLabel={scoreLabel}
+          questions={QUESTIONS}
+          categories={CATEGORIES}
+          getCategoryScore={getCategoryScore}
+        />
+      </ReportModal>
     </div>
   );
 }
