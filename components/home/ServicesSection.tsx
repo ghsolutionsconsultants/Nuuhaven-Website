@@ -10,7 +10,7 @@ const services = [
     icon: "◎",
     title: "Establish A Professional Digital Presence",
     sub: "Website Development",
-    desc: "Custom-designed websites that communicate credibility, drive trust, and position your business for growth.",
+    desc: "Custom-designed websites and e-commerce stores that communicate credibility, drive trust, and position your business for growth — whether you need a corporate site or an online store to sell directly.",
   },
   {
     icon: "◈",

@@ -13,6 +13,7 @@ const NAV = [
 
 const SERVICES = [
   { label: "Website Development", href: "/contact" },
+  { label: "E-Commerce Website", href: "/contact" },
   { label: "Brand Development", href: "/contact" },
   { label: "Company Profiles", href: "/contact" },
   { label: "Marketing Assets", href: "/contact" },

@@ -21,6 +21,7 @@ const SERVICES: Service[] = [
   { id: "basic", category: "Website", label: "Basic Website", subLabel: "3–5 pages, custom design", baseMin: 2500, baseMax: 4000, durationWeeks: 2, complexity: 1 },
   { id: "multi", category: "Website", label: "Professional Website", subLabel: "5–8 pages, full corporate site", baseMin: 5000, baseMax: 8000, durationWeeks: 3, complexity: 2 },
   { id: "enterprise", category: "Website", label: "Enterprise Website", subLabel: "10+ pages, advanced functionality", baseMin: 10000, baseMax: 20000, durationWeeks: 6, complexity: 3 },
+  { id: "ecommerce", category: "Website", label: "E-Commerce Website", subLabel: "Online store — sell products or services directly", baseMin: 8000, baseMax: 18000, durationWeeks: 4, complexity: 3 },
   { id: "brand-basic", category: "Brand", label: "Brand Identity", subLabel: "Logo, colours, typography", baseMin: 2000, baseMax: 4000, durationWeeks: 1, complexity: 1 },
   { id: "brand-premium", category: "Brand", label: "Premium Brand Identity", subLabel: "Full brand standards + guidelines", baseMin: 5000, baseMax: 10000, durationWeeks: 2, complexity: 2 },
   { id: "profile-std", category: "Documentation", label: "Company Profile", subLabel: "Standard (8–12 pages)", baseMin: 1500, baseMax: 3000, durationWeeks: 1, complexity: 1 },

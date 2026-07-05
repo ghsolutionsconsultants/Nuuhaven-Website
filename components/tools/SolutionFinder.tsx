@@ -20,6 +20,7 @@ const SERVICE_COSTS: Record<string, string> = {
   "Professional Multi-Page Website": "R 5,000 – R 8,000",
   "Strategic Advisory & Commercial Roadmap": "R 2,000 – R 8,000",
   "Enterprise Website (10+ pages)": "R 10,000 – R 20,000",
+  "E-Commerce Website (Online Store)": "R 8,000 – R 18,000",
   "Monthly Retainer Support": "R 1,000 – R 3,000/mo",
   "Strategic Advisory Session": "R 2,000 – R 4,000",
   "Business Positioning Assessment": "Complimentary",
@@ -142,33 +143,53 @@ function getRecommendation(answers: Answers) {
   const stage = answers.stage as string;
   const have = (answers.have as string[]) || [];
   const outcome = answers.outcome as string;
+  const clients = answers.clients as string;
   const hasWebsite = have.includes("website");
   const hasLogo = have.includes("logo");
+  const isConsumer = clients === "b2c" || clients === "both";
 
   if (stage === "startup" || have.includes("nothing") || have.length === 0) {
     return {
       name: "Foundation Package",
       badge: "Most popular for new businesses",
-      desc: "Everything you need to launch professionally — brand identity, website, and core documentation that makes you look established from day one.",
-      services: ["Brand Identity (Logo + Colours + Typography)", "Multi-Page Corporate Website", "Company Profile (8–12 pages)", "Social Media Setup (3 platforms)"],
-      why: "You're starting fresh and every touchpoint matters. The Foundation Package sets a professional baseline that gets you taken seriously — immediately.",
-      estimatorParams: "brand-basic,multi,profile-std,social",
+      desc: isConsumer
+        ? "Everything you need to launch professionally — brand identity, an e-commerce store to sell directly online, and core documentation that makes you look established from day one."
+        : "Everything you need to launch professionally — brand identity, website, and core documentation that makes you look established from day one.",
+      services: isConsumer
+        ? ["Brand Identity (Logo + Colours + Typography)", "E-Commerce Website (Online Store)", "Company Profile (8–12 pages)", "Social Media Setup (3 platforms)"]
+        : ["Brand Identity (Logo + Colours + Typography)", "Multi-Page Corporate Website", "Company Profile (8–12 pages)", "Social Media Setup (3 platforms)"],
+      why: isConsumer
+        ? "You're starting fresh and you sell to consumers — an e-commerce store lets you generate revenue online from day one, paired with a brand that earns instant trust."
+        : "You're starting fresh and every touchpoint matters. The Foundation Package sets a professional baseline that gets you taken seriously — immediately.",
+      estimatorParams: isConsumer ? "brand-basic,ecommerce,profile-std,social" : "brand-basic,multi,profile-std,social",
     };
   }
   if (stage === "growing" || outcome === "credibility") {
     return {
       name: "Growth Package",
       badge: "Best for businesses gaining momentum",
-      desc: "Elevate your existing business with a premium brand refresh, a powerful website, and complete documentation that matches how well you actually operate.",
-      services: [
-        hasWebsite ? "Website Redesign & Upgrade" : "Professional Multi-Page Website",
-        hasLogo ? "Brand Identity Refresh & Guidelines" : "Premium Brand Identity",
-        "Premium Company Profile (16–24 pages)",
-        "Marketing Assets Pack",
-        "Business Documentation Templates",
-      ],
-      why: "Your business has momentum but your presentation hasn't kept pace. This package closes the gap between how you operate and how you look.",
-      estimatorParams: "multi,brand-premium,profile-prem,marketing,docs",
+      desc: isConsumer
+        ? "Elevate your existing business with a premium brand refresh, an e-commerce store to unlock direct online revenue, and complete documentation that matches how well you actually operate."
+        : "Elevate your existing business with a premium brand refresh, a powerful website, and complete documentation that matches how well you actually operate.",
+      services: isConsumer
+        ? [
+            hasWebsite ? "E-Commerce Website (Online Store)" : "E-Commerce Website (Online Store)",
+            hasLogo ? "Brand Identity Refresh & Guidelines" : "Premium Brand Identity",
+            "Premium Company Profile (16–24 pages)",
+            "Marketing Assets Pack",
+            "Business Documentation Templates",
+          ]
+        : [
+            hasWebsite ? "Website Redesign & Upgrade" : "Professional Multi-Page Website",
+            hasLogo ? "Brand Identity Refresh & Guidelines" : "Premium Brand Identity",
+            "Premium Company Profile (16–24 pages)",
+            "Marketing Assets Pack",
+            "Business Documentation Templates",
+          ],
+      why: isConsumer
+        ? "Your business has momentum but your customers can't buy from you online. Adding e-commerce alongside a brand refresh turns your digital presence into a direct revenue channel."
+        : "Your business has momentum but your presentation hasn't kept pace. This package closes the gap between how you operate and how you look.",
+      estimatorParams: isConsumer ? "ecommerce,brand-premium,profile-prem,marketing,docs" : "multi,brand-premium,profile-prem,marketing,docs",
     };
   }
   if (stage === "established" || stage === "enterprise") {
@@ -176,9 +197,11 @@ function getRecommendation(answers: Answers) {
       name: "Transformation Package",
       badge: "For businesses ready to operate at the top",
       desc: "A complete ecosystem rebuild — premium brand, enterprise digital presence, strategic advisory, and ongoing retainer support to maintain the standard.",
-      services: ["Strategic Advisory & Commercial Roadmap", "Premium Brand Identity & Full Guidelines", "Enterprise Website (10+ pages)", "Premium Company Profile", "Marketing Assets Pack", "Monthly Retainer Support"],
+      services: isConsumer
+        ? ["Strategic Advisory & Commercial Roadmap", "Premium Brand Identity & Full Guidelines", "E-Commerce Website (Online Store)", "Premium Company Profile", "Marketing Assets Pack", "Monthly Retainer Support"]
+        : ["Strategic Advisory & Commercial Roadmap", "Premium Brand Identity & Full Guidelines", "Enterprise Website (10+ pages)", "Premium Company Profile", "Marketing Assets Pack", "Monthly Retainer Support"],
       why: "You're ready to compete at the highest level. This package combines strategic counsel with world-class execution across every touchpoint — and keeps it there.",
-      estimatorParams: "advisory,brand-premium,enterprise,profile-prem,marketing,retainer",
+      estimatorParams: isConsumer ? "advisory,brand-premium,ecommerce,profile-prem,marketing,retainer" : "advisory,brand-premium,enterprise,profile-prem,marketing,retainer",
     };
   }
   return {
