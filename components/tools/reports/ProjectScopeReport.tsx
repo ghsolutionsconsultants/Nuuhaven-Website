@@ -231,6 +231,50 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
         </div>
       </div>
 
+      {/* ── Advisory ────────────────────────────────── */}
+      {(() => {
+        const hasWebsite = categories.includes("Website");
+        const hasBrand = categories.includes("Brand");
+        const hasDocumentation = categories.includes("Documentation");
+        const hasMarketing = categories.includes("Marketing");
+        const isMulti = categories.length >= 3;
+
+        let para1 = "";
+        let para2 = "";
+
+        if (hasWebsite && hasBrand) {
+          para1 = "Your website and brand identity are in scope together — that's the right combination. But sequencing is critical: always finalise your brand identity before website design begins. Your colours, typography, and logo must be locked in first — a website built without a defined visual system will need redesigning once the brand is finalised. That's avoidable rework and unnecessary cost.";
+        } else if (hasWebsite) {
+          para1 = "Your website is the single most-visited touchpoint in any client's journey with your business. Most prospects will visit your site before accepting a call, before reading a proposal, and before making any decision. A professionally designed website doesn't just create a good first impression — it answers the question every prospective client is quietly asking: 'Can I trust this business?'";
+        } else if (hasBrand) {
+          para1 = "Brand identity is the foundation that every other asset is built on. A professional logo, a defined colour palette, and a clear visual system mean that every touchpoint your business makes — website, documents, social profiles, email signatures — reinforces the same impression. Without it, every asset you produce works in isolation. With it, they compound.";
+        } else if (hasDocumentation) {
+          para1 = "Professional documentation is frequently the deciding factor in B2B sales — not the meeting, not the pitch, but the document that gets forwarded. Most businesses only commission a company profile when they're chasing a specific tender or partnership, which is too late. Having it in place now means you're ready to respond to opportunities the moment they appear.";
+        } else {
+          para1 = "Every service in this scope has been selected for a reason — and the most important thing about executing a project like this is treating it as an investment in your business infrastructure, not a one-off spend. The assets you build here will represent your business for years, open doors, and generate returns that compound over time.";
+        }
+
+        if (isMulti) {
+          para2 = "When multiple deliverables are in scope together, the investment compounds. A brand that works, a website that converts, and documentation that closes deals are more powerful as a system than they are individually — each makes the others more effective. The businesses that invest holistically in their presence are the ones that consistently win business others lose to less-qualified competitors who simply look more established.";
+        } else if (hasMarketing) {
+          para2 = "Marketing assets only perform at their full potential when the brand and digital foundation is in place. If you're investing in collateral and campaigns without a defined visual identity, you risk amplifying an inconsistent impression. Once your brand is locked in, every marketing asset you produce will reinforce the same credibility signal — and the effect compounds with each touchpoint.";
+        } else if (complexityLevel >= 3) {
+          para2 = `At ${complexityLabel} level, the quality of execution is what separates a good project from one that genuinely moves your business forward. This means strategic input at the brief stage, structured revision rounds, and senior attention to every deliverable. Budget the time for this — rushing a project at this scope almost always means a second, more expensive pass within 12 months.`;
+        } else {
+          para2 = "A focused scope like this is often more strategic than a large one. Knowing exactly what to build — and not adding scope prematurely — means your investment goes further, delivery is faster, and the result is coherent. Once this foundation is in place, you'll have a clear picture of what to build next and exactly how it fits into what you've already established.";
+        }
+
+        return (
+          <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8", background: "#f7f9ff" }}>
+            <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1rem" }}>A Note From Our Team</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+              <p style={{ fontSize: "0.8rem", color: "#333", lineHeight: 1.85, margin: 0 }}>{para1}</p>
+              <p style={{ fontSize: "0.8rem", color: "#333", lineHeight: 1.85, margin: 0 }}>{para2}</p>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* ── Next steps ──────────────────────────────── */}
       <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8" }}>
         <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.125rem" }}>Recommended Next Steps</div>

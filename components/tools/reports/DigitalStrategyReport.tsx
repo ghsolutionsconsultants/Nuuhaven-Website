@@ -261,6 +261,47 @@ export default function DigitalStrategyReport({ answers, recommendation, service
         )}
       </div>
 
+      {/* ── What This Means For You ─────────────────── */}
+      {(() => {
+        const stage = answers.stage as string;
+        const outcome = answers.outcome as string;
+        const clients = answers.clients as string;
+
+        const stagePara: Record<string, string> = {
+          startup: "Starting a business is about building confidence — yours and your prospective clients'. You are currently in the window where first impressions are permanently set. Potential clients, partners, and referrals will visit your website, see your brand, and form a view of your business before you've exchanged a word. Getting this right from the beginning saves you the cost of a rebrand and a site redesign down the line — both of which are significantly more expensive than doing it properly from the start.",
+          growing: "You've validated your business — people are paying for what you do. But as you grow, something predictable happens: the gap between how good your business actually is and how it presents itself becomes increasingly visible. Clients who should be saying yes are hesitating, and you're often not sure why. The answer is almost always presentation. The right package closes that credibility gap and positions you to win the clients your business actually deserves.",
+          established: "At this stage, the risk isn't looking unprofessional — it's looking stale. Markets move, competitors invest, and positioning erodes quietly. A brand refresh and digital upgrade aren't about fixing something broken; they're about asserting relevance. Businesses that invest in staying sharp don't just maintain their market position — they extend it, because their competitors have stopped investing.",
+          enterprise: "At an enterprise level, your brand and digital infrastructure need to perform consistently at scale — across contexts, across channels, and across the people who represent your business. The risk here is drift: different people representing the brand differently, outdated assets still in circulation, and a digital presence that no longer reflects the business you've become. Ongoing retainer support keeps everything current, aligned, and sharp.",
+        };
+
+        const outcomePara: Record<string, string> = {
+          leads: "The most common mistake when trying to generate more leads is starting with marketing before fixing the foundation. Marketing amplifies your presence — but if your presence isn't ready, you amplify the wrong impression. Fix the brand, website, and profile first. Then activate marketing. This sequence is what separates businesses that grow from those that spend without return.",
+          credibility: "Credibility is not built in a single interaction. It accumulates across every touchpoint: your website, your social profiles, your email signature, your company profile, and how you appear when someone Googles you. A single strong deliverable helps; a cohesive system is what genuinely changes how you're perceived. This package builds that system.",
+          investors: "Investors and partners assess your business on documentation and digital presence before meeting you. A company profile that isn't investor-ready, or a website that doesn't reflect a growth-stage business, signals that the opportunity isn't mature — regardless of the underlying strength of your business. Your materials need to meet your ambition. That's what this recommendation addresses.",
+          brand: "Brand recognition is earned through repetition and consistency — it's not a logo, it's how consistently that logo, those colours, and that tone of voice appear across every channel, every interaction, every touchpoint. A brand system makes that consistency scalable. Without it, you're starting from zero with every new client, every new hire, and every new platform you enter.",
+        };
+
+        const clientsNote = (clients === "b2b" || clients === "both")
+          ? "Given your B2B focus, company documentation carries particular weight. B2B buyers do extensive due diligence — your website and company profile are often circulated internally before any decision is made. These materials need to speak to a professional audience with precision."
+          : "";
+
+        const para1 = stagePara[stage] || "Every business has a stage where the right investment in its presence unlocks disproportionate returns. Based on your profile, this is that stage. The services recommended here are not optional extras — they're the infrastructure that determines how seriously your market takes you.";
+        const para2 = outcomePara[outcome] || "The right sequence of investment — brand, digital presence, documentation, and then activation — is what turns a good business into one that consistently wins business. This recommendation is built around that sequence, calibrated to your specific situation.";
+
+        return (
+          <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8", background: "#f7f9ff" }}>
+            <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1rem" }}>What This Means For You</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+              <p style={{ fontSize: "0.8rem", color: "#333", lineHeight: 1.85, margin: 0 }}>{para1}</p>
+              <p style={{ fontSize: "0.8rem", color: "#333", lineHeight: 1.85, margin: 0 }}>{para2}</p>
+              {clientsNote && (
+                <p style={{ fontSize: "0.78rem", color: "#555", lineHeight: 1.8, margin: 0, paddingTop: "0.25rem", borderTop: "1px solid #e8e8e8" }}>{clientsNote}</p>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* ── Implementation priority ──────────────────── */}
       <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8", background: "#fafafa" }}>
         <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.125rem" }}>Recommended Implementation Order</div>
