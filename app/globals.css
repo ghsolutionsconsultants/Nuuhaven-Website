@@ -314,19 +314,39 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 
 /* ─── Print / Report PDF styles ─────────────────────────────── */
 @media print {
+  @page { margin: 1cm; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  /* White page — body/html have #000 background which bleeds through visibility:hidden */
-  html, body { background: white !important; margin: 0 !important; padding: 0 !important; }
-  body { visibility: hidden; }
-  /* Three.js canvas renders its own black clear-color — must be removed, not just hidden */
+  html, body { background: white !important; margin: 0 !important; padding: 0 !important; visibility: hidden; }
   canvas { display: none !important; }
-  /* Hide all fixed UI layers (nav, cursor, overlays) */
   nav, [class*="cursor"], [class*="neural"], [class*="loading"], [class*="ticker"] { display: none !important; }
   .report-no-print { display: none !important; }
-  /* Ancestor chain: must be visible + non-clipping for report to flow naturally */
-  .report-modal-backdrop { visibility: visible !important; position: static !important; overflow: visible !important; background: white !important; padding: 0 !important; }
-  .report-scroll-area { visibility: visible !important; position: static !important; overflow: visible !important; height: auto !important; padding: 0 !important; }
-  /* Report itself — static flow, full width, no decorative chrome */
-  #nuuhaven-report { visibility: visible !important; position: static !important; width: 100% !important; max-width: 100% !important; border-radius: 0 !important; margin: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  /* Neutralise all positioned/sized ancestors so report flows from the top of the page */
+  .report-modal-backdrop {
+    visibility: visible !important;
+    position: static !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    inset: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    padding: 0 !important; margin: 0 !important;
+    width: 100% !important; height: auto !important;
+  }
+  .report-scroll-area {
+    visibility: visible !important;
+    position: static !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    padding: 0 !important; margin: 0 !important;
+  }
+  #nuuhaven-report {
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important; max-width: 100% !important;
+    margin: 0 !important; padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
   #nuuhaven-report * { visibility: visible !important; }
 }
