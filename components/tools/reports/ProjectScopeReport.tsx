@@ -125,7 +125,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
         <div style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#dfff00", border: "2px solid #cce000", flexShrink: 0, marginTop: "0.25rem" }} />
           <div style={{ fontSize: "0.8rem", color: "#444", lineHeight: 1.7 }}>
-            <strong style={{ color: "#111" }}>{complexityLabel} Project — </strong>
+            <strong style={{ color: "#111" }}>{complexityLabel} Project:</strong>{" "}
             {COMPLEXITY_DESC[complexityLabel] || "A bespoke project requiring tailored scoping."}
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
 
       {/* ── Services breakdown ─────────────────────── */}
       <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8" }}>
-        <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Scope of Work — Service Breakdown</div>
+        <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.25rem" }}>Scope of Work: Service Breakdown</div>
 
         {categories.map((cat, ci) => {
           const catServices = services.filter(s => s.category === cat);
@@ -196,7 +196,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem" }}>
           {[
             { step: "01", title: "Discovery Session", body: "We confirm your scope, goals, and timeline in a structured session before any work begins." },
-            { step: "02", title: "Fixed-Price Proposal", body: "You receive a formal proposal with exact pricing and deliverables — no surprise invoices, ever." },
+            { step: "02", title: "Fixed-Price Proposal", body: "You receive a formal proposal with exact pricing and deliverables,no surprise invoices, ever." },
             { step: "03", title: "Delivery & Handover", body: "Work is delivered in agreed phases with revision rounds built in. You own every asset." },
           ].map(({ step, title, body }) => (
             <div key={step} style={{
@@ -218,7 +218,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
         <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
           {[
             "All price ranges are indicative. Final pricing is confirmed in writing after a discovery session.",
-            "Nuuhaven operates on fixed-price agreements — scope and cost are agreed upfront, not billed hourly.",
+            "Nuuhaven operates on fixed-price agreements,scope and cost are agreed upfront, not billed hourly.",
             "Timelines are estimates. Final timeline confirmed at kickoff.",
             "Nuuhaven reserves the right to decline or pause any engagement if a conflict of interest is identified.",
             "This report is valid as a reference for 30 days from the date of generation.",
@@ -243,25 +243,25 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
         let para2 = "";
 
         if (hasWebsite && hasBrand) {
-          para1 = "Your website and brand identity are in scope together — that's the right combination. But sequencing is critical: always finalise your brand identity before website design begins. Your colours, typography, and logo must be locked in first — a website built without a defined visual system will need redesigning once the brand is finalised. That's avoidable rework and unnecessary cost.";
+          para1 = "Your website and brand identity are in scope together,that's the right combination. But sequencing is critical: always finalise your brand identity before website design begins. Your colours, typography, and logo must be locked in first,a website built without a defined visual system will need redesigning once the brand is finalised. That's avoidable rework and unnecessary cost.";
         } else if (hasWebsite) {
-          para1 = "Your website is the single most-visited touchpoint in any client's journey with your business. Most prospects will visit your site before accepting a call, before reading a proposal, and before making any decision. A professionally designed website doesn't just create a good first impression — it answers the question every prospective client is quietly asking: 'Can I trust this business?'";
+          para1 = "Your website is the single most-visited touchpoint in any client's journey with your business. Most prospects will visit your site before accepting a call, before reading a proposal, and before making any decision. A professionally designed website doesn't just create a good first impression,it answers the question every prospective client is quietly asking: 'Can I trust this business?'";
         } else if (hasBrand) {
-          para1 = "Brand identity is the foundation that every other asset is built on. A professional logo, a defined colour palette, and a clear visual system mean that every touchpoint your business makes — website, documents, social profiles, email signatures — reinforces the same impression. Without it, every asset you produce works in isolation. With it, they compound.";
+          para1 = "Brand identity is the foundation that every other asset is built on. A professional logo, a defined colour palette, and a clear visual system mean that every touchpoint your business makes,website, documents, social profiles, email signatures,reinforces the same impression. Without it, every asset you produce works in isolation. With it, they compound.";
         } else if (hasDocumentation) {
-          para1 = "Professional documentation is frequently the deciding factor in B2B sales — not the meeting, not the pitch, but the document that gets forwarded. Most businesses only commission a company profile when they're chasing a specific tender or partnership, which is too late. Having it in place now means you're ready to respond to opportunities the moment they appear.";
+          para1 = "Professional documentation is frequently the deciding factor in B2B sales,not the meeting, not the pitch, but the document that gets forwarded. Most businesses only commission a company profile when they're chasing a specific tender or partnership, which is too late. Having it in place now means you're ready to respond to opportunities the moment they appear.";
         } else {
-          para1 = "Every service in this scope has been selected for a reason — and the most important thing about executing a project like this is treating it as an investment in your business infrastructure, not a one-off spend. The assets you build here will represent your business for years, open doors, and generate returns that compound over time.";
+          para1 = "Every service in this scope has been selected for a reason,and the most important thing about executing a project like this is treating it as an investment in your business infrastructure, not a one-off spend. The assets you build here will represent your business for years, open doors, and generate returns that compound over time.";
         }
 
         if (isMulti) {
-          para2 = "When multiple deliverables are in scope together, the investment compounds. A brand that works, a website that converts, and documentation that closes deals are more powerful as a system than they are individually — each makes the others more effective. The businesses that invest holistically in their presence are the ones that consistently win business others lose to less-qualified competitors who simply look more established.";
+          para2 = "When multiple deliverables are in scope together, the investment compounds. A brand that works, a website that converts, and documentation that closes deals are more powerful as a system than they are individually,each makes the others more effective. The businesses that invest holistically in their presence are the ones that consistently win business others lose to less-qualified competitors who simply look more established.";
         } else if (hasMarketing) {
-          para2 = "Marketing assets only perform at their full potential when the brand and digital foundation is in place. If you're investing in collateral and campaigns without a defined visual identity, you risk amplifying an inconsistent impression. Once your brand is locked in, every marketing asset you produce will reinforce the same credibility signal — and the effect compounds with each touchpoint.";
+          para2 = "Marketing assets only perform at their full potential when the brand and digital foundation is in place. If you're investing in collateral and campaigns without a defined visual identity, you risk amplifying an inconsistent impression. Once your brand is locked in, every marketing asset you produce will reinforce the same credibility signal,and the effect compounds with each touchpoint.";
         } else if (complexityLevel >= 3) {
-          para2 = `At ${complexityLabel} level, the quality of execution is what separates a good project from one that genuinely moves your business forward. This means strategic input at the brief stage, structured revision rounds, and senior attention to every deliverable. Budget the time for this — rushing a project at this scope almost always means a second, more expensive pass within 12 months.`;
+          para2 = `At ${complexityLabel} level, the quality of execution is what separates a good project from one that genuinely moves your business forward. This means strategic input at the brief stage, structured revision rounds, and senior attention to every deliverable. Budget the time for this,rushing a project at this scope almost always means a second, more expensive pass within 12 months.`;
         } else {
-          para2 = "A focused scope like this is often more strategic than a large one. Knowing exactly what to build — and not adding scope prematurely — means your investment goes further, delivery is faster, and the result is coherent. Once this foundation is in place, you'll have a clear picture of what to build next and exactly how it fits into what you've already established.";
+          para2 = "A focused scope like this is often more strategic than a large one. Knowing exactly what to build,and not adding scope prematurely,means your investment goes further, delivery is faster, and the result is coherent. Once this foundation is in place, you'll have a clear picture of what to build next and exactly how it fits into what you've already established.";
         }
 
         return (
@@ -282,7 +282,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
           {[
             { action: "Send this report to Nuuhaven", detail: "Email it to tshepang@nuuhaven.com along with your contact details to start a conversation." },
             { action: "Book a discovery session", detail: "A 30–45 minute session to confirm scope, answer questions, and agree on next steps." },
-            { action: "Receive your formal proposal", detail: "A written proposal with exact pricing and a clear scope of work — within 24–48 hours of your session." },
+            { action: "Receive your formal proposal", detail: "A written proposal with exact pricing and a clear scope of work,within 24–48 hours of your session." },
           ].map(({ action, detail }, i) => (
             <div key={i} style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
               <div style={{

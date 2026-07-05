@@ -13,7 +13,7 @@ const services: { icon: string; title: string; sub: string; desc: string; featur
     desc: "Custom-designed websites built to communicate credibility, drive trust, and convert visitors — positioned precisely for the clients you want.",
   },
   {
-    icon: "◈",
+    icon: "🛒",
     title: "Open Your Online Store. Sell Directly.",
     sub: "E-Commerce Website",
     desc: "A fully integrated online store that lets your customers browse, add to cart, and pay — without leaving your site. Turn your products into consistent online revenue. From R 5,000.",

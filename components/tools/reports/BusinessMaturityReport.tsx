@@ -39,7 +39,7 @@ const GAP_RECOMMENDATIONS: Record<string, { fix: string; investment: string; imp
   "brand-guide": {
     fix: "Develop formal brand guidelines documenting your visual standards",
     investment: "Included in Premium Brand Identity (R 5,000 – R 10,000)",
-    impact: "Without guidelines, every touchpoint looks slightly different — eroding the consistency that builds recognition.",
+    impact: "Without guidelines, every touchpoint looks slightly different,eroding the consistency that builds recognition.",
   },
   "website": {
     fix: "Build or commission a professional, modern website",
@@ -74,12 +74,12 @@ const GAP_RECOMMENDATIONS: Record<string, { fix: string; investment: string; imp
   "email": {
     fix: "Implement branded email signatures for all team members",
     investment: "Typically included in brand delivery",
-    impact: "Every email your team sends is a brand touchpoint. Unbranded signatures are missed impressions — every single day.",
+    impact: "Every email your team sends is a brand touchpoint. Unbranded signatures are missed impressions,every single day.",
   },
   "positioning": {
     fix: "Define and document your brand messaging and market positioning",
     investment: "R 2,000 – R 8,000 (Strategic Advisory)",
-    impact: "Unclear positioning means your message doesn't resonate with the right clients — and you attract the wrong ones.",
+    impact: "Unclear positioning means your message doesn't resonate with the right clients,and you attract the wrong ones.",
   },
 };
 
@@ -118,7 +118,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
     : overall >= 60
     ? "You have a solid foundation but identifiable gaps are quietly costing you business. The right targeted investments now will close these gaps and accelerate growth significantly."
     : overall >= 40
-    ? "Significant credibility gaps exist across your business presence. These aren't just cosmetic — they're actively affecting your ability to win business and compete at the level your business deserves."
+    ? "Significant credibility gaps exist across your business presence. These aren't just cosmetic,they're actively affecting your ability to win business and compete at the level your business deserves."
     : "Critical gaps across your business presence mean you're being overlooked, dismissed, or undervalued before conversations even begin. This is an urgent priority.";
 
   return (
@@ -191,22 +191,22 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
 
         const scorePara =
           overall >= 80
-            ? "A score this high reflects real, deliberate investment in how your business presents itself. The risk at this level isn't visible gaps — it's invisible drift. Over time, assets age, markets shift, and what once looked sharp can start to look dated without anyone noticing. The priority now is maintenance, refinement, and staying one step ahead of your competition rather than catching up to them."
+            ? "A score this high reflects real, deliberate investment in how your business presents itself. The risk at this level isn't visible gaps,it's invisible drift. Over time, assets age, markets shift, and what once looked sharp can start to look dated without anyone noticing. The priority now is maintenance, refinement, and staying one step ahead of your competition rather than catching up to them."
             : overall >= 60
-            ? "You've built a legitimate foundation — and that's not a given. Many businesses of comparable size and stage have far less in place. What your score reveals is that you're operating at a credible level, but there are seams showing. Specific gaps are creating friction in your sales process, your referral chain, or your ability to respond to formal opportunities. Closing those gaps won't feel transformational in the moment — but the effect on your business usually is."
+            ? "You've built a legitimate foundation,and that's not a given. Many businesses of comparable size and stage have far less in place. What your score reveals is that you're operating at a credible level, but there are seams showing. Specific gaps are creating friction in your sales process, your referral chain, or your ability to respond to formal opportunities. Closing those gaps won't feel transformational in the moment,but the effect on your business usually is."
             : overall >= 40
-            ? "Your score reflects a business with real substance that is being under-represented. The work you do is legitimate — but the way your business appears to the outside world is not yet communicating that value accurately. This gap between reality and presentation is precisely where business is lost. Clients who would benefit from working with you are choosing someone else — not because that competitor is better, but because they look more established."
-            : "These gaps are not minor. They are the reason conversations don't convert, referrals don't materialise, and opportunities disappear without explanation. Businesses at this score level often attribute lost business to price, timing, or competition — when the real cause is presentation. You cannot compete effectively with a weak digital and brand infrastructure. This needs to be the priority, before sales, before marketing, before anything else.";
+            ? "Your score reflects a business with real substance that is being under-represented. The work you do is legitimate,but the way your business appears to the outside world is not yet communicating that value accurately. This gap between reality and presentation is precisely where business is lost. Clients who would benefit from working with you are choosing someone else,not because that competitor is better, but because they look more established."
+            : "These gaps are not minor. They are the reason conversations don't convert, referrals don't materialise, and opportunities disappear without explanation. Businesses at this score level often attribute lost business to price, timing, or competition,when the real cause is presentation. You cannot compete effectively with a weak digital and brand infrastructure. This needs to be the priority, before sales, before marketing, before anything else.";
 
         const catAdvice: Record<string, string> = {
-          Brand: "Your brand is the first filter every prospect runs you through. Before reading your proposal, before taking your call, before visiting your website — they've already formed a view based on your visual identity. If that view is 'this looks small' or 'this doesn't look professional', the conversation becomes significantly harder from the very first word. Fixing your brand changes the starting point of every interaction.",
+          Brand: "Your brand is the first filter every prospect runs you through. Before reading your proposal, before taking your call, before visiting your website,they've already formed a view based on your visual identity. If that view is 'this looks small' or 'this doesn't look professional', the conversation becomes significantly harder from the very first word. Fixing your brand changes the starting point of every interaction.",
           Digital: "Your digital presence is where most business decisions about you are made, before you know anyone is looking. Over 70% of B2B buyers research a vendor online before making contact. If your website is weak, outdated, or absent, you're losing business from people you never even knew were considering you. This is the highest-leverage fix available to you right now.",
-          Documentation: "Professional documentation is the difference between being considered and being dismissed in formal opportunities. Tenders, partnerships, and corporate supply chain applications all require documentation that speaks with authority. Without it, even excellent businesses get filtered out early — not because their offering is insufficient, but because their paperwork is.",
-          Marketing: "Marketing consistency is what turns good work into a recognisable presence. Inconsistent collateral, mismatched social profiles, and a brand that looks different across channels signal a business that hasn't invested in its own story — and clients read that signal. Once your marketing materials are cohesive and professional, every touchpoint your business makes becomes a credibility asset.",
-          Strategy: "Strategic clarity is the multiplier that makes everything else more effective. Without clear positioning, your marketing message doesn't resonate, your website speaks to the wrong audience, and your team represents the brand inconsistently. Strategy isn't a luxury or a nice-to-have — it's the foundation that determines whether every other investment returns what it should.",
+          Documentation: "Professional documentation is the difference between being considered and being dismissed in formal opportunities. Tenders, partnerships, and corporate supply chain applications all require documentation that speaks with authority. Without it, even excellent businesses get filtered out early,not because their offering is insufficient, but because their paperwork is.",
+          Marketing: "Marketing consistency is what turns good work into a recognisable presence. Inconsistent collateral, mismatched social profiles, and a brand that looks different across channels signal a business that hasn't invested in its own story,and clients read that signal. Once your marketing materials are cohesive and professional, every touchpoint your business makes becomes a credibility asset.",
+          Strategy: "Strategic clarity is the multiplier that makes everything else more effective. Without clear positioning, your marketing message doesn't resonate, your website speaks to the wrong audience, and your team represents the brand inconsistently. Strategy isn't a luxury or a nice-to-have,it's the foundation that determines whether every other investment returns what it should.",
         };
 
-        const para2 = catAdvice[worstCat] || "The gaps identified in this report are fixable — and the return on fixing them is disproportionate. Businesses that close credibility gaps at your stage consistently report faster sales cycles, stronger referral rates, and a dramatically improved ability to compete for formal opportunities.";
+        const para2 = catAdvice[worstCat] || "The gaps identified in this report are fixable,and the return on fixing them is disproportionate. Businesses that close credibility gaps at your stage consistently report faster sales cycles, stronger referral rates, and a dramatically improved ability to compete for formal opportunities.";
 
         return (
           <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #222", background: "#181818" }}>
@@ -283,7 +283,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
         <div style={{ padding: `1.75rem ${hPad}`, borderBottom: "1px solid #e8e8e8" }}>
           <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "0.5rem" }}>Priority Gap Analysis</div>
           <div style={{ fontSize: "0.74rem", color: "#666", marginBottom: "1.125rem", lineHeight: 1.6 }}>
-            Gaps ranked by business impact — address these in order for the fastest credibility improvement.
+            Gaps ranked by business impact,address these in order for the fastest credibility improvement.
           </div>
 
           {[...missingQuestions, ...partialQuestions].map((q, i) => {
@@ -371,7 +371,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
         <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.125rem" }}>Recommended Next Steps</div>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.575rem" }}>
           {[
-            { action: "Send this report to Nuuhaven", detail: "Email tshepang@nuuhaven.com — our team will review your scores and respond with a prioritised plan within 24 hours." },
+            { action: "Send this report to Nuuhaven", detail: "Email tshepang@nuuhaven.com,our team will review your scores and respond with a prioritised plan within 24 hours." },
             { action: "Use the Solution Finder", detail: "Visit nuuhaven.com/tools/solution-finder to get a personalised package recommendation based on your situation." },
             { action: "Book a discovery session", detail: "A focused 30–45 minute conversation to map the right sequence of investments to close your gaps and unlock growth." },
           ].map(({ action, detail }, i) => (
