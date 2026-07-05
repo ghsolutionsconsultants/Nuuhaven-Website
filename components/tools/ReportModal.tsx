@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getLenis } from "@/components/layout/LenisProvider";
 
@@ -15,12 +15,32 @@ const TOOLBAR_H = 64;
 
 export default function ReportModal({ isOpen, onClose, title, children }: ReportModalProps) {
   const [mounted, setMounted] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => { setMounted(true); }, []);
 
+  // Pause Lenis when modal is open
   useEffect(() => {
     const lenis = getLenis();
     if (isOpen) { lenis?.stop(); } else { lenis?.start(); }
     return () => { getLenis()?.start(); };
+  }, [isOpen]);
+
+  // Trap wheel + touch events so Lenis never sees them from inside this container.
+  // Lenis calls e.preventDefault() at document level even when stopped, which
+  // blocks native overflow-scroll on child elements.
+  useEffect(() => {
+    if (!isOpen || !scrollRef.current) return;
+    const el = scrollRef.current;
+    const trap = (e: Event) => e.stopPropagation();
+    el.addEventListener("wheel", trap, { passive: true });
+    el.addEventListener("touchstart", trap, { passive: true });
+    el.addEventListener("touchmove", trap, { passive: true });
+    return () => {
+      el.removeEventListener("wheel", trap);
+      el.removeEventListener("touchstart", trap);
+      el.removeEventListener("touchmove", trap);
+    };
   }, [isOpen]);
 
   if (!mounted || !isOpen) return null;
@@ -30,7 +50,7 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
       className="report-modal-backdrop"
       style={{ position: "fixed", inset: 0, zIndex: 99999, background: "rgba(0,0,0,0.97)" }}
     >
-      {/* Toolbar — absolute, explicit height, always visible */}
+      {/* Toolbar — absolute, fixed height, always visible */}
       <div
         className="report-no-print"
         style={{
@@ -75,8 +95,9 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
         </div>
       </div>
 
-      {/* Scroll area — absolute with explicit top/bottom, no flexbox ambiguity */}
+      {/* Scroll area — explicit bounds, wheel+touch trapped to prevent Lenis interference */}
       <div
+        ref={scrollRef}
         className="report-scroll-area"
         style={{
           position: "absolute",
@@ -84,9 +105,8 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
           left: 0,
           right: 0,
           bottom: 0,
-          overflowY: "scroll",
+          overflowY: "auto",
           WebkitOverflowScrolling: "touch",
-          overscrollBehavior: "contain",
           touchAction: "pan-y",
           padding: "1.5rem clamp(0.5rem, 2vw, 1rem) 5rem",
         }}
