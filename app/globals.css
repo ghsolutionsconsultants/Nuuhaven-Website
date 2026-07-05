@@ -316,9 +316,10 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 @media print {
   @page { margin: 1cm; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  html, body { background: white !important; margin: 0 !important; padding: 0 !important; visibility: hidden; }
-  canvas { display: none !important; }
-  nav, [class*="cursor"], [class*="neural"], [class*="loading"], [class*="ticker"] { display: none !important; }
+  html, body { background: white !important; margin: 0 !important; padding: 0 !important; }
+  /* display:none on ALL body children except the modal — visibility:hidden hides content
+     but elements still occupy layout space, creating blank pages before the report */
+  body > *:not(.report-modal-backdrop) { display: none !important; }
   .report-no-print { display: none !important; }
   /* Neutralise all positioned/sized ancestors so report flows from the top of the page */
   .report-modal-backdrop {
