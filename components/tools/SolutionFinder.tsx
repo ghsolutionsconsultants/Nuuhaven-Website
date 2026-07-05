@@ -246,6 +246,25 @@ export default function SolutionFinder() {
   const recommendation = complete ? getRecommendation(answers) : null;
   const progress = complete ? 100 : (step / QUESTIONS.length) * 100;
 
+  const STAGE_ADVICE: Record<string, string> = {
+    startup: "You're in the window where first impressions are permanently set. Potential clients, partners, and referrals will visit your website, see your brand, and form a view of your business before you've exchanged a word. Getting this right from the beginning saves you the cost of a rebrand and a site redesign down the line — both are significantly more expensive than doing it properly from the start.",
+    growing: "You've validated your business — people are paying for what you do. But as you grow, the gap between how good your business actually is and how it presents itself becomes increasingly visible. Clients who should be saying yes are hesitating, and you're often not sure why. The answer is almost always presentation. The right package closes that credibility gap.",
+    established: "At this stage, the risk isn't looking unprofessional — it's looking stale. Markets move, competitors invest, and positioning erodes quietly. A brand refresh and digital upgrade aren't about fixing something broken — they're about asserting relevance and staying ahead of competitors who've stopped investing.",
+    enterprise: "At an enterprise level, your brand and digital infrastructure need to perform consistently at scale — across contexts, channels, and the people who represent your business. The risk here is drift: outdated assets in circulation, inconsistent representation, a digital presence that no longer reflects the business you've become.",
+  };
+
+  const OUTCOME_ADVICE: Record<string, string> = {
+    leads: "The most common mistake when trying to generate more leads is starting with marketing before fixing the foundation. Marketing amplifies your presence — but if your presence isn't ready, you amplify the wrong impression. Fix brand, website, and profile first. Then activate marketing. This sequence is what separates businesses that grow from those that spend without return.",
+    credibility: "Credibility is not built in a single interaction. It accumulates across every touchpoint: your website, social profiles, email signature, company profile, and how you appear when someone Googles you. A single strong deliverable helps — a cohesive system is what genuinely changes how you're perceived.",
+    investors: "Investors and partners assess your business on documentation and digital presence before meeting you. A company profile that isn't investor-ready, or a website that doesn't reflect a growth-stage business, signals the opportunity isn't mature — regardless of the underlying strength of your offer. Your materials need to meet your ambition.",
+    brand: "Brand recognition is earned through repetition and consistency — it's not a logo, it's how consistently that logo, those colours, and that tone of voice appear across every channel and touchpoint. A brand system makes that consistency scalable. Without it, you're starting from zero with every new client, hire, and platform.",
+  };
+
+  const stageAdvice = STAGE_ADVICE[(answers.stage as string) || ""] || "";
+  const outcomeAdvice = OUTCOME_ADVICE[(answers.outcome as string) || ""] || "";
+  const isB2B = answers.clients === "b2b" || answers.clients === "both";
+  const b2bNote = isB2B ? "Given your B2B focus, company documentation carries particular weight. B2B buyers do extensive due diligence — your website and company profile are often circulated internally before any decision is made." : "";
+
   return (
     <div style={{ background: "var(--bg-primary)", paddingTop: 64 }}>
 
@@ -447,6 +466,18 @@ export default function SolutionFinder() {
                       <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Why This Fits You</div>
                       <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>{recommendation?.why}</p>
                     </div>
+
+                    {/* ── Inline advisory ── */}
+                    {(stageAdvice || outcomeAdvice) && (
+                      <div style={{ marginTop: "1.5rem", padding: "1.5rem", background: "rgba(223,255,0,0.03)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 12 }}>
+                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1rem" }}>What This Means For You</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+                          {stageAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>{stageAdvice}</p>}
+                          {outcomeAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>{outcomeAdvice}</p>}
+                          {b2bNote && <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.8, margin: 0, paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>{b2bNote}</p>}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Download report button */}
                     <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>

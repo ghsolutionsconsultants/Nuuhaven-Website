@@ -90,6 +90,36 @@ export default function BusinessAssessment() {
   const categoryQuestions = QUESTIONS.filter(q2 => q2.category === currentCategory);
   const categoryStep = categoryQuestions.findIndex(q2 => q2.id === q?.id) + 1;
 
+  // Inline advisory — computed from live answers once complete
+  const sortedCats = complete
+    ? [...CATEGORIES].sort((a, b) => getCategoryScore(answers, a) - getCategoryScore(answers, b))
+    : [];
+  const worstCat = sortedCats[0] || "";
+  const worstScore = complete ? getCategoryScore(answers, worstCat) : 0;
+
+  const SCORE_PARAS: Record<string, string> = {
+    strong: "A score this high reflects real, deliberate investment in how your business presents itself. The risk at this level isn't visible gaps — it's invisible drift. Over time, assets age, markets shift, and what once looked sharp can start to look dated without anyone noticing. The priority now is maintenance, refinement, and staying one step ahead rather than catching up.",
+    developing: "You've built a legitimate foundation — that's not a given. Many businesses of comparable size and stage have far less in place. What your score reveals is that you're operating at a credible level, but there are seams showing. Specific gaps are creating friction in your sales process, your referral chain, or your ability to respond to formal opportunities. Closing those gaps won't feel transformational in the moment — but the effect on your business usually is.",
+    needsWork: "Your score reflects a business with real substance that is being under-represented. The work you do is legitimate, but the way your business appears to the outside world is not yet communicating that value accurately. This gap between reality and presentation is precisely where business is lost — clients who would benefit from working with you are choosing someone who simply looks more established.",
+    critical: "These gaps are not minor. They are the reason conversations don't convert, referrals don't materialise, and opportunities disappear without explanation. Businesses at this score level often attribute lost business to price, timing, or competition — when the real cause is presentation. You cannot compete effectively with a weak digital and brand infrastructure. This needs to be the priority — before sales, before marketing, before anything else.",
+  };
+
+  const CAT_PARAS: Record<string, string> = {
+    Brand: "Your brand is the first filter every prospect runs you through. Before reading your proposal, before taking your call — they've already formed a view based on your visual identity. If that view is 'this looks small' or 'this doesn't look professional', every conversation becomes harder from the first word. Fixing your brand changes the starting point of every interaction.",
+    Digital: "Your digital presence is where most business decisions about you are made, before you know anyone is looking. Over 70% of B2B buyers research a vendor online before making contact. If your website is weak, outdated, or absent, you're losing business from people you never even knew were considering you.",
+    Documentation: "Professional documentation is the difference between being considered and being dismissed in formal opportunities. Tenders, partnerships, and corporate supply chain applications all require documentation that speaks with authority. Without it, even excellent businesses get filtered out early — not because their offering is insufficient, but because their paperwork is.",
+    Marketing: "Marketing consistency is what turns good work into a recognisable presence. Inconsistent collateral, mismatched social profiles, and a brand that looks different across channels signal a business that hasn't invested in its own story — and clients read that signal. Once your marketing materials are cohesive and professional, every touchpoint your business makes becomes a credibility asset.",
+    Strategy: "Strategic clarity is the multiplier that makes everything else more effective. Without clear positioning, your marketing message doesn't resonate, your website speaks to the wrong audience, and your team represents the brand inconsistently. Strategy isn't a luxury — it's the foundation that determines whether every other investment returns what it should.",
+  };
+
+  const scorePara =
+    overall >= 80 ? SCORE_PARAS.strong
+    : overall >= 60 ? SCORE_PARAS.developing
+    : overall >= 40 ? SCORE_PARAS.needsWork
+    : SCORE_PARAS.critical;
+
+  const catPara = CAT_PARAS[worstCat] || "";
+
   return (
     <div style={{ background: "var(--bg-primary)", paddingTop: 64 }}>
 
@@ -289,6 +319,24 @@ export default function BusinessAssessment() {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Inline advisory ── */}
+                {complete && (
+                  <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 20, padding: "2rem" }}>
+                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1.125rem" }}>
+                      What This Means For Your Business
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                      <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85, margin: 0 }}>{scorePara}</p>
+                      {worstScore < 80 && catPara && (
+                        <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0, paddingTop: "0.875rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                          <span style={{ color: "var(--accent)", fontWeight: 700 }}>Your lowest area is {worstCat} ({worstScore}%). </span>
+                          {catPara}
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}

@@ -10,20 +10,20 @@ interface ReportModalProps {
 }
 
 export default function ReportModal({ isOpen, onClose, title, children }: ReportModalProps) {
-  // No body overflow manipulation — setting overflow:hidden on body breaks iOS touch events
-  // including taps on buttons inside fixed overlays. The modal is position:fixed inset:0
-  // so it visually covers the page without needing to lock body scroll.
+  // No body overflow manipulation — setting overflow:hidden on body breaks iOS touch events.
+  // The toolbar is a flex sibling to the scroll area (not sticky inside it), which avoids
+  // the known bug where position:sticky fails inside overflow:auto flex containers.
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
           key="report-modal"
+          className="report-modal-backdrop"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="report-modal-backdrop"
           style={{
             position: "fixed",
             inset: 0,
@@ -31,30 +31,21 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
             background: "rgba(0,0,0,0.97)",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            overflowY: "auto",
-            WebkitOverflowScrolling: "touch",
-            overscrollBehavior: "contain",
-            padding: "0 clamp(0.5rem, 2vw, 1rem) 4rem",
           }}
-          data-lenis-prevent
         >
-          {/* Sticky toolbar */}
+          {/* ── Toolbar ── always visible, never scrolls ── */}
           <div
             className="report-no-print"
             style={{
-              width: "100%",
-              maxWidth: 800,
+              flexShrink: 0,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
               flexWrap: "wrap",
               gap: "0.625rem",
-              padding: "0.875rem 0",
-              position: "sticky",
-              top: 0,
-              zIndex: 2,
-              background: "rgba(0,0,0,0.92)",
+              padding: "0.75rem clamp(0.75rem, 3vw, 1.5rem)",
+              background: "rgba(0,0,0,0.96)",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
               backdropFilter: "blur(16px)",
             }}
           >
@@ -66,7 +57,7 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 color: "rgba(255,255,255,0.3)",
-                marginBottom: "0.2rem",
+                marginBottom: "0.15rem",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -75,8 +66,8 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
               </div>
               <div style={{
                 fontFamily: "var(--font-geist-mono)",
-                fontSize: "0.7rem",
-                color: "rgba(255,255,255,0.75)",
+                fontSize: "0.68rem",
+                color: "rgba(255,255,255,0.7)",
                 fontWeight: 600,
                 whiteSpace: "nowrap",
                 overflow: "hidden",
@@ -86,7 +77,7 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
               </div>
             </div>
 
-            {/* Buttons — 44px min tap targets for mobile */}
+            {/* Buttons — 44px minimum tap target */}
             <div style={{ display: "flex", gap: "0.5rem", flexShrink: 0 }}>
               <button
                 type="button"
@@ -120,7 +111,7 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
                   width: 44,
                   height: 44,
                   background: "rgba(255,255,255,0.07)",
-                  color: "rgba(255,255,255,0.7)",
+                  color: "rgba(255,255,255,0.8)",
                   border: "1px solid rgba(255,255,255,0.15)",
                   borderRadius: 8,
                   cursor: "pointer",
@@ -132,25 +123,40 @@ export default function ReportModal({ isOpen, onClose, title, children }: Report
                   justifyContent: "center",
                   WebkitTapHighlightColor: "transparent",
                 }}
+                aria-label="Close report"
               >
                 ✕
               </button>
             </div>
           </div>
 
-          {/* Report document */}
+          {/* ── Scrollable report area ── */}
           <div
-            id="nuuhaven-report"
+            data-lenis-prevent
             style={{
-              width: "100%",
-              maxWidth: 800,
-              background: "#fff",
-              borderRadius: 12,
-              overflow: "hidden",
-              boxShadow: "0 40px 100px rgba(0,0,0,0.7)",
+              flex: 1,
+              overflowY: "auto",
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "contain",
+              padding: "1.25rem clamp(0.5rem, 2vw, 1rem) 4rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            {children}
+            <div
+              id="nuuhaven-report"
+              style={{
+                width: "100%",
+                maxWidth: 800,
+                background: "#fff",
+                borderRadius: 12,
+                overflow: "hidden",
+                boxShadow: "0 40px 100px rgba(0,0,0,0.7)",
+              }}
+            >
+              {children}
+            </div>
           </div>
         </motion.div>
       )}

@@ -75,6 +75,39 @@ export default function CostEstimator() {
 
   const contactParams = selectedServices.map((s) => s.label).join(", ");
 
+  const categories = [...new Set(selectedServices.map(s => s.category))];
+  const hasWebsite = categories.includes("Website");
+  const hasBrand = categories.includes("Brand");
+  const hasDocumentation = categories.includes("Documentation");
+  const hasMarketing = categories.includes("Marketing");
+  const isMulti = categories.length >= 3;
+  const complexityLabel = COMPLEXITY_LABELS[complexityLevel] || "Custom";
+
+  let advisoryLine1 = "";
+  let advisoryLine2 = "";
+
+  if (hasWebsite && hasBrand) {
+    advisoryLine1 = "Your website and brand identity are in scope together — the right combination. Always finalise your brand before website design begins. Colours, typography, and logo must be locked first — a website built without a defined visual system will need redesigning once the brand is finalised. That's avoidable cost.";
+  } else if (hasWebsite) {
+    advisoryLine1 = "Your website is the single most-visited touchpoint in any client's journey. Most prospects visit your site before accepting a call or reading a proposal. A professionally designed website answers the question every prospect is quietly asking: 'Can I trust this business?'";
+  } else if (hasBrand) {
+    advisoryLine1 = "Brand identity is the foundation every other asset is built on. A professional logo, defined colour palette, and clear visual system mean every touchpoint — website, documents, social profiles — reinforces the same impression. Without it, every asset works in isolation. With it, they compound.";
+  } else if (hasDocumentation) {
+    advisoryLine1 = "Professional documentation is frequently the deciding factor in B2B sales — not the meeting, not the pitch, but the document that gets forwarded. Having it in place means you're ready to respond to opportunities the moment they appear.";
+  } else {
+    advisoryLine1 = "Every service in this scope is an investment in your business infrastructure. The assets you build here will represent your business for years, open doors, and generate returns that compound over time.";
+  }
+
+  if (isMulti) {
+    advisoryLine2 = "Multiple deliverables in scope together compound in value — a brand that works, a website that converts, and documentation that closes deals are more powerful as a system than individually. Businesses that invest holistically consistently win business others lose to less-qualified competitors who simply look more established.";
+  } else if (hasMarketing) {
+    advisoryLine2 = "Marketing assets perform at full potential only when a solid brand and digital foundation is in place. Fix the brand and website first — then activate marketing. This sequence is what separates businesses that grow from those that spend without return.";
+  } else if (complexityLevel >= 3) {
+    advisoryLine2 = `At ${complexityLabel} level, execution quality is what separates a good project from one that genuinely moves your business forward. This means strategic input at the brief stage, structured revision rounds, and senior attention to every deliverable. Budget the time for this — rushing a project at this scope almost always requires an expensive second pass within 12 months.`;
+  } else {
+    advisoryLine2 = "A focused scope like this is often more strategic than a large one. Knowing exactly what to build — and not adding scope prematurely — means your investment goes further, delivery is faster, and the result is coherent.";
+  }
+
   return (
     <div style={{ background: "var(--bg-primary)", paddingTop: 64 }}>
 
@@ -298,6 +331,19 @@ export default function CostEstimator() {
                             ))}
                           </div>
                         </div>
+
+                        {/* ── Inline advisory ── */}
+                        {advisoryLine1 && (
+                          <div style={{ padding: "1.125rem 1.25rem", background: "rgba(223,255,0,0.03)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 10 }}>
+                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>
+                              Our Take
+                            </div>
+                            <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.8, margin: "0 0 0.625rem" }}>{advisoryLine1}</p>
+                            {advisoryLine2 && (
+                              <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.8, margin: 0 }}>{advisoryLine2}</p>
+                            )}
+                          </div>
+                        )}
 
                         <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "1.25rem" }}>
                           <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
