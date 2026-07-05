@@ -89,7 +89,10 @@ export default function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className={i === services.length - 1 && services.length % 3 === 1 ? "lg:col-span-3" : ""}
+              className={
+                (i === services.length - 1 && services.length % 3 === 1) ? "lg:col-span-3" :
+                (i === services.length - 1 && services.length % 3 === 2) ? "lg:col-span-2" : ""
+              }
             >
               <HolographicCard
                 className="h-full group"
