@@ -262,7 +262,7 @@ export default function CostEstimator() {
 
             {/* Summary panel */}
             <div style={{ position: isMobile ? "static" : "sticky", top: 88 }}>
-              <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}>
+              <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}>
                 <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(223,255,0,0.03)" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)" }}>Project Summary</div>
                 </div>

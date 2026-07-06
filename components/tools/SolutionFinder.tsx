@@ -333,7 +333,7 @@ export default function SolutionFinder() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2.5rem", marginBottom: "1rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2.5rem", marginBottom: "1rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
                     <h2 style={{ fontSize: "1.35rem", fontWeight: 700, lineHeight: 1.3, letterSpacing: "-0.01em", marginBottom: "0.625rem" }}>{question.text}</h2>
                     {question.hint && (
@@ -424,7 +424,7 @@ export default function SolutionFinder() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
                   {/* Result header */}
                   <div style={{ padding: "2rem 2.5rem", background: "rgba(223,255,0,0.04)", borderBottom: "1px solid rgba(223,255,0,0.1)" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.75rem" }}>Your Recommended Solution</div>

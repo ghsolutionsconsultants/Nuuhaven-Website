@@ -247,8 +247,8 @@ function SitePortal({ url, accent, name }: { url: string; accent: string; name: 
   const [state, setState] = useState<"loading"|"loaded"|"blocked">("loading");
   const [live, setLive] = useState(false);
   return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: `1px solid ${accent}25`, background: "#050505" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.5rem 0.875rem", background: "rgba(12,12,12,0.99)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+    <div style={{ borderRadius: 12, overflow: "hidden", border: `1px solid ${accent}25`, background: "#0d0d0d" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.5rem 0.875rem", background: "rgba(16,16,16,0.99)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
           {["#ff5f57","#ffbd2e","#28ca41"].map(c => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
         </div>
@@ -256,7 +256,7 @@ function SitePortal({ url, accent, name }: { url: string; accent: string; name: 
         <button onClick={() => setLive(l => !l)} style={{ padding: "0.2rem 0.5rem", borderRadius: 4, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.08em", textTransform: "uppercase", border: `1px solid ${live ? accent : "rgba(255,255,255,0.1)"}`, background: live ? `${accent}18` : "transparent", color: live ? accent : "rgba(255,255,255,0.35)", cursor: "pointer", transition: "all 0.2s" }}>{live ? "◉ Live" : "○ Preview"}</button>
         <a href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "rgba(255,255,255,0.35)", textDecoration: "none", padding: "0.2rem 0.5rem", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 4 }}>↗</a>
       </div>
-      <div style={{ height: 420, position: "relative", background: "#080808", overflow: "hidden" }}>
+      <div style={{ height: 420, position: "relative", background: "#0e0e0e", overflow: "hidden" }}>
         {state === "loading" && (
           <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", zIndex: 2 }}>
             <div style={{ width: 28, height: 28, borderRadius: "50%", border: `2px solid ${accent}`, borderTopColor: "transparent", animation: "spin 0.8s linear infinite" }} />
@@ -313,7 +313,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
     <div style={{ padding: "0 0 4rem" }}>
 
       {/* Top bar */}
-      <div style={{ padding: "1rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(5,5,5,0.95)", backdropFilter: "blur(12px)" }}>
+      <div style={{ padding: "1rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(10,10,10,0.96)", backdropFilter: "blur(12px)" }}>
         <div>
           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.2rem" }}>Nuuhaven · Command Centre</div>
           <div style={{ fontWeight: 800, fontSize: "1.1rem", letterSpacing: "-0.02em" }}>Portfolio Overview</div>
@@ -380,7 +380,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.5 }}
-        style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem", background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "hidden" }}
+        style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem", background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}
       >
         <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
@@ -501,7 +501,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
               style={{ textAlign: "left", cursor: "pointer", background: "none", border: "none", padding: 0 }}
             >
               <div
-                style={{ background: "rgba(10,10,10,0.95)", border: `1px solid rgba(255,255,255,0.07)`, borderRadius: 16, overflow: "hidden", transition: "border-color 0.2s, transform 0.2s", position: "relative" }}
+                style={{ background: "var(--bg-card)", border: `1px solid rgba(255,255,255,0.09)`, borderRadius: 16, overflow: "hidden", transition: "border-color 0.2s, transform 0.2s", position: "relative" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `${c.accent}45`; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
               >
@@ -573,7 +573,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.78, duration: 0.5 }}
-          style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "1.25rem" }}
+          style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem" }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Sales Pipeline</div>
@@ -606,7 +606,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.86, duration: 0.5 }}
-          style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "1.25rem", display: "flex", flexDirection: "column" }}
+          style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem", display: "flex", flexDirection: "column" }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Recent Activity</div>
@@ -653,7 +653,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
   return (
     <div>
       {/* Header */}
-      <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(5,5,5,0.95)", backdropFilter: "blur(12px)", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", position: "sticky", top: 68, zIndex: 20 }}>
+      <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(10,10,10,0.96)", backdropFilter: "blur(12px)", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", position: "sticky", top: 68, zIndex: 20 }}>
         <div>
           <button onClick={onBack} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", background: "none", border: "none", cursor: "pointer", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.3rem" }}>
             <span>←</span> Portfolio
@@ -683,7 +683,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
               { label: "Completed", value: client.isOngoing ? "Ongoing" : client.endDate, color: client.isOngoing ? client.accent : "rgba(255,255,255,0.7)" },
               { label: "Deliverables", value: `${client.services.length}`, color: client.accent },
             ].map((s, i) => (
-              <div key={i} style={{ background: "rgba(10,10,10,0.9)", border: `1px solid rgba(255,255,255,0.06)`, borderRadius: 10, padding: "0.875rem 1rem" }}>
+              <div key={i} style={{ background: "var(--bg-card)", border: `1px solid rgba(255,255,255,0.08)`, borderRadius: 10, padding: "0.875rem 1rem" }}>
                 <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.35rem" }}>{s.label}</div>
                 <div style={{ fontWeight: 700, fontSize: "0.9rem", color: s.color }}>{s.value}</div>
               </div>
@@ -691,7 +691,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
           </div>
 
           {/* Timeline */}
-          <div style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "1.25rem" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
               <div style={{ fontWeight: 600, fontSize: "0.88rem" }}>Project Timeline</div>
               <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.56rem", color: "rgba(255,255,255,0.25)" }}>{client.startDate} → {client.isOngoing ? "Ongoing" : client.endDate}</div>
@@ -730,7 +730,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
               { label: "About", body: client.about },
               { label: "Challenge", body: client.challenge },
             ].map((card) => (
-              <div key={card.label} style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "1.125rem" }}>
+              <div key={card.label} style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
                 <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: client.accent, marginBottom: "0.625rem" }}>{card.label}</div>
                 <p style={{ color: "var(--text-muted)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>{card.body}</p>
               </div>
@@ -738,7 +738,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
           </div>
 
           {/* Outcomes */}
-          <div style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "1.25rem" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.25rem" }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: client.accent, marginBottom: "1rem" }}>Outcomes Delivered</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem" }}>
               {client.outcomes.map((o, i) => (
@@ -756,7 +756,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
         {/* Right sidebar */}
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {/* Services */}
-          <div style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "1.125rem" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Services Delivered</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
               {client.services.map((s, i) => (
@@ -769,7 +769,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
           </div>
 
           {/* Brand colours */}
-          <div style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "1.125rem" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Brand Palette</div>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               {client.colors.map((col, i) => (
@@ -782,7 +782,7 @@ function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack
           </div>
 
           {/* Activity */}
-          <div style={{ background: "rgba(10,10,10,0.9)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "1.125rem", flex: 1 }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem", flex: 1 }}>
             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Activity Log</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem" }}>
               {client.activity.map((a, i) => (

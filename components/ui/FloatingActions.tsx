@@ -15,7 +15,7 @@ export default function FloatingActions() {
     width: 46,
     height: 46,
     borderRadius: "50%",
-    background: "rgba(10,10,10,0.92)",
+    background: "rgba(17,17,17,0.94)",
     border: `1px solid ${color}`,
     display: "flex",
     alignItems: "center",

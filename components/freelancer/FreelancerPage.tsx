@@ -326,7 +326,7 @@ export default function FreelancerPage() {
             <AnimatePresence mode="wait">
               {status === "sent" ? (
                 <motion.div key="success" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  style={{ textAlign: "center", padding: "5rem 2rem", background: "rgba(10,10,10,0.98)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}>
+                  style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}>
                   <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem" }}>◆</div>
                   <h3 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>Application Received.</h3>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.85, maxWidth: "30rem", margin: "0 auto 2.5rem" }}>
@@ -336,7 +336,7 @@ export default function FreelancerPage() {
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={handleSubmit}
-                  style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, padding: isMobile ? "1.5rem" : "3rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+                  style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, padding: isMobile ? "1.5rem" : "3rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
 
                   {/* 01 Personal Details */}
                   <div>

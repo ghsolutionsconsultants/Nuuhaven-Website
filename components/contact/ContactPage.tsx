@@ -106,7 +106,7 @@ export default function ContactPage() {
                   { label: "Phone", value: "+27 67 717 9269", href: "tel:+27677179269" },
                   { label: "Location", value: "South Africa · Available Worldwide", href: null },
                 ].map(item => (
-                  <div key={item.label} style={{ display: "flex", gap: "1.5rem", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(255,255,255,0.02)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div key={item.label} style={{ display: "flex", gap: "1.5rem", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(255,255,255,0.035)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.09)" }}>
                     <div style={{ width: "4.5rem", fontSize: "0.62rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", flexShrink: 0 }}>
                       {item.label}
                     </div>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                     key="success"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ textAlign: "center", padding: "5rem 2rem", background: "rgba(10,10,10,0.98)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}
                   >
                     <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem" }}>◆</div>
                     <h3 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>Enquiry Received.</h3>
@@ -210,7 +210,7 @@ export default function ContactPage() {
                   <motion.form
                     key="form"
                     onSubmit={handleSubmit}
-                    style={{ display: "flex", flexDirection: "column", gap: "2rem", background: "rgba(10,10,10,0.98)", padding: "2.5rem", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ display: "flex", flexDirection: "column", gap: "2rem", background: "var(--bg-card)", padding: "2.5rem", borderRadius: 20, border: "1px solid rgba(255,255,255,0.09)" }}
                   >
                     {/* Personal details */}
                     <div>

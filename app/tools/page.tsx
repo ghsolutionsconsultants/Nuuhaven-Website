@@ -140,7 +140,7 @@ export default function ToolsPage() {
                   gap: isMobile ? "1.5rem" : "3rem",
                   alignItems: "start",
                   padding: isMobile ? "1.75rem" : "3rem",
-                  background: "rgba(10,10,10,0.95)",
+                  background: "var(--bg-card)",
                   border: "1px solid rgba(255,255,255,0.07)",
                   borderRadius: 20,
                   position: "relative",

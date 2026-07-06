@@ -224,7 +224,7 @@ export default function ImpressionsAudit() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
               >
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2.5rem", textAlign: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2.5rem", textAlign: "center" }}>
                   <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem", opacity: 0.7 }}>◉</div>
                   <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem", letterSpacing: "-0.01em" }}>5 Questions. Under 2 Minutes.</h2>
                   <p style={{ color: "var(--text-muted)", lineHeight: 1.85, maxWidth: "32rem", margin: "0 auto 2rem", fontSize: "0.9rem" }}>
@@ -259,7 +259,7 @@ export default function ImpressionsAudit() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
                   <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" }}>
                       Question {step + 1} of {QUESTIONS.length}
@@ -324,7 +324,7 @@ export default function ImpressionsAudit() {
                 style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
               >
                 {/* Score hero */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: `1px solid ${label.color}22`, borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: `1px solid ${label.color}22`, borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>
                     Your First Impressions Score
                   </div>
@@ -343,7 +343,7 @@ export default function ImpressionsAudit() {
 
                 {/* Gaps */}
                 {weakGaps.length > 0 && (
-                  <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,100,100,0.1)", borderRadius: 20, padding: "2rem" }}>
+                  <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,100,100,0.1)", borderRadius: 20, padding: "2rem" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#ff6b6b", marginBottom: "1.5rem" }}>What&apos;s Costing You Clients</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                       {weakGaps.map(g => (
@@ -358,7 +358,7 @@ export default function ImpressionsAudit() {
                 )}
 
                 {/* Inline contact form */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
                   <ToolContactForm
                     inline
                     toolName="First Impressions Audit"

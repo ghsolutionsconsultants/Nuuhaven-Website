@@ -181,7 +181,7 @@ export default function BusinessAssessment() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
                   {/* Category header */}
                   <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(255,255,255,0.02)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
@@ -246,7 +246,7 @@ export default function BusinessAssessment() {
                 style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
               >
                 {/* Score hero */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>
                     Your Business Presence Score
                   </div>
@@ -272,7 +272,7 @@ export default function BusinessAssessment() {
                 </div>
 
                 {/* Category breakdown */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.75rem" }}>Category Breakdown</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     {CATEGORIES.map((cat) => {
@@ -303,7 +303,7 @@ export default function BusinessAssessment() {
 
                 {/* Priority gaps */}
                 {QUESTIONS.filter((q) => answers[q.id] !== "yes").length > 0 && (
-                  <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,100,100,0.12)", borderRadius: 20, padding: "2rem" }}>
+                  <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,100,100,0.12)", borderRadius: 20, padding: "2rem" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#ff6b6b", marginBottom: "1.5rem" }}>Priority Gaps</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                       {QUESTIONS.filter((q) => answers[q.id] !== "yes").slice(0, 5).map((q) => (
@@ -325,7 +325,7 @@ export default function BusinessAssessment() {
 
                 {/* ── Inline advisory ── */}
                 {complete && (
-                  <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 20, padding: "2rem" }}>
+                  <div style={{ background: "var(--bg-card)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 20, padding: "2rem" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1.125rem" }}>
                       What This Means For Your Business
                     </div>
@@ -342,7 +342,7 @@ export default function BusinessAssessment() {
                 )}
 
                 {/* Download report */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "1.5rem 2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "1.5rem 2rem" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Your Full Report</div>
                   <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
                     Download a detailed PDF report with your full breakdown, gap analysis, priority recommendations, and estimated investment to close each gap.
@@ -357,7 +357,7 @@ export default function BusinessAssessment() {
                 </div>
 
                 {/* Inline contact form */}
-                <div style={{ background: "rgba(10,10,10,0.98)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
                   <ToolContactForm
                     inline
                     toolName="Business Assessment"
