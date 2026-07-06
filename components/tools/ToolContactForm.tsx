@@ -67,7 +67,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "0.875rem", justifyContent: "center", alignItems: "center" }}>
             <Link href="/work" className="btn-accent" style={{ fontSize: "0.8rem", textAlign: "center", width: isMobile ? "100%" : "auto" }}>See Our Work →</Link>
             {onReset && (
-              <button onClick={onReset} className="btn-outline" style={{ fontSize: "0.8rem", width: isMobile ? "100%" : "auto" }}>Start Over ↺</button>
+              <button onClick={() => { onReset?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="btn-outline" style={{ fontSize: "0.8rem", width: isMobile ? "100%" : "auto" }}>Start Over ↺</button>
             )}
           </div>
         </motion.div>
@@ -161,7 +161,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
                 type="submit"
                 disabled={status === "sending"}
                 className="btn-accent"
-                style={{ padding: "0.9rem 2.25rem", fontSize: "0.875rem", opacity: status === "sending" ? 0.7 : 1, textAlign: "center" }}
+                style={{ padding: isMobile ? "0.9rem 1rem" : "0.9rem 2.25rem", fontSize: isMobile ? "0.72rem" : "0.875rem", opacity: status === "sending" ? 0.7 : 1, textAlign: "center", whiteSpace: "nowrap" }}
               >
                 {status === "sending" ? "Sending…" : "Send My Results & Get a Plan →"}
               </button>
@@ -174,7 +174,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
               <div style={{ paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.05)", marginTop: "0.25rem" }}>
                 <button
                   type="button"
-                  onClick={onReset}
+                  onClick={() => { onReset?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                   style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", background: "none", border: "none", cursor: "pointer" }}
                 >
                   ↺ Start Over
