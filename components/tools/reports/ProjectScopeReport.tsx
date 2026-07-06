@@ -107,7 +107,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
             { label: "Estimated Timeline", value: `${totalWeeks}`, sub: `week${totalWeeks !== 1 ? "s" : ""} total` },
             { label: "Project Complexity", value: complexityLabel, sub: COMPLEXITY_DESC[complexityLabel]?.substring(0, 38) + "…" },
           ].map(item => (
-            <div key={item.label} style={{
+            <div key={item.label} className="rc" style={{
               flex: "1 1 180px",
               padding: "1.125rem", background: "#f9f9f9",
               borderRadius: 8, border: "1px solid #e8e8e8",
@@ -151,6 +151,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
               {catServices.map((s, i) => (
                 <div
                   key={s.id}
+                  className="rc"
                   style={{
                     display: "flex", flexWrap: "wrap",
                     alignItems: "flex-start", justifyContent: "space-between",
@@ -199,7 +200,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
             { step: "02", title: "Fixed-Price Proposal", body: "You receive a formal proposal with exact pricing and deliverables,no surprise invoices, ever." },
             { step: "03", title: "Delivery & Handover", body: "Work is delivered in agreed phases with revision rounds built in. You own every asset." },
           ].map(({ step, title, body }) => (
-            <div key={step} style={{
+            <div key={step} className="rc" style={{
               flex: "1 1 180px",
               padding: "1rem", background: "#f9f9f9",
               borderRadius: 8, border: "1px solid #ececec",
@@ -284,7 +285,7 @@ export default function ProjectScopeReport({ services, totalMin, totalMax, total
             { action: "Book a discovery session", detail: "A 30–45 minute session to confirm scope, answer questions, and agree on next steps." },
             { action: "Receive your formal proposal", detail: "A written proposal with exact pricing and a clear scope of work,within 24–48 hours of your session." },
           ].map(({ action, detail }, i) => (
-            <div key={i} style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
+            <div key={i} className="rc" style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
               <div style={{
                 ...mono, fontSize: "0.6rem", fontWeight: 700,
                 color: "#fff", background: "#111",

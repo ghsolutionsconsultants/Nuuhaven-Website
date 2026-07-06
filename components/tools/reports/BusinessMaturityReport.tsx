@@ -234,7 +234,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
             const catLabel = getScoreLabel(score);
             const catQs = questions.filter(q => q.category === cat);
             return (
-              <div key={cat} style={{ padding: "1rem 1.125rem", background: "#fafafa", borderRadius: 8, border: "1px solid #ececec" }}>
+              <div key={cat} className="rc" style={{ padding: "1rem 1.125rem", background: "#fafafa", borderRadius: 8, border: "1px solid #ececec" }}>
                 {/* Category header row */}
                 <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem", marginBottom: "0.625rem" }}>
                   <div style={{ flex: "1 1 160px", minWidth: 0 }}>
@@ -293,6 +293,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
             return (
               <div
                 key={q.id}
+                className="rc"
                 style={{
                   marginBottom: "0.7rem",
                   padding: "1rem 1.125rem",
@@ -345,7 +346,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
             const score = getCategoryScore(answers, cat);
             const catLabel = getScoreLabel(score);
             return (
-              <div key={cat} style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#fff", borderRadius: 8, border: "1px solid #ececec", alignItems: "flex-start" }}>
+              <div key={cat} className="rc" style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#fff", borderRadius: 8, border: "1px solid #ececec", alignItems: "flex-start" }}>
                 <div style={{
                   ...mono, fontSize: "0.58rem", fontWeight: 700, color: "#dfff00",
                   background: "#111", width: 22, height: 22, borderRadius: "50%",
@@ -375,7 +376,7 @@ export default function BusinessMaturityReport({ answers, overall, scoreLabel, q
             { action: "Use the Solution Finder", detail: "Visit nuuhaven.com/tools/solution-finder to get a personalised package recommendation based on your situation." },
             { action: "Book a discovery session", detail: "A focused 30–45 minute conversation to map the right sequence of investments to close your gaps and unlock growth." },
           ].map(({ action, detail }, i) => (
-            <div key={i} style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
+            <div key={i} className="rc" style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
               <div style={{
                 ...mono, fontSize: "0.6rem", fontWeight: 700,
                 color: "#fff", background: "#111",

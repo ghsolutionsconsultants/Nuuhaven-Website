@@ -312,6 +312,9 @@ iframe:not(.previewer-frame) { max-width: 100%; }
   *::-webkit-scrollbar { display: none !important; }
 }
 
+/* ─── Report card — never break across a page ───────────────── */
+.rc { break-inside: avoid; page-break-inside: avoid; }
+
 /* ─── Print / Report PDF styles ─────────────────────────────── */
 @media print {
   @page { margin: 1cm; }

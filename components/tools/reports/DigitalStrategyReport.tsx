@@ -174,6 +174,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
           {profileQuestions.filter(qId => answers[qId] !== undefined).map((qId, i) => (
             <div
               key={qId}
+              className="rc"
               style={{
                 padding: "0.75rem 0.875rem",
                 background: i % 2 === 0 ? "#fafafa" : "#fff",
@@ -197,7 +198,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
         <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.125rem" }}>Recommended Solution</div>
 
         {/* Package card */}
-        <div style={{ background: "#111", borderRadius: 10, padding: "1.5rem", marginBottom: "1rem" }}>
+        <div className="rc" style={{ background: "#111", borderRadius: 10, padding: "1.5rem", marginBottom: "1rem" }}>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem", marginBottom: "0.75rem" }}>
             <div style={{ color: "#dfff00", fontWeight: 900, fontSize: "1.2rem", letterSpacing: "-0.02em" }}>{recommendation.name}</div>
             <div style={{ ...mono, fontSize: "0.55rem", color: "#111", background: "#dfff00", padding: "0.2rem 0.55rem", borderRadius: 4, fontWeight: 700, whiteSpace: "nowrap" }}>
@@ -208,7 +209,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
         </div>
 
         {/* Analysis card */}
-        <div style={{ padding: "1.125rem", background: "#fff", border: "1px solid #e8e8e8", borderRadius: 8 }}>
+        <div className="rc" style={{ padding: "1.125rem", background: "#fff", border: "1px solid #e8e8e8", borderRadius: 8 }}>
           <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#888", marginBottom: "0.625rem" }}>Our Analysis</div>
           <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "#111", marginBottom: "0.4rem" }}>{insights.headline}</div>
           <div style={{ fontSize: "0.76rem", color: "#444", lineHeight: 1.75 }}>{insights.context}</div>
@@ -225,6 +226,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
             return (
               <div
                 key={service}
+                className="rc"
                 style={{
                   display: "flex", flexWrap: "wrap",
                   justifyContent: "space-between", alignItems: "center",
@@ -247,7 +249,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
         </div>
 
         {(totalMin > 0 && totalMax > 0) && (
-          <div style={{
+          <div className="rc" style={{
             background: "#111", borderRadius: 8, padding: "1.125rem 1.25rem",
             display: "flex", flexWrap: "wrap",
             justifyContent: "space-between", alignItems: "center", gap: "0.75rem",
@@ -307,7 +309,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
         <div style={{ ...mono, fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1.125rem" }}>Recommended Implementation Order</div>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
           {insights.priority.map((step, i) => (
-            <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.75rem 0.875rem", background: "#fff", borderRadius: 6, border: "1px solid #ececec" }}>
+            <div key={i} className="rc" style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.75rem 0.875rem", background: "#fff", borderRadius: 6, border: "1px solid #ececec" }}>
               <div style={{
                 ...mono, fontSize: "0.58rem", fontWeight: 700, color: "#dfff00",
                 background: "#111", width: 22, height: 22, borderRadius: "50%",
@@ -330,7 +332,7 @@ export default function DigitalStrategyReport({ answers, recommendation, service
             { action: "Book a discovery session", detail: "A focused 30–45 minute call to confirm scope, answer your questions, and align on priorities." },
             { action: "Receive your formal proposal", detail: "A written proposal with exact pricing and a clear delivery plan,within 24–48 hours of your session." },
           ].map(({ action, detail }, i) => (
-            <div key={i} style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
+            <div key={i} className="rc" style={{ display: "flex", gap: "0.75rem", padding: "0.875rem 1rem", background: "#f9f9f9", borderRadius: 8, border: "1px solid #ececec" }}>
               <div style={{
                 ...mono, fontSize: "0.6rem", fontWeight: 700,
                 color: "#fff", background: "#111",
