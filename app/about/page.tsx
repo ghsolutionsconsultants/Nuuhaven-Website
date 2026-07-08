@@ -109,6 +109,36 @@ export default function AboutPage() {
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "2.5rem" }}>
                 The result is a strategic partner unlike any other: one that thinks like a CFO and executes like a creative director.
               </p>
+              {/* Dictionary definition */}
+              <div
+                style={{
+                  marginBottom: "2.5rem",
+                  padding: "1.25rem 1.5rem",
+                  borderLeft: "2px solid rgba(223,255,0,0.35)",
+                  background: "rgba(223,255,0,0.03)",
+                  borderRadius: "0 8px 8px 0",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.625rem", flexWrap: "wrap", marginBottom: "0.4rem" }}>
+                  <span style={{ fontWeight: 800, fontSize: "1rem", letterSpacing: "-0.01em" }}>nuuhaven</span>
+                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em" }}>/njuːˈheɪvən/</span>
+                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "var(--accent)", letterSpacing: "0.1em", textTransform: "uppercase" }}>noun</span>
+                </div>
+                <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: "0.625rem" }}>
+                  A new place of safety, clarity, and professional refuge, a foundation built to protect and elevate a business&apos; identity in the world.
+                </p>
+                <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "0.5rem" }}>
+                  &ldquo;We finally found our <span style={{ color: "var(--accent)", fontStyle: "normal" }}>Nuuhaven</span>, the brand, website, and presence that matched how we actually operate.&rdquo;
+                </p>
+                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+                  {["refuge", "foundation", "haven", "launchpad", "home"].map((s, i, arr) => (
+                    <span key={s} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>
+                      {s}{i < arr.length - 1 && <span style={{ color: "rgba(255,255,255,0.15)", marginLeft: "0.5rem" }}>·</span>}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-start" }}>
                 <MagneticButton href="/contact" variant="accent">Work With Us</MagneticButton>
                 <MagneticButton href="/work" variant="outline">See Our Work</MagneticButton>

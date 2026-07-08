@@ -145,7 +145,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 section pb-24 w-full">
-        <div className="section-inner">
+        <div className="section-inner" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           {/* Hero logo, flows into nav on scroll */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -154,8 +154,6 @@ export default function HeroSection() {
             style={{
               marginBottom: "2.8rem",
               display: "inline-block",
-              originX: 0,
-              originY: 0,
             }}
           >
             <motion.div
@@ -163,7 +161,7 @@ export default function HeroSection() {
                 scale: heroLogoScale,
                 opacity: heroLogoOpacity,
                 y: heroLogoY,
-                transformOrigin: "top left",
+                transformOrigin: "top center",
               }}
             >
               <Image
@@ -182,7 +180,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="display-hero" style={{ maxWidth: "14ch", marginBottom: "2.5rem" }}>
+          <h1 className="display-hero" style={{ marginBottom: "2.5rem" }}>
             {HEADLINE.map((line, i) => (
               <motion.span
                 key={line}
@@ -199,8 +197,8 @@ export default function HeroSection() {
 
           {/* Subtext */}
           <motion.p
-            className="text-base md:text-lg max-w-xl"
-            style={{ color: "var(--text-muted)", lineHeight: 2, marginBottom: "3rem" }}
+            className="text-base md:text-lg"
+            style={{ color: "var(--text-muted)", lineHeight: 2, marginBottom: "3rem", maxWidth: "46rem" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.75 }}
@@ -212,7 +210,7 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <motion.div
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.9 }}
@@ -226,49 +224,13 @@ export default function HeroSection() {
             </MagneticButton>
           </motion.div>
 
-          {/* Dictionary definition */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.1 }}
-            style={{
-              marginTop: "3rem",
-              padding: "1.25rem 1.5rem",
-              borderLeft: "2px solid rgba(223,255,0,0.35)",
-              background: "rgba(223,255,0,0.03)",
-              borderRadius: "0 8px 8px 0",
-              maxWidth: "34rem",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "baseline", gap: "0.625rem", flexWrap: "wrap", marginBottom: "0.4rem" }}>
-              <span style={{ fontWeight: 800, fontSize: "1rem", letterSpacing: "-0.01em" }}>nuuhaven</span>
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em" }}>/njuːˈheɪvən/</span>
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "var(--accent)", letterSpacing: "0.1em", textTransform: "uppercase" }}>noun</span>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: "0.625rem" }}>
-              A new place of safety, clarity, and professional refuge, a foundation built to protect and elevate a business&apos; identity in the world.
-            </p>
-            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "0.5rem" }}>
-              &ldquo;We finally found our <span style={{ color: "var(--accent)", fontStyle: "normal" }}>Nuuhaven</span>, the brand, website, and presence that matched how we actually operate.&rdquo;
-            </p>
-            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
-              {["refuge", "foundation", "haven", "launchpad", "home"].map(s => (
-                <span key={s} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>{s}</span>
-              )).reduce((acc: React.ReactNode[], el, i, arr) => {
-                acc.push(el);
-                if (i < arr.length - 1) acc.push(<span key={`dot-${i}`} style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.6rem" }}>·</span>);
-                return acc;
-              }, [])}
-            </div>
-          </motion.div>
-
           {/* Scroll hint */}
           <motion.div
             className="flex items-center gap-3"
-            style={{ marginTop: "3rem" }}
+            style={{ marginTop: "3.5rem" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 3.5 }}
+            transition={{ duration: 1, delay: 3.3 }}
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
