@@ -1,35 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useAnimationFrame,
+} from "framer-motion";
 import * as THREE from "three";
 import Image from "next/image";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
-
-// True sine-wave keyframe cycle: 32 steps + linear ease = perfectly smooth float
-// Negative amp = rises first; positive = sinks first
-function sineWave(amp: number, steps = 32): number[] {
-  return Array.from({ length: steps }, (_, i) =>
-    amp * Math.sin((i / steps) * Math.PI * 2)
-  );
-}
-
-// Pre-computed waves so JSX never recomputes them on render
-const W = {
-  logo_d:  sineWave(-9),  logo_m:  sineWave(-7),
-  badge_d: sineWave(6),   badge_m: sineWave(5),
-  sub_d:   sineWave(7),   sub_m:   sineWave(6),
-  cta_d:   sineWave(-6),  cta_m:   sineWave(-5),
-};
-
-const LINE_CFG = [
-  { wave_d: sineWave(-11), wave_m: sineWave(-7), dur: 7.0, delay: 3.6 },
-  { wave_d: sineWave(7),   wave_m: sineWave(5),  dur: 8.2, delay: 3.4 },
-  { wave_d: sineWave(-10), wave_m: sineWave(-6), dur: 7.6, delay: 4.0 },
-];
 
 const STARS = [
   { t: "RA·12h 30m", x: "7%",  y: "14%", op: 0.1,  dur: 6.5, amp: 6,  delay: 3.2 },
@@ -52,7 +36,58 @@ export default function HeroSection() {
 
   const { scrollY } = useScroll();
   const heroLogoOpacity = useTransform(scrollY, [0, 260], [1, 0]);
-  const heroLogoY = useTransform(scrollY, [0, 320], [0, -40]);
+  const heroLogoY      = useTransform(scrollY, [0, 320], [0, -40]);
+
+  // MotionValues driven by rAF — bypass React renders, run at native frame rate
+  const logoY    = useMotionValue(0);
+  const badgeY   = useMotionValue(0);
+  const lineY0   = useMotionValue(0); // "Your Digital"
+  const lineY1   = useMotionValue(0); // "Haven For"
+  const lineY2   = useMotionValue(0); // "Business."
+  const subtextY = useMotionValue(0);
+  const ctaY     = useMotionValue(0);
+
+  const startedAt = useRef<number | null>(null);
+
+  useAnimationFrame((t) => {
+    // Wait for entry animations to finish before floating begins
+    if (t < 3500) return;
+    if (startedAt.current === null) startedAt.current = t;
+
+    const elapsed = (t - startedAt.current) / 1000; // seconds
+
+    // Amplitude eases in over 2 s so float starts imperceptibly
+    const ramp = Math.min(elapsed / 2.0, 1.0);
+    // Smooth ease-in curve: slow at start, reaches full amplitude gradually
+    const fade = ramp * ramp * (3 - 2 * ramp); // smoothstep
+
+    const TAU = Math.PI * 2;
+
+    if (isMobile) {
+      // Mobile: small amplitudes, headline floats as one block (no line convergence)
+      const a = 5 * fade;
+      logoY.set(-a * 1.1 * Math.sin((elapsed / 7.2) * TAU));
+      badgeY.set( a * 0.8 * Math.sin((elapsed / 8.0) * TAU + 1.2));
+      // All three lines share the same value → float as a single unit
+      const h1 = -a * Math.sin((elapsed / 7.6) * TAU + 0.5);
+      lineY0.set(h1);
+      lineY1.set(h1);
+      lineY2.set(h1);
+      subtextY.set(a * 0.9 * Math.sin((elapsed / 9.2) * TAU + 1.9));
+      ctaY.set(-a * 0.8 * Math.sin((elapsed / 8.4) * TAU + 1.4));
+    } else {
+      // Desktop: independent per-line float with phase offsets to prevent simultaneous convergence
+      const a = fade;
+      logoY.set(-9 * a * Math.sin((elapsed / 7.2) * TAU));
+      badgeY.set( 6 * a * Math.sin((elapsed / 7.8) * TAU + 1.1));
+      // Phase offsets spread the lines through their cycles at any given moment
+      lineY0.set(-11 * a * Math.sin((elapsed / 7.0) * TAU));
+      lineY1.set(  7 * a * Math.sin((elapsed / 8.4) * TAU + 2.2)); // ~π offset relative to 0
+      lineY2.set(-10 * a * Math.sin((elapsed / 7.6) * TAU + 1.1)); // ~π/3 offset
+      subtextY.set( 7 * a * Math.sin((elapsed / 9.4) * TAU + 1.8));
+      ctaY.set(   -6 * a * Math.sin((elapsed / 8.2) * TAU + 0.7));
+    }
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -62,11 +97,11 @@ export default function HeroSection() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const scene = new THREE.Scene();
+    const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.z = 5;
 
-    // ── Galactic core: eclipse sphere ──
+    // Eclipse sphere + orbital ring
     const sphere = new THREE.Mesh(
       new THREE.SphereGeometry(2, 64, 64),
       new THREE.MeshStandardMaterial({ color: 0x000000, roughness: 0.2, metalness: 0.8 })
@@ -89,28 +124,27 @@ export default function HeroSection() {
     pointLight.position.set(0, 0, 3);
     scene.add(pointLight);
 
-    // ── Galaxy spiral particles — halved on mobile for frame rate ──
-    const mobile = window.innerWidth < 768;
-    const ARMS = 2;
-    const PER_ARM = mobile ? 260 : 520;
-    const SCATTERED = mobile ? 140 : 280;
-    const total = ARMS * PER_ARM + SCATTERED;
+    // Galaxy particles — halved on mobile to maintain frame rate
+    const mobile  = window.innerWidth < 768;
+    const PER_ARM  = mobile ? 240 : 520;
+    const SCATTERED = mobile ? 120 : 280;
+    const total = 2 * PER_ARM + SCATTERED;
     const pos = new Float32Array(total * 3);
     const col = new Float32Array(total * 3);
 
     let idx = 0;
-    for (let arm = 0; arm < ARMS; arm++) {
-      const armAngle = (arm / ARMS) * Math.PI * 2;
+    for (let arm = 0; arm < 2; arm++) {
+      const base = (arm / 2) * Math.PI * 2;
       for (let j = 0; j < PER_ARM; j++) {
         const t = j / PER_ARM;
-        const angle = armAngle + t * Math.PI * 3.8;
-        const radius = 0.25 + t * 5.8;
+        const angle   = base + t * Math.PI * 3.8;
+        const radius  = 0.25 + t * 5.8;
         const scatter = 0.12 + t * 0.55;
-        pos[idx * 3 + 0] = Math.cos(angle) * radius + (Math.random() - 0.5) * scatter * 2;
+        pos[idx * 3]     = Math.cos(angle) * radius + (Math.random() - 0.5) * scatter * 2;
         pos[idx * 3 + 1] = (Math.random() - 0.5) * 0.22 - 2;
         pos[idx * 3 + 2] = Math.sin(angle) * radius + (Math.random() - 0.5) * scatter * 2;
         const core = Math.max(0, 1 - t * 1.5);
-        col[idx * 3 + 0] = 1.0;
+        col[idx * 3]     = 1.0;
         col[idx * 3 + 1] = 0.75 + core * 0.25;
         col[idx * 3 + 2] = core * 0.05 + (1 - core) * 0.85;
         idx++;
@@ -118,21 +152,21 @@ export default function HeroSection() {
     }
     for (let j = 0; j < SCATTERED; j++) {
       const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 2.5 + Math.random() * 5;
-      pos[idx * 3 + 0] = r * Math.sin(phi) * Math.cos(theta);
+      const phi   = Math.acos(2 * Math.random() - 1);
+      const r     = 2.5 + Math.random() * 5;
+      pos[idx * 3]     = r * Math.sin(phi) * Math.cos(theta);
       pos[idx * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) - 2;
       pos[idx * 3 + 2] = r * Math.cos(phi) - 1;
-      col[idx * 3 + 0] = 0.8 + Math.random() * 0.2;
+      col[idx * 3]     = 0.8  + Math.random() * 0.2;
       col[idx * 3 + 1] = 0.85 + Math.random() * 0.15;
-      col[idx * 3 + 2] = 0.9 + Math.random() * 0.1;
+      col[idx * 3 + 2] = 0.9  + Math.random() * 0.1;
       idx++;
     }
 
     const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    pGeo.setAttribute("color", new THREE.BufferAttribute(col, 3));
-    const pMat = new THREE.PointsMaterial({ size: 0.022, transparent: true, opacity: 0.75, vertexColors: true });
+    pGeo.setAttribute("color",    new THREE.BufferAttribute(col, 3));
+    const pMat   = new THREE.PointsMaterial({ size: 0.022, transparent: true, opacity: 0.75, vertexColors: true });
     const galaxy = new THREE.Points(pGeo, pMat);
     galaxy.rotation.x = Math.PI * 0.12;
     scene.add(galaxy);
@@ -153,18 +187,17 @@ export default function HeroSection() {
       animFrame = requestAnimationFrame(animate);
       const t = Date.now() * 0.001;
 
-      const rise = Math.min(scrollYVal / (window.innerHeight * 0.8), 1);
+      const rise    = Math.min(scrollYVal / (window.innerHeight * 0.8), 1);
       const targetY = -3.5 + rise * 4;
-      sphere.position.y += (targetY - sphere.position.y) * 0.05;
-      torus.position.y = sphere.position.y;
-      glow.position.y = sphere.position.y;
+      sphere.position.y  += (targetY - sphere.position.y) * 0.05;
+      torus.position.y    = sphere.position.y;
+      glow.position.y     = sphere.position.y;
 
-      sphere.rotation.y = t * 0.05;
-      torus.rotation.z = t * 0.02;
-      glowMat.opacity = 0.03 + Math.sin(t) * 0.01;
-      torusMat.opacity = 0.5 + Math.sin(t * 1.5) * 0.2;
-
-      galaxy.rotation.y = t * 0.035;
+      sphere.rotation.y   = t * 0.05;
+      torus.rotation.z    = t * 0.02;
+      glowMat.opacity     = 0.03 + Math.sin(t) * 0.01;
+      torusMat.opacity    = 0.5  + Math.sin(t * 1.5) * 0.2;
+      galaxy.rotation.y   = t * 0.035;
 
       renderer.render(scene, camera);
     };
@@ -185,12 +218,13 @@ export default function HeroSection() {
     >
       <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
 
+      {/* Vignette layers */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
         background: "radial-gradient(ellipse 110% 80% at 50% 50%, transparent 20%, rgba(0,0,0,0.65) 100%)" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
         background: "radial-gradient(ellipse 80% 50% at 50% 105%, rgba(223,255,0,0.07) 0%, transparent 65%)" }} />
 
-      {/* Decorative star-chart labels — desktop only */}
+      {/* Star-chart labels — desktop only, simple ease-in-out float */}
       {!isMobile && STARS.map((s, i) => (
         <motion.span
           key={i}
@@ -204,10 +238,10 @@ export default function HeroSection() {
             textTransform: "uppercase",
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: s.op, y: sineWave(-s.amp) }}
+          animate={{ opacity: s.op, y: [0, -s.amp, 0] }}
           transition={{
             opacity: { delay: s.delay, duration: 1.2 },
-            y: { delay: s.delay, duration: s.dur, repeat: Infinity, ease: "linear" },
+            y: { delay: s.delay, duration: s.dur, repeat: Infinity, ease: "easeInOut" },
           }}
         >
           {s.t}
@@ -231,10 +265,7 @@ export default function HeroSection() {
           style={{ marginBottom: isMobile ? "2rem" : "2.5rem" }}
         >
           <motion.div style={{ opacity: heroLogoOpacity, y: heroLogoY }}>
-            <motion.div
-              animate={{ y: isMobile ? W.logo_m : W.logo_d }}
-              transition={{ duration: 6.8, delay: 3.5, repeat: Infinity, ease: "linear" }}
-            >
+            <motion.div style={{ y: logoY }}>
               <Image
                 src="/images/brand/logo-transparent.png"
                 alt="Nuuhaven"
@@ -256,9 +287,8 @@ export default function HeroSection() {
           style={{ marginBottom: "1.75rem" }}
         >
           <motion.span
-            animate={{ y: isMobile ? W.badge_m : W.badge_d }}
-            transition={{ duration: 7.4, delay: 3.8, repeat: Infinity, ease: "linear" }}
             style={{
+              y: badgeY,
               display: "inline-flex",
               alignItems: "center",
               gap: "0.4rem",
@@ -278,29 +308,25 @@ export default function HeroSection() {
           </motion.span>
         </motion.div>
 
-        {/* Headline */}
+        {/* Headline — per-line on desktop, single block on mobile */}
         <h1 className="display-hero" style={{ marginBottom: "1.75rem" }}>
-          {HEADLINE.map((line, i) => {
-            const cfg = LINE_CFG[i];
-            return (
-              <motion.div
-                key={line}
-                initial={{ opacity: 0, y: 48 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.85, delay: 2.35 + i * 0.13, ease: [0.22, 1, 0.36, 1] }}
-                style={{ display: "block" }}
+          {HEADLINE.map((line, i) => (
+            <motion.div
+              key={line}
+              initial={{ opacity: 0, y: 48 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 2.35 + i * 0.13, ease: [0.22, 1, 0.36, 1] }}
+              style={{ display: "block" }}
+            >
+              <motion.span
+                className="block"
+                data-text={line}
+                style={{ y: [lineY0, lineY1, lineY2][i] }}
               >
-                <motion.span
-                  className="block"
-                  data-text={line}
-                  animate={{ y: isMobile ? cfg.wave_m : cfg.wave_d }}
-                  transition={{ duration: cfg.dur, delay: cfg.delay, repeat: Infinity, ease: "linear" }}
-                >
-                  {line}
-                </motion.span>
-              </motion.div>
-            );
-          })}
+                {line}
+              </motion.span>
+            </motion.div>
+          ))}
         </h1>
 
         {/* Accent divider */}
@@ -308,7 +334,11 @@ export default function HeroSection() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 2.72 }}
-          style={{ width: "4rem", height: 2, background: "linear-gradient(90deg, transparent, var(--accent), transparent)", borderRadius: 2, marginBottom: "1.75rem" }}
+          style={{
+            width: "4rem", height: 2,
+            background: "linear-gradient(90deg, transparent, var(--accent), transparent)",
+            borderRadius: 2, marginBottom: "1.75rem",
+          }}
         />
 
         {/* Subtext */}
@@ -320,14 +350,13 @@ export default function HeroSection() {
           <motion.p
             className="text-base md:text-lg"
             style={{
+              y: subtextY,
               color: "var(--text-muted)",
               lineHeight: 1.9,
               marginBottom: isMobile ? "2rem" : "2.75rem",
               maxWidth: isMobile ? "100%" : "26rem",
               textWrap: "balance" as never,
             }}
-            animate={{ y: isMobile ? W.sub_m : W.sub_d }}
-            transition={{ duration: 9.0, delay: 4.2, repeat: Infinity, ease: "linear" }}
           >
             We help businesses establish professional brand identities, digital platforms, documentation and marketing assets that strengthen credibility and drive long-term growth.
           </motion.p>
@@ -341,8 +370,7 @@ export default function HeroSection() {
         >
           <motion.div
             className="flex flex-wrap items-center justify-center gap-4"
-            animate={{ y: isMobile ? W.cta_m : W.cta_d }}
-            transition={{ duration: 8.0, delay: 4.5, repeat: Infinity, ease: "linear" }}
+            style={{ y: ctaY }}
           >
             <MagneticButton href="/contact" variant="accent" data-cursor="START">
               Start Your Project →
