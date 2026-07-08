@@ -318,8 +318,8 @@ export default function HeroSection() {
               color: "var(--text-muted)",
               lineHeight: 1.9,
               marginBottom: isMobile ? "2rem" : "2.75rem",
-              maxWidth: isMobile ? "100%" : "38rem",
-              textWrap: "pretty" as never,
+              maxWidth: isMobile ? "100%" : "26rem",
+              textWrap: "balance" as never,
             }}
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 10, delay: 4.2, repeat: Infinity, ease: "easeInOut" }}
