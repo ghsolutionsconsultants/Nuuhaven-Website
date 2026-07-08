@@ -9,11 +9,11 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
 
-// Each headline line: horizontal offset on desktop + unique float params
+// Each headline line: unique float params (all centered)
 const LINE_CFG = [
-  { xOffset: -28, floatAmp: 10, floatDur: 7.5, floatDelay: 0.2 },
-  { xOffset: 0,   floatAmp: 14, floatDur: 9.2, floatDelay: 0.0 },
-  { xOffset: 22,  floatAmp: 9,  floatDur: 8.1, floatDelay: 1.1 },
+  { floatAmp: 10, floatDur: 7.5, floatDelay: 0.2 },
+  { floatAmp: 14, floatDur: 9.2, floatDelay: 0.0 },
+  { floatAmp: 9,  floatDur: 8.1, floatDelay: 1.1 },
 ];
 
 // Decorative star-chart labels scattered around viewport (desktop only)
@@ -214,7 +214,7 @@ export default function HeroSection() {
         style={{
           zIndex: 10,
           minHeight: "100svh",
-          padding: `5rem clamp(1.25rem, 4vw, 4rem)`,
+          padding: isMobile ? "4rem 1.5rem 3rem" : "5rem clamp(1.25rem, 4vw, 4rem)",
         }}
       >
         {/* Logo — scroll-fades, also floats */}
@@ -280,8 +280,8 @@ export default function HeroSection() {
             return (
               <motion.div
                 key={line}
-                initial={{ opacity: 0, y: 48, x: 0 }}
-                animate={{ opacity: 1, y: 0, x: isMobile ? 0 : cfg.xOffset }}
+                initial={{ opacity: 0, y: 48 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.85, delay: 2.35 + i * 0.13, ease: [0.22, 1, 0.36, 1] }}
                 style={{ display: "block" }}
               >
@@ -314,13 +314,17 @@ export default function HeroSection() {
         >
           <motion.p
             className="text-base md:text-lg"
-            style={{ color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "2.75rem", maxWidth: "42rem" }}
+            style={{
+              color: "var(--text-muted)",
+              lineHeight: 1.9,
+              marginBottom: isMobile ? "2rem" : "2.75rem",
+              maxWidth: isMobile ? "100%" : "38rem",
+              textWrap: "pretty" as never,
+            }}
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 10, delay: 4.2, repeat: Infinity, ease: "easeInOut" }}
           >
-            We help businesses establish professional brand identities, digital
-            platforms, business documentation and marketing assets that
-            strengthen credibility and support long-term growth.
+            We help businesses establish professional brand identities, digital platforms, documentation and marketing assets that strengthen credibility and drive long-term growth.
           </motion.p>
         </motion.div>
 
