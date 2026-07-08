@@ -9,11 +9,16 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
 
-// Each headline line: unique float params (all centered)
+// Spring ease: overshoots target slightly then snaps back — the bounce feel
+const SPRING = [0.34, 1.56, 0.64, 1] as const;
+const SPRING_SOFT = [0.45, 0, 0.55, 1] as const; // gentler for mobile
+
+// Each headline line: unique float config
+// Lines 0 & 2 go UP, line 1 goes DOWN — they push against each other
 const LINE_CFG = [
-  { floatAmp: 10, floatDur: 7.5, floatDelay: 0.2 },
-  { floatAmp: 14, floatDur: 9.2, floatDelay: 0.0 },
-  { floatAmp: 9,  floatDur: 8.1, floatDelay: 1.1 },
+  { dir: -1, amp: 11, half: 3.6, delay: 3.5 },
+  { dir:  1, amp:  8, half: 3.6, delay: 3.5 }, // opposite direction
+  { dir: -1, amp: 10, half: 3.9, delay: 3.8 },
 ];
 
 // Decorative star-chart labels scattered around viewport (desktop only)
@@ -217,7 +222,7 @@ export default function HeroSection() {
           padding: isMobile ? "4rem 1.5rem 3rem" : "5rem clamp(1.25rem, 4vw, 4rem)",
         }}
       >
-        {/* Logo — scroll-fades, also floats */}
+        {/* Logo — scroll-fades; floats UP, opposite to badge below */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -226,8 +231,8 @@ export default function HeroSection() {
         >
           <motion.div style={{ opacity: heroLogoOpacity, y: heroLogoY }}>
             <motion.div
-              animate={{ y: [0, -7, 0] }}
-              transition={{ duration: 7, delay: 3.6, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: isMobile ? -4 : -9 }}
+              transition={{ duration: 3.2, delay: 3.5, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
             >
               <Image
                 src="/images/brand/logo-transparent.png"
@@ -242,7 +247,7 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Badge pill — floats */}
+        {/* Badge pill — floats DOWN (opposite to logo, pushes away) */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -250,8 +255,8 @@ export default function HeroSection() {
           style={{ marginBottom: "1.75rem" }}
         >
           <motion.span
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 6, delay: 3.8, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: isMobile ? 3 : 6 }}
+            transition={{ duration: 3.2, delay: 3.5, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -272,11 +277,11 @@ export default function HeroSection() {
           </motion.span>
         </motion.div>
 
-        {/* Headline — each line floats at its own orbital rhythm */}
+        {/* Headline — lines 0 & 2 float UP, line 1 floats DOWN: repulsion bounce */}
         <h1 className="display-hero" style={{ marginBottom: "1.75rem" }}>
           {HEADLINE.map((line, i) => {
             const cfg = LINE_CFG[i];
-            const amp = isMobile ? cfg.floatAmp * 0.5 : cfg.floatAmp;
+            const amp = (isMobile ? Math.round(cfg.amp * 0.45) : cfg.amp) * cfg.dir;
             return (
               <motion.div
                 key={line}
@@ -288,8 +293,8 @@ export default function HeroSection() {
                 <motion.span
                   className="block"
                   data-text={line}
-                  animate={{ y: [0, -amp, amp * 0.3, 0] }}
-                  transition={{ duration: cfg.floatDur, delay: 3.5 + cfg.floatDelay, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: amp }}
+                  transition={{ duration: cfg.half, delay: cfg.delay, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
                 >
                   {line}
                 </motion.span>
@@ -306,7 +311,7 @@ export default function HeroSection() {
           style={{ width: "4rem", height: 2, background: "linear-gradient(90deg, transparent, var(--accent), transparent)", borderRadius: 2, marginBottom: "1.75rem" }}
         />
 
-        {/* Subtext — gentle drift */}
+        {/* Subtext — floats DOWN (opposite to headline above) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -321,14 +326,14 @@ export default function HeroSection() {
               maxWidth: isMobile ? "100%" : "26rem",
               textWrap: "balance" as never,
             }}
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 10, delay: 4.2, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: isMobile ? 3 : 7 }}
+            transition={{ duration: 4.2, delay: 4.0, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
           >
             We help businesses establish professional brand identities, digital platforms, documentation and marketing assets that strengthen credibility and drive long-term growth.
           </motion.p>
         </motion.div>
 
-        {/* CTAs — subtle float */}
+        {/* CTAs — float UP (opposite to subtext, away from each other) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -336,8 +341,8 @@ export default function HeroSection() {
         >
           <motion.div
             className="flex flex-wrap items-center justify-center gap-4"
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 6.5, delay: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: isMobile ? -3 : -6 }}
+            transition={{ duration: 3.8, delay: 4.2, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
           >
             <MagneticButton href="/contact" variant="accent" data-cursor="START">
               Start Your Project →
@@ -357,8 +362,8 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 3.4 }}
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: 10 }}
+            transition={{ duration: 1.0, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
             className="w-px h-12"
             style={{ background: "linear-gradient(to bottom, var(--accent), transparent)" }}
           />
