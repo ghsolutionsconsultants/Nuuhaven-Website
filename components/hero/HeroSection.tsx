@@ -193,7 +193,7 @@ export default function HeroSection() {
               background: "rgba(223,255,0,0.05)",
             }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", display: "inline-block", flexShrink: 0 }} />
-              {isMobile ? "Brand · Web · Strategy" : "Brand · Web · Strategy · Johannesburg"}
+              Brand · Systems · Strategy
             </span>
           </motion.div>
 
@@ -255,35 +255,6 @@ export default function HeroSection() {
             </MagneticButton>
           </motion.div>
 
-          {/* Social proof strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.1 }}
-            style={{
-              marginTop: isMobile ? "2rem" : "3rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: isMobile ? "1rem" : "0",
-              flexWrap: "nowrap",
-            }}
-          >
-            {[
-              { value: "10+", label: "Ecosystems Built" },
-              { value: "4+", label: "Industries Served" },
-              { value: "100+", label: "Assets Delivered" },
-            ].map((stat, i) => (
-              <div key={stat.label} style={{ display: "flex", alignItems: "center" }}>
-                {i > 0 && !isMobile && <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.1)", margin: "0 1.5rem" }} />}
-                {i > 0 && isMobile && <div style={{ width: 1, height: 20, background: "rgba(255,255,255,0.1)", margin: "0 1rem" }} />}
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: isMobile ? "0.85rem" : "1rem", fontWeight: 700, color: "var(--accent)", letterSpacing: "-0.02em" }}>{stat.value}</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: isMobile ? "0.5rem" : "0.58rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem" }}>{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
 
           {/* Scroll hint */}
           <motion.div
