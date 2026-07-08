@@ -6,12 +6,14 @@ import * as THREE from "three";
 import Image from "next/image";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
 
 export default function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollY } = useScroll();
   // Hero logo shrinks + fades as user scrolls
@@ -152,17 +154,17 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.1 }}
-            style={{ marginBottom: "2.5rem", display: "inline-block" }}
+            style={{ marginBottom: isMobile ? "2rem" : "2.5rem", display: "inline-block" }}
           >
             <motion.div style={{ scale: heroLogoScale, opacity: heroLogoOpacity, y: heroLogoY, transformOrigin: "top center" }}>
               <Image
                 src="/images/brand/logo-transparent.png"
                 alt="Nuuhaven"
-                width={200}
-                height={66}
+                width={isMobile ? 150 : 200}
+                height={isMobile ? 50 : 66}
                 className="object-contain"
                 priority
-                style={{ maxHeight: 66, filter: "drop-shadow(0 0 24px rgba(223,255,0,0.2))" }}
+                style={{ maxHeight: isMobile ? 50 : 66, filter: "drop-shadow(0 0 24px rgba(223,255,0,0.2))" }}
               />
             </motion.div>
           </motion.div>
@@ -172,24 +174,26 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2.2 }}
-            style={{ marginBottom: "1.75rem" }}
+            style={{ marginBottom: "1.5rem", maxWidth: "100%", padding: "0 0.5rem" }}
           >
             <span style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "0.5rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "0.4rem",
               fontFamily: "var(--font-geist-mono)",
-              fontSize: "0.62rem",
-              letterSpacing: "0.18em",
+              fontSize: isMobile ? "0.55rem" : "0.62rem",
+              letterSpacing: isMobile ? "0.1em" : "0.18em",
               textTransform: "uppercase",
               color: "var(--accent)",
-              padding: "0.45rem 1rem",
+              padding: "0.45rem 0.875rem",
               border: "1px solid rgba(223,255,0,0.2)",
               borderRadius: 999,
               background: "rgba(223,255,0,0.05)",
             }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", display: "inline-block", animation: "pulse 2s infinite" }} />
-              Brand · Web · Strategy · Johannesburg
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", display: "inline-block", flexShrink: 0 }} />
+              {isMobile ? "Brand · Web · Strategy" : "Brand · Web · Strategy · Johannesburg"}
             </span>
           </motion.div>
 
@@ -257,12 +261,12 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 3.1 }}
             style={{
-              marginTop: "3rem",
+              marginTop: isMobile ? "2rem" : "3rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "1.5rem",
-              flexWrap: "wrap",
+              gap: isMobile ? "1rem" : "0",
+              flexWrap: "nowrap",
             }}
           >
             {[
@@ -270,11 +274,12 @@ export default function HeroSection() {
               { value: "4+", label: "Industries Served" },
               { value: "100+", label: "Assets Delivered" },
             ].map((stat, i) => (
-              <div key={stat.label} style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-                {i > 0 && <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.1)" }} />}
+              <div key={stat.label} style={{ display: "flex", alignItems: "center" }}>
+                {i > 0 && !isMobile && <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.1)", margin: "0 1.5rem" }} />}
+                {i > 0 && isMobile && <div style={{ width: 1, height: 20, background: "rgba(255,255,255,0.1)", margin: "0 1rem" }} />}
                 <div style={{ textAlign: "center" }}>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1rem", fontWeight: 700, color: "var(--accent)", letterSpacing: "-0.02em" }}>{stat.value}</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "0.2rem" }}>{stat.label}</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: isMobile ? "0.85rem" : "1rem", fontWeight: 700, color: "var(--accent)", letterSpacing: "-0.02em" }}>{stat.value}</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: isMobile ? "0.5rem" : "0.58rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem" }}>{stat.label}</div>
                 </div>
               </div>
             ))}
