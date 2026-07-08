@@ -9,17 +9,28 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
 
-// Smooth s-curve — no overshoot, continuous organic float
-const EASE = [0.37, 0, 0.63, 1] as const;
+// True sine-wave keyframe cycle: 32 steps + linear ease = perfectly smooth float
+// Negative amp = rises first; positive = sinks first
+function sineWave(amp: number, steps = 32): number[] {
+  return Array.from({ length: steps }, (_, i) =>
+    amp * Math.sin((i / steps) * Math.PI * 2)
+  );
+}
 
-// Each headline line: lines 0 & 2 drift UP, line 1 drifts DOWN
+// Pre-computed waves so JSX never recomputes them on render
+const W = {
+  logo_d:  sineWave(-9),  logo_m:  sineWave(-7),
+  badge_d: sineWave(6),   badge_m: sineWave(5),
+  sub_d:   sineWave(7),   sub_m:   sineWave(6),
+  cta_d:   sineWave(-6),  cta_m:   sineWave(-5),
+};
+
 const LINE_CFG = [
-  { keys: [0, -11, 0],  dur: 7.0, delay: 3.6 },
-  { keys: [0,   7, 0],  dur: 8.2, delay: 3.4 }, // opposite
-  { keys: [0, -10, 0],  dur: 7.6, delay: 4.0 },
+  { wave_d: sineWave(-11), wave_m: sineWave(-7), dur: 7.0, delay: 3.6 },
+  { wave_d: sineWave(7),   wave_m: sineWave(5),  dur: 8.2, delay: 3.4 },
+  { wave_d: sineWave(-10), wave_m: sineWave(-6), dur: 7.6, delay: 4.0 },
 ];
 
-// Decorative star-chart labels scattered around viewport (desktop only)
 const STARS = [
   { t: "RA·12h 30m", x: "7%",  y: "14%", op: 0.1,  dur: 6.5, amp: 6,  delay: 3.2 },
   { t: "NGC·2047",   x: "82%", y: "19%", op: 0.09, dur: 7.2, amp: 8,  delay: 3.5 },
@@ -63,13 +74,11 @@ export default function HeroSection() {
     sphere.position.y = -3.5;
     scene.add(sphere);
 
-    // Orbital glow ring
     const torusMat = new THREE.MeshBasicMaterial({ color: 0xdfff00, transparent: true, opacity: 0.7 });
     const torus = new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.06, 16, 100), torusMat);
     torus.position.copy(sphere.position);
     scene.add(torus);
 
-    // Glow halo plane
     const glowMat = new THREE.MeshBasicMaterial({ color: 0xdfff00, transparent: true, opacity: 0.04, depthWrite: false });
     const glow = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), glowMat);
     glow.position.copy(sphere.position);
@@ -80,10 +89,11 @@ export default function HeroSection() {
     pointLight.position.set(0, 0, 3);
     scene.add(pointLight);
 
-    // ── Galaxy spiral particles ──
+    // ── Galaxy spiral particles — halved on mobile for frame rate ──
+    const mobile = window.innerWidth < 768;
     const ARMS = 2;
-    const PER_ARM = 520;
-    const SCATTERED = 280;
+    const PER_ARM = mobile ? 260 : 520;
+    const SCATTERED = mobile ? 140 : 280;
     const total = ARMS * PER_ARM + SCATTERED;
     const pos = new Float32Array(total * 3);
     const col = new Float32Array(total * 3);
@@ -99,7 +109,6 @@ export default function HeroSection() {
         pos[idx * 3 + 0] = Math.cos(angle) * radius + (Math.random() - 0.5) * scatter * 2;
         pos[idx * 3 + 1] = (Math.random() - 0.5) * 0.22 - 2;
         pos[idx * 3 + 2] = Math.sin(angle) * radius + (Math.random() - 0.5) * scatter * 2;
-        // Accent yellow near core fading to cool white at edges
         const core = Math.max(0, 1 - t * 1.5);
         col[idx * 3 + 0] = 1.0;
         col[idx * 3 + 1] = 0.75 + core * 0.25;
@@ -107,7 +116,6 @@ export default function HeroSection() {
         idx++;
       }
     }
-    // Scattered background stars
     for (let j = 0; j < SCATTERED; j++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
@@ -145,7 +153,6 @@ export default function HeroSection() {
       animFrame = requestAnimationFrame(animate);
       const t = Date.now() * 0.001;
 
-      // Eclipse rises from galactic core on scroll
       const rise = Math.min(scrollYVal / (window.innerHeight * 0.8), 1);
       const targetY = -3.5 + rise * 4;
       sphere.position.y += (targetY - sphere.position.y) * 0.05;
@@ -157,7 +164,6 @@ export default function HeroSection() {
       glowMat.opacity = 0.03 + Math.sin(t) * 0.01;
       torusMat.opacity = 0.5 + Math.sin(t * 1.5) * 0.2;
 
-      // Galaxy slowly rotates
       galaxy.rotation.y = t * 0.035;
 
       renderer.render(scene, camera);
@@ -177,17 +183,14 @@ export default function HeroSection() {
       className="relative noise-overlay"
       style={{ minHeight: "100svh", background: "var(--bg-primary)", overflow: "hidden" }}
     >
-      {/* Three.js galaxy canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
 
-      {/* Deep space vignette */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
         background: "radial-gradient(ellipse 110% 80% at 50% 50%, transparent 20%, rgba(0,0,0,0.65) 100%)" }} />
-      {/* Galactic core glow */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
         background: "radial-gradient(ellipse 80% 50% at 50% 105%, rgba(223,255,0,0.07) 0%, transparent 65%)" }} />
 
-      {/* ── Decorative star-chart labels (desktop only) ── */}
+      {/* Decorative star-chart labels — desktop only */}
       {!isMobile && STARS.map((s, i) => (
         <motion.span
           key={i}
@@ -201,17 +204,17 @@ export default function HeroSection() {
             textTransform: "uppercase",
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: s.op, y: [0, -s.amp, s.amp * 0.35, 0] }}
+          animate={{ opacity: s.op, y: sineWave(-s.amp) }}
           transition={{
             opacity: { delay: s.delay, duration: 1.2 },
-            y: { delay: s.delay, duration: s.dur, repeat: Infinity, ease: "easeInOut" },
+            y: { delay: s.delay, duration: s.dur, repeat: Infinity, ease: "linear" },
           }}
         >
           {s.t}
         </motion.span>
       ))}
 
-      {/* ── Main content ── */}
+      {/* Main content */}
       <div
         className="relative flex flex-col items-center justify-center text-center"
         style={{
@@ -220,7 +223,7 @@ export default function HeroSection() {
           padding: isMobile ? "4rem 1.5rem 3rem" : "5rem clamp(1.25rem, 4vw, 4rem)",
         }}
       >
-        {/* Logo — scroll-fades; floats UP, opposite to badge below */}
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -229,8 +232,8 @@ export default function HeroSection() {
         >
           <motion.div style={{ opacity: heroLogoOpacity, y: heroLogoY }}>
             <motion.div
-              animate={{ y: isMobile ? [0, -5, 0] : [0, -9, 0] }}
-              transition={{ duration: 6.8, delay: 3.5, repeat: Infinity, ease: EASE }}
+              animate={{ y: isMobile ? W.logo_m : W.logo_d }}
+              transition={{ duration: 6.8, delay: 3.5, repeat: Infinity, ease: "linear" }}
             >
               <Image
                 src="/images/brand/logo-transparent.png"
@@ -245,7 +248,7 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Badge pill — floats DOWN (opposite to logo, pushes away) */}
+        {/* Badge pill */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -253,8 +256,8 @@ export default function HeroSection() {
           style={{ marginBottom: "1.75rem" }}
         >
           <motion.span
-            animate={{ y: isMobile ? [0, 4, 0] : [0, 6, 0] }}
-            transition={{ duration: 7.4, delay: 3.8, repeat: Infinity, ease: EASE }}
+            animate={{ y: isMobile ? W.badge_m : W.badge_d }}
+            transition={{ duration: 7.4, delay: 3.8, repeat: Infinity, ease: "linear" }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -275,7 +278,7 @@ export default function HeroSection() {
           </motion.span>
         </motion.div>
 
-        {/* Headline — lines 0 & 2 float UP, line 1 floats DOWN: repulsion bounce */}
+        {/* Headline */}
         <h1 className="display-hero" style={{ marginBottom: "1.75rem" }}>
           {HEADLINE.map((line, i) => {
             const cfg = LINE_CFG[i];
@@ -290,8 +293,8 @@ export default function HeroSection() {
                 <motion.span
                   className="block"
                   data-text={line}
-                  animate={{ y: isMobile ? cfg.keys.map(v => Math.round(v * 0.5)) : cfg.keys }}
-                  transition={{ duration: cfg.dur, delay: cfg.delay, repeat: Infinity, ease: EASE }}
+                  animate={{ y: isMobile ? cfg.wave_m : cfg.wave_d }}
+                  transition={{ duration: cfg.dur, delay: cfg.delay, repeat: Infinity, ease: "linear" }}
                 >
                   {line}
                 </motion.span>
@@ -308,7 +311,7 @@ export default function HeroSection() {
           style={{ width: "4rem", height: 2, background: "linear-gradient(90deg, transparent, var(--accent), transparent)", borderRadius: 2, marginBottom: "1.75rem" }}
         />
 
-        {/* Subtext — floats DOWN (opposite to headline above) */}
+        {/* Subtext */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -323,14 +326,14 @@ export default function HeroSection() {
               maxWidth: isMobile ? "100%" : "26rem",
               textWrap: "balance" as never,
             }}
-            animate={{ y: isMobile ? [0, 4, 0] : [0, 7, 0] }}
-            transition={{ duration: 9.0, delay: 4.2, repeat: Infinity, ease: EASE }}
+            animate={{ y: isMobile ? W.sub_m : W.sub_d }}
+            transition={{ duration: 9.0, delay: 4.2, repeat: Infinity, ease: "linear" }}
           >
             We help businesses establish professional brand identities, digital platforms, documentation and marketing assets that strengthen credibility and drive long-term growth.
           </motion.p>
         </motion.div>
 
-        {/* CTAs — float UP (opposite to subtext, away from each other) */}
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -338,8 +341,8 @@ export default function HeroSection() {
         >
           <motion.div
             className="flex flex-wrap items-center justify-center gap-4"
-            animate={{ y: isMobile ? [0, -4, 0] : [0, -6, 0] }}
-            transition={{ duration: 8.0, delay: 4.5, repeat: Infinity, ease: EASE }}
+            animate={{ y: isMobile ? W.cta_m : W.cta_d }}
+            transition={{ duration: 8.0, delay: 4.5, repeat: Infinity, ease: "linear" }}
           >
             <MagneticButton href="/contact" variant="accent" data-cursor="START">
               Start Your Project →
