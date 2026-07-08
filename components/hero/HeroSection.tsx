@@ -9,16 +9,14 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HEADLINE = ["Your Digital", "Haven For", "Business."];
 
-// Spring ease: overshoots target slightly then snaps back — the bounce feel
-const SPRING = [0.34, 1.56, 0.64, 1] as const;
-const SPRING_SOFT = [0.45, 0, 0.55, 1] as const; // gentler for mobile
+// Smooth s-curve — no overshoot, continuous organic float
+const EASE = [0.37, 0, 0.63, 1] as const;
 
-// Each headline line: unique float config
-// Lines 0 & 2 go UP, line 1 goes DOWN — they push against each other
+// Each headline line: lines 0 & 2 drift UP, line 1 drifts DOWN
 const LINE_CFG = [
-  { dir: -1, amp: 11, half: 3.6, delay: 3.5 },
-  { dir:  1, amp:  8, half: 3.6, delay: 3.5 }, // opposite direction
-  { dir: -1, amp: 10, half: 3.9, delay: 3.8 },
+  { keys: [0, -11, 0],  dur: 7.0, delay: 3.6 },
+  { keys: [0,   7, 0],  dur: 8.2, delay: 3.4 }, // opposite
+  { keys: [0, -10, 0],  dur: 7.6, delay: 4.0 },
 ];
 
 // Decorative star-chart labels scattered around viewport (desktop only)
@@ -231,8 +229,8 @@ export default function HeroSection() {
         >
           <motion.div style={{ opacity: heroLogoOpacity, y: heroLogoY }}>
             <motion.div
-              animate={{ y: isMobile ? -4 : -9 }}
-              transition={{ duration: 3.2, delay: 3.5, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
+              animate={{ y: isMobile ? [0, -5, 0] : [0, -9, 0] }}
+              transition={{ duration: 6.8, delay: 3.5, repeat: Infinity, ease: EASE }}
             >
               <Image
                 src="/images/brand/logo-transparent.png"
@@ -255,8 +253,8 @@ export default function HeroSection() {
           style={{ marginBottom: "1.75rem" }}
         >
           <motion.span
-            animate={{ y: isMobile ? 3 : 6 }}
-            transition={{ duration: 3.2, delay: 3.5, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
+            animate={{ y: isMobile ? [0, 4, 0] : [0, 6, 0] }}
+            transition={{ duration: 7.4, delay: 3.8, repeat: Infinity, ease: EASE }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -281,7 +279,6 @@ export default function HeroSection() {
         <h1 className="display-hero" style={{ marginBottom: "1.75rem" }}>
           {HEADLINE.map((line, i) => {
             const cfg = LINE_CFG[i];
-            const amp = (isMobile ? Math.round(cfg.amp * 0.45) : cfg.amp) * cfg.dir;
             return (
               <motion.div
                 key={line}
@@ -293,8 +290,8 @@ export default function HeroSection() {
                 <motion.span
                   className="block"
                   data-text={line}
-                  animate={{ y: amp }}
-                  transition={{ duration: cfg.half, delay: cfg.delay, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
+                  animate={{ y: isMobile ? cfg.keys.map(v => Math.round(v * 0.5)) : cfg.keys }}
+                  transition={{ duration: cfg.dur, delay: cfg.delay, repeat: Infinity, ease: EASE }}
                 >
                   {line}
                 </motion.span>
@@ -326,8 +323,8 @@ export default function HeroSection() {
               maxWidth: isMobile ? "100%" : "26rem",
               textWrap: "balance" as never,
             }}
-            animate={{ y: isMobile ? 3 : 7 }}
-            transition={{ duration: 4.2, delay: 4.0, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
+            animate={{ y: isMobile ? [0, 4, 0] : [0, 7, 0] }}
+            transition={{ duration: 9.0, delay: 4.2, repeat: Infinity, ease: EASE }}
           >
             We help businesses establish professional brand identities, digital platforms, documentation and marketing assets that strengthen credibility and drive long-term growth.
           </motion.p>
@@ -341,8 +338,8 @@ export default function HeroSection() {
         >
           <motion.div
             className="flex flex-wrap items-center justify-center gap-4"
-            animate={{ y: isMobile ? -3 : -6 }}
-            transition={{ duration: 3.8, delay: 4.2, repeat: Infinity, repeatType: "mirror", ease: isMobile ? SPRING_SOFT : SPRING }}
+            animate={{ y: isMobile ? [0, -4, 0] : [0, -6, 0] }}
+            transition={{ duration: 8.0, delay: 4.5, repeat: Infinity, ease: EASE }}
           >
             <MagneticButton href="/contact" variant="accent" data-cursor="START">
               Start Your Project →
@@ -362,8 +359,8 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 3.4 }}
         >
           <motion.div
-            animate={{ y: 10 }}
-            transition={{ duration: 1.0, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
             className="w-px h-12"
             style={{ background: "linear-gradient(to bottom, var(--accent), transparent)" }}
           />
