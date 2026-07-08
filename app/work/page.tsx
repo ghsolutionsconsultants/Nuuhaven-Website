@@ -636,7 +636,7 @@ function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
               </motion.div>
             ))}
           </div>
-          <Link href="/contact" className="btn-accent" style={{ display: "block", textAlign: "center", fontSize: "0.72rem", padding: "0.7rem 1rem", marginTop: "1rem" }}>Start a Project →</Link>
+          <Link href="/contact" className="btn-accent" style={{ display: "block", textAlign: "center", fontSize: "0.72rem", padding: "0.7rem 1rem", marginTop: "1rem" }}>Start Your Project →</Link>
         </motion.div>
       </div>
 

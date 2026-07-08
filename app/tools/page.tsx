@@ -222,7 +222,7 @@ export default function ToolsPage() {
             If you already know what you need, skip straight to a discovery conversation. Tell us about your business and we'll respond within 24 hours with a clear path forward.
           </p>
           <Link href="/contact" className="btn-accent" style={{ fontSize: "0.875rem" }} data-cursor="START">
-            Start a Project →
+            Start Your Project →
           </Link>
         </div>
       </section>

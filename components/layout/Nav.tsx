@@ -96,7 +96,7 @@ export default function Nav() {
             className="flex-shrink-0 btn-accent"
             style={{ fontSize: "0.72rem", padding: "0.7rem 1.5rem" }}
           >
-            Start a Project →
+            Start Your Project →
           </Link>
         </div>
 
@@ -175,7 +175,7 @@ export default function Nav() {
               className="mt-8"
             >
               <Link href="/contact" onClick={() => setOpen(false)} className="btn-accent">
-                Start a Project
+                Start Your Project
               </Link>
             </motion.div>
           </motion.div>

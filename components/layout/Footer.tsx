@@ -107,7 +107,7 @@ export default function Footer() {
                 +27 67 717 9269
               </a>
               <Link href="/contact" className="btn-accent" style={{ fontSize: "0.72rem", padding: "0.65rem 1.4rem", marginTop: "0.5rem" }}>
-                Start a Project →
+                Start Your Project →
               </Link>
             </div>
           </div>

@@ -144,26 +144,17 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 section pb-24 w-full">
+      <div className="relative z-10 section pb-20 w-full">
         <div className="section-inner" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-          {/* Hero logo, flows into nav on scroll */}
+
+          {/* Hero logo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.1 }}
-            style={{
-              marginBottom: "2.8rem",
-              display: "inline-block",
-            }}
+            style={{ marginBottom: "2.5rem", display: "inline-block" }}
           >
-            <motion.div
-              style={{
-                scale: heroLogoScale,
-                opacity: heroLogoOpacity,
-                y: heroLogoY,
-                transformOrigin: "top center",
-              }}
-            >
+            <motion.div style={{ scale: heroLogoScale, opacity: heroLogoOpacity, y: heroLogoY, transformOrigin: "top center" }}>
               <Image
                 src="/images/brand/logo-transparent.png"
                 alt="Nuuhaven"
@@ -171,37 +162,74 @@ export default function HeroSection() {
                 height={66}
                 className="object-contain"
                 priority
-                style={{
-                  maxHeight: 66,
-                  filter: "drop-shadow(0 0 20px rgba(223,255,0,0.15))",
-                }}
+                style={{ maxHeight: 66, filter: "drop-shadow(0 0 24px rgba(223,255,0,0.2))" }}
               />
             </motion.div>
           </motion.div>
 
+          {/* Label badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.2 }}
+            style={{ marginBottom: "1.75rem" }}
+          >
+            <span style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              fontFamily: "var(--font-geist-mono)",
+              fontSize: "0.62rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              padding: "0.45rem 1rem",
+              border: "1px solid rgba(223,255,0,0.2)",
+              borderRadius: 999,
+              background: "rgba(223,255,0,0.05)",
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", display: "inline-block", animation: "pulse 2s infinite" }} />
+              Brand · Web · Strategy · Johannesburg
+            </span>
+          </motion.div>
+
           {/* Headline */}
-          <h1 className="display-hero" style={{ marginBottom: "2.5rem" }}>
+          <h1 className="display-hero" style={{ marginBottom: "1.75rem", lineHeight: 1.0 }}>
             {HEADLINE.map((line, i) => (
               <motion.span
                 key={line}
                 className="block"
                 data-text={line}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 48 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.3 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.85, delay: 2.35 + i * 0.13, ease: [0.22, 1, 0.36, 1] }}
               >
                 {line}
               </motion.span>
             ))}
           </h1>
 
+          {/* Thin accent divider */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 2.72, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              width: "4rem",
+              height: 2,
+              background: "linear-gradient(90deg, transparent, var(--accent), transparent)",
+              borderRadius: 2,
+              marginBottom: "1.75rem",
+            }}
+          />
+
           {/* Subtext */}
           <motion.p
             className="text-base md:text-lg"
-            style={{ color: "var(--text-muted)", lineHeight: 2, marginBottom: "3rem", maxWidth: "46rem" }}
+            style={{ color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "2.75rem", maxWidth: "42rem" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.75 }}
+            transition={{ duration: 0.8, delay: 2.8 }}
           >
             We help businesses establish professional brand identities, digital
             platforms, business documentation and marketing assets that
@@ -213,24 +241,52 @@ export default function HeroSection() {
             className="flex flex-wrap items-center justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.9 }}
+            transition={{ duration: 0.8, delay: 2.95 }}
           >
             <MagneticButton href="/contact" variant="accent" data-cursor="START">
-              Begin Your Transformation
-              <span>→</span>
+              Start Your Project →
             </MagneticButton>
             <MagneticButton href="/work" variant="outline" data-cursor="EXPLORE">
               Explore Our Work
             </MagneticButton>
           </motion.div>
 
+          {/* Social proof strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 3.1 }}
+            style={{
+              marginTop: "3rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1.5rem",
+              flexWrap: "wrap",
+            }}
+          >
+            {[
+              { value: "10+", label: "Ecosystems Built" },
+              { value: "4+", label: "Industries Served" },
+              { value: "100+", label: "Assets Delivered" },
+            ].map((stat, i) => (
+              <div key={stat.label} style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+                {i > 0 && <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.1)" }} />}
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1rem", fontWeight: 700, color: "var(--accent)", letterSpacing: "-0.02em" }}>{stat.value}</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "0.2rem" }}>{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
           {/* Scroll hint */}
           <motion.div
             className="flex items-center gap-3"
-            style={{ marginTop: "3.5rem" }}
+            style={{ marginTop: "3rem" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 3.3 }}
+            transition={{ duration: 1, delay: 3.4 }}
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -240,6 +296,7 @@ export default function HeroSection() {
             />
             <span className="label-mono">Scroll to explore</span>
           </motion.div>
+
         </div>
       </div>
     </section>
