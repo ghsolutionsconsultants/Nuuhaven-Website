@@ -54,12 +54,14 @@ export default function LoadingScreen() {
   };
 
   useEffect(() => {
-    const already = sessionStorage.getItem("nuu-loaded");
-    if (already) {
+    const KEY = "nuu-loaded-at";
+    const last = Number(localStorage.getItem(KEY) ?? 0);
+    const TWENTY_FOUR_H = 24 * 60 * 60 * 1000;
+    if (Date.now() - last < TWENTY_FOUR_H) {
       setPhase("done");
       return;
     }
-    sessionStorage.setItem("nuu-loaded", "1");
+    localStorage.setItem(KEY, String(Date.now()));
     setPhase("playing");
 
     // Skip on any scroll or touch — user wants to see the site
