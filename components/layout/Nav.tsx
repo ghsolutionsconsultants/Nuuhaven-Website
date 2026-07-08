@@ -174,8 +174,13 @@ export default function Nav() {
               transition={{ delay: [...leftLinks, ...rightLinks].length * 0.07 }}
               className="mt-8"
             >
-              <Link href="/contact" onClick={() => setOpen(false)} className="btn-accent">
-                Start Your Project
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="block text-3xl font-bold uppercase tracking-wider py-4 text-center"
+                style={{ color: "var(--accent)" }}
+              >
+                Start Your Project →
               </Link>
             </motion.div>
           </motion.div>
