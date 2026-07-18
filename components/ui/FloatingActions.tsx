@@ -38,6 +38,24 @@ export default function FloatingActions() {
       zIndex: 200,
       alignItems: "center",
     }}>
+      {/* Instagram — top of the stack */}
+      <a
+        href="https://www.instagram.com/nuuhaven"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={btnStyle("rgba(225,48,108,0.5)")}
+        title="Instagram"
+        aria-label="Follow Nuuhaven on Instagram"
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(225,48,108,0.14)"; (e.currentTarget as HTMLElement).style.transform = "scale(1.1)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(17,17,17,0.94)"; (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+
       {/* WhatsApp */}
       <a
         href="https://wa.me/27677179269"

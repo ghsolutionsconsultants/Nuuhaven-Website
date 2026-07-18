@@ -106,6 +106,33 @@ export default function Footer() {
               >
                 +27 67 717 9269
               </a>
+              <a
+                href="https://www.instagram.com/nuuhaven"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Nuuhaven on Instagram"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.45rem",
+                  color: "rgba(255,255,255,0.4)",
+                  fontFamily: "var(--font-geist-mono)",
+                  fontSize: "0.7rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                @nuuhaven
+              </a>
               <Link href="/contact" className="btn-accent" style={{ fontSize: "0.72rem", padding: "0.65rem 1.4rem", marginTop: "0.5rem" }}>
                 Start Your Project →
               </Link>
