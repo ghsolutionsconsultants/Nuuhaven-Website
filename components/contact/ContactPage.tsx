@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from "@/lib/web3forms";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -46,13 +47,19 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("sending");
     try {
-      const res = await fetch("https://formspree.io/f/xpqgdzwy", {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ type: "contact", ...form }),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New Contact Enquiry — Nuuhaven Website",
+          from_name: "Nuuhaven Website",
+          type: "contact",
+          ...form,
+        }),
       });
       const json = await res.json();
-      if (json.ok) setStatus("sent");
+      if (json.success) setStatus("sent");
       else setStatus("error");
     } catch {
       setStatus("error");

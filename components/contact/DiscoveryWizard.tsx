@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from "@/lib/web3forms";
 import HolographicCard from "@/components/ui/HolographicCard";
 
 type Stage = "startup" | "growing" | "established" | "enterprise";
@@ -85,12 +86,19 @@ export default function DiscoveryWizard() {
     setSubmitting(true);
     setError("");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, recommendation }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New Discovery Session — Nuuhaven Website",
+          from_name: "Nuuhaven Website",
+          ...data,
+          recommendation,
+        }),
       });
-      if (!res.ok) throw new Error("Failed to send");
+      const json = await res.json();
+      if (!json.success) throw new Error("Failed to send");
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please email tshepang@nuuhaven.com directly.");

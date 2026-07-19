@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from "@/lib/web3forms";
 import Link from "next/link";
 import HolographicCard from "@/components/ui/HolographicCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -136,19 +137,22 @@ export default function FreelancerPage() {
     setStatus("sending");
     try {
       const fd = new FormData();
+      fd.append("access_key", WEB3FORMS_ACCESS_KEY);
+      fd.append("subject", "New Freelancer Application — Nuuhaven Website");
+      fd.append("from_name", "Nuuhaven Website");
       Object.entries(form).forEach(([k, v]) => fd.append(k, v));
       fd.append("skills", selectedSkills.join(", "));
       fd.append("aiTools", selectedAiTools.map(id => AI_TOOLS.find(t => t.id === id)?.label || id).join(", "));
       if (cvFile) fd.append("cv", cvFile);
       if (portfolioFile) fd.append("portfolioFile", portfolioFile);
 
-      const res = await fetch("https://formspree.io/f/xpqgdzwy", {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: fd,
       });
       const json = await res.json();
-      if (json.ok) setStatus("sent");
+      if (json.success) setStatus("sent");
       else setStatus("error");
     } catch {
       setStatus("error");
