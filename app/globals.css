@@ -446,3 +446,11 @@ html[data-theme="light"] .bg-particles,
 html[data-theme="light"] .noise-overlay::after {
   display: none;
 }
+
+/* Hero copy fades between ink and white as the eclipse passes behind it. */
+[data-hero-text] { transition: color 0.35s ease; }
+[data-hero-text].on-eclipse { color: #ffffff !important; }
+[data-hero-text].on-eclipse .btn-outline {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+}

@@ -178,9 +178,6 @@ export default function HeroSection() {
       const light = root.dataset.theme === "light";
       galaxy.visible = !light;
       glow.visible = !light;
-      // On paper the black sphere becomes a heavy disc over the copy, so only
-      // the glowing lime ring is drawn — it still reads as the eclipse.
-      sphere.visible = !light;
     };
     applyTheme();
     const themeObserver = new MutationObserver(applyTheme);
@@ -215,6 +212,27 @@ export default function HeroSection() {
       galaxy.rotation.y   = t * 0.035;
 
       renderer.render(scene, camera);
+
+      // Light theme: text over the black eclipse turns white so it stays readable.
+      const nodes = document.querySelectorAll<HTMLElement>("[data-hero-text]");
+      if (root.dataset.theme === "light") {
+        const c = sphere.position.clone().project(camera);
+        const edge = sphere.position.clone().add(new THREE.Vector3(2, 0, 0)).project(camera);
+        const w = window.innerWidth, h = window.innerHeight;
+        const cx = (c.x + 1) / 2 * w, cy = (1 - c.y) / 2 * h;
+        const r = Math.abs(edge.x - c.x) / 2 * w;
+        const box = canvas.getBoundingClientRect();
+        const visibleBottom = (canvas.parentElement?.getBoundingClientRect().bottom ?? box.bottom) - box.top;
+        nodes.forEach((el) => {
+          const b = el.getBoundingClientRect();
+          const y = b.top + b.height / 2 - box.top;
+          const dx = Math.max(0, Math.abs(b.left + b.width / 2 - cx) - b.width * 0.3);
+          const over = y < visibleBottom - 4 && Math.hypot(dx, y - cy) < r;
+          el.classList.toggle("on-eclipse", over);
+        });
+      } else {
+        nodes.forEach((el) => el.classList.remove("on-eclipse"));
+      }
     };
     animate();
 
@@ -336,6 +354,7 @@ export default function HeroSection() {
             >
               <motion.span
                 className="block"
+                data-hero-text=""
                 data-text={line}
                 style={{ y: [lineY0, lineY1, lineY2][i] }}
               >
@@ -364,6 +383,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 2.8 }}
         >
           <motion.p
+            data-hero-text=""
             className="text-base md:text-lg"
             style={{
               y: subtextY,
@@ -385,6 +405,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 2.95 }}
         >
           <motion.div
+            data-hero-text=""
             className="flex flex-wrap items-center justify-center gap-4"
             style={{ y: ctaY }}
           >
@@ -411,7 +432,7 @@ export default function HeroSection() {
             className="w-px h-12"
             style={{ background: "linear-gradient(to bottom, var(--accent), transparent)" }}
           />
-          <span className="label-mono">Scroll to explore</span>
+          <span className="label-mono" data-hero-text="">Scroll to explore</span>
         </motion.div>
       </div>
     </section>
