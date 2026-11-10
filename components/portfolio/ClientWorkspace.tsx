@@ -24,9 +24,9 @@ interface ClientData {
 
 const brandColors: Record<string, string[]> = {
   nucleus: ["#000000", "#ffffff", "#1a1a2e"],
-  lona: ["#0a0a0a", "#d4af37", "#ffffff"],
+  lona: ["var(--surface)", "#d4af37", "#ffffff"],
   hlophe: ["#000000", "#e63946", "#ffffff"],
-  omn: ["#0d0d0d", "#ff9500", "#ffffff"],
+  omn: ["var(--surface)", "#ff9500", "#ffffff"],
 };
 
 export default function ClientWorkspace({ client }: { client: ClientData }) {
@@ -88,7 +88,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div
                   className="p-5 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-3">Project Objective</div>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
@@ -97,7 +97,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 </div>
                 <div
                   className="p-5 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-3">Services Delivered</div>
                   <div className="flex flex-col gap-2">
@@ -111,7 +111,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 </div>
                 <div
                   className="p-5 rounded-xl md:col-span-2"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-3">Business Impact</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -170,7 +170,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 {/* Logo display */}
                 <div
                   className="p-8 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)", minHeight: 180 }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)", minHeight: 180 }}
                 >
                   {client.logo ? (
                     <Image src={client.logo} alt={client.name} width={160} height={80} className="object-contain" />
@@ -187,7 +187,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 {/* Colour palette */}
                 <div
                   className="p-5 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-4">Colour Palette</div>
                   <div className="flex gap-3">
@@ -195,7 +195,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                       <div key={c} className="flex flex-col items-center gap-2">
                         <div
                           className="w-12 h-12 rounded-lg border"
-                          style={{ background: c, borderColor: "rgba(255,255,255,0.1)" }}
+                          style={{ background: c, borderColor: "rgba(var(--ink-rgb),0.1)" }}
                         />
                         <span className="font-mono text-xs" style={{ color: "var(--text-muted)" }}>
                           {c}
@@ -208,7 +208,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 {/* Typography */}
                 <div
                   className="p-5 rounded-xl md:col-span-2"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-4">Typography</div>
                   <div className="grid grid-cols-2 gap-4">
@@ -254,7 +254,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 </div>
                 <div
                   className="p-5 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-3">Engagement Model</div>
                   <div className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
@@ -265,7 +265,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                 </div>
                 <div
                   className="p-5 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-subtle)" }}
+                  style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid var(--border-subtle)" }}
                 >
                   <div className="label-mono mb-3">View Live Work</div>
                   <a

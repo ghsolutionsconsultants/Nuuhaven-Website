@@ -133,8 +133,8 @@ export default function ToolsTeaser() {
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 className="rounded-xl overflow-hidden"
                 style={{
-                  background: "rgba(17,17,17,0.85)",
-                  border: isOpen ? "1px solid rgba(var(--accent-rgb),0.3)" : "1px solid rgba(255,255,255,0.07)",
+                  background: "rgba(var(--surface-rgb),0.85)",
+                  border: isOpen ? "1px solid rgba(var(--accent-rgb),0.3)" : "1px solid rgba(var(--ink-rgb),0.07)",
                   backdropFilter: "blur(20px)",
                   transition: "border-color 0.25s",
                 }}
@@ -192,7 +192,7 @@ export default function ToolsTeaser() {
                       <div
                         style={{
                           padding: "0 2rem 2rem 2rem",
-                          borderTop: "1px solid rgba(255,255,255,0.06)",
+                          borderTop: "1px solid rgba(var(--ink-rgb),0.06)",
                         }}
                       >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ paddingTop: "1.5rem" }}>
@@ -201,7 +201,7 @@ export default function ToolsTeaser() {
                             <div className="label-mono text-xs" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>
                               What This Tool Does
                             </div>
-                            <p className="text-sm" style={{ color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "1rem" }}>
+                            <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.75)", lineHeight: 1.8, marginBottom: "1rem" }}>
                               {tool.explain}
                             </p>
                             <div
@@ -237,9 +237,9 @@ export default function ToolsTeaser() {
                                     className="text-left rounded-lg text-xs font-medium transition-all duration-200"
                                     style={{
                                       padding: "0.6rem 0.875rem",
-                                      background: isSel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)",
-                                      border: isSel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.08)",
-                                      color: isSel ? "var(--accent)" : "rgba(255,255,255,0.65)",
+                                      background: isSel ? "rgba(var(--accent-rgb),0.1)" : "rgba(var(--ink-rgb),0.04)",
+                                      border: isSel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(var(--ink-rgb),0.08)",
+                                      color: isSel ? "var(--accent)" : "rgba(var(--ink-rgb),0.65)",
                                       cursor: "pointer",
                                     }}
                                     data-cursor="SELECT"

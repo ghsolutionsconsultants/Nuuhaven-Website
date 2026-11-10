@@ -140,9 +140,9 @@ export default function BusinessAssessment() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {CATEGORIES.map(cat => (
-                <div key={cat} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "0.75rem 1.125rem", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div key={cat} style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "0.75rem 1.125rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 8, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                   <span style={{ color: "var(--accent)", fontSize: "0.85rem", width: 16, textAlign: "center" }}>{CATEGORY_ICONS[cat]}</span>
-                  <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)" }}>{cat}</span>
+                  <span style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.55)" }}>{cat}</span>
                 </div>
               ))}
             </div>
@@ -156,14 +156,14 @@ export default function BusinessAssessment() {
           {/* Progress bar */}
           <div style={{ marginBottom: "2.5rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>
+              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.35)" }}>
                 {complete ? "Assessment Complete" : `Question ${step + 1} of ${QUESTIONS.length}`}
               </span>
               <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "var(--accent)" }}>
                 {Math.round(progress)}%
               </span>
             </div>
-            <div style={{ height: 2, background: "rgba(255,255,255,0.06)", borderRadius: 999, overflow: "hidden" }}>
+            <div style={{ height: 2, background: "rgba(var(--ink-rgb),0.06)", borderRadius: 999, overflow: "hidden" }}>
               <motion.div
                 style={{ height: "100%", background: "var(--accent)", borderRadius: 999 }}
                 animate={{ width: `${progress}%` }}
@@ -181,14 +181,14 @@ export default function BusinessAssessment() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, overflow: "hidden" }}>
                   {/* Category header */}
-                  <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(255,255,255,0.02)" }}>
+                  <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(var(--ink-rgb),0.02)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
                       <span style={{ color: "var(--accent)", fontSize: "0.9rem" }}>{CATEGORY_ICONS[currentCategory]}</span>
                       <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" }}>{currentCategory}</span>
                     </div>
-                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.08em" }}>
+                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(var(--ink-rgb),0.25)", letterSpacing: "0.08em" }}>
                       {categoryStep} of {categoryQuestions.length} in this section
                     </span>
                   </div>
@@ -214,7 +214,7 @@ export default function BusinessAssessment() {
                           onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = `${ANSWER_COLORS[ans]}0a`; (e.currentTarget as HTMLButtonElement).style.transform = "none"; }}
                         >
                           <span style={{ fontWeight: 700, fontSize: "1rem" }}>{ANSWER_LABELS[ans]}</span>
-                          <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", fontWeight: 400, lineHeight: 1.4 }}>{ANSWER_DESCS[ans]}</span>
+                          <span style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.35)", fontWeight: 400, lineHeight: 1.4 }}>{ANSWER_DESCS[ans]}</span>
                         </button>
                       ))}
                     </div>
@@ -222,7 +222,7 @@ export default function BusinessAssessment() {
                     {step > 0 && (
                       <button
                         onClick={() => setStep((s) => s - 1)}
-                        style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", background: "none", border: "none", cursor: "pointer" }}
+                        style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.25)", background: "none", border: "none", cursor: "pointer" }}
                       >
                         ← Back
                       </button>
@@ -233,7 +233,7 @@ export default function BusinessAssessment() {
                 {/* Step dots */}
                 <div style={{ display: "flex", justifyContent: "center", gap: "0.375rem", marginTop: "1.5rem" }}>
                   {QUESTIONS.map((_, i) => (
-                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(var(--ink-rgb),0.1)", transition: "all 0.3s" }} />
                   ))}
                 </div>
               </motion.div>
@@ -246,8 +246,8 @@ export default function BusinessAssessment() {
                 style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
               >
                 {/* Score hero */}
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.5rem" }}>
                     Your Business Presence Score
                   </div>
                   <motion.div
@@ -258,7 +258,7 @@ export default function BusinessAssessment() {
                   >
                     {overall}
                   </motion.div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.3)", marginBottom: "1rem" }}>out of 100</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", letterSpacing: "0.12em", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1rem" }}>out of 100</div>
                   <div style={{ fontSize: "1.5rem", fontWeight: 800, color: scoreLabel.color, marginBottom: "1rem" }}>{scoreLabel.label}</div>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.8, maxWidth: "34rem", margin: "0 auto" }}>
                     {overall >= 80
@@ -272,8 +272,8 @@ export default function BusinessAssessment() {
                 </div>
 
                 {/* Category breakdown */}
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.75rem" }}>Category Breakdown</div>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "2rem" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.75rem" }}>Category Breakdown</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     {CATEGORIES.map((cat) => {
                       const score = getCategoryScore(answers, cat);
@@ -287,7 +287,7 @@ export default function BusinessAssessment() {
                             </div>
                             <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.8rem", fontWeight: 700, color: catLabel.color }}>{score}%</span>
                           </div>
-                          <div style={{ height: 6, background: "rgba(255,255,255,0.05)", borderRadius: 999, overflow: "hidden" }}>
+                          <div style={{ height: 6, background: "rgba(var(--ink-rgb),0.05)", borderRadius: 999, overflow: "hidden" }}>
                             <motion.div
                               style={{ height: "100%", background: catLabel.color, borderRadius: 999 }}
                               initial={{ width: 0 }}
@@ -307,12 +307,12 @@ export default function BusinessAssessment() {
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#ff6b6b", marginBottom: "1.5rem" }}>Priority Gaps</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                       {QUESTIONS.filter((q) => answers[q.id] !== "yes").slice(0, 5).map((q) => (
-                        <div key={q.id} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem", padding: "0.875rem 1rem", background: "rgba(255,255,255,0.02)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)" }}>
+                        <div key={q.id} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem", padding: "0.875rem 1rem", background: "rgba(var(--ink-rgb),0.02)", borderRadius: 10, border: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                           <span style={{ color: answers[q.id] === "partial" ? "#ff9500" : "#ff4444", flexShrink: 0, marginTop: "0.1rem", fontSize: "0.8rem" }}>
                             {answers[q.id] === "partial" ? "◑" : "○"}
                           </span>
                           <div style={{ flex: 1 }}>
-                            <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>{q.text}</span>
+                            <span style={{ fontSize: "0.78rem", color: "rgba(var(--ink-rgb),0.55)", lineHeight: 1.6 }}>{q.text}</span>
                             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: answers[q.id] === "partial" ? "#ff9500" : "#ff4444", marginTop: "0.25rem", letterSpacing: "0.06em" }}>
                               {answers[q.id] === "partial" ? "PARTIALLY IN PLACE" : "NOT YET IN PLACE"}
                             </div>
@@ -330,9 +330,9 @@ export default function BusinessAssessment() {
                       What This Means For Your Business
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                      <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85, margin: 0 }}>{scorePara}</p>
+                      <p style={{ fontSize: "0.875rem", color: "rgba(var(--ink-rgb),0.65)", lineHeight: 1.85, margin: 0 }}>{scorePara}</p>
                       {worstScore < 80 && catPara && (
-                        <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0, paddingTop: "0.875rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                        <p style={{ fontSize: "0.875rem", color: "rgba(var(--ink-rgb),0.6)", lineHeight: 1.85, margin: 0, paddingTop: "0.875rem", borderTop: "1px solid rgba(var(--ink-rgb),0.07)" }}>
                           <span style={{ color: "var(--accent)", fontWeight: 700 }}>Your lowest area is {worstCat} ({worstScore}%). </span>
                           {catPara}
                         </p>
@@ -342,9 +342,9 @@ export default function BusinessAssessment() {
                 )}
 
                 {/* Download report */}
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "1.5rem 2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "1.5rem 2rem" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Your Full Report</div>
-                  <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  <p style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.5)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
                     Download a detailed PDF report with your full breakdown, gap analysis, priority recommendations, and estimated investment to close each gap.
                   </p>
                   <button
@@ -357,7 +357,7 @@ export default function BusinessAssessment() {
                 </div>
 
                 {/* Inline contact form */}
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "2rem" }}>
                   <ToolContactForm
                     inline
                     toolName="Business Assessment"

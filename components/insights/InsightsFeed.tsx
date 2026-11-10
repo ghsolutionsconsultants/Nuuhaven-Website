@@ -46,9 +46,9 @@ export default function InsightsFeed({ posts }: { posts: PostMeta[] }) {
                 data-cursor="OPEN"
                 className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200"
                 style={{
-                  background: filter === f ? "var(--accent)" : "rgba(255,255,255,0.05)",
+                  background: filter === f ? "var(--accent)" : "rgba(var(--ink-rgb),0.05)",
                   color: filter === f ? "#000" : "var(--text-muted)",
-                  border: filter === f ? "none" : "1px solid rgba(255,255,255,0.1)",
+                  border: filter === f ? "none" : "1px solid rgba(var(--ink-rgb),0.1)",
                 }}
               >
                 {LABELS[f]}
@@ -94,14 +94,14 @@ export default function InsightsFeed({ posts }: { posts: PostMeta[] }) {
                           />
                           <div
                             className="absolute inset-0"
-                            style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(17,17,17,1))" }}
+                            style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(var(--surface-rgb),1))" }}
                           />
                           <div
                             className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
                             style={{
-                              background: post.category === "case-study" ? "rgba(var(--accent-rgb),0.2)" : "rgba(255,255,255,0.1)",
+                              background: post.category === "case-study" ? "rgba(var(--accent-rgb),0.2)" : "rgba(var(--ink-rgb),0.1)",
                               color: post.category === "case-study" ? "var(--accent)" : "var(--text-muted)",
-                              border: `1px solid ${post.category === "case-study" ? "rgba(var(--accent-rgb),0.4)" : "rgba(255,255,255,0.1)"}`,
+                              border: `1px solid ${post.category === "case-study" ? "rgba(var(--accent-rgb),0.4)" : "rgba(var(--ink-rgb),0.1)"}`,
                             }}
                           >
                             {post.category === "case-study" ? "Case Study" : "Blog"}
@@ -124,7 +124,7 @@ export default function InsightsFeed({ posts }: { posts: PostMeta[] }) {
                               <span
                                 key={tag}
                                 className="text-xs px-2 py-0.5 rounded-full"
-                                style={{ background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}
+                                style={{ background: "rgba(var(--ink-rgb),0.05)", color: "var(--text-muted)" }}
                               >
                                 {tag}
                               </span>

@@ -289,7 +289,7 @@ export default function SolutionFinder() {
                 { label: "3 possible outcomes", desc: "Foundation, Growth, or Transformation" },
                 { label: "No wrong answers", desc: "Honest answers lead to the best result" },
               ].map(item => (
-                <div key={item.label} style={{ display: "flex", gap: "1rem", padding: "1rem 1.25rem", background: "rgba(255,255,255,0.03)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div key={item.label} style={{ display: "flex", gap: "1rem", padding: "1rem 1.25rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 10, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                   <span style={{ color: "var(--accent)", flexShrink: 0 }}>◎</span>
                   <div>
                     <div style={{ fontSize: "0.82rem", fontWeight: 600, marginBottom: "0.2rem" }}>{item.label}</div>
@@ -308,14 +308,14 @@ export default function SolutionFinder() {
           {/* Progress */}
           <div style={{ marginBottom: "2.5rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>
+              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.35)" }}>
                 {complete ? "Complete" : `Question ${step + 1} of ${QUESTIONS.length}`}
               </span>
               <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "var(--accent)" }}>
                 {Math.round(progress)}%
               </span>
             </div>
-            <div style={{ height: 2, background: "rgba(255,255,255,0.06)", borderRadius: 999, overflow: "hidden" }}>
+            <div style={{ height: 2, background: "rgba(var(--ink-rgb),0.06)", borderRadius: 999, overflow: "hidden" }}>
               <motion.div
                 style={{ height: "100%", background: "var(--accent)", borderRadius: 999 }}
                 animate={{ width: `${progress}%` }}
@@ -333,11 +333,11 @@ export default function SolutionFinder() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2.5rem", marginBottom: "1rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "2.5rem", marginBottom: "1rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
                     <h2 style={{ fontSize: "1.35rem", fontWeight: 700, lineHeight: 1.3, letterSpacing: "-0.01em", marginBottom: "0.625rem" }}>{question.text}</h2>
                     {question.hint && (
-                      <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.6, fontStyle: "italic" }}>{question.hint}</p>
+                      <p style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.4)", lineHeight: 1.6, fontStyle: "italic" }}>{question.hint}</p>
                     )}
                     {question.type === "multi" && (
                       <div style={{ display: "inline-flex", marginTop: "0.75rem", padding: "0.3rem 0.75rem", background: "rgba(255,149,0,0.1)", border: "1px solid rgba(255,149,0,0.25)", borderRadius: 999 }}>
@@ -358,22 +358,22 @@ export default function SolutionFinder() {
                           data-cursor="SELECT"
                           style={{
                             textAlign: "left", padding: "1.25rem 1.375rem", borderRadius: 12, cursor: "pointer",
-                            background: isSelected ? "rgba(var(--accent-rgb),0.07)" : "rgba(255,255,255,0.025)",
-                            border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
+                            background: isSelected ? "rgba(var(--accent-rgb),0.07)" : "rgba(var(--ink-rgb),0.025)",
+                            border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(var(--ink-rgb),0.07)",
                             transition: "all 0.2s",
                             boxShadow: isSelected ? "0 0 20px rgba(var(--accent-rgb),0.07)" : "none",
                           }}
                         >
                           <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
-                            <span style={{ fontSize: "1.1rem", color: isSelected ? "var(--accent)" : "rgba(255,255,255,0.3)", flexShrink: 0, marginTop: "0.1rem", transition: "color 0.2s" }}>
+                            <span style={{ fontSize: "1.1rem", color: isSelected ? "var(--accent)" : "rgba(var(--ink-rgb),0.3)", flexShrink: 0, marginTop: "0.1rem", transition: "color 0.2s" }}>
                               {opt.icon}
                             </span>
                             <div style={{ flex: 1, minWidth: 0 }}>
-                              <div style={{ fontWeight: 600, fontSize: "0.875rem", color: isSelected ? "#fff" : "rgba(255,255,255,0.75)", marginBottom: "0.3rem", transition: "color 0.2s" }}>
+                              <div style={{ fontWeight: 600, fontSize: "0.875rem", color: isSelected ? "var(--text)" : "rgba(var(--ink-rgb),0.75)", marginBottom: "0.3rem", transition: "color 0.2s" }}>
                                 {opt.label}
                               </div>
                               {opt.desc && (
-                                <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>{opt.desc}</div>
+                                <div style={{ fontSize: "0.75rem", color: "rgba(var(--ink-rgb),0.38)", lineHeight: 1.5 }}>{opt.desc}</div>
                               )}
                             </div>
                             {isSelected && (
@@ -401,7 +401,7 @@ export default function SolutionFinder() {
                     {step > 0 && (
                       <button
                         onClick={() => setStep((s) => s - 1)}
-                        style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", background: "none", border: "none", cursor: "pointer", transition: "color 0.2s" }}
+                        style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", background: "none", border: "none", cursor: "pointer", transition: "color 0.2s" }}
                         data-cursor="BACK"
                       >
                         ← Back
@@ -413,7 +413,7 @@ export default function SolutionFinder() {
                 {/* Step indicator dots */}
                 <div style={{ display: "flex", justifyContent: "center", gap: "0.375rem" }}>
                   {QUESTIONS.map((_, i) => (
-                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(var(--ink-rgb),0.1)", transition: "all 0.3s" }} />
                   ))}
                 </div>
               </motion.div>
@@ -424,7 +424,7 @@ export default function SolutionFinder() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, overflow: "hidden" }}>
                   {/* Result header */}
                   <div style={{ padding: "2rem 2.5rem", background: "rgba(var(--accent-rgb),0.04)", borderBottom: "1px solid rgba(var(--accent-rgb),0.1)" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.75rem" }}>Your Recommended Solution</div>
@@ -437,18 +437,18 @@ export default function SolutionFinder() {
                   </div>
 
                   <div style={{ padding: "2.5rem" }}>
-                    <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85, marginBottom: "2rem" }}>{recommendation?.desc}</p>
+                    <p style={{ fontSize: "0.9375rem", color: "rgba(var(--ink-rgb),0.65)", lineHeight: 1.85, marginBottom: "2rem" }}>{recommendation?.desc}</p>
 
                     <div style={{ marginBottom: "2rem" }}>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1rem" }}>What&apos;s Included</div>
+                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1rem" }}>What&apos;s Included</div>
                       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                         {recommendation?.services.map((s) => {
                           const cost = SERVICE_COSTS[s];
                           return (
-                            <div key={s} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", padding: "0.875rem 1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 8 }}>
+                            <div key={s} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", padding: "0.875rem 1rem", background: "rgba(var(--ink-rgb),0.03)", border: "1px solid rgba(var(--ink-rgb),0.06)", borderRadius: 8 }}>
                               <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
                                 <span style={{ color: "var(--accent)", fontSize: "0.65rem", flexShrink: 0 }}>✓</span>
-                                <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>{s}</span>
+                                <span style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.7)", lineHeight: 1.4 }}>{s}</span>
                               </div>
                               {cost && (
                                 <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", color: "var(--accent)", fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{cost}</span>
@@ -457,14 +457,14 @@ export default function SolutionFinder() {
                           );
                         })}
                       </div>
-                      <p style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.25)", marginTop: "0.75rem", fontStyle: "italic" }}>
+                      <p style={{ fontSize: "0.68rem", color: "rgba(var(--ink-rgb),0.25)", marginTop: "0.75rem", fontStyle: "italic" }}>
                         Indicative ranges only. Final pricing confirmed after discovery session. No total shown — each deliverable is scoped individually.
                       </p>
                     </div>
 
                     <div style={{ padding: "1.25rem 1.5rem", background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 12, marginBottom: "0" }}>
                       <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Why This Fits You</div>
-                      <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>{recommendation?.why}</p>
+                      <p style={{ fontSize: "0.875rem", color: "rgba(var(--ink-rgb),0.6)", lineHeight: 1.8 }}>{recommendation?.why}</p>
                     </div>
 
                     {/* ── Inline advisory ── */}
@@ -472,15 +472,15 @@ export default function SolutionFinder() {
                       <div style={{ marginTop: "1.5rem", padding: "1.5rem", background: "rgba(var(--accent-rgb),0.03)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 12 }}>
                         <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1rem" }}>What This Means For You</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-                          {stageAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>{stageAdvice}</p>}
-                          {outcomeAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>{outcomeAdvice}</p>}
-                          {b2bNote && <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.8, margin: 0, paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>{b2bNote}</p>}
+                          {stageAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.6)", lineHeight: 1.85, margin: 0 }}>{stageAdvice}</p>}
+                          {outcomeAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.6)", lineHeight: 1.85, margin: 0 }}>{outcomeAdvice}</p>}
+                          {b2bNote && <p style={{ fontSize: "0.78rem", color: "rgba(var(--ink-rgb),0.4)", lineHeight: 1.8, margin: 0, paddingTop: "0.5rem", borderTop: "1px solid rgba(var(--ink-rgb),0.07)" }}>{b2bNote}</p>}
                         </div>
                       </div>
                     )}
 
                     {/* Download report button */}
-                    <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                    <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(var(--ink-rgb),0.07)" }}>
                       <button
                         onClick={() => setShowReport(true)}
                         className="btn-outline"

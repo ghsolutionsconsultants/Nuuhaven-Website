@@ -46,8 +46,8 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(var(--ink-rgb),0.04)",
+    border: "1px solid rgba(var(--ink-rgb),0.1)",
     borderRadius: 6,
     padding: "0.875rem 1rem",
     color: "var(--text)",
@@ -104,7 +104,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
             }}>
               <span style={{ color: "var(--accent)", fontSize: "0.7rem" }}>◆</span>
               <div>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.25rem" }}>Your {toolName} Results</div>
+                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "0.25rem" }}>Your {toolName} Results</div>
                 <div style={{ color: "var(--accent)", fontSize: "0.82rem", fontWeight: 600 }}>{summaryLabel}</div>
               </div>
             </div>
@@ -130,7 +130,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
                     onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                     style={inputStyle}
                     onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                    onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                    onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
                   />
                 </div>
               ))}
@@ -147,7 +147,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
                 onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                 style={{ ...inputStyle, resize: "vertical", lineHeight: 1.7 }}
                 onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
               />
             </div>
 
@@ -158,10 +158,10 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
             )}
 
             {/* Conflict of Interest Notice */}
-            <div style={{ background: "rgba(255,200,0,0.04)", border: "1px solid rgba(255,200,0,0.2)", borderRadius: 8, padding: "1rem 1.125rem", display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-              <span style={{ color: "#ffc800", fontSize: "0.7rem", fontWeight: 900, flexShrink: 0, marginTop: "0.1rem" }}>!</span>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem", lineHeight: 1.8, margin: 0 }}>
-                <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>Conflict of Interest Notice:</strong> Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 (debt &amp; capital advisory). All enquiries are assessed for conflicts before engagement. <strong style={{ color: "#ffc800", fontWeight: 600 }}>We reserve the right to decline or terminate any engagement at any stage — including after acceptance — if a conflict is identified.</strong>
+            <div style={{ background: "rgba(var(--warn-rgb),0.04)", border: "1px solid rgba(var(--warn-rgb),0.2)", borderRadius: 8, padding: "1rem 1.125rem", display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
+              <span style={{ color: "var(--warn)", fontSize: "0.7rem", fontWeight: 900, flexShrink: 0, marginTop: "0.1rem" }}>!</span>
+              <p style={{ color: "rgba(var(--ink-rgb),0.4)", fontSize: "0.72rem", lineHeight: 1.8, margin: 0 }}>
+                <strong style={{ color: "rgba(var(--ink-rgb),0.6)", fontWeight: 600 }}>Conflict of Interest Notice:</strong> Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 (debt &amp; capital advisory). All enquiries are assessed for conflicts before engagement. <strong style={{ color: "var(--warn)", fontWeight: 600 }}>We reserve the right to decline or terminate any engagement at any stage — including after acceptance — if a conflict is identified.</strong>
               </p>
             </div>
 
@@ -180,11 +180,11 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
             </div>
 
             {onReset && (
-              <div style={{ paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.05)", marginTop: "0.25rem" }}>
+              <div style={{ paddingTop: "0.5rem", borderTop: "1px solid rgba(var(--ink-rgb),0.05)", marginTop: "0.25rem" }}>
                 <button
                   type="button"
                   onClick={() => { onReset?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", background: "none", border: "none", cursor: "pointer" }}
+                  style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.2)", background: "none", border: "none", cursor: "pointer" }}
                 >
                   ↺ Start Over
                 </button>
@@ -200,7 +200,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
 export default function ToolContactForm({ toolName, toolSummary, summaryLabel, inline, onReset }: ToolContactFormProps) {
   if (inline) {
     return (
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "2rem", marginTop: "2rem" }}>
+      <div style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.07)", paddingTop: "2rem", marginTop: "2rem" }}>
         <FormContent toolName={toolName} toolSummary={toolSummary} summaryLabel={summaryLabel} onReset={onReset} />
       </div>
     );

@@ -94,7 +94,7 @@ export default function DiscoveryCTA() {
               flexWrap: "wrap",
               gap: "3rem",
               paddingTop: "2.5rem",
-              borderTop: "1px solid rgba(255,255,255,0.07)",
+              borderTop: "1px solid rgba(var(--ink-rgb),0.07)",
               width: "100%",
               maxWidth: "36rem",
             }}

@@ -72,8 +72,8 @@ const AI_TOOLS = [
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.1)",
+  background: "rgba(var(--ink-rgb),0.04)",
+  border: "1px solid rgba(var(--ink-rgb),0.1)",
   borderRadius: 8,
   padding: "0.875rem 1rem",
   color: "var(--text)",
@@ -86,7 +86,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "0.62rem",
-  color: "rgba(255,255,255,0.35)",
+  color: "rgba(var(--ink-rgb),0.35)",
   fontFamily: "var(--font-geist-mono)",
   letterSpacing: "0.14em",
   textTransform: "uppercase",
@@ -101,7 +101,7 @@ const sectionLabel: React.CSSProperties = {
   color: "var(--accent)",
   marginBottom: "1.25rem",
   paddingBottom: "0.75rem",
-  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  borderBottom: "1px solid rgba(var(--ink-rgb),0.06)",
 };
 
 export default function FreelancerPage() {
@@ -236,11 +236,11 @@ export default function FreelancerPage() {
               const isOpen = openRole === role.title;
               return (
                 <motion.div key={role.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}
-                  style={{ background: "rgba(17,17,17,0.85)", border: isOpen ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 12, overflow: "hidden", transition: "border-color 0.25s" }}>
+                  style={{ background: "rgba(var(--surface-rgb),0.85)", border: isOpen ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(var(--ink-rgb),0.07)", borderRadius: 12, overflow: "hidden", transition: "border-color 0.25s" }}>
                   <button onClick={() => setOpenRole(isOpen ? null : role.title)} style={{ width: "100%", textAlign: "left", padding: "1.5rem 2rem", display: "flex", alignItems: "center", gap: "1.5rem", background: "none", border: "none", cursor: "pointer" }}>
                     <span style={{ color: "var(--accent)", fontSize: "1.25rem", flexShrink: 0 }}>{role.icon}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontWeight: 700, fontSize: "1rem", color: "#fff", marginBottom: "0.2rem" }}>{role.title}</div>
+                      <div style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)", marginBottom: "0.2rem" }}>{role.title}</div>
                       <div style={{ color: "var(--text-muted)", fontSize: "0.75rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{role.skills.slice(0, 3).join(" · ")}</div>
                     </div>
                     <span style={{ color: "var(--text-muted)", fontSize: "0.75rem", flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.25s", display: "inline-block" }}>▾</span>
@@ -248,17 +248,17 @@ export default function FreelancerPage() {
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} style={{ overflow: "hidden" }}>
-                        <div style={{ padding: "0 2rem 2rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                        <div style={{ padding: "0 2rem 2rem", borderTop: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2rem", paddingTop: "1.5rem" }}>
                             <div>
                               <div className="label-mono" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>About This Role</div>
-                              <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.875rem", lineHeight: 1.8 }}>{role.desc}</p>
+                              <p style={{ color: "rgba(var(--ink-rgb),0.7)", fontSize: "0.875rem", lineHeight: 1.8 }}>{role.desc}</p>
                             </div>
                             <div>
                               <div className="label-mono" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>Skills We Need</div>
                               <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                                 {role.skills.map(skill => (
-                                  <div key={skill} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
+                                  <div key={skill} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "rgba(var(--ink-rgb),0.7)" }}>
                                     <span style={{ color: "var(--accent)", fontSize: "0.6rem" }}>◆</span> {skill}
                                   </div>
                                 ))}
@@ -300,7 +300,7 @@ export default function FreelancerPage() {
                 ["◑", "Attention to detail", "The difference between good and great is usually invisible to most — and obvious to us."],
                 ["◉", "Commercial awareness", "We serve businesses. Your work should reflect an understanding of the client's goals."],
               ].map(([icon, title, desc]) => (
-                <div key={title as string} style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start", padding: "1.125rem 1.375rem", background: "rgba(255,255,255,0.02)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div key={title as string} style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start", padding: "1.125rem 1.375rem", background: "rgba(var(--ink-rgb),0.02)", borderRadius: 10, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                   <span style={{ color: "var(--accent)", fontSize: "1rem", flexShrink: 0, marginTop: "0.1rem" }}>{icon}</span>
                   <div>
                     <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.3rem" }}>{title}</div>
@@ -330,7 +330,7 @@ export default function FreelancerPage() {
             <AnimatePresence mode="wait">
               {status === "sent" ? (
                 <motion.div key="success" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}>
+                  style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(var(--ink-rgb),0.07)" }}>
                   <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem" }}>◆</div>
                   <h3 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>Application Received.</h3>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.85, maxWidth: "30rem", margin: "0 auto 2.5rem" }}>
@@ -340,7 +340,7 @@ export default function FreelancerPage() {
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={handleSubmit}
-                  style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, padding: isMobile ? "1.5rem" : "3rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+                  style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.07)", borderRadius: 20, padding: isMobile ? "1.5rem" : "3rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
 
                   {/* 01 Personal Details */}
                   <div>
@@ -360,7 +360,7 @@ export default function FreelancerPage() {
                             onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                             style={inputStyle}
                             onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                            onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                            onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
                           />
                         </div>
                       ))}
@@ -375,7 +375,7 @@ export default function FreelancerPage() {
                         const sel = form.role === role.title;
                         return (
                           <button key={role.title} type="button" onClick={() => { setForm(f => ({ ...f, role: role.title })); setSelectedSkills([]); }}
-                            style={{ padding: "0.875rem 1rem", textAlign: "left", borderRadius: 10, background: sel ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.08)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.65)", fontSize: "0.82rem", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "0.625rem" }}>
+                            style={{ padding: "0.875rem 1rem", textAlign: "left", borderRadius: 10, background: sel ? "rgba(var(--accent-rgb),0.08)" : "rgba(var(--ink-rgb),0.03)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(var(--ink-rgb),0.08)", color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.65)", fontSize: "0.82rem", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "0.625rem" }}>
                             <span>{role.icon}</span> {role.title}
                           </button>
                         );
@@ -386,13 +386,13 @@ export default function FreelancerPage() {
                   {/* 03 Skills */}
                   {currentRoleSkills.length > 0 && (
                     <div>
-                      <div style={sectionLabel}>03 — Your Skills <span style={{ color: "rgba(255,255,255,0.25)", textTransform: "none", letterSpacing: 0 }}>(select all that apply)</span></div>
+                      <div style={sectionLabel}>03 — Your Skills <span style={{ color: "rgba(var(--ink-rgb),0.25)", textTransform: "none", letterSpacing: 0 }}>(select all that apply)</span></div>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                         {currentRoleSkills.map(skill => {
                           const sel = selectedSkills.includes(skill);
                           return (
                             <button key={skill} type="button" onClick={() => toggleSkill(skill)}
-                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
+                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(var(--ink-rgb),0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(var(--ink-rgb),0.1)", color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.6)", cursor: "pointer", transition: "all 0.2s" }}>
                               {sel ? "✓ " : ""}{skill}
                             </button>
                           );
@@ -409,22 +409,22 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>Years of Experience</label>
                         <select value={form.experience} onChange={e => setForm(f => ({ ...f, experience: e.target.value }))}
                           style={{ ...inputStyle, appearance: "none" as const }}>
-                          <option value="" style={{ background: "#111" }}>Select…</option>
-                          <option value="Less than 1 year" style={{ background: "#111" }}>Less than 1 year</option>
-                          <option value="1–2 years" style={{ background: "#111" }}>1–2 years</option>
-                          <option value="3–5 years" style={{ background: "#111" }}>3–5 years</option>
-                          <option value="5+ years" style={{ background: "#111" }}>5+ years</option>
+                          <option value="" style={{ background: "var(--surface)" }}>Select…</option>
+                          <option value="Less than 1 year" style={{ background: "var(--surface)" }}>Less than 1 year</option>
+                          <option value="1–2 years" style={{ background: "var(--surface)" }}>1–2 years</option>
+                          <option value="3–5 years" style={{ background: "var(--surface)" }}>3–5 years</option>
+                          <option value="5+ years" style={{ background: "var(--surface)" }}>5+ years</option>
                         </select>
                       </div>
                       <div>
                         <label style={labelStyle}>Availability</label>
                         <select value={form.availability} onChange={e => setForm(f => ({ ...f, availability: e.target.value }))}
                           style={{ ...inputStyle, appearance: "none" as const }}>
-                          <option value="" style={{ background: "#111" }}>Select…</option>
-                          <option value="Available immediately" style={{ background: "#111" }}>Available immediately</option>
-                          <option value="Within 2 weeks" style={{ background: "#111" }}>Within 2 weeks</option>
-                          <option value="Within a month" style={{ background: "#111" }}>Within a month</option>
-                          <option value="Project-by-project" style={{ background: "#111" }}>Project by project</option>
+                          <option value="" style={{ background: "var(--surface)" }}>Select…</option>
+                          <option value="Available immediately" style={{ background: "var(--surface)" }}>Available immediately</option>
+                          <option value="Within 2 weeks" style={{ background: "var(--surface)" }}>Within 2 weeks</option>
+                          <option value="Within a month" style={{ background: "var(--surface)" }}>Within a month</option>
+                          <option value="Project-by-project" style={{ background: "var(--surface)" }}>Project by project</option>
                         </select>
                       </div>
                       <div>
@@ -432,7 +432,7 @@ export default function FreelancerPage() {
                         <input type="text" placeholder="e.g. R 500/hr or R 3,000/project" value={form.rate}
                           onChange={e => setForm(f => ({ ...f, rate: e.target.value }))} style={inputStyle}
                           onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                          onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"} />
+                          onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"} />
                       </div>
                     </div>
                   </div>
@@ -442,15 +442,15 @@ export default function FreelancerPage() {
                     <div style={sectionLabel}>05 — Tech Stack &amp; Tools</div>
 
                     {/* AI Tools Disclaimer */}
-                    <div style={{ background: "rgba(255,200,0,0.04)", border: "1px solid rgba(255,200,0,0.2)", borderRadius: 10, padding: "1.125rem 1.375rem", marginBottom: "1.5rem", display: "flex", gap: "0.875rem", alignItems: "flex-start" }}>
-                      <span style={{ color: "#ffc800", fontSize: "0.72rem", fontWeight: 900, flexShrink: 0, marginTop: "0.1rem" }}>!</span>
+                    <div style={{ background: "rgba(var(--warn-rgb),0.04)", border: "1px solid rgba(var(--warn-rgb),0.2)", borderRadius: 10, padding: "1.125rem 1.375rem", marginBottom: "1.5rem", display: "flex", gap: "0.875rem", alignItems: "flex-start" }}>
+                      <span style={{ color: "var(--warn)", fontSize: "0.72rem", fontWeight: 900, flexShrink: 0, marginTop: "0.1rem" }}>!</span>
                       <div>
-                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.4rem", fontWeight: 700 }}>
+                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--warn)", marginBottom: "0.4rem", fontWeight: 700 }}>
                           Important Notice — AI Subscriptions &amp; Hardware
                         </div>
-                        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.78rem", lineHeight: 1.8, margin: 0 }}>
-                          <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: 600 }}>Nuuhaven does not provide access to AI subscriptions.</strong> You are expected to have your own active subscriptions to the tools required for your role. Not having the required AI tools will directly impact delivery timelines and may affect your eligibility for certain projects.{" "}
-                          <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: 600 }}>Nuuhaven does not provide or lend hardware to freelancers.</strong> You must have your own equipment that is capable of handling professional design, development, and production work.
+                        <p style={{ color: "rgba(var(--ink-rgb),0.5)", fontSize: "0.78rem", lineHeight: 1.8, margin: 0 }}>
+                          <strong style={{ color: "rgba(var(--ink-rgb),0.7)", fontWeight: 600 }}>Nuuhaven does not provide access to AI subscriptions.</strong> You are expected to have your own active subscriptions to the tools required for your role. Not having the required AI tools will directly impact delivery timelines and may affect your eligibility for certain projects.{" "}
+                          <strong style={{ color: "rgba(var(--ink-rgb),0.7)", fontWeight: 600 }}>Nuuhaven does not provide or lend hardware to freelancers.</strong> You must have your own equipment that is capable of handling professional design, development, and production work.
                         </p>
                       </div>
                     </div>
@@ -462,14 +462,14 @@ export default function FreelancerPage() {
                           const sel = selectedAiTools.includes(tool.id);
                           return (
                             <button key={tool.id} type="button" onClick={() => toggleAiTool(tool.id)}
-                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
+                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(var(--ink-rgb),0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(var(--ink-rgb),0.1)", color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.6)", cursor: "pointer", transition: "all 0.2s" }}>
                               {sel ? "✓ " : ""}{tool.label}
                             </button>
                           );
                         })}
                       </div>
                       {selectedAiTools.length === 0 && (
-                        <p style={{ fontSize: "0.72rem", color: "rgba(255,200,0,0.6)", marginTop: "0.625rem", fontStyle: "italic" }}>
+                        <p style={{ fontSize: "0.72rem", color: "rgba(var(--warn-rgb),0.6)", marginTop: "0.625rem", fontStyle: "italic" }}>
                           No AI tools selected. Please note this may limit the projects you are eligible for.
                         </p>
                       )}
@@ -482,8 +482,8 @@ export default function FreelancerPage() {
                         onChange={e => setForm(f => ({ ...f, laptopModel: e.target.value }))}
                         style={inputStyle}
                         onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                        onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"} />
-                      <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)", marginTop: "0.4rem", lineHeight: 1.6 }}>
+                        onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"} />
+                      <p style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.25)", marginTop: "0.4rem", lineHeight: 1.6 }}>
                         Nuuhaven does not provide or lend hardware. All freelancers must have their own capable equipment.
                       </p>
                     </div>
@@ -498,20 +498,20 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>CV / Resume (PDF) — optional</label>
                         <div
                           onClick={() => cvRef.current?.click()}
-                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: cvFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(255,255,255,0.02)", borderColor: cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
-                          onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}
-                          onMouseLeave={e => (e.currentTarget.style.borderColor = cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)")}
+                          style={{ border: "1px dashed rgba(var(--ink-rgb),0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: cvFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(var(--ink-rgb),0.02)", borderColor: cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(var(--ink-rgb),0.15)", transition: "all 0.2s" }}
+                          onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.3)")}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(var(--ink-rgb),0.15)")}
                         >
-                          <div style={{ fontSize: "1.5rem", color: cvFile ? "var(--accent)" : "rgba(255,255,255,0.25)", marginBottom: "0.5rem" }}>◳</div>
+                          <div style={{ fontSize: "1.5rem", color: cvFile ? "var(--accent)" : "rgba(var(--ink-rgb),0.25)", marginBottom: "0.5rem" }}>◳</div>
                           {cvFile ? (
                             <div>
                               <div style={{ fontSize: "0.8rem", color: "var(--accent)", fontWeight: 600, marginBottom: "0.25rem" }}>{cvFile.name}</div>
-                              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.3)" }}>{(cvFile.size / 1024).toFixed(0)} KB</div>
+                              <div style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.3)" }}>{(cvFile.size / 1024).toFixed(0)} KB</div>
                             </div>
                           ) : (
                             <div>
-                              <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", marginBottom: "0.25rem" }}>Click to upload CV</div>
-                              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)" }}>PDF, max 10MB</div>
+                              <div style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.5)", marginBottom: "0.25rem" }}>Click to upload CV</div>
+                              <div style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.25)" }}>PDF, max 10MB</div>
                             </div>
                           )}
                         </div>
@@ -523,20 +523,20 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>Portfolio PDF *</label>
                         <div
                           onClick={() => portfolioRef.current?.click()}
-                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: portfolioFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(255,255,255,0.02)", borderColor: portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
-                          onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}
-                          onMouseLeave={e => (e.currentTarget.style.borderColor = portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)")}
+                          style={{ border: "1px dashed rgba(var(--ink-rgb),0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: portfolioFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(var(--ink-rgb),0.02)", borderColor: portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(var(--ink-rgb),0.15)", transition: "all 0.2s" }}
+                          onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.3)")}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(var(--ink-rgb),0.15)")}
                         >
-                          <div style={{ fontSize: "1.5rem", color: portfolioFile ? "var(--accent)" : "rgba(255,255,255,0.25)", marginBottom: "0.5rem" }}>◈</div>
+                          <div style={{ fontSize: "1.5rem", color: portfolioFile ? "var(--accent)" : "rgba(var(--ink-rgb),0.25)", marginBottom: "0.5rem" }}>◈</div>
                           {portfolioFile ? (
                             <div>
                               <div style={{ fontSize: "0.8rem", color: "var(--accent)", fontWeight: 600, marginBottom: "0.25rem" }}>{portfolioFile.name}</div>
-                              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.3)" }}>{(portfolioFile.size / 1024).toFixed(0)} KB</div>
+                              <div style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.3)" }}>{(portfolioFile.size / 1024).toFixed(0)} KB</div>
                             </div>
                           ) : (
                             <div>
-                              <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", marginBottom: "0.25rem" }}>Click to upload portfolio</div>
-                              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)" }}>PDF, max 20MB</div>
+                              <div style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.5)", marginBottom: "0.25rem" }}>Click to upload portfolio</div>
+                              <div style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.25)" }}>PDF, max 20MB</div>
                             </div>
                           )}
                         </div>
@@ -554,7 +554,7 @@ export default function FreelancerPage() {
                       onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                       style={{ ...inputStyle, resize: "vertical", lineHeight: 1.75 }}
                       onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
-                      onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                      onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
                     />
                   </div>
 
@@ -569,7 +569,7 @@ export default function FreelancerPage() {
                       style={{ padding: "1rem 2.5rem", fontSize: "0.875rem", opacity: status === "sending" ? 0.7 : 1 }}>
                       {status === "sending" ? "Submitting…" : "Submit Application →"}
                     </button>
-                    <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.72rem", lineHeight: 1.6 }}>
+                    <p style={{ color: "rgba(var(--ink-rgb),0.25)", fontSize: "0.72rem", lineHeight: 1.6 }}>
                       Reviewed personally · We respond to strong fits only
                     </p>
                   </div>

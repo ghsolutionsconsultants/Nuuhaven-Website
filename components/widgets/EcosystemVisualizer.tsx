@@ -191,8 +191,8 @@ export default function EcosystemVisualizer() {
                     {/* Main bubble */}
                     <circle
                       cx={x} cy={y} r={NODE_R}
-                      fill={isActive ? "rgba(var(--accent-rgb),0.13)" : "rgba(14,14,14,0.96)"}
-                      stroke={isActive ? "var(--accent)" : "rgba(255,255,255,0.14)"}
+                      fill={isActive ? "rgba(var(--accent-rgb),0.13)" : "rgba(var(--surface-rgb),0.96)"}
+                      stroke={isActive ? "var(--accent)" : "rgba(var(--ink-rgb),0.14)"}
                       strokeWidth={isActive ? 1.5 : 1}
                     />
                     {/* Icon, centred inside bubble */}
@@ -201,7 +201,7 @@ export default function EcosystemVisualizer() {
                       textAnchor="middle"
                       dominantBaseline="central"
                       fontSize={18}
-                      fill={isActive ? "var(--accent)" : "rgba(255,255,255,0.5)"}
+                      fill={isActive ? "var(--accent)" : "rgba(var(--ink-rgb),0.5)"}
                       style={{ pointerEvents: "none", userSelect: "none" }}
                     >
                       {node.icon}
@@ -227,8 +227,8 @@ export default function EcosystemVisualizer() {
               {/* Center bubble, on top of everything */}
               <circle
                 cx={CX} cy={CY} r={CENTER_R}
-                fill={active ? "rgba(var(--accent-rgb),0.11)" : "rgba(8,8,8,0.99)"}
-                stroke={active ? "var(--accent)" : "rgba(255,255,255,0.2)"}
+                fill={active ? "rgba(var(--accent-rgb),0.11)" : "var(--surface)"}
+                stroke={active ? "var(--accent)" : "rgba(var(--ink-rgb),0.2)"}
                 strokeWidth={active ? 1.5 : 1}
               />
               {active && (
@@ -268,7 +268,7 @@ export default function EcosystemVisualizer() {
               }}
             >
               {/* Header row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={{ marginBottom: "1.5rem", paddingBottom: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={{ marginBottom: "1.5rem", paddingBottom: "1.5rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.07)" }}>
                 <div className="flex items-center gap-4">
                   <div style={{ color: "var(--accent)", fontSize: "2rem" }}>{activeNode.icon}</div>
                   <div>
@@ -283,7 +283,7 @@ export default function EcosystemVisualizer() {
                   </div>
                   <div className="text-center">
                     <div className="label-mono text-xs" style={{ color: "var(--text-muted)", marginBottom: "0.25rem" }}>Timeline</div>
-                    <div className="font-mono font-bold" style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.85rem" }}>{activeNode.timeline}</div>
+                    <div className="font-mono font-bold" style={{ color: "rgba(var(--ink-rgb),0.8)", fontSize: "0.85rem" }}>{activeNode.timeline}</div>
                   </div>
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function EcosystemVisualizer() {
                 {/* Description + why it matters */}
                 <div className="md:col-span-1">
                   <div className="label-mono text-xs" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>What We Do</div>
-                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
+                  <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.75)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
                     {activeNode.desc}
                   </p>
                   <div className="rounded-lg" style={{ background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.1)", padding: "0.875rem 1rem" }}>
@@ -307,7 +307,7 @@ export default function EcosystemVisualizer() {
                   <div className="label-mono text-xs" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>What&apos;s Included</div>
                   <ul style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {activeNode.deliverables.map((d) => (
-                      <li key={d} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+                      <li key={d} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(var(--ink-rgb),0.7)" }}>
                         <span style={{ color: "var(--accent)", flexShrink: 0 }}>✓</span>
                         {d}
                       </li>
@@ -319,7 +319,7 @@ export default function EcosystemVisualizer() {
                 <div className="flex flex-col justify-between gap-6">
                   <div>
                     <div className="label-mono text-xs" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>Best For</div>
-                    <p className="text-sm" style={{ color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>{activeNode.bestFor}</p>
+                    <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.75)", lineHeight: 1.7 }}>{activeNode.bestFor}</p>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                     <Link
@@ -351,7 +351,7 @@ export default function EcosystemVisualizer() {
               className="rounded-xl"
               style={{
                 background: "var(--bg-card)",
-                border: "1px solid rgba(255,255,255,0.06)",
+                border: "1px solid rgba(var(--ink-rgb),0.06)",
                 padding: "1.25rem 2rem",
                 marginBottom: "2.5rem",
                 textAlign: "center",

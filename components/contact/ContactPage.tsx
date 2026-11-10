@@ -68,8 +68,8 @@ export default function ContactPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(var(--ink-rgb),0.04)",
+    border: "1px solid rgba(var(--ink-rgb),0.1)",
     borderRadius: 8,
     padding: "1rem 1.125rem",
     color: "var(--text)",
@@ -113,14 +113,14 @@ export default function ContactPage() {
                   { label: "Phone", value: "+27 67 717 9269", href: "tel:+27677179269" },
                   { label: "Location", value: "South Africa · Available Worldwide", href: null },
                 ].map(item => (
-                  <div key={item.label} style={{ display: "flex", gap: "1.5rem", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(255,255,255,0.035)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.09)" }}>
-                    <div style={{ width: "4.5rem", fontSize: "0.62rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", flexShrink: 0 }}>
+                  <div key={item.label} style={{ display: "flex", gap: "1.5rem", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(var(--ink-rgb),0.035)", borderRadius: 8, border: "1px solid rgba(var(--ink-rgb),0.09)" }}>
+                    <div style={{ width: "4.5rem", fontSize: "0.62rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.25)", flexShrink: 0 }}>
                       {item.label}
                     </div>
                     {item.href ? (
                       <a href={item.href} style={{ color: "var(--accent)", fontSize: "0.9rem", textDecoration: "none", fontWeight: 500 }}>{item.value}</a>
                     ) : (
-                      <span style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.9rem" }}>{item.value}</span>
+                      <span style={{ color: "rgba(var(--ink-rgb),0.55)", fontSize: "0.9rem" }}>{item.value}</span>
                     )}
                   </div>
                 ))}
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
-                  style={{ padding: "1.75rem", background: "rgba(255,255,255,0.03)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{ padding: "1.75rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 14, border: "1px solid rgba(var(--ink-rgb),0.07)" }}
                 >
                   <div style={{ color: "var(--accent)", fontSize: "1.4rem", marginBottom: "1rem" }}>{item.icon}</div>
                   <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: "0.625rem", lineHeight: 1.2 }}>{item.title}</div>
@@ -179,7 +179,7 @@ export default function ContactPage() {
                   <div key={item.step} style={{ display: "flex", gap: "1.25rem", position: "relative" }}>
                     {/* Vertical connector line */}
                     {i < arr.length - 1 && (
-                      <div style={{ position: "absolute", left: "1rem", top: "2.5rem", bottom: "-1rem", width: 1, background: "rgba(255,255,255,0.07)" }} />
+                      <div style={{ position: "absolute", left: "1rem", top: "2.5rem", bottom: "-1rem", width: 1, background: "rgba(var(--ink-rgb),0.07)" }} />
                     )}
                     <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(var(--accent-rgb),0.08)", border: "1px solid rgba(var(--accent-rgb),0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "var(--accent)", fontWeight: 700, zIndex: 1 }}>
                       {item.step}
@@ -201,7 +201,7 @@ export default function ContactPage() {
                     key="success"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ textAlign: "center", padding: "5rem 2rem", background: "var(--bg-card)", borderRadius: 20, border: "1px solid rgba(var(--ink-rgb),0.07)" }}
                   >
                     <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem" }}>◆</div>
                     <h3 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem" }}>Enquiry Received.</h3>
@@ -217,11 +217,11 @@ export default function ContactPage() {
                   <motion.form
                     key="form"
                     onSubmit={handleSubmit}
-                    style={{ display: "flex", flexDirection: "column", gap: "2rem", background: "var(--bg-card)", padding: "2.5rem", borderRadius: 20, border: "1px solid rgba(255,255,255,0.09)" }}
+                    style={{ display: "flex", flexDirection: "column", gap: "2rem", background: "var(--bg-card)", padding: "2.5rem", borderRadius: 20, border: "1px solid rgba(var(--ink-rgb),0.09)" }}
                   >
                     {/* Personal details */}
                     <div>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                         Your Details
                       </div>
                       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem" }}>
@@ -232,7 +232,7 @@ export default function ContactPage() {
                           { id: "company", label: "Business Name", type: "text", required: false, placeholder: "Your Business (Pty) Ltd" },
                         ].map(f => (
                           <div key={f.id}>
-                            <label style={{ display: "block", fontSize: "0.65rem", color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+                            <label style={{ display: "block", fontSize: "0.65rem", color: "rgba(var(--ink-rgb),0.35)", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
                               {f.label}
                             </label>
                             <input
@@ -243,7 +243,7 @@ export default function ContactPage() {
                               onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                               style={inputStyle}
                               onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.5)"}
-                              onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                              onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
                             />
                           </div>
                         ))}
@@ -252,7 +252,7 @@ export default function ContactPage() {
 
                     {/* Service */}
                     <div>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                         Service Required
                       </div>
                       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "0.625rem" }}>
@@ -265,9 +265,9 @@ export default function ContactPage() {
                               onClick={() => setForm(p => ({ ...p, service: s.label }))}
                               style={{
                                 padding: "0.875rem 1rem", textAlign: "left", borderRadius: 8, fontSize: "0.82rem",
-                                background: sel ? "rgba(var(--accent-rgb),0.07)" : "rgba(255,255,255,0.025)",
-                                border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.07)",
-                                color: sel ? "var(--accent)" : "rgba(255,255,255,0.55)",
+                                background: sel ? "rgba(var(--accent-rgb),0.07)" : "rgba(var(--ink-rgb),0.025)",
+                                border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(var(--ink-rgb),0.07)",
+                                color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.55)",
                                 cursor: "pointer", transition: "all 0.2s",
                                 display: "flex", alignItems: "center", gap: "0.625rem",
                                 fontWeight: sel ? 600 : 400,
@@ -284,7 +284,7 @@ export default function ContactPage() {
                     {/* Budget & Timeline */}
                     <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2rem" }}>
                       <div>
-                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                           Budget Range
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -298,8 +298,8 @@ export default function ContactPage() {
                                 style={{
                                   padding: "0.75rem 1rem", textAlign: "left", borderRadius: 7, fontSize: "0.82rem",
                                   background: sel ? "rgba(var(--accent-rgb),0.07)" : "transparent",
-                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)",
-                                  color: sel ? "var(--accent)" : "rgba(255,255,255,0.5)",
+                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(var(--ink-rgb),0.07)",
+                                  color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.5)",
                                   cursor: "pointer", transition: "all 0.2s", fontWeight: sel ? 600 : 400,
                                   display: "flex", alignItems: "center", gap: "0.5rem",
                                 }}
@@ -312,7 +312,7 @@ export default function ContactPage() {
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                           Timeline
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -326,8 +326,8 @@ export default function ContactPage() {
                                 style={{
                                   padding: "0.75rem 1rem", textAlign: "left", borderRadius: 7, fontSize: "0.82rem",
                                   background: sel ? "rgba(var(--accent-rgb),0.07)" : "transparent",
-                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)",
-                                  color: sel ? "var(--accent)" : "rgba(255,255,255,0.5)",
+                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(var(--ink-rgb),0.07)",
+                                  color: sel ? "var(--accent)" : "rgba(var(--ink-rgb),0.5)",
                                   cursor: "pointer", transition: "all 0.2s", fontWeight: sel ? 600 : 400,
                                   display: "flex", alignItems: "center", gap: "0.5rem",
                                 }}
@@ -343,10 +343,10 @@ export default function ContactPage() {
 
                     {/* Message */}
                     <div>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.25rem", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
                         Your Message
                       </div>
-                      <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.35)", lineHeight: 1.7, marginBottom: "0.875rem" }}>
+                      <p style={{ fontSize: "0.8rem", color: "rgba(var(--ink-rgb),0.35)", lineHeight: 1.7, marginBottom: "0.875rem" }}>
                         Tell us about your business, the challenge you&apos;re trying to solve, and what a successful outcome looks like. The more specific you are, the more useful our response will be.
                       </p>
                       <textarea
@@ -357,30 +357,30 @@ export default function ContactPage() {
                         onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                         style={{ ...inputStyle, resize: "vertical", lineHeight: 1.75 }}
                         onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.5)"}
-                        onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
+                        onBlur={e => e.currentTarget.style.borderColor = "rgba(var(--ink-rgb),0.1)"}
                       />
                     </div>
 
                     {/* Conflict of Interest Notice */}
                     <div style={{
-                      background: "rgba(255,200,0,0.04)",
-                      border: "1px solid rgba(255,200,0,0.25)",
+                      background: "rgba(var(--warn-rgb),0.04)",
+                      border: "1px solid rgba(var(--warn-rgb),0.25)",
                       borderRadius: 10,
                       padding: "1.375rem 1.5rem",
                       display: "flex",
                       gap: "1rem",
                       alignItems: "flex-start",
                     }}>
-                      <div style={{ flexShrink: 0, width: 24, height: 24, borderRadius: "50%", background: "rgba(255,200,0,0.12)", border: "1px solid rgba(255,200,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.1rem" }}>
-                        <span style={{ color: "#ffc800", fontSize: "0.72rem", fontWeight: 900, lineHeight: 1 }}>!</span>
+                      <div style={{ flexShrink: 0, width: 24, height: 24, borderRadius: "50%", background: "rgba(var(--warn-rgb),0.12)", border: "1px solid rgba(var(--warn-rgb),0.4)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.1rem" }}>
+                        <span style={{ color: "var(--warn)", fontSize: "0.72rem", fontWeight: 900, lineHeight: 1 }}>!</span>
                       </div>
                       <div>
-                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.625rem", fontWeight: 700 }}>
+                        <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--warn)", marginBottom: "0.625rem", fontWeight: 700 }}>
                           Conflict of Interest Notice — Please Read Before Submitting
                         </div>
-                        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", lineHeight: 1.85, margin: 0 }}>
-                          Nuuhaven&apos;s <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>Founder &amp; Managing Director</strong> maintains a primary employment role at <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>one of the Big 4 professional services firms</strong>. Each enquiry and project scope is individually assessed for potential conflicts with this primary role before any engagement commences.{" "}
-                          <strong style={{ color: "#ffc800", fontWeight: 600 }}>
+                        <p style={{ color: "rgba(var(--ink-rgb),0.5)", fontSize: "0.8rem", lineHeight: 1.85, margin: 0 }}>
+                          Nuuhaven&apos;s <strong style={{ color: "rgba(var(--ink-rgb),0.75)", fontWeight: 600 }}>Founder &amp; Managing Director</strong> maintains a primary employment role at <strong style={{ color: "rgba(var(--ink-rgb),0.75)", fontWeight: 600 }}>one of the Big 4 professional services firms</strong>. Each enquiry and project scope is individually assessed for potential conflicts with this primary role before any engagement commences.{" "}
+                          <strong style={{ color: "var(--warn)", fontWeight: 600 }}>
                             Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after a proposal has been accepted and work has commenced — should a conflict of interest be identified.
                           </strong>{" "}
                           Submission of this form does not constitute a guarantee of engagement. To expedite the assessment, please describe your business and industry in full detail in the message field above.
@@ -403,7 +403,7 @@ export default function ContactPage() {
                       >
                         {status === "sending" ? "Sending…" : "Send Enquiry →"}
                       </button>
-                      <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.72rem", lineHeight: 1.6 }}>
+                      <p style={{ color: "rgba(var(--ink-rgb),0.25)", fontSize: "0.72rem", lineHeight: 1.6 }}>
                         We respond within 24 hours · Subject to conflict of interest assessment.
                       </p>
                     </div>

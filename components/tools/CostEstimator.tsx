@@ -132,7 +132,7 @@ export default function CostEstimator() {
                 { label: "No commitment required", desc: "Explore freely before reaching out" },
                 { label: "Fixed-price projects", desc: "We agree on scope and price upfront, no hourly billing" },
               ].map(item => (
-                <div key={item.label} style={{ display: "flex", gap: "1rem", padding: "1rem 1.25rem", background: "rgba(255,255,255,0.03)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div key={item.label} style={{ display: "flex", gap: "1rem", padding: "1rem 1.25rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 10, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                   <span style={{ color: "var(--accent)", flexShrink: 0, marginTop: "0.1rem" }}>◎</span>
                   <div>
                     <div style={{ fontSize: "0.82rem", fontWeight: 600, marginBottom: "0.2rem" }}>{item.label}</div>
@@ -156,7 +156,7 @@ export default function CostEstimator() {
                 {selected.size > 0 && (
                   <button
                     onClick={() => setSelected(new Set())}
-                    style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", background: "none", border: "none", cursor: "pointer" }}
+                    style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", background: "none", border: "none", cursor: "pointer" }}
                   >
                     Clear all
                   </button>
@@ -172,9 +172,9 @@ export default function CostEstimator() {
                     style={{
                       padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.72rem",
                       fontFamily: "var(--font-geist-mono)", letterSpacing: "0.08em", textTransform: "uppercase",
-                      background: activeCategory === cat ? "var(--accent)" : "rgba(255,255,255,0.04)",
-                      border: activeCategory === cat ? "none" : "1px solid rgba(255,255,255,0.08)",
-                      color: activeCategory === cat ? "#000" : "rgba(255,255,255,0.45)",
+                      background: activeCategory === cat ? "var(--accent)" : "rgba(var(--ink-rgb),0.04)",
+                      border: activeCategory === cat ? "none" : "1px solid rgba(var(--ink-rgb),0.08)",
+                      color: activeCategory === cat ? "#000" : "rgba(var(--ink-rgb),0.45)",
                       cursor: "pointer", transition: "all 0.2s", fontWeight: activeCategory === cat ? 700 : 400,
                     }}
                   >
@@ -199,15 +199,15 @@ export default function CostEstimator() {
                         data-cursor="SELECT"
                         style={{
                           textAlign: "left", padding: "1.25rem 1.375rem", borderRadius: 12,
-                          background: isSelected ? "rgba(var(--accent-rgb),0.06)" : "rgba(255,255,255,0.025)",
-                          border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
+                          background: isSelected ? "rgba(var(--accent-rgb),0.06)" : "rgba(var(--ink-rgb),0.025)",
+                          border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(var(--ink-rgb),0.07)",
                           cursor: "pointer", transition: "border-color 0.2s, background 0.2s",
                           boxShadow: isSelected ? "0 0 20px rgba(var(--accent-rgb),0.06)" : "none",
                         }}
                       >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.75rem", marginBottom: "0.75rem" }}>
                           <div style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: isSelected ? "var(--accent)" : "rgba(255,255,255,0.25)", marginBottom: "0.3rem" }}>{service.category}</div>
+                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: isSelected ? "var(--accent)" : "rgba(var(--ink-rgb),0.25)", marginBottom: "0.3rem" }}>{service.category}</div>
                             <div style={{ fontWeight: 600, fontSize: "0.875rem", lineHeight: 1.3, color: "var(--text)" }}>{service.label}</div>
                             {service.subLabel && (
                               <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.25rem", lineHeight: 1.4 }}>{service.subLabel}</div>
@@ -217,16 +217,16 @@ export default function CostEstimator() {
                             width: 22, height: 22, borderRadius: 6, flexShrink: 0,
                             display: "flex", alignItems: "center", justifyContent: "center",
                             fontSize: "0.7rem", fontWeight: 700,
-                            background: isSelected ? "var(--accent)" : "rgba(255,255,255,0.05)",
-                            color: isSelected ? "#000" : "rgba(255,255,255,0.3)",
-                            border: isSelected ? "none" : "1px solid rgba(255,255,255,0.1)",
+                            background: isSelected ? "var(--accent)" : "rgba(var(--ink-rgb),0.05)",
+                            color: isSelected ? "#000" : "rgba(var(--ink-rgb),0.3)",
+                            border: isSelected ? "none" : "1px solid rgba(var(--ink-rgb),0.1)",
                             transition: "all 0.2s",
                           }}>
                             {isSelected ? "✓" : "+"}
                           </div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
-                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.72rem", fontWeight: 700, color: isSelected ? "var(--accent)" : "rgba(255,255,255,0.35)" }}>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.72rem", fontWeight: 700, color: isSelected ? "var(--accent)" : "rgba(var(--ink-rgb),0.35)" }}>
                             {formatZAR(service.baseMin)} – {formatZAR(service.baseMax)}
                           </div>
                           {service.id === "ecommerce" && (
@@ -242,8 +242,8 @@ export default function CostEstimator() {
               </div>
 
               {/* Guide note */}
-              <div style={{ marginTop: "2rem", padding: "1.25rem 1.5rem", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12 }}>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "0.75rem" }}>How to use this tool</div>
+              <div style={{ marginTop: "2rem", padding: "1.25rem 1.5rem", background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)", borderRadius: 12 }}>
+                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.25)", marginBottom: "0.75rem" }}>How to use this tool</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {[
                     "Select every service you think you might need — you can always narrow it down later.",
@@ -253,7 +253,7 @@ export default function CostEstimator() {
                   ].map((tip, i) => (
                     <div key={i} style={{ display: "flex", gap: "0.625rem", alignItems: "flex-start" }}>
                       <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "var(--accent)", flexShrink: 0, marginTop: "0.1rem" }}>0{i + 1}</span>
-                      <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{tip}</span>
+                      <span style={{ fontSize: "0.78rem", color: "rgba(var(--ink-rgb),0.4)", lineHeight: 1.6 }}>{tip}</span>
                     </div>
                   ))}
                 </div>
@@ -262,8 +262,8 @@ export default function CostEstimator() {
 
             {/* Summary panel */}
             <div style={{ position: isMobile ? "static" : "sticky", top: 88 }}>
-              <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}>
-                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(var(--accent-rgb),0.03)" }}>
+              <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.09)", borderRadius: 16, overflow: "hidden" }}>
+                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.06)", background: "rgba(var(--accent-rgb),0.03)" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)" }}>Project Summary</div>
                 </div>
 
@@ -278,7 +278,7 @@ export default function CostEstimator() {
                         style={{ textAlign: "center", padding: "2.5rem 1rem" }}
                       >
                         <div style={{ fontSize: "2.5rem", color: "var(--accent)", opacity: 0.25, marginBottom: "1rem" }}>◈</div>
-                        <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.7 }}>
+                        <p style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.3)", lineHeight: 1.7 }}>
                           Select services on the left to see your investment range and timeline.
                         </p>
                       </motion.div>
@@ -291,27 +291,27 @@ export default function CostEstimator() {
                       >
                         {/* Investment */}
                         <div style={{ padding: "1.25rem", background: "rgba(var(--accent-rgb),0.05)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 12 }}>
-                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: "0.75rem" }}>Investment Range</div>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.35)", marginBottom: "0.75rem" }}>Investment Range</div>
                           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.75rem", fontWeight: 900, color: "var(--accent)", lineHeight: 1, marginBottom: "0.3rem" }}>{formatZAR(totalMin)}</div>
-                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.82rem", color: "rgba(255,255,255,0.4)" }}>to {formatZAR(totalMax)}</div>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.4)" }}>to {formatZAR(totalMax)}</div>
                         </div>
 
                         {/* Timeline + Complexity */}
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-                          <div style={{ padding: "1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10 }}>
-                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.5rem" }}>Timeline</div>
-                            <div style={{ fontWeight: 800, fontSize: "1.4rem", fontFamily: "var(--font-geist-mono)", color: "#fff", lineHeight: 1 }}>{totalWeeks}</div>
-                            <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", marginTop: "0.2rem" }}>week{totalWeeks !== 1 ? "s" : ""}</div>
+                          <div style={{ padding: "1rem", background: "rgba(var(--ink-rgb),0.03)", border: "1px solid rgba(var(--ink-rgb),0.07)", borderRadius: 10 }}>
+                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "0.5rem" }}>Timeline</div>
+                            <div style={{ fontWeight: 800, fontSize: "1.4rem", fontFamily: "var(--font-geist-mono)", color: "var(--text)", lineHeight: 1 }}>{totalWeeks}</div>
+                            <div style={{ fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.35)", marginTop: "0.2rem" }}>week{totalWeeks !== 1 ? "s" : ""}</div>
                           </div>
-                          <div style={{ padding: "1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10 }}>
-                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.5rem" }}>Complexity</div>
+                          <div style={{ padding: "1rem", background: "rgba(var(--ink-rgb),0.03)", border: "1px solid rgba(var(--ink-rgb),0.07)", borderRadius: 10 }}>
+                            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "0.5rem" }}>Complexity</div>
                             <div style={{ fontWeight: 700, fontSize: "0.82rem", color: COMPLEXITY_COLORS[complexityLevel] || "var(--accent)", lineHeight: 1.2 }}>{COMPLEXITY_LABELS[complexityLevel] || "Custom"}</div>
                           </div>
                         </div>
 
                         {/* Selected list */}
                         <div>
-                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.875rem" }}>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "0.875rem" }}>
                             Included ({selectedServices.length})
                           </div>
                           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -319,11 +319,11 @@ export default function CostEstimator() {
                               <div key={s.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
                                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: 1, minWidth: 0 }}>
                                   <span style={{ color: "var(--accent)", fontSize: "0.65rem", flexShrink: 0 }}>✓</span>
-                                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.55)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.label}</span>
+                                  <span style={{ fontSize: "0.78rem", color: "rgba(var(--ink-rgb),0.55)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.label}</span>
                                 </div>
                                 <button
                                   onClick={() => toggle(s.id)}
-                                  style={{ background: "none", border: "none", color: "rgba(255,255,255,0.2)", cursor: "pointer", fontSize: "0.7rem", flexShrink: 0, padding: "0.1rem 0.2rem" }}
+                                  style={{ background: "none", border: "none", color: "rgba(var(--ink-rgb),0.2)", cursor: "pointer", fontSize: "0.7rem", flexShrink: 0, padding: "0.1rem 0.2rem" }}
                                 >
                                   ✕
                                 </button>
@@ -338,15 +338,15 @@ export default function CostEstimator() {
                             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>
                               Our Take
                             </div>
-                            <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.8, margin: "0 0 0.625rem" }}>{advisoryLine1}</p>
+                            <p style={{ fontSize: "0.75rem", color: "rgba(var(--ink-rgb),0.55)", lineHeight: 1.8, margin: "0 0 0.625rem" }}>{advisoryLine1}</p>
                             {advisoryLine2 && (
-                              <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.8, margin: 0 }}>{advisoryLine2}</p>
+                              <p style={{ fontSize: "0.75rem", color: "rgba(var(--ink-rgb),0.45)", lineHeight: 1.8, margin: 0 }}>{advisoryLine2}</p>
                             )}
                           </div>
                         )}
 
-                        <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "1.25rem" }}>
-                          <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                        <div style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.07)", paddingTop: "1.25rem" }}>
+                          <p style={{ fontSize: "0.72rem", color: "rgba(var(--ink-rgb),0.3)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
                             Indicative ranges only. Final pricing confirmed after a discovery session.
                           </p>
                           <button
@@ -385,7 +385,7 @@ export default function CostEstimator() {
               Let&apos;s Confirm<br />Your Scope.
             </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.8, marginBottom: "0.5rem" }}>
-              Your selected scope: <span style={{ color: "rgba(255,255,255,0.7)" }}>{selectedServices.map(s => s.label).join(", ")}</span>
+              Your selected scope: <span style={{ color: "rgba(var(--ink-rgb),0.7)" }}>{selectedServices.map(s => s.label).join(", ")}</span>
             </p>
             <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
               Estimated range: <span style={{ color: "var(--accent)", fontWeight: 700 }}>{formatZAR(totalMin)} – {formatZAR(totalMax)}</span> over <span style={{ color: "var(--accent)", fontWeight: 700 }}>{totalWeeks} week{totalWeeks !== 1 ? "s" : ""}</span>

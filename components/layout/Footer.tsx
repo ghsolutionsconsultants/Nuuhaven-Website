@@ -30,7 +30,7 @@ const TOOLS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--bg-secondary)", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+    <footer style={{ background: "var(--bg-secondary)", borderTop: "1px solid rgba(var(--ink-rgb),0.08)" }}>
       <div
         style={{
           maxWidth: 1200,
@@ -47,7 +47,7 @@ export default function Footer() {
             gap: "2rem",
             paddingTop: "3.5rem",
             paddingBottom: "3rem",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            borderBottom: "1px solid rgba(var(--ink-rgb),0.06)",
           }}
         >
           {/* Logo row */}
@@ -96,7 +96,7 @@ export default function Footer() {
               <a
                 href="tel:+27677179269"
                 style={{
-                  color: "rgba(255,255,255,0.4)",
+                  color: "rgba(var(--ink-rgb),0.4)",
                   fontFamily: "var(--font-geist-mono)",
                   fontSize: "0.7rem",
                   letterSpacing: "0.12em",
@@ -115,7 +115,7 @@ export default function Footer() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.45rem",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "rgba(var(--ink-rgb),0.4)",
                   fontFamily: "var(--font-geist-mono)",
                   fontSize: "0.7rem",
                   letterSpacing: "0.12em",
@@ -124,7 +124,7 @@ export default function Footer() {
                   transition: "color 0.2s",
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(var(--ink-rgb),0.4)")}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -154,7 +154,7 @@ export default function Footer() {
           <div>
             <div
               style={{
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(var(--ink-rgb),0.28)",
                 fontFamily: "var(--font-geist-mono)",
                 fontSize: "0.62rem",
                 letterSpacing: "0.18em",
@@ -170,13 +170,13 @@ export default function Footer() {
                   <Link
                     href={l.href}
                     style={{
-                      color: "rgba(255,255,255,0.5)",
+                      color: "rgba(var(--ink-rgb),0.5)",
                       fontSize: "0.825rem",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(var(--ink-rgb),0.5)")}
                   >
                     {l.label}
                   </Link>
@@ -189,7 +189,7 @@ export default function Footer() {
           <div>
             <div
               style={{
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(var(--ink-rgb),0.28)",
                 fontFamily: "var(--font-geist-mono)",
                 fontSize: "0.62rem",
                 letterSpacing: "0.18em",
@@ -205,13 +205,13 @@ export default function Footer() {
                   <Link
                     href={s.href}
                     style={{
-                      color: "rgba(255,255,255,0.5)",
+                      color: "rgba(var(--ink-rgb),0.5)",
                       fontSize: "0.825rem",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(var(--ink-rgb),0.5)")}
                   >
                     {s.label}
                   </Link>
@@ -224,7 +224,7 @@ export default function Footer() {
           <div>
             <div
               style={{
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(var(--ink-rgb),0.28)",
                 fontFamily: "var(--font-geist-mono)",
                 fontSize: "0.62rem",
                 letterSpacing: "0.18em",
@@ -240,13 +240,13 @@ export default function Footer() {
                   <Link
                     href={t.href}
                     style={{
-                      color: "rgba(255,255,255,0.5)",
+                      color: "rgba(var(--ink-rgb),0.5)",
                       fontSize: "0.825rem",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(var(--ink-rgb),0.5)")}
                   >
                     {t.label}
                   </Link>
@@ -276,7 +276,7 @@ export default function Footer() {
             >
               Not sure where to start?
             </div>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.8rem", lineHeight: 1.75, marginBottom: "1rem" }}>
+            <p style={{ color: "rgba(var(--ink-rgb),0.55)", fontSize: "0.8rem", lineHeight: 1.75, marginBottom: "1rem" }}>
               Take the free Business Assessment and get your credibility score in under 2 minutes.
             </p>
             <Link
@@ -302,24 +302,24 @@ export default function Footer() {
         {/* ── Conflict of Interest Notice ── */}
         <div
           style={{
-            borderTop: "1px solid rgba(255,200,0,0.15)",
-            borderBottom: "1px solid rgba(255,200,0,0.15)",
+            borderTop: "1px solid rgba(var(--warn-rgb),0.15)",
+            borderBottom: "1px solid rgba(var(--warn-rgb),0.15)",
             padding: "2rem 0",
             margin: "0.5rem 0",
           }}
         >
           <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
             <div style={{ flexShrink: 0, marginTop: "0.1rem" }}>
-              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(255,200,0,0.1)", border: "1px solid rgba(255,200,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ color: "#ffc800", fontSize: "0.75rem", fontWeight: 700 }}>!</span>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(var(--warn-rgb),0.1)", border: "1px solid rgba(var(--warn-rgb),0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "var(--warn)", fontSize: "0.75rem", fontWeight: 700 }}>!</span>
               </div>
             </div>
             <div>
-              <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.75rem", fontWeight: 700 }}>
+              <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--warn)", marginBottom: "0.75rem", fontWeight: 700 }}>
                 Conflict of Interest Notice
               </div>
-              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.78rem", lineHeight: 1.85, maxWidth: "72rem" }}>
-                Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms. Every prospective client and project scope is individually assessed to determine whether it presents a conflict of interest with this primary role. <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after a proposal has been accepted — should a conflict of interest be identified.</strong> Submitting an enquiry or receiving a proposal does not constitute a guarantee of engagement. Clients are encouraged to disclose the full nature of their business upfront to expedite this assessment.
+              <p style={{ color: "rgba(var(--ink-rgb),0.45)", fontSize: "0.78rem", lineHeight: 1.85, maxWidth: "72rem" }}>
+                Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms. Every prospective client and project scope is individually assessed to determine whether it presents a conflict of interest with this primary role. <strong style={{ color: "rgba(var(--ink-rgb),0.6)", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after a proposal has been accepted — should a conflict of interest be identified.</strong> Submitting an enquiry or receiving a proposal does not constitute a guarantee of engagement. Clients are encouraged to disclose the full nature of their business upfront to expedite this assessment.
               </p>
             </div>
           </div>
@@ -335,12 +335,12 @@ export default function Footer() {
             gap: "1rem",
             paddingTop: "1.5rem",
             paddingBottom: "1.5rem",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid rgba(var(--ink-rgb),0.06)",
           }}
         >
           <span
             style={{
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(var(--ink-rgb),0.25)",
               fontFamily: "var(--font-geist-mono)",
               fontSize: "0.65rem",
               letterSpacing: "0.1em",
@@ -352,7 +352,7 @@ export default function Footer() {
             <div className="live-dot" />
             <span
               style={{
-                color: "rgba(255,255,255,0.25)",
+                color: "rgba(var(--ink-rgb),0.25)",
                 fontFamily: "var(--font-geist-mono)",
                 fontSize: "0.65rem",
                 letterSpacing: "0.1em",

@@ -146,7 +146,7 @@ const CLIENTS = [
     challenge: "Lona needed to differentiate through brand quality, positioning themselves as the premium choice in a competitive shuttle market.",
     services: ["Brand Strategy & Visual Identity","Corporate Website","Social Media Setup","Company Profile","Marketing Materials","Branded Digital Assets","Content Creation"],
     outcomes: ["Professional, market-ready brand presence","Entered market with credible premium identity","Consistent visual identity across all touchpoints","Strong brand foundation for long-term growth"],
-    colors: ["#c9a84c","#fef8e8","#1a1a1a"],
+    colors: ["#c9a84c","#fef8e8","var(--surface-2)"],
     colorNames: ["Champagne Gold","Ivory","Charcoal"],
     ganttStart: 4,  // May 2026
     ganttEnd: 11,
@@ -350,7 +350,7 @@ function ChipRail({ label, hint, items, active, onSelect }: {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
         <span style={{ ...mono, fontSize: "0.6rem", color: "var(--accent)" }}>{label}</span>
-        <span style={{ ...mono, fontSize: "0.56rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.45)", textAlign: "right" }}>{hint}</span>
+        <span style={{ ...mono, fontSize: "0.56rem", letterSpacing: "0.1em", color: "rgba(var(--ink-rgb),0.45)", textAlign: "right" }}>{hint}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         {arrow(-1)}
@@ -362,15 +362,15 @@ function ChipRail({ label, hint, items, active, onSelect }: {
               return (
                 <button key={it.id} data-id={it.id} role="tab" aria-selected={on} onClick={() => onSelect(it.id)}
                   style={{ flexShrink: 0, scrollSnapAlign: "center", display: "inline-flex", alignItems: "center", gap: 8, minHeight: 38, padding: "0 16px", borderRadius: 999, whiteSpace: "nowrap", cursor: "pointer", fontSize: "0.78rem", fontWeight: 600, transition: "all .2s",
-                    background: on ? "var(--accent)" : "rgba(255,255,255,0.06)", color: on ? "#000" : "rgba(255,255,255,0.78)", border: `1px solid ${on ? "var(--accent)" : "rgba(255,255,255,0.12)"}` }}>
+                    background: on ? "var(--accent)" : "rgba(var(--ink-rgb),0.06)", color: on ? "#000" : "rgba(var(--ink-rgb),0.78)", border: `1px solid ${on ? "var(--accent)" : "rgba(var(--ink-rgb),0.12)"}` }}>
                   {it.dot && <span aria-hidden style={{ width: 7, height: 7, borderRadius: "50%", background: on ? "#000" : it.dot }} />}
                   {it.label}
                 </button>
               );
             })}
           </div>
-          {edges.left && <div aria-hidden style={{ position: "absolute", inset: "0 auto 0 0", width: 32, pointerEvents: "none", background: "linear-gradient(90deg,#050505,rgba(5,5,5,0))" }} />}
-          {edges.right && <div aria-hidden style={{ position: "absolute", inset: "0 0 0 auto", width: 48, pointerEvents: "none", background: "linear-gradient(270deg,#050505,rgba(5,5,5,0))" }} />}
+          {edges.left && <div aria-hidden style={{ position: "absolute", inset: "0 auto 0 0", width: 32, pointerEvents: "none", background: "linear-gradient(90deg,rgb(var(--paper-rgb)),rgba(var(--paper-rgb),0))" }} />}
+          {edges.right && <div aria-hidden style={{ position: "absolute", inset: "0 0 0 auto", width: 48, pointerEvents: "none", background: "linear-gradient(270deg,rgb(var(--paper-rgb)),rgba(var(--paper-rgb),0))" }} />}
         </div>
         {arrow(1)}
       </div>
@@ -386,28 +386,28 @@ function ProjectCard({ c, i, onOpen }: { c: Client; i: number; onOpen: () => voi
     <motion.article initial={reduce ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: Math.min(i, 8) * 0.045, ease: [0.22, 1, 0.36, 1] }}
       onClick={onOpen} role="button" tabIndex={0} onKeyDown={e => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onOpen())}
       className="work-card"
-      style={{ position: "relative", cursor: "pointer", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.09)", background: `radial-gradient(120% 80% at 0% 0%, ${c.accent}26, transparent 55%), #0b0b0b`, padding: "clamp(1.25rem,3vw,1.75rem)", display: "flex", flexDirection: "column", gap: 14, minHeight: 300, ["--accent-c" as string]: c.accent }}>
-      <div style={{ margin: "calc(-1 * clamp(1.25rem,3vw,1.75rem)) calc(-1 * clamp(1.25rem,3vw,1.75rem)) 4px", borderBottom: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", aspectRatio: "16 / 9", background: "#111" }}>
+      style={{ position: "relative", cursor: "pointer", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(var(--ink-rgb),0.09)", background: `radial-gradient(120% 80% at 0% 0%, ${c.accent}26, transparent 55%), var(--surface)`, padding: "clamp(1.25rem,3vw,1.75rem)", display: "flex", flexDirection: "column", gap: 14, minHeight: 300, ["--accent-c" as string]: c.accent }}>
+      <div style={{ margin: "calc(-1 * clamp(1.25rem,3vw,1.75rem)) calc(-1 * clamp(1.25rem,3vw,1.75rem)) 4px", borderBottom: "1px solid rgba(var(--ink-rgb),0.08)", overflow: "hidden", aspectRatio: "16 / 9", background: "var(--surface)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={`/images/work/${c.id}.jpg`} alt={`${c.name} website`} loading="lazy" className="work-shot"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ ...mono, fontSize: "0.58rem", color: c.accent }}>{c.industry}</span>
-        <span style={{ ...mono, fontSize: "0.58rem", color: "rgba(255,255,255,0.3)" }}>{pad(i + 1)}</span>
+        <span className="lime-chip" style={{ ...mono, fontSize: "0.58rem", color: c.accent }}>{c.industry}</span>
+        <span style={{ ...mono, fontSize: "0.58rem", color: "rgba(var(--ink-rgb),0.3)" }}>{pad(i + 1)}</span>
       </div>
-      <h3 style={{ fontFamily: "var(--font-display, inherit)", fontSize: "clamp(1.5rem,4vw,2rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "#fff" }}>{c.name}</h3>
-      <p style={{ margin: 0, fontSize: "0.9rem", lineHeight: 1.55, color: "rgba(255,255,255,0.62)", maxWidth: "46ch" }}>{c.tagline}</p>
+      <h3 style={{ fontFamily: "var(--font-display, inherit)", fontSize: "clamp(1.5rem,4vw,2rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "var(--text)" }}>{c.name}</h3>
+      <p style={{ margin: 0, fontSize: "0.9rem", lineHeight: 1.55, color: "rgba(var(--ink-rgb),0.62)", maxWidth: "46ch" }}>{c.tagline}</p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
         {c.services.slice(0, 3).map(s => (
-          <span key={s} style={{ fontSize: "0.68rem", padding: "4px 10px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)" }}>{s}</span>
+          <span key={s} style={{ fontSize: "0.68rem", padding: "4px 10px", borderRadius: 999, border: "1px solid rgba(var(--ink-rgb),0.1)", color: "rgba(var(--ink-rgb),0.6)" }}>{s}</span>
         ))}
-        {c.services.length > 3 && <span style={{ fontSize: "0.68rem", padding: "4px 10px", color: "rgba(255,255,255,0.4)" }}>+{c.services.length - 3}</span>}
+        {c.services.length > 3 && <span style={{ fontSize: "0.68rem", padding: "4px 10px", color: "rgba(var(--ink-rgb),0.4)" }}>+{c.services.length - 3}</span>}
       </div>
-      <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-        <span style={{ fontWeight: 600, fontSize: "0.85rem", color: "#fff" }}>View case study <span style={{ color: c.accent }}>→</span></span>
+      <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, paddingTop: 14, borderTop: "1px solid rgba(var(--ink-rgb),0.07)" }}>
+        <span style={{ fontWeight: 600, fontSize: "0.85rem", color: "var(--text)" }}>View case study <span style={{ color: c.accent }}>→</span></span>
         <a href={c.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-          style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.66rem", color: "rgba(255,255,255,0.5)", textDecoration: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "50%" }}>
+          style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.66rem", color: "rgba(var(--ink-rgb),0.5)", textDecoration: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "50%" }}>
           {host} ↗
         </a>
       </div>
@@ -423,7 +423,7 @@ function LivePreview({ c, isMobile }: { c: Client; isMobile: boolean }) {
   const seg = (m: "shot" | "live", label: string) => (
     <button onClick={() => { setMode(m); if (m === "live") setLoaded(false); }} aria-pressed={mode === m}
       style={{ padding: "5px 11px", borderRadius: 999, border: "none", cursor: "pointer", fontSize: "0.68rem", fontWeight: 600, whiteSpace: "nowrap",
-        background: mode === m ? "var(--accent)" : "transparent", color: mode === m ? "#000" : "rgba(255,255,255,0.65)" }}>
+        background: mode === m ? "var(--accent)" : "transparent", color: mode === m ? "#000" : "rgba(var(--ink-rgb),0.65)" }}>
       {label}
     </button>
   );
@@ -432,7 +432,7 @@ function LivePreview({ c, isMobile }: { c: Client; isMobile: boolean }) {
       <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px 8px 14px", background: "var(--surface-2)", borderBottom: "1px solid var(--line-2)" }}>
         {!isMobile && <div style={{ display: "flex", gap: 6 }}>{["#ff5f57", "#9a9a9a", "#28ca41"].map(x => <span key={x} style={{ width: 10, height: 10, borderRadius: "50%", background: x }} />)}</div>}
         <span style={{ flex: 1, minWidth: 0, fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", color: "var(--text-2)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{host}</span>
-        <div role="group" aria-label="Preview mode" style={{ display: "flex", gap: 2, padding: 2, borderRadius: 999, background: "rgba(255,255,255,0.06)", border: "1px solid var(--line-2)" }}>
+        <div role="group" aria-label="Preview mode" style={{ display: "flex", gap: 2, padding: 2, borderRadius: 999, background: "rgba(var(--ink-rgb),0.06)", border: "1px solid var(--line-2)" }}>
           {seg("shot", "Screenshot")}
           {seg("live", isMobile ? "Live" : "Live site")}
         </div>
@@ -453,7 +453,7 @@ function LivePreview({ c, isMobile }: { c: Client; isMobile: boolean }) {
       ) : (
         <div style={{ position: "relative", height: isMobile ? 560 : "min(74vh, 700px)" }}>
           {!loaded && (
-            <div style={{ position: "absolute", inset: 0, zIndex: 1, display: "grid", placeItems: "center", background: "#0a0a0a" }}>
+            <div style={{ position: "absolute", inset: 0, zIndex: 1, display: "grid", placeItems: "center", background: "var(--surface)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={`/images/work/${c.id}.jpg`} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.35 }} />
               <span style={{ position: "relative", ...mono, fontSize: "0.6rem", color: "#fff", background: "rgba(0,0,0,0.7)", padding: "8px 14px", borderRadius: 999 }}>Loading live site…</span>
@@ -472,21 +472,21 @@ function CaseStudy({ c, list, onOpen, onClose, isMobile }: { c: Client; list: Cl
   const i = list.findIndex(x => x.id === c.id);
   const prev = list[(i - 1 + list.length) % list.length];
   const next = list[(i + 1) % list.length];
-  const section: React.CSSProperties = { borderRadius: 16, border: "1px solid rgba(255,255,255,0.08)", background: "#0b0b0b", padding: "clamp(1.25rem,3vw,1.75rem)" };
+  const section: React.CSSProperties = { borderRadius: 16, border: "1px solid rgba(var(--ink-rgb),0.08)", background: "var(--surface)", padding: "clamp(1.25rem,3vw,1.75rem)" };
   const h4: React.CSSProperties = { ...mono, fontSize: "0.6rem", color: c.accent, margin: "0 0 12px" };
   return (
     <motion.div key={c.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}>
       <header style={{ padding: "clamp(1.5rem,4vw,3rem) 0 clamp(1.25rem,3vw,2rem)", display: "grid", gap: 14 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontSize: "0.85rem", padding: "8px 0" }}>← All work</button>
-          <span style={{ ...mono, fontSize: "0.6rem", color: "rgba(255,255,255,0.4)" }}>{pad(i + 1)} / {pad(list.length)}</span>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(var(--ink-rgb),0.6)", cursor: "pointer", fontSize: "0.85rem", padding: "8px 0" }}>← All work</button>
+          <span style={{ ...mono, fontSize: "0.6rem", color: "rgba(var(--ink-rgb),0.4)" }}>{pad(i + 1)} / {pad(list.length)}</span>
         </div>
-        <span style={{ ...mono, fontSize: "0.62rem", color: c.accent }}>{c.industry}</span>
-        <h1 style={{ margin: 0, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 0.98, fontSize: "clamp(2.2rem,7vw,4.5rem)", color: "#fff", textWrap: "balance" as React.CSSProperties["textWrap"] }}>{c.name}</h1>
-        <p style={{ margin: 0, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(255,255,255,0.65)", maxWidth: "52ch", lineHeight: 1.5 }}>{c.tagline}</p>
+        <span className="lime-chip" style={{ ...mono, fontSize: "0.62rem", color: c.accent, width: "fit-content" }}>{c.industry}</span>
+        <h1 style={{ margin: 0, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 0.98, fontSize: "clamp(2.2rem,7vw,4.5rem)", color: "var(--text)", textWrap: "balance" as React.CSSProperties["textWrap"] }}>{c.name}</h1>
+        <p style={{ margin: 0, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(var(--ink-rgb),0.65)", maxWidth: "52ch", lineHeight: 1.5 }}>{c.tagline}</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 6 }}>
           <a href={c.url} target="_blank" rel="noopener noreferrer" className="btn-accent" style={{ fontSize: "0.8rem", padding: "0.75rem 1.4rem" }}>Visit live site ↗</a>
-          <Link href="/contact" style={{ fontSize: "0.8rem", padding: "0.75rem 1.4rem", borderRadius: 999, border: "1px solid rgba(255,255,255,0.18)", color: "#fff", textDecoration: "none" }}>Start a similar project</Link>
+          <Link href="/contact" style={{ fontSize: "0.8rem", padding: "0.75rem 1.4rem", borderRadius: 999, border: "1px solid rgba(var(--ink-rgb),0.18)", color: "var(--text)", textDecoration: "none" }}>Start a similar project</Link>
         </div>
       </header>
 
@@ -495,13 +495,13 @@ function CaseStudy({ c, list, onOpen, onClose, isMobile }: { c: Client; list: Cl
 
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.4fr 1fr", gap: 16, marginTop: 16 }}>
         <div style={{ display: "grid", gap: 16 }}>
-          <section style={section}><h4 style={h4}>The client</h4><p style={{ margin: 0, color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>{c.about}</p></section>
-          <section style={section}><h4 style={h4}>The challenge</h4><p style={{ margin: 0, color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>{c.challenge}</p></section>
+          <section style={section}><h4 className="lime-chip" style={{ ...h4, width: "fit-content" }}>The client</h4><p style={{ margin: 0, color: "rgba(var(--ink-rgb),0.72)", lineHeight: 1.7 }}>{c.about}</p></section>
+          <section style={section}><h4 className="lime-chip" style={{ ...h4, width: "fit-content" }}>The challenge</h4><p style={{ margin: 0, color: "rgba(var(--ink-rgb),0.72)", lineHeight: 1.7 }}>{c.challenge}</p></section>
           <section style={section}>
-            <h4 style={h4}>Outcomes</h4>
+            <h4 className="lime-chip" style={{ ...h4, width: "fit-content" }}>Outcomes</h4>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
               {c.outcomes.map(o => (
-                <li key={o} style={{ display: "flex", gap: 10, color: "rgba(255,255,255,0.8)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+                <li key={o} style={{ display: "flex", gap: 10, color: "rgba(var(--ink-rgb),0.8)", fontSize: "0.9rem", lineHeight: 1.5 }}>
                   <span aria-hidden style={{ color: c.accent, flexShrink: 0 }}>✓</span>{o}
                 </li>
               ))}
@@ -510,23 +510,23 @@ function CaseStudy({ c, list, onOpen, onClose, isMobile }: { c: Client; list: Cl
         </div>
         <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
           <section style={section}>
-            <h4 style={h4}>What we delivered</h4>
+            <h4 className="lime-chip" style={{ ...h4, width: "fit-content" }}>What we delivered</h4>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
               {c.services.map(s => (
-                <li key={s} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.88rem", color: "rgba(255,255,255,0.8)" }}>
+                <li key={s} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.88rem", color: "rgba(var(--ink-rgb),0.8)" }}>
                   <span aria-hidden style={{ width: 6, height: 6, borderRadius: "50%", background: c.accent }} />{s}
                 </li>
               ))}
             </ul>
           </section>
           <section style={section}>
-            <h4 style={h4}>Brand palette</h4>
+            <h4 className="lime-chip" style={{ ...h4, width: "fit-content" }}>Brand palette</h4>
             <div style={{ display: "flex", gap: 10 }}>
               {c.colors.map((col, k) => (
                 <div key={col} style={{ flex: 1, minWidth: 0 }}>
-                  <div data-keep-colors style={{ height: 48, borderRadius: 10, background: col, border: "1px solid rgba(255,255,255,0.12)" }} />
-                  <div style={{ fontSize: "0.68rem", marginTop: 6, color: "rgba(255,255,255,0.7)" }}>{c.colorNames[k]}</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.4)" }}>{col}</div>
+                  <div data-keep-colors style={{ height: 48, borderRadius: 10, background: col, border: "1px solid rgba(var(--ink-rgb),0.12)" }} />
+                  <div style={{ fontSize: "0.68rem", marginTop: 6, color: "rgba(var(--ink-rgb),0.7)" }}>{c.colorNames[k]}</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(var(--ink-rgb),0.4)" }}>{col}</div>
                 </div>
               ))}
             </div>
@@ -537,8 +537,8 @@ function CaseStudy({ c, list, onOpen, onClose, isMobile }: { c: Client; list: Cl
       <nav aria-label="More projects" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, margin: "28px 0 8px" }}>
         {[{ c: prev, l: "← Previous" }, { c: next, l: "Next →" }].map(({ c: x, l }, k) => (
           <button key={l} onClick={() => onOpen(x.id)}
-            style={{ textAlign: k ? "right" : "left", cursor: "pointer", borderRadius: 16, border: "1px solid rgba(255,255,255,0.09)", background: `radial-gradient(100% 100% at ${k ? "100%" : "0%"} 0%, ${x.accent}22, transparent 60%), #0b0b0b`, padding: "clamp(1rem,3vw,1.5rem)", color: "#fff", minWidth: 0 }}>
-            <div style={{ ...mono, fontSize: "0.56rem", color: "rgba(255,255,255,0.45)", marginBottom: 8 }}>{l}</div>
+            style={{ textAlign: k ? "right" : "left", cursor: "pointer", borderRadius: 16, border: "1px solid rgba(var(--ink-rgb),0.09)", background: `radial-gradient(100% 100% at ${k ? "100%" : "0%"} 0%, ${x.accent}22, transparent 60%), var(--surface)`, padding: "clamp(1rem,3vw,1.5rem)", color: "var(--text)", minWidth: 0 }}>
+            <div style={{ ...mono, fontSize: "0.56rem", color: "rgba(var(--ink-rgb),0.45)", marginBottom: 8 }}>{l}</div>
             <div style={{ fontWeight: 700, fontSize: "clamp(0.95rem,2.6vw,1.3rem)", lineHeight: 1.2, overflow: "hidden", textOverflow: "ellipsis" }}>{x.name}</div>
           </button>
         ))}
@@ -567,14 +567,14 @@ function LiveClock() {
     const id = setInterval(tick, 1000);
     return () => { clearTimeout(first); clearInterval(id); };
   }, []);
-  return <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", color: "rgba(255,255,255,0.55)", letterSpacing: "0.08em", minWidth: 64, display: "inline-block" }}>{t || "--:--:--"}</span>;
+  return <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", color: "rgba(var(--ink-rgb),0.55)", letterSpacing: "0.08em", minWidth: 64, display: "inline-block" }}>{t || "--:--:--"}</span>;
 }
 
 function Panel({ title, right, children, style }: { title: string; right?: React.ReactNode; children: React.ReactNode; style?: React.CSSProperties }) {
   return (
-    <section style={{ borderRadius: 16, border: "1px solid rgba(255,255,255,0.08)", background: "linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01)), #0a0a0a", padding: "1rem 1.1rem 1.15rem", minWidth: 0, ...style }}>
+    <section style={{ borderRadius: 16, border: "1px solid rgba(var(--ink-rgb),0.08)", background: "linear-gradient(180deg, rgba(var(--ink-rgb),0.025), rgba(var(--ink-rgb),0.01)), var(--surface)", padding: "1rem 1.1rem 1.15rem", minWidth: 0, ...style }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 14 }}>
-        <span style={{ ...mono, fontSize: "0.58rem", color: "rgba(255,255,255,0.55)" }}>{title}</span>
+        <span style={{ ...mono, fontSize: "0.58rem", color: "rgba(var(--ink-rgb),0.55)" }}>{title}</span>
         {right}
       </header>
       {children}
@@ -613,11 +613,11 @@ function CommandCentre({ onOpen, isMobile }: { onOpen: (id: string) => void; isM
       {/* KPI tiles */}
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 12 }}>
         {kpis.map(k => (
-          <div key={k.l} style={{ borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0a0a0a", padding: "0.95rem 1rem 1rem", minWidth: 0 }}>
-            <div style={{ ...mono, fontSize: "0.54rem", color: "rgba(255,255,255,0.5)" }}>{k.l}</div>
-            <div style={{ fontWeight: 700, fontSize: "clamp(1.8rem,4vw,2.4rem)", lineHeight: 1.05, margin: "8px 0 4px", color: "#fff", fontVariantNumeric: "tabular-nums" }}>{k.v}</div>
-            <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.45)", marginBottom: 10 }}>{k.sub}</div>
-            <div style={{ height: 4, borderRadius: 4, background: "rgba(255,255,255,0.07)", overflow: "hidden" }}>
+          <div key={k.l} style={{ borderRadius: 14, border: "1px solid rgba(var(--ink-rgb),0.08)", background: "var(--surface)", padding: "0.95rem 1rem 1rem", minWidth: 0 }}>
+            <div style={{ ...mono, fontSize: "0.54rem", color: "rgba(var(--ink-rgb),0.5)" }}>{k.l}</div>
+            <div style={{ fontWeight: 700, fontSize: "clamp(1.8rem,4vw,2.4rem)", lineHeight: 1.05, margin: "8px 0 4px", color: "var(--text)", fontVariantNumeric: "tabular-nums" }}>{k.v}</div>
+            <div style={{ fontSize: "0.72rem", color: "rgba(var(--ink-rgb),0.45)", marginBottom: 10 }}>{k.sub}</div>
+            <div style={{ height: 4, borderRadius: 4, background: "rgba(var(--ink-rgb),0.07)", overflow: "hidden" }}>
               <motion.div initial={{ width: 0 }} whileInView={{ width: `${k.pct}%` }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 style={{ height: "100%", background: "var(--accent)", borderRadius: 4 }} />
             </div>
@@ -627,39 +627,56 @@ function CommandCentre({ onOpen, isMobile }: { onOpen: (id: string) => void; isM
 
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "minmax(0,1.75fr) minmax(0,1fr)", gap: 12 }}>
         {/* Timeline */}
-        <Panel title="Project timeline · 2026" right={<span style={{ ...mono, fontSize: "0.54rem", color: "rgba(255,255,255,0.4)" }}>Tap a row to open</span>}>
-          <div style={{ display: "grid", gridTemplateColumns: `${labelW}px 1fr`, alignItems: "end", marginBottom: 6 }}>
-            <span />
+        <Panel title="Project timeline · 2026" style={{ display: "flex", flexDirection: "column" }}
+          right={<span style={{ ...mono, fontSize: "0.54rem", color: "rgba(var(--ink-rgb),0.4)" }}>{isMobile ? "Tap a row" : "Click a row to open"}</span>}>
+          <div style={{ display: "grid", gridTemplateColumns: `${labelW}px 1fr`, alignItems: "end", marginBottom: 8 }}>
+            <span style={{ ...mono, fontSize: "0.5rem", color: "rgba(var(--ink-rgb),0.35)" }}>Client</span>
             <div style={{ display: "grid", gridTemplateColumns: `repeat(${GANTT_SPAN}, 1fr)` }}>
               {MONTHS.map((m, i) => (
-                <span key={m} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", color: "rgba(255,255,255,0.35)", textAlign: "center" }}>
+                <span key={m} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", color: "rgba(var(--ink-rgb),0.4)", textAlign: "center" }}>
                   {isMobile ? (i % 2 ? "" : m[0]) : m}
                 </span>
               ))}
             </div>
           </div>
-          <div style={{ display: "grid", gap: 4, position: "relative" }}>
+          <div style={{ position: "relative", flex: 1, display: "grid", gridAutoRows: "minmax(40px, 1fr)" }}>
+            {/* full-height month gridlines with alternating quarter shading */}
+            <div aria-hidden style={{ position: "absolute", top: 0, bottom: 0, left: labelW, right: 0, display: "grid", gridTemplateColumns: `repeat(${GANTT_SPAN}, 1fr)`, pointerEvents: "none" }}>
+              {MONTHS.map((m, i) => (
+                <span key={m} style={{ borderLeft: "1px solid rgba(var(--ink-rgb),0.06)", background: Math.floor(i / 3) % 2 ? "rgba(var(--ink-rgb),0.022)" : "transparent" }} />
+              ))}
+            </div>
+            {/* today marker */}
+            <div aria-hidden style={{ position: "absolute", top: -6, bottom: 0, right: 0, width: 2, borderRadius: 2, background: "var(--accent)", boxShadow: "0 0 12px rgba(var(--accent-rgb),0.55)" }} />
             {CLIENTS.map((c, i) => {
               const left = (c.ganttStart / GANTT_SPAN) * 100;
               const width = Math.max(((c.ganttEnd - c.ganttStart) / GANTT_SPAN) * 100, 100 / GANTT_SPAN);
               return (
                 <button key={c.id} onClick={() => onOpen(c.id)} className="gantt-row"
-                  style={{ display: "grid", gridTemplateColumns: `${labelW}px 1fr`, alignItems: "center", gap: 0, background: "none", border: "none", padding: "5px 0", cursor: "pointer", color: "#fff", textAlign: "left", borderRadius: 8 }}>
-                  <span style={{ fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", paddingRight: 10 }}>{c.name}</span>
-                  <span style={{ position: "relative", height: 18, borderRadius: 6, background: "repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px calc(100% / 11))" }}>
+                  style={{ position: "relative", display: "grid", gridTemplateColumns: `${labelW}px 1fr`, alignItems: "center", background: "none", border: "none", borderTop: i ? "1px solid rgba(var(--ink-rgb),0.05)" : "none", padding: "0 0 0 4px", cursor: "pointer", color: "var(--text)", textAlign: "left", borderRadius: 6 }}>
+                  <span style={{ minWidth: 0, paddingRight: 10 }}>
+                    <span style={{ display: "block", fontSize: isMobile ? "0.72rem" : "0.8rem", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.name}</span>
+                    <span style={{ display: "block", fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", color: "rgba(var(--ink-rgb),0.42)", marginTop: 2, letterSpacing: "0.04em" }}>Since {c.startDate.replace(" 20", " \u2019")}</span>
+                  </span>
+                  <span style={{ position: "relative", height: "100%" }}>
                     <motion.span initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                      style={{ position: "absolute", top: 3, bottom: 3, left: `${left}%`, width: `${width}%`, transformOrigin: "left", borderRadius: 5,
-                        background: c.isOngoing ? `linear-gradient(90deg, ${c.accent}, ${c.accent}55)` : c.accent, boxShadow: `0 0 12px ${c.accent}44` }} />
+                      style={{ position: "absolute", top: "50%", height: 12, marginTop: -6, left: `${left}%`, width: `${width}%`, transformOrigin: "left", borderRadius: 6,
+                        background: c.isOngoing ? `linear-gradient(90deg, ${c.accent}, ${c.accent}66)` : c.accent, boxShadow: `0 0 14px ${c.accent}40` }}>
+                      <span style={{ position: "absolute", left: 0, top: "50%", width: 12, height: 12, marginTop: -6, borderRadius: "50%", background: c.accent, boxShadow: `0 0 0 3px rgba(var(--paper-rgb),0.9)` }} />
+                    </motion.span>
                   </span>
                 </button>
               );
             })}
-            {/* "now" marker at the right edge (Nov 2026) */}
-            <div aria-hidden style={{ position: "absolute", top: -4, bottom: -4, right: 0, width: 1, background: "rgba(var(--accent-rgb),0.5)", marginLeft: labelW }} />
           </div>
-          <div style={{ display: "flex", gap: 14, marginTop: 12, flexWrap: "wrap" }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.68rem", color: "rgba(255,255,255,0.5)" }}><span style={{ width: 18, height: 6, borderRadius: 3, background: "linear-gradient(90deg,#dfff00,#dfff0055)" }} />Active retainer · bar runs to today</span>
-            {CLIENTS.some(x => !x.isOngoing) && <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.68rem", color: "rgba(255,255,255,0.5)" }}><span style={{ width: 10, height: 6, borderRadius: 3, background: "#888" }} />Delivered project</span>}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 14, marginTop: 14, flexWrap: "wrap" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.68rem", color: "rgba(var(--ink-rgb),0.55)" }}>
+              <span style={{ width: 20, height: 8, borderRadius: 4, background: "linear-gradient(90deg, rgba(var(--ink-rgb),0.7), rgba(var(--ink-rgb),0.2))" }} />
+              Active retainer &middot; start to today
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, ...mono, fontSize: "0.54rem", color: "rgba(var(--ink-rgb),0.55)" }}>
+              <span style={{ width: 2, height: 12, borderRadius: 2, background: "var(--accent)", boxShadow: "0 0 8px rgba(var(--accent-rgb),0.6)" }} />Today
+            </span>
           </div>
         </Panel>
 
@@ -669,13 +686,13 @@ function CommandCentre({ onOpen, isMobile }: { onOpen: (id: string) => void; isM
             <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
               {feed.map((f, i) => (
                 <li key={i}>
-                  <button onClick={() => onOpen(f.id)} style={{ display: "grid", gridTemplateColumns: "10px 1fr auto", gap: 10, alignItems: "start", width: "100%", background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", color: "#fff" }}>
+                  <button onClick={() => onOpen(f.id)} style={{ display: "grid", gridTemplateColumns: "10px 1fr auto", gap: 10, alignItems: "start", width: "100%", background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", color: "var(--text)" }}>
                     <span style={{ width: 8, height: 8, borderRadius: "50%", background: f.accent, marginTop: 5 }} />
                     <span style={{ minWidth: 0 }}>
                       <span style={{ display: "block", fontSize: "0.8rem", lineHeight: 1.35 }}>{f.text}</span>
-                      <span style={{ display: "block", fontSize: "0.68rem", color: "rgba(255,255,255,0.45)", marginTop: 2 }}>{f.name}</span>
+                      <span style={{ display: "block", fontSize: "0.68rem", color: "rgba(var(--ink-rgb),0.45)", marginTop: 2 }}>{f.name}</span>
                     </span>
-                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.4)", whiteSpace: "nowrap", marginTop: 2 }}>{f.time}</span>
+                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(var(--ink-rgb),0.4)", whiteSpace: "nowrap", marginTop: 2 }}>{f.time}</span>
                   </button>
                 </li>
               ))}
@@ -687,10 +704,10 @@ function CommandCentre({ onOpen, isMobile }: { onOpen: (id: string) => void; isM
               {services.map((s, i) => (
                 <div key={s.label}>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.74rem", marginBottom: 4 }}>
-                    <span style={{ color: "rgba(255,255,255,0.75)" }}>{s.label}</span>
-                    <span style={{ fontFamily: "var(--font-geist-mono)", color: "rgba(255,255,255,0.5)", fontVariantNumeric: "tabular-nums" }}>{s.n}/{CLIENTS.length}</span>
+                    <span style={{ color: "rgba(var(--ink-rgb),0.75)" }}>{s.label}</span>
+                    <span style={{ fontFamily: "var(--font-geist-mono)", color: "rgba(var(--ink-rgb),0.5)", fontVariantNumeric: "tabular-nums" }}>{s.n}/{CLIENTS.length}</span>
                   </div>
-                  <div style={{ height: 6, borderRadius: 6, background: "rgba(255,255,255,0.06)", overflow: "hidden" }}>
+                  <div style={{ height: 6, borderRadius: 6, background: "rgba(var(--ink-rgb),0.06)", overflow: "hidden" }}>
                     <motion.div initial={{ width: 0 }} whileInView={{ width: `${(s.n / CLIENTS.length) * 100}%` }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.07 }}
                       style={{ height: "100%", borderRadius: 6, background: "linear-gradient(90deg, rgba(var(--accent-rgb),0.55), var(--accent))" }} />
                   </div>
@@ -713,11 +730,11 @@ function ProjectStatus({ c, isMobile }: { c: Client; isMobile: boolean }) {
     { l: "Next milestone", v: c.nextMilestone },
   ];
   return (
-    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 1, borderRadius: 14, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.08)", marginBottom: 16 }}>
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 1, borderRadius: 14, overflow: "hidden", border: "1px solid rgba(var(--ink-rgb),0.08)", background: "rgba(var(--ink-rgb),0.08)", marginBottom: 16 }}>
       {cells.map(x => (
-        <div key={x.l} style={{ background: "#0a0a0a", padding: "0.8rem 0.95rem", minWidth: 0 }}>
-          <div style={{ ...mono, fontSize: "0.52rem", color: "rgba(255,255,255,0.45)", marginBottom: 6 }}>{x.l}</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: "0.82rem", fontWeight: 600, color: "#fff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        <div key={x.l} style={{ background: "var(--surface)", padding: "0.8rem 0.95rem", minWidth: 0 }}>
+          <div style={{ ...mono, fontSize: "0.52rem", color: "rgba(var(--ink-rgb),0.45)", marginBottom: 6 }}>{x.l}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: "0.82rem", fontWeight: 600, color: "var(--text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {x.dot && <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80", flexShrink: 0 }} />}
             {x.v}
           </div>
@@ -754,8 +771,8 @@ export default function WorkPage() {
   const wrap: React.CSSProperties = { maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1rem,4vw,2.5rem)" };
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingTop: 68, color: "#fff", overflowX: "clip", ["--surface-1" as string]: "#0b0b0b", ["--surface-2" as string]: "rgba(255,255,255,0.04)", ["--line-2" as string]: "rgba(255,255,255,0.09)", ["--text-2" as string]: "rgba(255,255,255,0.55)", ["--accent-ink" as string]: "var(--accent)" }}>
-      <style>{`.work-card{transition:transform .25s ease,border-color .25s ease}.work-card:hover,.work-card:focus-visible{transform:translateY(-4px);border-color:var(--accent-c)!important;outline:none}.work-shot{transition:transform .5s ease}.work-card:hover .work-shot{transform:scale(1.04)}.gantt-row:hover{background:rgba(255,255,255,0.04)!important}`}</style>
+    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingTop: 68, color: "var(--text)", overflowX: "clip", ["--surface-1" as string]: "var(--surface)", ["--surface-2" as string]: "rgba(var(--ink-rgb),0.04)", ["--line-2" as string]: "rgba(var(--ink-rgb),0.09)", ["--text-2" as string]: "rgba(var(--ink-rgb),0.55)", ["--accent-ink" as string]: "var(--accent)" }}>
+      <style>{`.work-card{transition:transform .25s ease,border-color .25s ease}.work-card:hover,.work-card:focus-visible{transform:translateY(-4px);border-color:var(--accent-c)!important;outline:none}.work-shot{transition:transform .5s ease}.work-card:hover .work-shot{transform:scale(1.04)}.gantt-row:hover{background:rgba(var(--ink-rgb),0.04)!important}`}</style>
 
       {!current && (
         <section style={{ ...wrap, padding: `clamp(2.5rem,7vw,5rem) clamp(1rem,4vw,2.5rem) clamp(1.5rem,4vw,2.5rem)` }}>
@@ -763,7 +780,7 @@ export default function WorkPage() {
           <h1 style={{ margin: 0, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, fontSize: "clamp(2.2rem,7vw,4.8rem)", maxWidth: "16ch", textWrap: "balance" as React.CSSProperties["textWrap"] }}>
             Brands and websites we&apos;ve <span style={{ color: "var(--accent)" }}>built</span>.
           </h1>
-          <p style={{ margin: "18px 0 0", color: "rgba(255,255,255,0.62)", fontSize: "clamp(1rem,2.4vw,1.15rem)", lineHeight: 1.6, maxWidth: "54ch" }}>
+          <p style={{ margin: "18px 0 0", color: "rgba(var(--ink-rgb),0.62)", fontSize: "clamp(1rem,2.4vw,1.15rem)", lineHeight: 1.6, maxWidth: "54ch" }}>
             Every project here is live. Track them in the command centre below, filter by industry, or open a full case study.
           </p>
         </section>
@@ -776,7 +793,7 @@ export default function WorkPage() {
       )}
 
       {/* Sticky navigation bar */}
-      <div style={{ position: "sticky", top: 68, zIndex: 20, background: "rgba(5,5,5,0.95)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(var(--accent-rgb),0.18)" }}>
+      <div style={{ position: "sticky", top: 68, zIndex: 20, background: "rgba(var(--paper-rgb),0.95)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderTop: "1px solid rgba(var(--ink-rgb),0.06)", borderBottom: "1px solid rgba(var(--accent-rgb),0.18)" }}>
         <div style={{ ...wrap, padding: `10px clamp(1rem,4vw,2.5rem) 12px` }}>
           {current ? (
             <ChipRail label="Browse projects" hint={isMobile ? "swipe or tap →" : "click to switch project"}
@@ -802,10 +819,10 @@ export default function WorkPage() {
         </AnimatePresence>
 
         {!current && (
-          <section style={{ marginTop: 40, borderRadius: 18, border: "1px solid rgba(var(--accent-rgb),0.2)", background: "radial-gradient(80% 120% at 100% 0%, rgba(var(--accent-rgb),0.1), transparent 60%), #0b0b0b", padding: "clamp(1.5rem,4vw,2.5rem)", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
+          <section style={{ marginTop: 40, borderRadius: 18, border: "1px solid rgba(var(--accent-rgb),0.2)", background: "radial-gradient(80% 120% at 100% 0%, rgba(var(--accent-rgb),0.1), transparent 60%), var(--surface)", padding: "clamp(1.5rem,4vw,2.5rem)", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
             <div>
               <div style={{ fontWeight: 700, fontSize: "clamp(1.3rem,3.5vw,1.8rem)", letterSpacing: "-0.02em" }}>Your business could be next.</div>
-              <div style={{ color: "rgba(255,255,255,0.6)", marginTop: 6 }}>Brand, website and everything in between, built to look as good as you operate.</div>
+              <div style={{ color: "rgba(var(--ink-rgb),0.6)", marginTop: 6 }}>Brand, website and everything in between, built to look as good as you operate.</div>
             </div>
             <Link href="/contact" className="btn-accent" style={{ fontSize: "0.85rem", padding: "0.85rem 1.6rem" }}>Start your project →</Link>
           </section>

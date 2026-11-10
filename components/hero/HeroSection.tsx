@@ -171,6 +171,21 @@ export default function HeroSection() {
     galaxy.rotation.x = Math.PI * 0.12;
     scene.add(galaxy);
 
+    // Light theme: the pale galaxy particles read as specks on white, so only
+    // the eclipse (sphere + ring) is drawn. Follows the theme toggle live.
+    const root = document.documentElement;
+    const applyTheme = () => {
+      const light = root.dataset.theme === "light";
+      galaxy.visible = !light;
+      glow.visible = !light;
+      // On paper the black sphere becomes a heavy disc over the copy, so only
+      // the glowing lime ring is drawn — it still reads as the eclipse.
+      sphere.visible = !light;
+    };
+    applyTheme();
+    const themeObserver = new MutationObserver(applyTheme);
+    themeObserver.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
     let animFrame: number;
     let scrollYVal = 0;
     const onScroll = () => { scrollYVal = window.scrollY; };
@@ -205,6 +220,7 @@ export default function HeroSection() {
 
     return () => {
       cancelAnimationFrame(animFrame);
+      themeObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
@@ -216,13 +232,13 @@ export default function HeroSection() {
       className="relative noise-overlay"
       style={{ minHeight: "100svh", background: "var(--bg-primary)", overflow: "hidden" }}
     >
-      <canvas ref={canvasRef} className="hero-canvas absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
+      <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
 
       {/* Vignette layers */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
-        background: "radial-gradient(ellipse 110% 80% at 50% 50%, transparent 20%, rgba(0,0,0,0.65) 100%)" }} />
+        background: "radial-gradient(ellipse 110% 80% at 50% 50%, transparent 20%, rgba(var(--paper-rgb),0.65) 100%)" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,
-        background: "radial-gradient(ellipse 80% 50% at 50% 105%, rgba(223,255,0,0.07) 0%, transparent 65%)" }} />
+        background: "radial-gradient(ellipse 80% 50% at 50% 105%, rgba(var(--accent-rgb),0.07) 0%, transparent 65%)" }} />
 
       {/* Star-chart labels — desktop only, simple ease-in-out float */}
       {!isMobile && STARS.map((s, i) => (
@@ -233,7 +249,7 @@ export default function HeroSection() {
             left: s.x, top: s.y, zIndex: 2,
             fontFamily: "var(--font-geist-mono)",
             fontSize: s.t.length <= 2 ? "0.7rem" : "0.46rem",
-            color: s.accent ? "var(--accent)" : "rgba(255,255,255,0.9)",
+            color: s.accent ? "var(--accent)" : "rgba(var(--ink-rgb),0.9)",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
           }}
@@ -273,7 +289,7 @@ export default function HeroSection() {
                 height={isMobile ? 50 : 66}
                 className="object-contain"
                 priority
-                style={{ maxHeight: isMobile ? 50 : 66, filter: "drop-shadow(0 0 28px rgba(223,255,0,0.25))" }}
+                style={{ maxHeight: isMobile ? 50 : 66, filter: "drop-shadow(0 0 28px rgba(var(--accent-rgb),0.25))" }}
               />
             </motion.div>
           </motion.div>
@@ -298,9 +314,9 @@ export default function HeroSection() {
               textTransform: "uppercase",
               color: "var(--accent)",
               padding: "0.45rem 0.875rem",
-              border: "1px solid rgba(223,255,0,0.2)",
+              border: "1px solid rgba(var(--accent-rgb),0.2)",
               borderRadius: 999,
-              background: "rgba(223,255,0,0.05)",
+              background: "rgba(var(--accent-rgb),0.05)",
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />

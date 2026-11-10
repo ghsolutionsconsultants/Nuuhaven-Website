@@ -103,22 +103,22 @@ function WorkCard({ p }: { p: (typeof projects)[number] }) {
     <HolographicCard className="overflow-hidden group h-full">
       <div className="flex flex-col h-full">
         <Link href={`/work#${p.id}`} data-cursor="OPEN" aria-label={`${p.name} case study`}
-          className="block relative overflow-hidden" style={{ aspectRatio: "16 / 10", background: "#0a0a0a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          className="block relative overflow-hidden" style={{ aspectRatio: "16 / 10", background: "var(--surface)", borderBottom: "1px solid rgba(var(--ink-rgb),0.08)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`/images/work/${p.id}.jpg`} alt={`${p.name} website homepage`} loading="lazy"
             className="transition-transform duration-500 group-hover:scale-[1.04]"
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
         </Link>
         <div className="flex flex-col flex-1" style={{ padding: "1.25rem 1.25rem 1.4rem", gap: "0.7rem" }}>
-          <div className="label-mono" style={{ color: p.accent, fontSize: "0.6rem" }}>{p.industry}</div>
+          <div className="label-mono lime-chip" style={{ color: p.accent, fontSize: "0.6rem", width: "fit-content" }}>{p.industry}</div>
           <h3 className="font-bold" style={{ fontSize: "1.15rem", lineHeight: 1.2 }}>{p.name}</h3>
           <p className="text-sm" style={{ color: "var(--text-muted)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{p.outcome}</p>
-          <div className="flex items-center justify-between gap-3" style={{ marginTop: "auto", paddingTop: "0.8rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="flex items-center justify-between gap-3" style={{ marginTop: "auto", paddingTop: "0.8rem", borderTop: "1px solid rgba(var(--ink-rgb),0.07)" }}>
             <Link href={`/work#${p.id}`} className="text-sm font-semibold" data-cursor="OPEN" style={{ color: "var(--text)" }}>
               Case study <span style={{ color: "var(--accent)" }}>→</span>
             </Link>
             <a href={p.url} target="_blank" rel="noopener noreferrer" data-cursor="OPEN"
-              style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "rgba(255,255,255,0.45)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "55%" }}>
+              style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "rgba(var(--ink-rgb),0.45)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "55%" }}>
               {host} ↗
             </a>
           </div>

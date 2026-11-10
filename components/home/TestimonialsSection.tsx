@@ -67,7 +67,7 @@ export default function TestimonialsSection() {
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
-                <div className="flex items-center gap-4 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="flex items-center gap-4 pt-6" style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.08)" }}>
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
                     style={{ background: "rgba(var(--accent-rgb),0.12)", color: "var(--accent)", border: "1px solid rgba(var(--accent-rgb),0.2)" }}

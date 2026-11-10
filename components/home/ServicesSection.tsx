@@ -67,11 +67,11 @@ const services: { icon: React.ReactNode; title: string; sub: string; desc: strin
 function ServiceAccordion() {
   const [open, setOpen] = useState<number | null>(1);
   return (
-    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+    <div style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.08)" }}>
       {services.map((s, i) => {
         const on = open === i;
         return (
-          <div key={s.title} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", background: on ? "rgba(var(--accent-rgb),0.035)" : "transparent", transition: "background .25s" }}>
+          <div key={s.title} style={{ borderBottom: "1px solid rgba(var(--ink-rgb),0.08)", background: on ? "rgba(var(--accent-rgb),0.035)" : "transparent", transition: "background .25s" }}>
             <button onClick={() => setOpen(on ? null : i)} aria-expanded={on}
               style={{ width: "100%", display: "grid", gridTemplateColumns: "34px 1fr 20px", alignItems: "center", gap: 12, padding: "1rem 0.25rem", textAlign: "left", background: "none", border: "none", color: "var(--text)", cursor: "pointer" }}>
               <span style={{ color: "var(--accent)", fontSize: "1.35rem", display: "grid", placeItems: "center", lineHeight: 1 }}>
@@ -84,7 +84,7 @@ function ServiceAccordion() {
                 </span>
                 <span style={{ display: "block", fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.35 }}>{s.title}</span>
               </span>
-              <span aria-hidden style={{ color: "rgba(255,255,255,0.5)", fontSize: "1.1rem", transition: "transform .25s", transform: on ? "rotate(45deg)" : "none" }}>+</span>
+              <span aria-hidden style={{ color: "rgba(var(--ink-rgb),0.5)", fontSize: "1.1rem", transition: "transform .25s", transform: on ? "rotate(45deg)" : "none" }}>+</span>
             </button>
             <AnimatePresence initial={false}>
               {on && (
@@ -175,23 +175,23 @@ export default function ServicesSection() {
         <div style={{
           marginTop: isMobile ? "2rem" : "3.5rem",
           padding: isMobile ? "1.1rem 1.1rem" : "1.375rem 1.75rem",
-          background: "rgba(255,200,0,0.03)",
-          border: "1px solid rgba(255,200,0,0.18)",
+          background: "rgba(var(--warn-rgb),0.03)",
+          border: "1px solid rgba(var(--warn-rgb),0.18)",
           borderRadius: 12,
           display: "flex",
           gap: "1.125rem",
           alignItems: "flex-start",
         }}>
-          <div style={{ flexShrink: 0, width: 26, height: 26, borderRadius: "50%", background: "rgba(255,200,0,0.1)", border: "1px solid rgba(255,200,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.1rem" }}>
-            <span style={{ color: "#ffc800", fontSize: "0.72rem", fontWeight: 900 }}>!</span>
+          <div style={{ flexShrink: 0, width: 26, height: 26, borderRadius: "50%", background: "rgba(var(--warn-rgb),0.1)", border: "1px solid rgba(var(--warn-rgb),0.35)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.1rem" }}>
+            <span style={{ color: "var(--warn)", fontSize: "0.72rem", fontWeight: 900 }}>!</span>
           </div>
           <div>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#ffc800", marginBottom: "0.5rem", fontWeight: 700 }}>
+            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--warn)", marginBottom: "0.5rem", fontWeight: 700 }}>
               Conflict of Interest Notice
             </div>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>
+            <p style={{ color: "rgba(var(--ink-rgb),0.4)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>
               Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
-              <strong style={{ color: "#ffc800", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
+              <strong style={{ color: "var(--warn)", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
             </p>
           </div>
         </div>

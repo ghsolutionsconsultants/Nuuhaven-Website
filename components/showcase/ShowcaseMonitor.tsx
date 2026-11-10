@@ -68,9 +68,9 @@ export default function ShowcaseMonitor() {
             data-cursor="OPEN"
             className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200"
             style={{
-              background: active.id === c.id ? "var(--accent)" : "rgba(255,255,255,0.05)",
+              background: active.id === c.id ? "var(--accent)" : "rgba(var(--ink-rgb),0.05)",
               color: active.id === c.id ? "#000" : "var(--text-muted)",
-              border: active.id === c.id ? "none" : "1px solid rgba(255,255,255,0.1)",
+              border: active.id === c.id ? "none" : "1px solid rgba(var(--ink-rgb),0.1)",
             }}
           >
             {c.name}
@@ -86,8 +86,8 @@ export default function ShowcaseMonitor() {
             className="relative rounded-xl overflow-hidden"
             style={{
               background: "linear-gradient(145deg, #1a1a1a, #0d0d0d)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 0 60px rgba(0,0,0,0.8), 0 0 20px rgba(var(--accent-rgb),0.05), inset 0 1px 0 rgba(255,255,255,0.05)",
+              border: "1px solid rgba(var(--ink-rgb),0.08)",
+              boxShadow: "0 0 60px rgba(0,0,0,0.8), 0 0 20px rgba(var(--accent-rgb),0.05), inset 0 1px 0 rgba(var(--ink-rgb),0.05)",
               padding: "12px 12px 0",
             }}
           >
@@ -101,7 +101,7 @@ export default function ShowcaseMonitor() {
               <div
                 className="flex-1 mx-3 rounded text-center flex items-center justify-center gap-2"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
+                  background: "rgba(var(--ink-rgb),0.05)",
                   height: 22,
                   fontSize: "0.65rem",
                   color: "var(--text-muted)",
@@ -156,7 +156,7 @@ export default function ShowcaseMonitor() {
                     {iframeError ? (
                       <div
                         className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-                        style={{ background: "rgba(17,17,17,0.95)" }}
+                        style={{ background: "rgba(var(--surface-rgb),0.95)" }}
                       >
                         <div className="text-2xl" style={{ color: "var(--accent)" }}>◎</div>
                         <p className="text-sm font-medium">{active.name}</p>

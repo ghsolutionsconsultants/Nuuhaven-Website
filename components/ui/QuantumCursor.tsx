@@ -74,13 +74,13 @@ export default function QuantumCursor() {
             opacity: isHover ? 0.9 : 0.4,
           }}
           transition={{ duration: 0.2 }}
-          className="rounded-full border border-accent flex items-center justify-center"
-          style={{ borderColor: "var(--accent)" }}
+          className="rounded-full border flex items-center justify-center"
+          style={{ borderColor: "var(--cursor)" }}
         >
           {isHover && label && (
             <span
               className="text-[9px] font-mono font-bold uppercase tracking-widest"
-              style={{ color: "var(--accent)" }}
+              style={{ color: "var(--cursor)" }}
             >
               {label}
             </span>
@@ -101,7 +101,7 @@ export default function QuantumCursor() {
           }}
           transition={{ duration: 0.15 }}
           className="rounded-full"
-          style={{ background: "var(--accent)" }}
+          style={{ background: "var(--cursor)" }}
         />
       </motion.div>
     </div>

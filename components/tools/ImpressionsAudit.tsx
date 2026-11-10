@@ -181,9 +181,9 @@ export default function ImpressionsAudit() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {STATS.map(s => (
-                <div key={s.label} style={{ display: "flex", alignItems: "center", gap: "1.5rem", padding: "1.25rem 1.5rem", background: "rgba(255,255,255,0.03)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div key={s.label} style={{ display: "flex", alignItems: "center", gap: "1.5rem", padding: "1.25rem 1.5rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 12, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.75rem", fontWeight: 900, color: "var(--accent)", lineHeight: 1, flexShrink: 0 }}>{s.value}</div>
-                  <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{s.label}</div>
+                  <div style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.5)", lineHeight: 1.5 }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -199,12 +199,12 @@ export default function ImpressionsAudit() {
           {(started || done) && (
             <div style={{ marginBottom: "2.5rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-                <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>
+                <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.35)" }}>
                   {done ? "Audit Complete" : `Question ${step + 1} of ${QUESTIONS.length}`}
                 </span>
                 <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "var(--accent)" }}>{Math.round(progress)}%</span>
               </div>
-              <div style={{ height: 2, background: "rgba(255,255,255,0.06)", borderRadius: 999, overflow: "hidden" }}>
+              <div style={{ height: 2, background: "rgba(var(--ink-rgb),0.06)", borderRadius: 999, overflow: "hidden" }}>
                 <motion.div
                   style={{ height: "100%", background: "var(--accent)", borderRadius: 999 }}
                   animate={{ width: `${progress}%` }}
@@ -224,7 +224,7 @@ export default function ImpressionsAudit() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
               >
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3rem 2.5rem", textAlign: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "3rem 2.5rem", textAlign: "center" }}>
                   <div style={{ fontSize: "3rem", color: "var(--accent)", marginBottom: "1.5rem", opacity: 0.7 }}>◉</div>
                   <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem", letterSpacing: "-0.01em" }}>5 Questions. Under 2 Minutes.</h2>
                   <p style={{ color: "var(--text-muted)", lineHeight: 1.85, maxWidth: "32rem", margin: "0 auto 2rem", fontSize: "0.9rem" }}>
@@ -239,9 +239,9 @@ export default function ImpressionsAudit() {
                       { icon: "◉", label: "Market perception" },
                       { icon: "◆", label: "Instant score" },
                     ].map(item => (
-                      <div key={item.label} style={{ padding: "0.75rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 8, textAlign: "center" }}>
+                      <div key={item.label} style={{ padding: "0.75rem", background: "rgba(var(--ink-rgb),0.03)", border: "1px solid rgba(var(--ink-rgb),0.06)", borderRadius: 8, textAlign: "center" }}>
                         <div style={{ color: "var(--accent)", fontSize: "0.9rem", marginBottom: "0.35rem" }}>{item.icon}</div>
-                        <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.45)" }}>{item.label}</div>
+                        <div style={{ fontSize: "0.72rem", color: "rgba(var(--ink-rgb),0.45)" }}>{item.label}</div>
                       </div>
                     ))}
                   </div>
@@ -259,14 +259,14 @@ export default function ImpressionsAudit() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
-                  <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, overflow: "hidden" }}>
+                  <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(var(--ink-rgb),0.06)", background: "rgba(var(--ink-rgb),0.02)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" }}>
                       Question {step + 1} of {QUESTIONS.length}
                     </span>
                     <div style={{ display: "flex", gap: "0.3rem" }}>
                       {QUESTIONS.map((_, i) => (
-                        <div key={i} style={{ width: i === step ? 16 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                        <div key={i} style={{ width: i === step ? 16 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.35)" : "rgba(var(--ink-rgb),0.1)", transition: "all 0.3s" }} />
                       ))}
                     </div>
                   </div>
@@ -274,7 +274,7 @@ export default function ImpressionsAudit() {
                   <div style={{ padding: "2.5rem 2rem" }}>
                     <h2 style={{ fontSize: "1.2rem", fontWeight: 700, lineHeight: 1.5, letterSpacing: "-0.01em", marginBottom: "0.625rem" }}>{current.text}</h2>
                     {current.hint && (
-                      <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.38)", fontStyle: "italic", lineHeight: 1.6, marginBottom: "2rem" }}>{current.hint}</p>
+                      <p style={{ fontSize: "0.8rem", color: "rgba(var(--ink-rgb),0.38)", fontStyle: "italic", lineHeight: 1.6, marginBottom: "2rem" }}>{current.hint}</p>
                     )}
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -287,14 +287,14 @@ export default function ImpressionsAudit() {
                             data-cursor="SELECT"
                             style={{
                               textAlign: "left", padding: "1.125rem 1.375rem", borderRadius: 12, cursor: "pointer",
-                              background: isSelected ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.025)",
-                              border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
-                              color: isSelected ? "#fff" : "rgba(255,255,255,0.7)",
+                              background: isSelected ? "rgba(var(--accent-rgb),0.08)" : "rgba(var(--ink-rgb),0.025)",
+                              border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(var(--ink-rgb),0.07)",
+                              color: isSelected ? "var(--text)" : "rgba(var(--ink-rgb),0.7)",
                               transition: "all 0.2s",
                               display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem",
                             }}
-                            onMouseEnter={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)"; }}
-                            onMouseLeave={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.025)"; }}
+                            onMouseEnter={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = "rgba(var(--ink-rgb),0.05)"; }}
+                            onMouseLeave={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = "rgba(var(--ink-rgb),0.025)"; }}
                           >
                             <span style={{ fontSize: "0.875rem", lineHeight: 1.4 }}>{opt.label}</span>
                             {isSelected && <span style={{ color: "var(--accent)", fontSize: "0.75rem" }}>✓</span>}
@@ -306,7 +306,7 @@ export default function ImpressionsAudit() {
                     {step > 0 && (
                       <button
                         onClick={() => setStep(s => s - 1)}
-                        style={{ marginTop: "1.5rem", fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", background: "none", border: "none", cursor: "pointer" }}
+                        style={{ marginTop: "1.5rem", fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.25)", background: "none", border: "none", cursor: "pointer" }}
                       >
                         ← Back
                       </button>
@@ -325,7 +325,7 @@ export default function ImpressionsAudit() {
               >
                 {/* Score hero */}
                 <div style={{ background: "var(--bg-card)", border: `1px solid ${label.color}22`, borderRadius: 20, padding: "3rem 2rem", textAlign: "center" }}>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "1.5rem" }}>
                     Your First Impressions Score
                   </div>
                   <motion.div
@@ -336,7 +336,7 @@ export default function ImpressionsAudit() {
                   >
                     {pct}
                   </motion.div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.25)", marginBottom: "1.25rem" }}>out of 100</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", letterSpacing: "0.12em", color: "rgba(var(--ink-rgb),0.25)", marginBottom: "1.25rem" }}>out of 100</div>
                   <div style={{ fontSize: "1.75rem", fontWeight: 800, color: label.color, marginBottom: "1rem", letterSpacing: "-0.02em" }}>{label.text}</div>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.8, maxWidth: "34rem", margin: "0 auto" }}>{label.sub}</p>
                 </div>
@@ -347,7 +347,7 @@ export default function ImpressionsAudit() {
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#ff6b6b", marginBottom: "1.5rem" }}>What&apos;s Costing You Clients</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                       {weakGaps.map(g => (
-                        <div key={g.title} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "1.25rem 1.5rem" }}>
+                        <div key={g.title} style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)", borderRadius: 12, padding: "1.25rem 1.5rem" }}>
                           <div style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.5rem" }}>{g.title}</div>
                           <p style={{ fontSize: "0.78rem", color: "rgba(255,100,100,0.85)", lineHeight: 1.7, marginBottom: "0.625rem" }}>✕ {g.gap}</p>
                           <p style={{ fontSize: "0.78rem", color: "var(--accent)", lineHeight: 1.7 }}>✓ {g.fix}</p>
@@ -358,7 +358,7 @@ export default function ImpressionsAudit() {
                 )}
 
                 {/* Inline contact form */}
-                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "2rem" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--ink-rgb),0.08)", borderRadius: 20, padding: "2rem" }}>
                   <ToolContactForm
                     inline
                     toolName="First Impressions Audit"

@@ -121,19 +121,19 @@ export default function AboutPage() {
               >
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.625rem", flexWrap: "wrap", marginBottom: "0.4rem" }}>
                   <span style={{ fontWeight: 800, fontSize: "1rem", letterSpacing: "-0.01em" }}>nuuhaven</span>
-                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em" }}>/njuːˈheɪvən/</span>
+                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.75rem", color: "rgba(var(--ink-rgb),0.4)", letterSpacing: "0.05em" }}>/njuːˈheɪvən/</span>
                   <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "var(--accent)", letterSpacing: "0.1em", textTransform: "uppercase" }}>noun</span>
                 </div>
-                <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: "0.625rem" }}>
+                <p style={{ color: "rgba(var(--ink-rgb),0.65)", fontSize: "0.85rem", lineHeight: 1.75, marginBottom: "0.625rem" }}>
                   A new place of safety, clarity, and professional refuge, a foundation built to protect and elevate a business&apos; identity in the world.
                 </p>
-                <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "0.5rem" }}>
+                <p style={{ color: "rgba(var(--ink-rgb),0.35)", fontSize: "0.78rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "0.5rem" }}>
                   &ldquo;We finally found our <span style={{ color: "var(--accent)", fontStyle: "normal" }}>Nuuhaven</span>, the brand, website, and presence that matched how we actually operate.&rdquo;
                 </p>
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
                   {["refuge", "foundation", "haven", "launchpad", "home"].map((s, i, arr) => (
-                    <span key={s} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>
-                      {s}{i < arr.length - 1 && <span style={{ color: "rgba(255,255,255,0.15)", marginLeft: "0.5rem" }}>·</span>}
+                    <span key={s} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(var(--ink-rgb),0.3)", letterSpacing: "0.08em" }}>
+                      {s}{i < arr.length - 1 && <span style={{ color: "rgba(var(--ink-rgb),0.15)", marginLeft: "0.5rem" }}>·</span>}
                     </span>
                   ))}
                 </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
             {/* Founder card */}
             <div style={{ flexShrink: 0, display: "flex", justifyContent: "center" }}>
               <HolographicCard style={{ padding: 0, overflow: "hidden", width: isMobile ? "100%" : 290, maxWidth: 360 }}>
-                <div style={{ position: "relative", width: "100%", height: 340, background: "#0a0a0a" }}>
+                <div style={{ position: "relative", width: "100%", height: 340, background: "var(--surface)" }}>
                   <Image
                     src="/images/founder.jpg"
                     alt="Tshepang Ramatsoma, Founder & MD, Nuuhaven"
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 <div style={{ padding: "1.375rem 1.375rem 1.625rem" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.57rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.35rem" }}>Founder & Managing Director</div>
                   <div style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: "0.35rem" }}>Tshepang Ramatsoma</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", marginBottom: "0.875rem" }}>Strategy & Transactions · Big 4 · Nuuhaven</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(var(--ink-rgb),0.35)", letterSpacing: "0.08em", marginBottom: "0.875rem" }}>Strategy & Transactions · Big 4 · Nuuhaven</div>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.78rem", lineHeight: 1.8, marginBottom: "1.125rem" }}>
                     Strategist. Brand architect. Digital builder. BCom Honours, University of Pretoria. Advisor to founders navigating growth and market positioning.
                   </p>
@@ -174,7 +174,7 @@ export default function AboutPage() {
                     >
                       LinkedIn ↗
                     </a>
-                    <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", fontFamily: "var(--font-geist-mono)", fontSize: "0.63rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", textDecoration: "none", padding: "0.45rem 0.875rem", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 6, transition: "all 0.2s" }}>
+                    <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", fontFamily: "var(--font-geist-mono)", fontSize: "0.63rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.45)", textDecoration: "none", padding: "0.45rem 0.875rem", border: "1px solid rgba(var(--ink-rgb),0.1)", borderRadius: 6, transition: "all 0.2s" }}>
                       Contact
                     </Link>
                   </div>
@@ -186,11 +186,11 @@ export default function AboutPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="section" style={{ background: "var(--bg-primary)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingTop: 0, paddingBottom: 0 }}>
+      <section className="section" style={{ background: "var(--bg-primary)", borderBottom: "1px solid rgba(var(--ink-rgb),0.06)", paddingTop: 0, paddingBottom: 0 }}>
         <div className="section-inner">
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", padding: "2.75rem 0" }}>
             {STATS.map((s, i) => (
-              <div key={s.label} style={{ textAlign: "center", borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none", padding: "0 2rem" }}>
+              <div key={s.label} style={{ textAlign: "center", borderRight: i < STATS.length - 1 ? "1px solid rgba(var(--ink-rgb),0.06)" : "none", padding: "0 2rem" }}>
                 <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "2rem", fontWeight: 800, color: "var(--accent)", marginBottom: "0.5rem", lineHeight: 1 }}>{s.value}</div>
                 <div className="label-mono" style={{ color: "var(--text-muted)" }}>{s.label}</div>
               </div>
@@ -228,10 +228,10 @@ export default function AboutPage() {
                     position: "absolute", left: 0, top: "1.375rem",
                     width: 22, height: 22, borderRadius: "50%",
                     background: step.highlight ? "var(--accent)" : "var(--bg-card)",
-                    border: `1px solid ${step.highlight ? "var(--accent)" : "rgba(255,255,255,0.15)"}`,
+                    border: `1px solid ${step.highlight ? "var(--accent)" : "rgba(var(--ink-rgb),0.15)"}`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: "0.55rem",
-                    color: step.highlight ? "#000" : "rgba(255,255,255,0.45)",
+                    color: step.highlight ? "#000" : "rgba(var(--ink-rgb),0.45)",
                     zIndex: 1, flexShrink: 0,
                   }}>
                     {step.icon}
@@ -253,16 +253,16 @@ export default function AboutPage() {
                         <div>
                           {/* Tag + period */}
                           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.4rem", flexWrap: "wrap" }}>
-                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: step.highlight ? "var(--accent)" : "rgba(255,255,255,0.28)" }}>{step.period}</span>
-                            <span style={{ width: 3, height: 3, borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "inline-block" }} />
-                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: step.highlight ? "rgba(var(--accent-rgb),0.7)" : "rgba(255,255,255,0.22)" }}>{step.tag}</span>
+                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: step.highlight ? "var(--accent)" : "rgba(var(--ink-rgb),0.28)" }}>{step.period}</span>
+                            <span style={{ width: 3, height: 3, borderRadius: "50%", background: "rgba(var(--ink-rgb),0.2)", display: "inline-block" }} />
+                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: step.highlight ? "rgba(var(--accent-rgb),0.7)" : "rgba(var(--ink-rgb),0.22)" }}>{step.tag}</span>
                           </div>
                           {/* Title */}
                           <div style={{ fontWeight: 700, fontSize: "0.975rem", color: step.highlight ? "var(--accent)" : "var(--text)", marginBottom: "0.2rem" }}>{step.title}</div>
                           {/* Institution */}
-                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.3)" }}>{step.institution}</div>
+                          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.08em", color: "rgba(var(--ink-rgb),0.3)" }}>{step.institution}</div>
                         </div>
-                        <span style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.65rem", flexShrink: 0, paddingTop: "0.15rem" }}>
+                        <span style={{ color: "rgba(var(--ink-rgb),0.25)", fontSize: "0.65rem", flexShrink: 0, paddingTop: "0.15rem" }}>
                           {activeStep === i ? "▲" : "▼"}
                         </span>
                       </div>
@@ -276,7 +276,7 @@ export default function AboutPage() {
                             transition={{ duration: 0.3 }}
                             style={{ overflow: "hidden" }}
                           >
-                            <p style={{ marginTop: "1rem", fontSize: "0.875rem", lineHeight: 1.9, color: "var(--text-muted)", paddingTop: "0.75rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                            <p style={{ marginTop: "1rem", fontSize: "0.875rem", lineHeight: 1.9, color: "var(--text-muted)", paddingTop: "0.75rem", borderTop: "1px solid rgba(var(--ink-rgb),0.06)" }}>
                               {step.desc}
                             </p>
                           </motion.div>

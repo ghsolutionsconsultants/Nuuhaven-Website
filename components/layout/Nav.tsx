@@ -49,9 +49,9 @@ export default function Nav() {
         style={{
           height: 68,
           padding: "0 40px",
-          background: scrolled ? "rgba(0,0,0,0.88)" : "transparent",
+          background: scrolled ? "rgba(var(--paper-rgb),0.88)" : "transparent",
           backdropFilter: scrolled ? "blur(24px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.07)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(var(--ink-rgb),0.07)" : "none",
           transition: "background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease",
         }}
       >
@@ -83,7 +83,7 @@ export default function Nav() {
                 href={l.href}
                 className="label-mono text-xs tracking-widest uppercase transition-colors duration-200 hover:text-white"
                 data-cursor="OPEN"
-                style={{ color: "rgba(255,255,255,0.5)" }}
+                style={{ color: "rgba(var(--ink-rgb),0.5)" }}
               >
                 {l.label}
               </Link>
@@ -156,7 +156,7 @@ export default function Nav() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[99] flex flex-col items-center justify-center md:hidden"
-            style={{ background: "rgba(0,0,0,0.97)" }}
+            style={{ background: "rgba(var(--paper-rgb),0.97)" }}
           >
             {[...leftLinks, ...rightLinks].map((l, i) => (
               <motion.div

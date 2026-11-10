@@ -5,16 +5,17 @@
   --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #070707;
-  --color-bg-card: #111111;
-  --color-accent: #dfff00;
-  --color-accent-2: #e8ff5a;
-  --color-text: #ffffff;
-  --color-text-muted: #a0a0a0;
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
 }
 
 :root {
+  color-scheme: dark;
   --bg-primary: #000000;
   --bg-secondary: #070707;
   --bg-card: #111111;
@@ -24,9 +25,42 @@
   --text: #ffffff;
   --text-muted: #c0c0c0;
   --text-subtle: #888888;
-  --border-subtle: rgba(255, 255, 255, 0.06);
+  /* Theme primitives: foreground ink, page paper, card surface */
+  --ink-rgb: 255, 255, 255;
+  --paper-rgb: 0, 0, 0;
+  --surface: #0b0b0b;
+  --surface-rgb: 14, 14, 14;
+  --surface-2: #1a1a1a;
+  --warn: #ffc800;
+  --warn-rgb: 255, 200, 0;
+  --shadow-strong: 0.8;
+  --shadow-soft: 0.5;
+  --cursor: var(--accent);
+  --border-subtle: rgba(var(--ink-rgb), 0.06);
   --glow-accent: 0 0 40px rgba(var(--accent-rgb), 0.15);
   --glow-accent-strong: 0 0 80px rgba(var(--accent-rgb), 0.3);
+}
+
+/* Light theme: warm paper, white cards, near-black ink. The lime accent is
+   unchanged; where lime is used as text it sits on a charcoal chip (below). */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg-primary: #f6f6f1;
+  --bg-secondary: #eeeee7;
+  --bg-card: #ffffff;
+  --text: #0e0e0e;
+  --text-muted: #4a4a44;
+  --text-subtle: #6b6b64;
+  --ink-rgb: 14, 14, 14;
+  --paper-rgb: 246, 246, 241;
+  --surface: #ffffff;
+  --surface-rgb: 255, 255, 255;
+  --surface-2: #f1f1ec;
+  --warn: #8f6400;
+  --warn-rgb: 143, 100, 0;
+  --shadow-strong: 0.14;
+  --shadow-soft: 0.08;
+  --cursor: #0e0e0e;
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,11 +88,15 @@ h1, h2, h3, h4, h5, h6 {
 a { color: inherit; }
 
 /* Lift deeply-dimmed inline text to a readable minimum */
-[style*="rgba(255,255,255,0.2)"],
-[style*="rgba(255,255,255,0.22)"],
-[style*="rgba(255,255,255,0.25)"],
-[style*="rgba(255,255,255,0.28)"] {
-  color: rgba(255,255,255,0.45) !important;
+[style*="color:rgba(var(--ink-rgb),0.2)"],
+[style*="color:rgba(var(--ink-rgb),0.22)"],
+[style*="color:rgba(var(--ink-rgb),0.25)"],
+[style*="color:rgba(var(--ink-rgb),0.28)"],
+[style*="color: rgba(var(--ink-rgb),0.2)"],
+[style*="color: rgba(var(--ink-rgb),0.22)"],
+[style*="color: rgba(var(--ink-rgb),0.25)"],
+[style*="color: rgba(var(--ink-rgb),0.28)"] {
+  color: rgba(var(--ink-rgb),0.45) !important;
 }
 
 body {
@@ -133,7 +171,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 2;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.008) 2px, rgba(255,255,255,0.008) 4px);
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(var(--ink-rgb),0.008) 2px, rgba(var(--ink-rgb),0.008) 4px);
 }
 
 @property --holo-angle {
@@ -142,7 +180,7 @@ body {
   initial-value: 0deg;
 }
 .holo-card {
-  background: rgba(17, 17, 17, 0.85);
+  background: rgba(var(--surface-rgb), 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 12px;
@@ -158,7 +196,7 @@ body {
     will-change: auto;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(17, 17, 17, 0.97);
+    background: rgba(var(--surface-rgb), 0.97);
   }
 }
 .holo-card::before {
@@ -167,7 +205,7 @@ body {
   inset: 0;
   border-radius: 12px;
   padding: 1px;
-  background: conic-gradient(from var(--holo-angle), rgba(var(--accent-rgb),0.4), rgba(255,255,255,0.1), rgba(var(--accent-rgb),0.1), rgba(255,200,0,0.2), rgba(var(--accent-rgb),0.4));
+  background: conic-gradient(from var(--holo-angle), rgba(var(--accent-rgb),0.4), rgba(var(--ink-rgb),0.1), rgba(var(--accent-rgb),0.1), rgba(255,200,0,0.2), rgba(var(--accent-rgb),0.4));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -229,7 +267,7 @@ body {
   font-size: 0.8rem;
   padding: 0.875rem 2rem;
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--ink-rgb), 0.2);
   cursor: none;
   transition: border-color 0.3s ease, color 0.3s ease;
   will-change: transform;
@@ -357,32 +395,54 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 }
 
 
-/* ── Light mode ──────────────────────────────────────────────────────────────
-   Inverts the whole dark design to light. The accent is swapped for a
-   pre-inverted value that renders as a readable green on white. Photos,
-   screenshots and video are flipped back; brand logos stay inverted. */
-html[data-theme="light"] {
-  filter: invert(1) hue-rotate(180deg);
-  --accent: #008d36;
-  --accent-2: #009a3d;
-  --accent-rgb: 0, 141, 54;
-  --color-accent: #008d36;
-  --color-accent-2: #009a3d;
-}
-html[data-theme="light"] img:not([src*="brand"]),
-html[data-theme="light"] video,
-html[data-theme="light"] iframe,
-html[data-theme="light"] [data-keep-colors] {
-  filter: invert(1) hue-rotate(180deg);
+/* ── Light theme refinements ──────────────────────────────────────────────── */
+
+/* Lime text is unreadable on white, so in light mode it sits on a charcoal chip.
+   Matches inline styles whose colour (not border/background colour) is the accent. */
+html[data-theme="light"] [style^="color:var(--accent)"],
+html[data-theme="light"] [style*=";color:var(--accent)"],
+html[data-theme="light"] [style^="color: var(--accent)"],
+html[data-theme="light"] [style*="; color: var(--accent)"],
+html[data-theme="light"] .lime-chip {
+  background-color: #171717 !important;
+  border-radius: 5px;
+  padding-inline: 0.32em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
-/* Light mode: the drifting particle fields and noise texture read as dark
-   specks on white, so the full-page field and noise are hidden and the hero's
-   particles softened. */
+/* Lime fills keep a hairline edge so they don't dissolve into the white page. */
+html[data-theme="light"] .btn-accent {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+html[data-theme="light"] .btn-accent:hover {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(120, 140, 0, 0.25);
+}
+html[data-theme="light"] .btn-outline:hover {
+  color: var(--text);
+  border-color: #0e0e0e;
+  background: var(--accent);
+}
+
+/* Tailwind white text utilities follow the theme ink. */
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .hover\:text-white:hover {
+  color: var(--text) !important;
+}
+
+/* Logos: the neon mark sits on a black pill so it keeps its true colours. */
+html[data-theme="light"] img[src*="logo-transparent"] {
+  background: #0b0b0b;
+  border-radius: 999px;
+  padding: 7px 16px;
+  box-sizing: content-box;
+}
+html[data-theme="light"] img[src*="logo-main-hd"] {
+  border-radius: 12px;
+}
+
+/* The drifting particle field and noise texture read as specks on white. */
 html[data-theme="light"] .bg-particles,
 html[data-theme="light"] .noise-overlay::after {
   display: none;
-}
-html[data-theme="light"] .hero-canvas {
-  opacity: 0.35;
 }

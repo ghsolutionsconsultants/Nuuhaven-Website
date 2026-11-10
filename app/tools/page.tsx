@@ -101,8 +101,8 @@ export default function ToolsPage() {
                 { label: "What you get", value: "Specific, actionable insights" },
                 { label: "No signup required", value: "Start immediately" },
               ].map(item => (
-                <div key={item.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>{item.label}</span>
+                <div key={item.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.875rem 1.25rem", background: "rgba(var(--ink-rgb),0.03)", borderRadius: 8, border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
+                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.35)" }}>{item.label}</span>
                   <span style={{ fontSize: "0.85rem", color: "var(--accent)", fontWeight: 600 }}>{item.value}</span>
                 </div>
               ))}
@@ -112,15 +112,15 @@ export default function ToolsPage() {
       </section>
 
       {/* How it works */}
-      <section style={{ padding: "2.5rem 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ padding: "2.5rem 0", borderBottom: "1px solid rgba(var(--ink-rgb),0.05)" }}>
         <div className="section-inner" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1.25rem, 4vw, 4rem)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Recommended order:</span>
+            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.25)" }}>Recommended order:</span>
             {["Assessment", "Impressions Audit", "Solution Finder", "Cost Estimator"].map((t, i) => (
               <div key={t} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", color: "rgba(255,255,255,0.2)" }}>0{i + 1}</span>
-                <span style={{ fontSize: "0.82rem", color: i === 0 ? "var(--accent)" : "rgba(255,255,255,0.5)", fontWeight: i === 0 ? 600 : 400 }}>{t}</span>
-                {i < 3 && <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.7rem" }}>→</span>}
+                <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", color: "rgba(var(--ink-rgb),0.2)" }}>0{i + 1}</span>
+                <span style={{ fontSize: "0.82rem", color: i === 0 ? "var(--accent)" : "rgba(var(--ink-rgb),0.5)", fontWeight: i === 0 ? 600 : 400 }}>{t}</span>
+                {i < 3 && <span style={{ color: "rgba(var(--ink-rgb),0.15)", fontSize: "0.7rem" }}>→</span>}
               </div>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default function ToolsPage() {
                   alignItems: "start",
                   padding: isMobile ? "1.75rem" : "3rem",
                   background: "var(--bg-card)",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(var(--ink-rgb),0.07)",
                   borderRadius: 20,
                   position: "relative",
                   overflow: "hidden",
@@ -151,7 +151,7 @@ export default function ToolsPage() {
                 <div style={{
                   position: "absolute", right: "2rem", top: "1.5rem",
                   fontFamily: "var(--font-geist-mono)", fontSize: "5rem", fontWeight: 900,
-                  color: "rgba(255,255,255,0.025)", lineHeight: 1, pointerEvents: "none", userSelect: "none",
+                  color: "rgba(var(--ink-rgb),0.025)", lineHeight: 1, pointerEvents: "none", userSelect: "none",
                 }}>
                   {tool.number}
                 </div>
@@ -159,7 +159,7 @@ export default function ToolsPage() {
                 {/* Left: icon + meta */}
                 <div>
                   <div style={{ fontSize: "2.5rem", color: "var(--accent)", marginBottom: "1.5rem", opacity: 0.9 }}>{tool.icon}</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.5rem" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)", marginBottom: "0.5rem" }}>
                     Tool {tool.number}
                   </div>
                   <h2 style={{ fontSize: "1.25rem", fontWeight: 700, lineHeight: 1.2, marginBottom: "0.75rem", letterSpacing: "-0.01em" }}>{tool.title}</h2>
@@ -174,19 +174,19 @@ export default function ToolsPage() {
 
                 {/* Middle: description + features */}
                 <div>
-                  <p style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.9, fontSize: "0.9rem", marginBottom: "2rem" }}>{tool.desc}</p>
+                  <p style={{ color: "rgba(var(--ink-rgb),0.65)", lineHeight: 1.9, fontSize: "0.9rem", marginBottom: "2rem" }}>{tool.desc}</p>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                     {tool.features.map(f => (
                       <div key={f.text} style={{ display: "flex", alignItems: "flex-start", gap: "0.625rem" }}>
                         <span style={{ color: "var(--accent)", fontSize: "0.7rem", marginTop: "0.1rem", flexShrink: 0 }}>✓</span>
-                        <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>{f.text}</span>
+                        <span style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.55)", lineHeight: 1.5 }}>{f.text}</span>
                       </div>
                     ))}
                   </div>
                   {tool.when && (
                     <div style={{ marginTop: "1.75rem", padding: "0.875rem 1.125rem", background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 8 }}>
-                      <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>When to use: </span>
-                      <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)" }}>{tool.when}</span>
+                      <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.3)" }}>When to use: </span>
+                      <span style={{ fontSize: "0.82rem", color: "rgba(var(--ink-rgb),0.55)" }}>{tool.when}</span>
                     </div>
                   )}
                 </div>
@@ -201,7 +201,7 @@ export default function ToolsPage() {
                   >
                     {tool.cta}
                   </Link>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", textAlign: "center" }}>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(var(--ink-rgb),0.2)", textAlign: "center" }}>
                     Free · No signup
                   </div>
                 </div>

@@ -32,8 +32,8 @@ export default function ThemeToggle({ size = 36 }: { size?: number }) {
       style={{
         width: size, height: size, flexShrink: 0, borderRadius: "50%",
         display: "grid", placeItems: "center", cursor: "pointer",
-        border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.05)",
-        color: "rgba(255,255,255,0.8)", transition: "border-color .2s, color .2s",
+        border: "1px solid rgba(var(--ink-rgb),0.18)", background: "rgba(var(--ink-rgb),0.05)",
+        color: "rgba(var(--ink-rgb),0.8)", transition: "border-color .2s, color .2s",
       }}
     >
       {light ? (
