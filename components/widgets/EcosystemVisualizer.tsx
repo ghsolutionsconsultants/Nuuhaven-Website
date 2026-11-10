@@ -128,11 +128,8 @@ export default function EcosystemVisualizer() {
             <h2 className="display-xl" style={{ maxWidth: "16ch", marginBottom: "1.75rem" }}>
               Businesses Are<br />Systems,<br />Not Websites.
             </h2>
-            <p className="text-base" style={{ color: "var(--text-muted)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
+            <p className="text-base" style={{ color: "var(--text-muted)", lineHeight: 1.85, maxWidth: "46ch" }}>
               Nuuhaven doesn&apos;t build websites. We build complete business ecosystems, every node connected, every touchpoint aligned, every asset working together.
-            </p>
-            <p className="text-sm" style={{ color: "rgba(160,160,160,0.65)", lineHeight: 1.8 }}>
-              Tap any node to explore what we deliver for that part of your business.
             </p>
           </div>
 
@@ -140,7 +137,7 @@ export default function EcosystemVisualizer() {
           <div className="xl:w-3/5 w-full flex justify-center">
             <svg
               viewBox={`0 0 ${VB} ${VB}`}
-              style={{ width: "100%", maxWidth: 460, display: "block" }}
+              style={{ width: "100%", maxWidth: 560, display: "block", overflow: "visible" }}
               aria-label="Business ecosystem diagram"
             >
               {/* Orbit rings */}
@@ -203,7 +200,7 @@ export default function EcosystemVisualizer() {
                       x={x} y={y}
                       textAnchor="middle"
                       dominantBaseline="central"
-                      fontSize={15}
+                      fontSize={18}
                       fill={isActive ? "var(--accent)" : "rgba(255,255,255,0.5)"}
                       style={{ pointerEvents: "none", userSelect: "none" }}
                     >
@@ -212,16 +209,16 @@ export default function EcosystemVisualizer() {
                     {/* Label sits OUTSIDE the bubble, below it, never overlaps */}
                     <text
                       x={x}
-                      y={y + NODE_R + 6}
+                      y={y + NODE_R + 16}
                       textAnchor="middle"
-                      fontSize={7.5}
+                      fontSize={10}
                       fontWeight="700"
                       fill={isActive ? "var(--accent)" : "rgba(160,160,160,0.85)"}
                       letterSpacing="0.06em"
                       style={{ pointerEvents: "none", userSelect: "none" }}
                     >
                       <tspan x={x} dy={0}>{line1.toUpperCase()}</tspan>
-                      {line2 && <tspan x={x} dy={10}>{line2.toUpperCase()}</tspan>}
+                      {line2 && <tspan x={x} dy={12}>{line2.toUpperCase()}</tspan>}
                     </text>
                   </g>
                 );
@@ -239,12 +236,12 @@ export default function EcosystemVisualizer() {
                   fill="none" stroke="rgba(var(--accent-rgb),0.07)" strokeWidth={1}
                 />
               )}
-              <text x={CX} y={CY - 8} textAnchor="middle" fontSize={8.5} fontWeight="800"
+              <text x={CX} y={CY - 5} textAnchor="middle" fontSize={10.5} fontWeight="800"
                 letterSpacing="0.18em" fill="var(--accent)"
                 style={{ pointerEvents: "none", userSelect: "none" }}>
                 YOUR
               </text>
-              <text x={CX} y={CY + 8} textAnchor="middle" fontSize={8.5} fontWeight="800"
+              <text x={CX} y={CY + 11} textAnchor="middle" fontSize={10.5} fontWeight="800"
                 letterSpacing="0.18em" fill="var(--accent)"
                 style={{ pointerEvents: "none", userSelect: "none" }}>
                 BUSINESS
@@ -361,7 +358,7 @@ export default function EcosystemVisualizer() {
               }}
             >
               <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                Tap any node in the diagram above to explore what Nuuhaven delivers for that part of your business.
+                Select any node in the diagram to see what Nuuhaven delivers for that part of your business.
               </p>
             </motion.div>
           )}

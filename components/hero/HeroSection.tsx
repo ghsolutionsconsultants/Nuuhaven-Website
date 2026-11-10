@@ -216,7 +216,7 @@ export default function HeroSection() {
       className="relative noise-overlay"
       style={{ minHeight: "100svh", background: "var(--bg-primary)", overflow: "hidden" }}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
+      <canvas ref={canvasRef} className="hero-canvas absolute inset-0 z-0" style={{ pointerEvents: "none" }} />
 
       {/* Vignette layers */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1,

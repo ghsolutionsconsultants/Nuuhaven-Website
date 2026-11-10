@@ -358,14 +358,11 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 
 
 /* ── Light mode ──────────────────────────────────────────────────────────────
-   Inverts the whole dark design to light. The lime accent is swapped for a
-   pre-inverted value that renders as WhatsApp green. Photos, screenshots and video are
-   flipped back so they keep their true colours; brand logos (src contains
-   "brand") stay inverted so neon-on-black logos read dark-on-light. */
+   Inverts the whole dark design to light. The accent is swapped for a
+   pre-inverted value that renders as a readable green on white. Photos,
+   screenshots and video are flipped back; brand logos stay inverted. */
 html[data-theme="light"] {
   filter: invert(1) hue-rotate(180deg);
-  /* Pre-inverted values: after the invert filter these render as WhatsApp
-     green (#25D366 family, measured ~#2EBB64) instead of olive. */
   --accent: #008d36;
   --accent-2: #009a3d;
   --accent-rgb: 0, 141, 54;
@@ -377,4 +374,15 @@ html[data-theme="light"] video,
 html[data-theme="light"] iframe,
 html[data-theme="light"] [data-keep-colors] {
   filter: invert(1) hue-rotate(180deg);
+}
+
+/* Light mode: the drifting particle fields and noise texture read as dark
+   specks on white, so the full-page field and noise are hidden and the hero's
+   particles softened. */
+html[data-theme="light"] .bg-particles,
+html[data-theme="light"] .noise-overlay::after {
+  display: none;
+}
+html[data-theme="light"] .hero-canvas {
+  opacity: 0.35;
 }

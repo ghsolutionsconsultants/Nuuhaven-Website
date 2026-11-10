@@ -196,7 +196,7 @@ export default function GalaxyBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
+      className="bg-particles fixed inset-0 pointer-events-none"
       style={{ zIndex: 0, opacity: 0.9 }}
     />
   );
