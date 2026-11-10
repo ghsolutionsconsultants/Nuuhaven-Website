@@ -19,9 +19,9 @@ export default function LiveMetricsTicker() {
     <div
       className="relative overflow-hidden py-4"
       style={{
-        background: "rgba(223,255,0,0.04)",
-        borderTop: "1px solid rgba(223,255,0,0.12)",
-        borderBottom: "1px solid rgba(223,255,0,0.12)",
+        background: "rgba(var(--accent-rgb),0.04)",
+        borderTop: "1px solid rgba(var(--accent-rgb),0.12)",
+        borderBottom: "1px solid rgba(var(--accent-rgb),0.12)",
       }}
     >
       <motion.div

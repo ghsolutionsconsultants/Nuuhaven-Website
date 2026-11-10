@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import HolographicCard from "@/components/ui/HolographicCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -51,168 +51,151 @@ const projects = [
     accent: "#d4af37",
     outcome: "Premium brand presence enabling market entry and client acquisition.",
   },
+  {
+    id: "45one",
+    name: "45one",
+    industry: "Sports Media",
+    status: "Live",
+    statusColor: "#dfff00",
+    services: ["Brand Identity", "Website", "Content Platform", "Interactive Tools"],
+    url: "https://45one.co.za",
+    accent: "#f2ff00",
+    outcome: "In-depth football content platform with podcast, tactics board and quiz.",
+  },
+  {
+    id: "drnontu",
+    name: "Dr Nontu Medical Practice",
+    industry: "Healthcare",
+    status: "Live",
+    statusColor: "#dfff00",
+    services: ["Brand Identity", "Website", "Membership Plans", "Booking Journey"],
+    url: "https://drnontu.co.za",
+    accent: "#c9a24d",
+    outcome: "Warm, credible GP practice presence across two locations with membership plans.",
+  },
+  {
+    id: "cta",
+    name: "Code Trust Assurance",
+    industry: "Software Assurance",
+    status: "Live",
+    statusColor: "#dfff00",
+    services: ["Framework Website", "Trust Registry", "Documentation", "Brand System"],
+    url: "https://codetrustassurance.com",
+    accent: "#3b82f6",
+    outcome: "Authoritative home for a software trust standard, certification and public registry.",
+  },
+  {
+    id: "dtff",
+    name: "Digital Trust Futures Foundation",
+    industry: "Non-Profit / Digital Rights",
+    status: "Live",
+    statusColor: "#dfff00",
+    services: ["Brand Identity", "Website", "Programme Architecture", "Content"],
+    url: "https://digitaltrustfuturesfoundation.org",
+    accent: "#6fa3d8",
+    outcome: "Public-interest foundation protecting people as digital public infrastructure scales.",
+  },
 ];
 
-function SitePreviewer({ url, name, accent }: { url: string; name: string; accent: string }) {
-  const [failed, setFailed] = useState(false);
-
+function WorkCard({ p }: { p: (typeof projects)[number] }) {
+  const host = p.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
-    <div
-      className="relative overflow-hidden rounded-lg"
-      style={{
-        background: "#0a0a0a",
-        border: "1px solid rgba(255,255,255,0.08)",
-      }}
-    >
-      {/* Browser chrome */}
-      <div
-        className="flex items-center gap-2 px-3 py-2"
-        style={{ background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-      >
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
-          <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffbd2e" }} />
-          <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28ca41" }} />
-        </div>
-        <div
-          className="flex-1 flex items-center gap-1.5 px-2 py-0.5 rounded text-xs"
-          style={{ background: "rgba(255,255,255,0.04)", color: "var(--text-muted)", fontFamily: "monospace" }}
-        >
-          <div className="live-dot" style={{ background: accent, boxShadow: `0 0 4px ${accent}`, width: 5, height: 5 }} />
-          {url.replace("https://", "")}
-        </div>
-      </div>
-
-      {/* iframe or fallback */}
-      <div className="relative overflow-hidden" style={{ height: 320 }}>
-        {!failed ? (
-          <>
-            <iframe
-              src={url}
-              title={name}
-              className="border-0 previewer-frame"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "166.67%",
-                maxWidth: "none",
-                height: "166.67%",
-                transform: "scale(0.6)",
-                transformOrigin: "top left",
-                pointerEvents: "none",
-              }}
-              sandbox="allow-scripts allow-same-origin"
-              onError={() => setFailed(true)}
-              loading="lazy"
-            />
-            {/* Sits above iframe to block iframe from capturing touch/pointer — pointer-events none so scroll reaches the page */}
-            <div className="absolute inset-0" style={{ zIndex: 1, pointerEvents: "none" }} />
-          </>
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-            <div className="text-2xl" style={{ color: accent }}>◎</div>
-            <p className="text-xs text-center px-4" style={{ color: "var(--text-muted)" }}>
-              Site blocks embedding, open directly to view
-            </p>
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="label-mono text-xs px-3 py-1.5 rounded-full transition-colors hover:text-white"
-              style={{ border: `1px solid ${accent}40`, color: accent }}
-            >
-              Open Live Site ↗
+    <HolographicCard className="overflow-hidden group h-full">
+      <div className="flex flex-col h-full">
+        <Link href={`/work#${p.id}`} data-cursor="OPEN" aria-label={`${p.name} case study`}
+          className="block relative overflow-hidden" style={{ aspectRatio: "16 / 10", background: "#0a0a0a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`/images/work/${p.id}.jpg`} alt={`${p.name} website homepage`} loading="lazy"
+            className="transition-transform duration-500 group-hover:scale-[1.04]"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        </Link>
+        <div className="flex flex-col flex-1" style={{ padding: "1.25rem 1.25rem 1.4rem", gap: "0.7rem" }}>
+          <div className="label-mono" style={{ color: p.accent, fontSize: "0.6rem" }}>{p.industry}</div>
+          <h3 className="font-bold" style={{ fontSize: "1.15rem", lineHeight: 1.2 }}>{p.name}</h3>
+          <p className="text-sm" style={{ color: "var(--text-muted)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{p.outcome}</p>
+          <div className="flex items-center justify-between gap-3" style={{ marginTop: "auto", paddingTop: "0.8rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+            <Link href={`/work#${p.id}`} className="text-sm font-semibold" data-cursor="OPEN" style={{ color: "var(--text)" }}>
+              Case study <span style={{ color: "var(--accent)" }}>→</span>
+            </Link>
+            <a href={p.url} target="_blank" rel="noopener noreferrer" data-cursor="OPEN"
+              style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "rgba(255,255,255,0.45)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "55%" }}>
+              {host} ↗
             </a>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </HolographicCard>
   );
 }
 
 export default function SelectedWork() {
-  const [active, setActive] = useState<string | null>(null);
   const isMobile = useIsMobile();
+  const rail = useRef<HTMLDivElement>(null);
+  const [idx, setIdx] = useState(0);
+
+  const onScroll = () => {
+    const r = rail.current; if (!r) return;
+    const card = r.firstElementChild as HTMLElement | null;
+    if (!card) return;
+    setIdx(Math.min(projects.length - 1, Math.round(r.scrollLeft / (card.offsetWidth + 14))));
+  };
+  const go = (d: number) => {
+    const r = rail.current; const card = r?.firstElementChild as HTMLElement | null;
+    if (!r || !card) return;
+    const next = Math.max(0, Math.min(projects.length - 1, idx + d));
+    r.scrollTo({ left: next * (card.offsetWidth + 14), behavior: "smooth" });
+  };
+  const arrow = (d: number, disabled: boolean) => (
+    <button onClick={() => go(d)} disabled={disabled} aria-label={d > 0 ? "Next project" : "Previous project"}
+      style={{ width: 40, height: 40, borderRadius: "50%", border: "1px solid rgba(var(--accent-rgb),0.35)", background: "rgba(var(--accent-rgb),0.08)", color: "var(--accent)", opacity: disabled ? 0.3 : 1, display: "grid", placeItems: "center", cursor: disabled ? "default" : "pointer" }}>
+      {d > 0 ? "→" : "←"}
+    </button>
+  );
 
   return (
-    <section className="section noise-overlay" style={{ background: "var(--bg-primary)", overflowX: "hidden" }}>
+    <section className="section noise-overlay" style={{ background: "var(--bg-primary)", overflowX: "clip" }}>
       <div className="section-inner">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10" style={{ marginBottom: "5rem" }}>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8" style={{ marginBottom: isMobile ? "2.25rem" : "3.5rem" }}>
           <div>
             <div className="accent-line">
-              <span className="label-mono">Selected Work</span>
+              <span className="label-mono">Selected Work · {projects.length} live projects</span>
             </div>
             <h2 className="display-xl" style={{ maxWidth: "16ch" }}>
               Client<br />Ecosystems<br />We&apos;ve Built.
             </h2>
           </div>
           <Link href="/work" className="btn-outline self-start md:self-end" data-cursor="EXPLORE">
-            Enter Command Centre →
+            View all work →
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {projects.map((p, i) => (
-            <motion.div
-              key={p.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-            >
-              <HolographicCard className="overflow-hidden group">
-                {/* Live site preview */}
-                <SitePreviewer url={p.url} name={p.name} accent={p.accent} />
-
-                {/* Info */}
-                <div style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
-                  <div className="flex items-center justify-between" style={{ marginBottom: "1.5rem" }}>
-                    <div className="label-mono" style={{ color: p.accent }}>{p.industry}</div>
-                    <div className="flex items-center gap-2">
-                      <div className="live-dot" style={{ background: p.statusColor, boxShadow: `0 0 6px ${p.statusColor}` }} />
-                      <span className="label-mono text-xs">{p.status}</span>
-                    </div>
-                  </div>
-
-                  <h3 className="font-bold text-xl" style={{ marginBottom: "1rem" }}>{p.name}</h3>
-                  <p className="text-sm" style={{ color: "var(--text-muted)", lineHeight: 2, marginBottom: "2rem" }}>{p.outcome}</p>
-
-                  <div className="flex flex-wrap gap-2" style={{ marginBottom: "2.5rem" }}>
-                    {p.services.map((s) => (
-                      <span
-                        key={s}
-                        className="text-xs px-3 py-1.5 rounded-full"
-                        style={{
-                          background: "rgba(255,255,255,0.04)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          color: "var(--text-muted)",
-                        }}
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col gap-2 sm:flex-row">
-                    <Link href="/work" className="btn-accent text-xs px-4 py-2.5" data-cursor="OPEN">
-                      View Workspace
-                    </Link>
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-outline text-xs px-4 py-2.5"
-                      data-cursor="OPEN"
-                    >
-                      Live Site ↗
-                    </a>
-                  </div>
+        {isMobile ? (
+          <>
+            <div className="flex items-center justify-between" style={{ marginBottom: "0.9rem" }}>
+              <span className="label-mono" style={{ fontSize: "0.6rem", color: "var(--accent)" }}>
+                {String(idx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")} · swipe →
+              </span>
+              <div className="flex gap-2">{arrow(-1, idx === 0)}{arrow(1, idx === projects.length - 1)}</div>
+            </div>
+            <div ref={rail} onScroll={onScroll} className="hide-scrollbar"
+              style={{ display: "flex", gap: 14, overflowX: "auto", scrollSnapType: "x mandatory", margin: "0 -1.25rem", padding: "0 1.25rem 0.5rem", scrollPaddingLeft: "1.25rem" }}>
+              {projects.map(p => (
+                <div key={p.id} style={{ flex: "0 0 84%", scrollSnapAlign: "start" }}>
+                  <WorkCard p={p} />
                 </div>
-              </HolographicCard>
-            </motion.div>
-          ))}
-        </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
+            {projects.map((p, i) => (
+              <motion.div key={p.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, delay: (i % 4) * 0.08 }}>
+                <WorkCard p={p} />
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

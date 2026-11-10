@@ -134,7 +134,7 @@ export default function ToolsTeaser() {
                 className="rounded-xl overflow-hidden"
                 style={{
                   background: "rgba(17,17,17,0.85)",
-                  border: isOpen ? "1px solid rgba(223,255,0,0.3)" : "1px solid rgba(255,255,255,0.07)",
+                  border: isOpen ? "1px solid rgba(var(--accent-rgb),0.3)" : "1px solid rgba(255,255,255,0.07)",
                   backdropFilter: "blur(20px)",
                   transition: "border-color 0.25s",
                 }}
@@ -146,7 +146,7 @@ export default function ToolsTeaser() {
                   onClick={() => setExpanded(isOpen ? null : tool.id)}
                   data-cursor="EXPLORE"
                 >
-                  <span className="label-mono" style={{ color: "rgba(223,255,0,0.4)", fontSize: "0.65rem", flexShrink: 0 }}>
+                  <span className="label-mono" style={{ color: "rgba(var(--accent-rgb),0.4)", fontSize: "0.65rem", flexShrink: 0 }}>
                     {tool.number}
                   </span>
                   <span style={{ color: "var(--accent)", fontSize: "1.25rem", flexShrink: 0 }}>
@@ -159,7 +159,7 @@ export default function ToolsTeaser() {
                   {picked && (
                     <span
                       className="label-mono text-xs px-2 py-0.5 rounded-full flex-shrink-0"
-                      style={{ background: "rgba(223,255,0,0.1)", border: "1px solid rgba(223,255,0,0.3)", color: "var(--accent)" }}
+                      style={{ background: "rgba(var(--accent-rgb),0.1)", border: "1px solid rgba(var(--accent-rgb),0.3)", color: "var(--accent)" }}
                     >
                       Answer saved
                     </span>
@@ -207,8 +207,8 @@ export default function ToolsTeaser() {
                             <div
                               className="rounded-lg text-xs"
                               style={{
-                                background: "rgba(223,255,0,0.04)",
-                                border: "1px solid rgba(223,255,0,0.1)",
+                                background: "rgba(var(--accent-rgb),0.04)",
+                                border: "1px solid rgba(var(--accent-rgb),0.1)",
                                 padding: "0.75rem 1rem",
                                 color: "var(--accent)",
                                 lineHeight: 1.7,
@@ -237,8 +237,8 @@ export default function ToolsTeaser() {
                                     className="text-left rounded-lg text-xs font-medium transition-all duration-200"
                                     style={{
                                       padding: "0.6rem 0.875rem",
-                                      background: isSel ? "rgba(223,255,0,0.1)" : "rgba(255,255,255,0.04)",
-                                      border: isSel ? "1px solid rgba(223,255,0,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                                      background: isSel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)",
+                                      border: isSel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.08)",
                                       color: isSel ? "var(--accent)" : "rgba(255,255,255,0.65)",
                                       cursor: "pointer",
                                     }}

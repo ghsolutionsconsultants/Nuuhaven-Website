@@ -358,10 +358,10 @@ export default function SolutionFinder() {
                           data-cursor="SELECT"
                           style={{
                             textAlign: "left", padding: "1.25rem 1.375rem", borderRadius: 12, cursor: "pointer",
-                            background: isSelected ? "rgba(223,255,0,0.07)" : "rgba(255,255,255,0.025)",
-                            border: isSelected ? "1px solid rgba(223,255,0,0.45)" : "1px solid rgba(255,255,255,0.07)",
+                            background: isSelected ? "rgba(var(--accent-rgb),0.07)" : "rgba(255,255,255,0.025)",
+                            border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
                             transition: "all 0.2s",
-                            boxShadow: isSelected ? "0 0 20px rgba(223,255,0,0.07)" : "none",
+                            boxShadow: isSelected ? "0 0 20px rgba(var(--accent-rgb),0.07)" : "none",
                           }}
                         >
                           <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
@@ -413,7 +413,7 @@ export default function SolutionFinder() {
                 {/* Step indicator dots */}
                 <div style={{ display: "flex", justifyContent: "center", gap: "0.375rem" }}>
                   {QUESTIONS.map((_, i) => (
-                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(223,255,0,0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
                   ))}
                 </div>
               </motion.div>
@@ -426,11 +426,11 @@ export default function SolutionFinder() {
               >
                 <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden" }}>
                   {/* Result header */}
-                  <div style={{ padding: "2rem 2.5rem", background: "rgba(223,255,0,0.04)", borderBottom: "1px solid rgba(223,255,0,0.1)" }}>
+                  <div style={{ padding: "2rem 2.5rem", background: "rgba(var(--accent-rgb),0.04)", borderBottom: "1px solid rgba(var(--accent-rgb),0.1)" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.75rem" }}>Your Recommended Solution</div>
                     <h2 style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>{recommendation?.name}</h2>
                     {recommendation?.badge && (
-                      <div style={{ display: "inline-flex", padding: "0.3rem 0.875rem", background: "rgba(223,255,0,0.1)", border: "1px solid rgba(223,255,0,0.25)", borderRadius: 999 }}>
+                      <div style={{ display: "inline-flex", padding: "0.3rem 0.875rem", background: "rgba(var(--accent-rgb),0.1)", border: "1px solid rgba(var(--accent-rgb),0.25)", borderRadius: 999 }}>
                         <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--accent)" }}>{recommendation.badge}</span>
                       </div>
                     )}
@@ -462,14 +462,14 @@ export default function SolutionFinder() {
                       </p>
                     </div>
 
-                    <div style={{ padding: "1.25rem 1.5rem", background: "rgba(223,255,0,0.04)", border: "1px solid rgba(223,255,0,0.15)", borderRadius: 12, marginBottom: "0" }}>
+                    <div style={{ padding: "1.25rem 1.5rem", background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 12, marginBottom: "0" }}>
                       <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>Why This Fits You</div>
                       <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>{recommendation?.why}</p>
                     </div>
 
                     {/* ── Inline advisory ── */}
                     {(stageAdvice || outcomeAdvice) && (
-                      <div style={{ marginTop: "1.5rem", padding: "1.5rem", background: "rgba(223,255,0,0.03)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 12 }}>
+                      <div style={{ marginTop: "1.5rem", padding: "1.5rem", background: "rgba(var(--accent-rgb),0.03)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 12 }}>
                         <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1rem" }}>What This Means For You</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                           {stageAdvice && <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.85, margin: 0 }}>{stageAdvice}</p>}

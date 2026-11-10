@@ -66,8 +66,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("nuu-theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}`,
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NXCMVN41T3"
           strategy="afterInteractive"

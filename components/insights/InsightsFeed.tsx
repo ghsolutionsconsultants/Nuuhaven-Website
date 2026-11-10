@@ -99,9 +99,9 @@ export default function InsightsFeed({ posts }: { posts: PostMeta[] }) {
                           <div
                             className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
                             style={{
-                              background: post.category === "case-study" ? "rgba(223,255,0,0.2)" : "rgba(255,255,255,0.1)",
+                              background: post.category === "case-study" ? "rgba(var(--accent-rgb),0.2)" : "rgba(255,255,255,0.1)",
                               color: post.category === "case-study" ? "var(--accent)" : "var(--text-muted)",
-                              border: `1px solid ${post.category === "case-study" ? "rgba(223,255,0,0.4)" : "rgba(255,255,255,0.1)"}`,
+                              border: `1px solid ${post.category === "case-study" ? "rgba(var(--accent-rgb),0.4)" : "rgba(255,255,255,0.1)"}`,
                             }}
                           >
                             {post.category === "case-study" ? "Case Study" : "Blog"}

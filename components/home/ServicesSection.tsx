@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import HolographicCard from "@/components/ui/HolographicCard";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -64,6 +64,42 @@ const services: { icon: React.ReactNode; title: string; sub: string; desc: strin
   },
 ];
 
+function ServiceAccordion() {
+  const [open, setOpen] = useState<number | null>(1);
+  return (
+    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      {services.map((s, i) => {
+        const on = open === i;
+        return (
+          <div key={s.title} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", background: on ? "rgba(var(--accent-rgb),0.035)" : "transparent", transition: "background .25s" }}>
+            <button onClick={() => setOpen(on ? null : i)} aria-expanded={on}
+              style={{ width: "100%", display: "grid", gridTemplateColumns: "34px 1fr 20px", alignItems: "center", gap: 12, padding: "1rem 0.25rem", textAlign: "left", background: "none", border: "none", color: "var(--text)", cursor: "pointer" }}>
+              <span style={{ color: "var(--accent)", fontSize: "1.35rem", display: "grid", placeItems: "center", lineHeight: 1 }}>
+                {typeof s.icon === "string" ? s.icon : <span style={{ display: "inline-flex", transform: "scale(0.7)" }}>{s.icon}</span>}
+              </span>
+              <span style={{ minWidth: 0 }}>
+                <span className="label-mono" style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: "0.56rem", marginBottom: 4 }}>
+                  {s.sub}
+                  {s.featured && <span style={{ fontSize: "0.46rem", fontWeight: 700, color: "#000", background: "var(--accent)", padding: "0.12rem 0.4rem", borderRadius: 3 }}>Most in-demand</span>}
+                </span>
+                <span style={{ display: "block", fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.35 }}>{s.title}</span>
+              </span>
+              <span aria-hidden style={{ color: "rgba(255,255,255,0.5)", fontSize: "1.1rem", transition: "transform .25s", transform: on ? "rotate(45deg)" : "none" }}>+</span>
+            </button>
+            <AnimatePresence initial={false}>
+              {on && (
+                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} style={{ overflow: "hidden" }}>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", lineHeight: 1.7, padding: "0 0.25rem 1.1rem 46px", margin: 0 }}>{s.desc}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function ServicesSection() {
   const isMobile = useIsMobile();
   return (
@@ -75,7 +111,7 @@ export default function ServicesSection() {
 
         <div
           className="flex flex-col md:flex-row md:items-end justify-between"
-          style={{ gap: "3rem", marginBottom: "4rem" }}
+          style={{ gap: isMobile ? "1.25rem" : "3rem", marginBottom: isMobile ? "2rem" : "4rem" }}
         >
           <h2 className="display-xl" style={{ maxWidth: "16ch" }}>
             Outcomes That<br />Move Businesses<br />Forward.
@@ -85,6 +121,7 @@ export default function ServicesSection() {
           </p>
         </div>
 
+        {isMobile ? <ServiceAccordion /> : (
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           style={{ gap: "1.5rem" }}
@@ -105,7 +142,7 @@ export default function ServicesSection() {
                 className="h-full group"
                 style={{
                   padding: isMobile ? "1.25rem" : "2.5rem",
-                  ...(s.featured ? { border: "1px solid rgba(223,255,0,0.35)", boxShadow: "0 0 40px rgba(223,255,0,0.07), inset 0 0 40px rgba(223,255,0,0.02)" } : {}),
+                  ...(s.featured ? { border: "1px solid rgba(var(--accent-rgb),0.35)", boxShadow: "0 0 40px rgba(var(--accent-rgb),0.07), inset 0 0 40px rgba(var(--accent-rgb),0.02)" } : {}),
                 }}
               >
                 <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "2rem" }}>
@@ -132,11 +169,12 @@ export default function ServicesSection() {
             </motion.div>
           ))}
         </div>
+        )}
 
         {/* Conflict of Interest Notice */}
         <div style={{
-          marginTop: "3.5rem",
-          padding: "1.375rem 1.75rem",
+          marginTop: isMobile ? "2rem" : "3.5rem",
+          padding: isMobile ? "1.1rem 1.1rem" : "1.375rem 1.75rem",
           background: "rgba(255,200,0,0.03)",
           border: "1px solid rgba(255,200,0,0.18)",
           borderRadius: 12,
@@ -152,7 +190,7 @@ export default function ServicesSection() {
               Conflict of Interest Notice
             </div>
             <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>
-              Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms, specialising in <strong style={{ color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>debt and capital advisory</strong>. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
+              Nuuhaven&apos;s Founder &amp; Managing Director maintains a primary employment role at one of the Big 4 professional services firms. Each prospective client and project is assessed for potential conflicts with this primary role before any engagement commences.{" "}
               <strong style={{ color: "#ffc800", fontWeight: 600 }}>Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after acceptance — should a conflict of interest be identified.</strong>
             </p>
           </div>

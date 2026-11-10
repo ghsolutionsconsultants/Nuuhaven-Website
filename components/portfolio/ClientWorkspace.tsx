@@ -63,9 +63,9 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
             data-cursor="OPEN"
             className="px-4 py-2 rounded text-xs font-semibold uppercase tracking-wider transition-all duration-200"
             style={{
-              background: tab === t ? "rgba(223,255,0,0.1)" : "transparent",
+              background: tab === t ? "rgba(var(--accent-rgb),0.1)" : "transparent",
               color: tab === t ? "var(--accent)" : "var(--text-muted)",
-              border: tab === t ? "1px solid rgba(223,255,0,0.3)" : "1px solid transparent",
+              border: tab === t ? "1px solid rgba(var(--accent-rgb),0.3)" : "1px solid transparent",
             }}
           >
             {t}
@@ -231,7 +231,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div
                   className="p-5 rounded-xl md:col-span-2"
-                  style={{ background: "rgba(223,255,0,0.03)", border: "1px solid rgba(223,255,0,0.15)" }}
+                  style={{ background: "rgba(var(--accent-rgb),0.03)", border: "1px solid rgba(var(--accent-rgb),0.15)" }}
                 >
                   <div className="label-mono mb-4" style={{ color: "var(--accent)" }}>Business Outcomes</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -244,7 +244,7 @@ export default function ClientWorkspace({ client }: { client: ClientData }) {
                         className="flex items-start gap-3 text-sm"
                       >
                         <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                          style={{ background: "rgba(223,255,0,0.15)", border: "1px solid var(--accent)" }}>
+                          style={{ background: "rgba(var(--accent-rgb),0.15)", border: "1px solid var(--accent)" }}>
                           <span style={{ color: "var(--accent)", fontSize: "0.6rem" }}>✓</span>
                         </div>
                         <span style={{ color: "var(--text-muted)" }}>{o}</span>

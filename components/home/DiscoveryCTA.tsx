@@ -26,7 +26,7 @@ export default function DiscoveryCTA() {
         className="absolute inset-0 z-1 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(223,255,0,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(var(--accent-rgb),0.07) 0%, transparent 70%)",
         }}
       />
 

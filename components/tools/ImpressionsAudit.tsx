@@ -266,7 +266,7 @@ export default function ImpressionsAudit() {
                     </span>
                     <div style={{ display: "flex", gap: "0.3rem" }}>
                       {QUESTIONS.map((_, i) => (
-                        <div key={i} style={{ width: i === step ? 16 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(223,255,0,0.35)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                        <div key={i} style={{ width: i === step ? 16 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
                       ))}
                     </div>
                   </div>
@@ -287,8 +287,8 @@ export default function ImpressionsAudit() {
                             data-cursor="SELECT"
                             style={{
                               textAlign: "left", padding: "1.125rem 1.375rem", borderRadius: 12, cursor: "pointer",
-                              background: isSelected ? "rgba(223,255,0,0.08)" : "rgba(255,255,255,0.025)",
-                              border: isSelected ? "1px solid rgba(223,255,0,0.45)" : "1px solid rgba(255,255,255,0.07)",
+                              background: isSelected ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.025)",
+                              border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
                               color: isSelected ? "#fff" : "rgba(255,255,255,0.7)",
                               transition: "all 0.2s",
                               display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem",

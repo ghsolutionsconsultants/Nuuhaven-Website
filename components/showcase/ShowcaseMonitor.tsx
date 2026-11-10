@@ -87,7 +87,7 @@ export default function ShowcaseMonitor() {
             style={{
               background: "linear-gradient(145deg, #1a1a1a, #0d0d0d)",
               border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 0 60px rgba(0,0,0,0.8), 0 0 20px rgba(223,255,0,0.05), inset 0 1px 0 rgba(255,255,255,0.05)",
+              boxShadow: "0 0 60px rgba(0,0,0,0.8), 0 0 20px rgba(var(--accent-rgb),0.05), inset 0 1px 0 rgba(255,255,255,0.05)",
               padding: "12px 12px 0",
             }}
           >
@@ -116,7 +116,7 @@ export default function ShowcaseMonitor() {
                 rel="noopener noreferrer"
                 data-cursor="OPEN"
                 className="text-xs px-3 py-1 rounded transition-colors hover:text-white"
-                style={{ color: "var(--accent)", fontSize: "0.65rem", border: "1px solid rgba(223,255,0,0.3)" }}
+                style={{ color: "var(--accent)", fontSize: "0.65rem", border: "1px solid rgba(var(--accent-rgb),0.3)" }}
               >
                 Full Site ↗
               </a>

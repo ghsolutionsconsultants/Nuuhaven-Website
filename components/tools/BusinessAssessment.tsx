@@ -233,7 +233,7 @@ export default function BusinessAssessment() {
                 {/* Step dots */}
                 <div style={{ display: "flex", justifyContent: "center", gap: "0.375rem", marginTop: "1.5rem" }}>
                   {QUESTIONS.map((_, i) => (
-                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(223,255,0,0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
+                    <div key={i} style={{ width: i === step ? 20 : 6, height: 6, borderRadius: 3, background: i === step ? "var(--accent)" : i < step ? "rgba(var(--accent-rgb),0.3)" : "rgba(255,255,255,0.1)", transition: "all 0.3s" }} />
                   ))}
                 </div>
               </motion.div>
@@ -325,7 +325,7 @@ export default function BusinessAssessment() {
 
                 {/* ── Inline advisory ── */}
                 {complete && (
-                  <div style={{ background: "var(--bg-card)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 20, padding: "2rem" }}>
+                  <div style={{ background: "var(--bg-card)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 20, padding: "2rem" }}>
                     <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1.125rem" }}>
                       What This Means For Your Business
                     </div>

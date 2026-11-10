@@ -100,7 +100,7 @@ export default function ContactPage() {
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, maxWidth: "34rem", marginBottom: "2.5rem" }}>
                 Not sure what you need?{" "}
-                <Link href="/tools" style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid rgba(223,255,0,0.3)" }}>
+                <Link href="/tools" style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid rgba(var(--accent-rgb),0.3)" }}>
                   Start with our free diagnostic tools
                 </Link>
                 {" "}and come back with the insights.
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     {i < arr.length - 1 && (
                       <div style={{ position: "absolute", left: "1rem", top: "2.5rem", bottom: "-1rem", width: 1, background: "rgba(255,255,255,0.07)" }} />
                     )}
-                    <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(223,255,0,0.08)", border: "1px solid rgba(223,255,0,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "var(--accent)", fontWeight: 700, zIndex: 1 }}>
+                    <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(var(--accent-rgb),0.08)", border: "1px solid rgba(var(--accent-rgb),0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "var(--accent)", fontWeight: 700, zIndex: 1 }}>
                       {item.step}
                     </div>
                     <div style={{ paddingBottom: i < arr.length - 1 ? "2rem" : 0 }}>
@@ -242,7 +242,7 @@ export default function ContactPage() {
                               value={(form as Record<string, string>)[f.id]}
                               onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                               style={inputStyle}
-                              onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.5)"}
+                              onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.5)"}
                               onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
                             />
                           </div>
@@ -265,8 +265,8 @@ export default function ContactPage() {
                               onClick={() => setForm(p => ({ ...p, service: s.label }))}
                               style={{
                                 padding: "0.875rem 1rem", textAlign: "left", borderRadius: 8, fontSize: "0.82rem",
-                                background: sel ? "rgba(223,255,0,0.07)" : "rgba(255,255,255,0.025)",
-                                border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid rgba(255,255,255,0.07)",
+                                background: sel ? "rgba(var(--accent-rgb),0.07)" : "rgba(255,255,255,0.025)",
+                                border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.07)",
                                 color: sel ? "var(--accent)" : "rgba(255,255,255,0.55)",
                                 cursor: "pointer", transition: "all 0.2s",
                                 display: "flex", alignItems: "center", gap: "0.625rem",
@@ -297,8 +297,8 @@ export default function ContactPage() {
                                 onClick={() => setForm(p => ({ ...p, budget: b }))}
                                 style={{
                                   padding: "0.75rem 1rem", textAlign: "left", borderRadius: 7, fontSize: "0.82rem",
-                                  background: sel ? "rgba(223,255,0,0.07)" : "transparent",
-                                  border: sel ? "1px solid rgba(223,255,0,0.35)" : "1px solid rgba(255,255,255,0.07)",
+                                  background: sel ? "rgba(var(--accent-rgb),0.07)" : "transparent",
+                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)",
                                   color: sel ? "var(--accent)" : "rgba(255,255,255,0.5)",
                                   cursor: "pointer", transition: "all 0.2s", fontWeight: sel ? 600 : 400,
                                   display: "flex", alignItems: "center", gap: "0.5rem",
@@ -325,8 +325,8 @@ export default function ContactPage() {
                                 onClick={() => setForm(p => ({ ...p, timeline: t }))}
                                 style={{
                                   padding: "0.75rem 1rem", textAlign: "left", borderRadius: 7, fontSize: "0.82rem",
-                                  background: sel ? "rgba(223,255,0,0.07)" : "transparent",
-                                  border: sel ? "1px solid rgba(223,255,0,0.35)" : "1px solid rgba(255,255,255,0.07)",
+                                  background: sel ? "rgba(var(--accent-rgb),0.07)" : "transparent",
+                                  border: sel ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)",
                                   color: sel ? "var(--accent)" : "rgba(255,255,255,0.5)",
                                   cursor: "pointer", transition: "all 0.2s", fontWeight: sel ? 600 : 400,
                                   display: "flex", alignItems: "center", gap: "0.5rem",
@@ -356,7 +356,7 @@ export default function ContactPage() {
                         value={form.message}
                         onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                         style={{ ...inputStyle, resize: "vertical", lineHeight: 1.75 }}
-                        onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.5)"}
+                        onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.5)"}
                         onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
                       />
                     </div>
@@ -379,7 +379,7 @@ export default function ContactPage() {
                           Conflict of Interest Notice — Please Read Before Submitting
                         </div>
                         <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", lineHeight: 1.85, margin: 0 }}>
-                          Nuuhaven&apos;s <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>Founder &amp; Managing Director</strong> maintains a primary employment role at <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>one of the Big 4 professional services firms</strong>, specialising in <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>debt and capital advisory</strong>. Each enquiry and project scope is individually assessed for potential conflicts with this primary role before any engagement commences.{" "}
+                          Nuuhaven&apos;s <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>Founder &amp; Managing Director</strong> maintains a primary employment role at <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>one of the Big 4 professional services firms</strong>. Each enquiry and project scope is individually assessed for potential conflicts with this primary role before any engagement commences.{" "}
                           <strong style={{ color: "#ffc800", fontWeight: 600 }}>
                             Nuuhaven expressly reserves the right to decline, suspend, or terminate any engagement at any stage — including after a proposal has been accepted and work has commenced — should a conflict of interest be identified.
                           </strong>{" "}

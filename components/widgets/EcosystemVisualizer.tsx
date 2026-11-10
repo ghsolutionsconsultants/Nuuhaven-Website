@@ -144,8 +144,8 @@ export default function EcosystemVisualizer() {
               aria-label="Business ecosystem diagram"
             >
               {/* Orbit rings */}
-              <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(223,255,0,0.06)" strokeWidth={1} />
-              <circle cx={CX} cy={CY} r={R * 0.5} fill="none" stroke="rgba(223,255,0,0.03)" strokeWidth={1} strokeDasharray="3 6" />
+              <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(var(--accent-rgb),0.06)" strokeWidth={1} />
+              <circle cx={CX} cy={CY} r={R * 0.5} fill="none" stroke="rgba(var(--accent-rgb),0.03)" strokeWidth={1} strokeDasharray="3 6" />
 
               {/* Lines from center to each node bubble edge (not center) so line ends at bubble perimeter */}
               {nodes.map((node) => {
@@ -161,7 +161,7 @@ export default function EcosystemVisualizer() {
                   <line
                     key={`line-${node.id}`}
                     x1={x1} y1={y1} x2={x2} y2={y2}
-                    stroke={isActive ? "var(--accent)" : "rgba(223,255,0,0.2)"}
+                    stroke={isActive ? "var(--accent)" : "rgba(var(--accent-rgb),0.2)"}
                     strokeWidth={isActive ? 1.5 : 0.8}
                   />
                 );
@@ -186,15 +186,15 @@ export default function EcosystemVisualizer() {
                     {/* Glow ring when active */}
                     {isActive && (
                       <circle cx={x} cy={y} r={NODE_R + 10}
-                        fill="rgba(223,255,0,0.05)"
-                        stroke="rgba(223,255,0,0.25)"
+                        fill="rgba(var(--accent-rgb),0.05)"
+                        stroke="rgba(var(--accent-rgb),0.25)"
                         strokeWidth={1}
                       />
                     )}
                     {/* Main bubble */}
                     <circle
                       cx={x} cy={y} r={NODE_R}
-                      fill={isActive ? "rgba(223,255,0,0.13)" : "rgba(14,14,14,0.96)"}
+                      fill={isActive ? "rgba(var(--accent-rgb),0.13)" : "rgba(14,14,14,0.96)"}
                       stroke={isActive ? "var(--accent)" : "rgba(255,255,255,0.14)"}
                       strokeWidth={isActive ? 1.5 : 1}
                     />
@@ -230,13 +230,13 @@ export default function EcosystemVisualizer() {
               {/* Center bubble, on top of everything */}
               <circle
                 cx={CX} cy={CY} r={CENTER_R}
-                fill={active ? "rgba(223,255,0,0.11)" : "rgba(8,8,8,0.99)"}
+                fill={active ? "rgba(var(--accent-rgb),0.11)" : "rgba(8,8,8,0.99)"}
                 stroke={active ? "var(--accent)" : "rgba(255,255,255,0.2)"}
                 strokeWidth={active ? 1.5 : 1}
               />
               {active && (
                 <circle cx={CX} cy={CY} r={CENTER_R + 10}
-                  fill="none" stroke="rgba(223,255,0,0.07)" strokeWidth={1}
+                  fill="none" stroke="rgba(var(--accent-rgb),0.07)" strokeWidth={1}
                 />
               )}
               <text x={CX} y={CY - 8} textAnchor="middle" fontSize={8.5} fontWeight="800"
@@ -265,7 +265,7 @@ export default function EcosystemVisualizer() {
               className="rounded-xl"
               style={{
                 background: "var(--bg-card)",
-                border: "1px solid rgba(223,255,0,0.2)",
+                border: "1px solid rgba(var(--accent-rgb),0.2)",
                 padding: "2rem 2.5rem",
                 marginBottom: "2.5rem",
               }}
@@ -299,7 +299,7 @@ export default function EcosystemVisualizer() {
                   <p className="text-sm" style={{ color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
                     {activeNode.desc}
                   </p>
-                  <div className="rounded-lg" style={{ background: "rgba(223,255,0,0.04)", border: "1px solid rgba(223,255,0,0.1)", padding: "0.875rem 1rem" }}>
+                  <div className="rounded-lg" style={{ background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.1)", padding: "0.875rem 1rem" }}>
                     <div className="label-mono text-xs" style={{ color: "var(--accent)", marginBottom: "0.5rem" }}>Why It Matters</div>
                     <p className="text-xs" style={{ color: "var(--text-muted)", lineHeight: 1.7 }}>{activeNode.whyItMatters}</p>
                   </div>

@@ -177,7 +177,7 @@ export default function DiscoveryWizard() {
                     {STAGES.map((s) => (
                       <button key={s.id} onClick={() => { setData((d) => ({ ...d, stage: s.id })); setStep(1); }} data-cursor="SELECT"
                         className="p-5 rounded-xl text-left transition-all duration-200 hover:border-accent"
-                        style={{ background: data.stage === s.id ? "rgba(223,255,0,0.08)" : "rgba(255,255,255,0.03)", border: data.stage === s.id ? "1px solid rgba(223,255,0,0.4)" : "1px solid var(--border-subtle)" }}>
+                        style={{ background: data.stage === s.id ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.03)", border: data.stage === s.id ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid var(--border-subtle)" }}>
                         <div className="font-bold mb-1">{s.label}</div>
                         <div className="text-sm" style={{ color: "var(--text-muted)" }}>{s.desc}</div>
                       </button>
@@ -199,7 +199,7 @@ export default function DiscoveryWizard() {
                       return (
                         <button key={c.id} onClick={() => setData((d) => ({ ...d, challenges: sel ? d.challenges.filter((x) => x !== c.id) : [...d.challenges, c.id] }))} data-cursor="SELECT"
                           className="p-4 rounded-xl text-left text-sm transition-all duration-200 flex items-center gap-3"
-                          style={{ background: sel ? "rgba(223,255,0,0.06)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid var(--border-subtle)" }}>
+                          style={{ background: sel ? "rgba(var(--accent-rgb),0.06)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid var(--border-subtle)" }}>
                           <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 text-xs font-bold"
                             style={{ background: sel ? "var(--accent)" : "rgba(255,255,255,0.05)", color: sel ? "#000" : "var(--text-muted)" }}>
                             {sel ? "✓" : "+"}
@@ -229,7 +229,7 @@ export default function DiscoveryWizard() {
                       return (
                         <button key={g.id} onClick={() => setData((d) => ({ ...d, goals: sel ? d.goals.filter((x) => x !== g.id) : [...d.goals, g.id] }))} data-cursor="SELECT"
                           className="p-4 rounded-xl text-left text-sm transition-all duration-200 flex items-center gap-3"
-                          style={{ background: sel ? "rgba(223,255,0,0.06)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid var(--border-subtle)" }}>
+                          style={{ background: sel ? "rgba(var(--accent-rgb),0.06)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid var(--border-subtle)" }}>
                           <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 text-xs font-bold"
                             style={{ background: sel ? "var(--accent)" : "rgba(255,255,255,0.05)", color: sel ? "#000" : "var(--text-muted)" }}>
                             {sel ? "✓" : "+"}
@@ -256,7 +256,7 @@ export default function DiscoveryWizard() {
                     {TIMELINES.map((t) => (
                       <button key={t.id} onClick={() => { setData((d) => ({ ...d, timeline: t.id })); setStep(4); }} data-cursor="SELECT"
                         className="p-5 rounded-xl text-left transition-all duration-200 font-medium"
-                        style={{ background: data.timeline === t.id ? "rgba(223,255,0,0.08)" : "rgba(255,255,255,0.03)", border: data.timeline === t.id ? "1px solid rgba(223,255,0,0.4)" : "1px solid var(--border-subtle)" }}>
+                        style={{ background: data.timeline === t.id ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.03)", border: data.timeline === t.id ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid var(--border-subtle)" }}>
                         {t.label}
                       </button>
                     ))}

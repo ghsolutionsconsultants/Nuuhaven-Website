@@ -93,8 +93,8 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
 
           {summaryLabel && (
             <div style={{
-              background: "rgba(223,255,0,0.04)",
-              border: "1px solid rgba(223,255,0,0.12)",
+              background: "rgba(var(--accent-rgb),0.04)",
+              border: "1px solid rgba(var(--accent-rgb),0.12)",
               borderRadius: 8,
               padding: "1rem 1.25rem",
               marginBottom: "1.5rem",
@@ -129,7 +129,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
                     value={(form as Record<string, string>)[f.id]}
                     onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                     style={inputStyle}
-                    onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                    onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                     onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
                   />
                 </div>
@@ -146,7 +146,7 @@ function FormContent({ toolName, toolSummary, summaryLabel, onReset }: Omit<Tool
                 value={form.message}
                 onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                 style={{ ...inputStyle, resize: "vertical", lineHeight: 1.7 }}
-                onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                 onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>

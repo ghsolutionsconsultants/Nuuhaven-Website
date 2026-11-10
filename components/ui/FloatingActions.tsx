@@ -75,9 +75,9 @@ export default function FloatingActions() {
       {/* Email */}
       <a
         href="mailto:tshepang@nuuhaven.com"
-        style={btnStyle("rgba(223,255,0,0.3)")}
+        style={btnStyle("rgba(var(--accent-rgb),0.3)")}
         title="Email us"
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(223,255,0,0.08)"; (e.currentTarget as HTMLElement).style.transform = "scale(1.1)"; }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(var(--accent-rgb),0.08)"; (e.currentTarget as HTMLElement).style.transform = "scale(1.1)"; }}
         onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(10,10,10,0.92)"; (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

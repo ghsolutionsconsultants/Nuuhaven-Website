@@ -39,12 +39,12 @@ const TIMELINE = [
   },
   {
     period: "Jan 2026 – Present",
-    tag: "Big 4 · Capital Markets",
-    title: "Debt & Capital Markets Advisor",
+    tag: "Big 4 · Advisory",
+    title: "Consultant, Strategy, Risk & Transactions",
     institution: "One of the Big 4",
     icon: "◉",
     highlight: false,
-    desc: "Promoted to Consultant within the Strategy, Risk & Transactions practice, specialising in Debt & Capital Advisory. Supports clients on debt structuring, refinancing, capital raising, and capital structure optimisation. Day-to-day work involves building and reviewing detailed financial models, cash flow, funding, and debt service, supporting credit analysis, engaging with lenders and capital markets participants, and executing debt and capital markets transactions across instruments and sectors. The role demands precision, commercial clarity, and the ability to communicate complex financials to diverse stakeholders.",
+    desc: "Promoted to Consultant within the Strategy, Risk & Transactions practice. Day-to-day work involves building and reviewing detailed financial models, supporting complex client mandates, and engaging with senior stakeholders across sectors. The role demands precision, commercial clarity, and the ability to communicate complex financials to diverse audiences.",
   },
   {
     period: "Parallel Path",
@@ -104,7 +104,7 @@ export default function AboutPage() {
                 Nuuhaven was born from a simple observation: most businesses operate professionally but don&apos;t look it. The ambition is there, the presentation isn&apos;t.
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-                Founded by <strong style={{ color: "var(--text)" }}>Tshepang Ramatsoma</strong>, a Debt &amp; Capital Markets Advisor at one of the Big 4, with a BCom Honours in Investment Management from the University of Pretoria, Nuuhaven bridges the gap between commercial rigour and creative execution.
+                Founded by <strong style={{ color: "var(--text)" }}>Tshepang Ramatsoma</strong>, a Strategy, Risk &amp; Transactions consultant at one of the Big 4, with a BCom Honours in Investment Management from the University of Pretoria, Nuuhaven bridges the gap between commercial rigour and creative execution.
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "2.5rem" }}>
                 The result is a strategic partner unlike any other: one that thinks like a CFO and executes like a creative director.
@@ -114,8 +114,8 @@ export default function AboutPage() {
                 style={{
                   marginBottom: "2.5rem",
                   padding: "1.25rem 1.5rem",
-                  borderLeft: "2px solid rgba(223,255,0,0.35)",
-                  background: "rgba(223,255,0,0.03)",
+                  borderLeft: "2px solid rgba(var(--accent-rgb),0.35)",
+                  background: "rgba(var(--accent-rgb),0.03)",
                   borderRadius: "0 8px 8px 0",
                 }}
               >
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 <div style={{ padding: "1.375rem 1.375rem 1.625rem" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.57rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.35rem" }}>Founder & Managing Director</div>
                   <div style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: "0.35rem" }}>Tshepang Ramatsoma</div>
-                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", marginBottom: "0.875rem" }}>Debt & Capital Markets · Big 4 · Nuuhaven</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", marginBottom: "0.875rem" }}>Strategy & Transactions · Big 4 · Nuuhaven</div>
                   <p style={{ color: "var(--text-muted)", fontSize: "0.78rem", lineHeight: 1.8, marginBottom: "1.125rem" }}>
                     Strategist. Brand architect. Digital builder. BCom Honours, University of Pretoria. Advisor to founders navigating growth and market positioning.
                   </p>
@@ -170,7 +170,7 @@ export default function AboutPage() {
                       href="https://www.linkedin.com/in/tshepang-ramatsoma-8b0518260/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", fontFamily: "var(--font-geist-mono)", fontSize: "0.63rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)", textDecoration: "none", padding: "0.45rem 0.875rem", border: "1px solid rgba(223,255,0,0.25)", borderRadius: 6, transition: "background 0.2s" }}
+                      style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", fontFamily: "var(--font-geist-mono)", fontSize: "0.63rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)", textDecoration: "none", padding: "0.45rem 0.875rem", border: "1px solid rgba(var(--accent-rgb),0.25)", borderRadius: 6, transition: "background 0.2s" }}
                     >
                       LinkedIn ↗
                     </a>
@@ -211,7 +211,7 @@ export default function AboutPage() {
 
           <div style={{ position: "relative" }}>
             {/* Vertical line */}
-            <div style={{ position: "absolute", left: 11, top: 11, bottom: 11, width: 1, background: "linear-gradient(to bottom, var(--accent), rgba(223,255,0,0.04))" }} />
+            <div style={{ position: "absolute", left: 11, top: 11, bottom: 11, width: 1, background: "linear-gradient(to bottom, var(--accent), rgba(var(--accent-rgb),0.04))" }} />
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {TIMELINE.map((step, i) => (
@@ -241,8 +241,8 @@ export default function AboutPage() {
                     style={{
                       padding: "1.25rem 1.5rem",
                       cursor: "pointer",
-                      border: step.highlight ? "1px solid rgba(223,255,0,0.28)" : undefined,
-                      background: step.highlight ? "rgba(223,255,0,0.025)" : undefined,
+                      border: step.highlight ? "1px solid rgba(var(--accent-rgb),0.28)" : undefined,
+                      background: step.highlight ? "rgba(var(--accent-rgb),0.025)" : undefined,
                     }}
                   >
                     <button
@@ -255,7 +255,7 @@ export default function AboutPage() {
                           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.4rem", flexWrap: "wrap" }}>
                             <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: step.highlight ? "var(--accent)" : "rgba(255,255,255,0.28)" }}>{step.period}</span>
                             <span style={{ width: 3, height: 3, borderRadius: "50%", background: "rgba(255,255,255,0.2)", display: "inline-block" }} />
-                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: step.highlight ? "rgba(223,255,0,0.7)" : "rgba(255,255,255,0.22)" }}>{step.tag}</span>
+                            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: step.highlight ? "rgba(var(--accent-rgb),0.7)" : "rgba(255,255,255,0.22)" }}>{step.tag}</span>
                           </div>
                           {/* Title */}
                           <div style={{ fontWeight: 700, fontSize: "0.975rem", color: step.highlight ? "var(--accent)" : "var(--text)", marginBottom: "0.2rem" }}>{step.title}</div>
@@ -307,7 +307,7 @@ export default function AboutPage() {
                 Beyond building brands and websites, Tshepang works directly with founders and leadership teams as a strategic advisor, bringing the same rigour applied to Big 4 client mandates to the businesses Nuuhaven serves.
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-                With a background spanning debt advisory, capital structure analysis, financial modelling, and transaction services, strategic advisory sessions at Nuuhaven go beyond brand. They address positioning, commercial clarity, and the decisions that shape long-term trajectory.
+                With a background spanning corporate finance, financial modelling, and transaction services, strategic advisory sessions at Nuuhaven go beyond brand. They address positioning, commercial clarity, and the decisions that shape long-term trajectory.
               </p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.9, marginBottom: "2.5rem" }}>
                 Whether you&apos;re preparing to raise, refinance, enter a new market, or simply need a sharper commercial narrative, this is what sets Nuuhaven apart from any ordinary agency.

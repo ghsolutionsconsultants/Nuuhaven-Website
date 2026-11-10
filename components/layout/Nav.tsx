@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const leftLinks = [
   { href: "/", label: "Home" },
@@ -89,15 +90,18 @@ export default function Nav() {
             ))}
           </div>
 
-          {/* CTA */}
-          <Link
-            href="/contact"
-            data-cursor="OPEN"
-            className="flex-shrink-0 btn-accent"
-            style={{ fontSize: "0.72rem", padding: "0.7rem 1.5rem" }}
-          >
-            Start Your Project →
-          </Link>
+          {/* Theme toggle + CTA */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <ThemeToggle />
+            <Link
+              href="/contact"
+              data-cursor="OPEN"
+              className="flex-shrink-0 btn-accent"
+              style={{ fontSize: "0.72rem", padding: "0.7rem 1.5rem" }}
+            >
+              Start Your Project →
+            </Link>
+          </div>
         </div>
 
         {/* Mobile: logo left, hamburger right */}
@@ -115,6 +119,8 @@ export default function Nav() {
               />
             </motion.div>
           </Link>
+          <div className="flex items-center gap-2">
+          <ThemeToggle size={34} />
           <button
             className="flex flex-col gap-1.5 p-2"
             onClick={() => setOpen((o) => !o)}
@@ -137,6 +143,7 @@ export default function Nav() {
               style={{ background: "var(--text)" }}
             />
           </button>
+          </div>
         </div>
       </motion.nav>
 

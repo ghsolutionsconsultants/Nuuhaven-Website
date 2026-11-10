@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-// Gantt: Jan 2026 (0) → Jun 2026 (5), total 6 months
+// ── Client data ───────────────────────────────────────────────────────────────
 const CLIENTS = [
   {
     id: "nucleus",
@@ -32,7 +31,7 @@ const CLIENTS = [
     colors: ["#ffffff","#1a6bff","#ff6b00"],
     colorNames: ["White","Blue","Orange"],
     ganttStart: 0,  // Jan 2026
-    ganttEnd: 6,    // ongoing
+    ganttEnd: 11,   // ongoing
     isOngoing: true,
     timeline: [
       { label: "Discovery", done: true, date: "Mar 2024" },
@@ -71,7 +70,7 @@ const CLIENTS = [
     colors: ["#ffffff","#e63946","#d4af37"],
     colorNames: ["White","Red","Gold"],
     ganttStart: 5,  // Jun 2026
-    ganttEnd: 6,
+    ganttEnd: 11,
     isOngoing: true,
     timeline: [
       { label: "Discovery", done: true, date: "Jun 2026" },
@@ -110,7 +109,7 @@ const CLIENTS = [
     colors: ["#ffffff","#7c3aed","#a855f7"],
     colorNames: ["White","Royal Purple","Purple"],
     ganttStart: 2,  // Mar 2026
-    ganttEnd: 6,
+    ganttEnd: 11,
     isOngoing: true,
     timeline: [
       { label: "Discovery", done: true, date: "Mar 2026" },
@@ -149,7 +148,7 @@ const CLIENTS = [
     colors: ["#ffffff","#d4af37","#b8963e"],
     colorNames: ["White","Gold","Dark Gold"],
     ganttStart: 4,  // May 2026
-    ganttEnd: 6,
+    ganttEnd: 11,
     isOngoing: true,
     timeline: [
       { label: "Discovery", done: true, date: "May 2026" },
@@ -164,670 +163,444 @@ const CLIENTS = [
       { text: "Website launched", time: "Jun 2026", type: "milestone" },
     ],
   },
+  {
+    id: "45one",
+    name: "45one",
+    code: "FOR-005",
+    industry: "Sports Media",
+    status: "Live",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Aug 2026",
+    endDate: "Aug 2026",
+    lastUpdate: "Aug 2026",
+    nextMilestone: "Post-launch review",
+    health: "green",
+    url: "https://45one.co.za",
+    accent: "#f2ff00",
+    tagline: "Football, in depth: a content platform for South African and European football.",
+    about: "45one is a South African football content brand: the weekly 451 podcast, long-form PSL and European league analysis, short-form video and writing.",
+    challenge: "A content-heavy brand needed one home for podcast, analysis and fan engagement that feels as sharp as the football talk.",
+    services: ["Brand Identity","Content Platform Website","Podcast Hub","Interactive Tactics Board","Football IQ Quiz","Fantasy League Integration"],
+    outcomes: ["Single home for podcast, video and writing","Interactive tools that keep fans on site","Distinctive high-energy football brand","Weekly content cadence supported by the platform"],
+    colors: ["#000000","#f2ff00","#ffffff"],
+    colorNames: ["Black","Electric Yellow","White"],
+    ganttStart: 7,
+    ganttEnd: 8,
+    isOngoing: false,
+    timeline: [
+      { label: "Discovery", done: true, date: "Aug 2026" },
+      { label: "Brand Identity", done: true, date: "Aug 2026" },
+      { label: "Website", done: true, date: "Aug 2026" },
+      { label: "Content", done: true, date: "Aug 2026" },
+      { label: "Launch", done: true, date: "Aug 2026" },
+    ],
+    activity: [
+      { text: "Website launched", time: "Aug 2026", type: "milestone" },
+    ],
+  },
+  {
+    id: "drnontu",
+    name: "Dr Nontu Medical Practice",
+    code: "MED-006",
+    industry: "Healthcare",
+    status: "Live",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Sep 2026",
+    endDate: "Sep 2026",
+    lastUpdate: "Sep 2026",
+    nextMilestone: "Post-launch review",
+    health: "green",
+    url: "https://drnontu.co.za",
+    accent: "#c9a24d",
+    tagline: "Every patient. Expertly cared for. A GP practice brand across two locations.",
+    about: "Dr Nontu Medical Practice, led by Dr Nontuthuko Ndlovu, is a general practice in Esther Park (Kempton Park) and Fourways offering consultations, house calls, virtual care and chronic care.",
+    challenge: "The practice needed a warm yet credible online presence that explains services, two locations and new membership plans clearly.",
+    services: ["Brand Identity","Practice Website","Service Pages","Membership Plans","Location & Contact Journeys"],
+    outcomes: ["Clear service and location information for patients","Membership plans presented with transparent pricing","Warm, trustworthy practice brand","Virtual and house-call options made discoverable"],
+    colors: ["#ffffff","#c9a24d","#7a5a22"],
+    colorNames: ["White","Gold","Deep Bronze"],
+    ganttStart: 8,
+    ganttEnd: 9,
+    isOngoing: false,
+    timeline: [
+      { label: "Discovery", done: true, date: "Sep 2026" },
+      { label: "Brand Identity", done: true, date: "Sep 2026" },
+      { label: "Website", done: true, date: "Sep 2026" },
+      { label: "Content", done: true, date: "Sep 2026" },
+      { label: "Launch", done: true, date: "Sep 2026" },
+    ],
+    activity: [
+      { text: "Website launched", time: "Sep 2026", type: "milestone" },
+    ],
+  },
+  {
+    id: "cta",
+    name: "Code Trust Assurance",
+    code: "CTA-007",
+    industry: "Software Assurance",
+    status: "Live",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Oct 2026",
+    endDate: "Oct 2026",
+    lastUpdate: "Oct 2026",
+    nextMilestone: "Post-launch review",
+    health: "green",
+    url: "https://codetrustassurance.com",
+    accent: "#3b82f6",
+    tagline: "Security tools find issues. This framework proves trust.",
+    about: "The Code Trust Assurance Framework by Nucleus Systems scores software across six domains and 86 controls, issues CTA-1 to CTA-4 certificates, and publishes a public Trust Registry.",
+    challenge: "A technical certification standard had to read as authoritative and easy to follow for buyers, vendors and assessors alike.",
+    services: ["Framework Website","Certification Levels","Public Trust Registry","Assessment Offer Pages","Technical Documentation"],
+    outcomes: ["Credible home for a new software trust standard","Clear path from framework to paid assessment","Public registry that builds market confidence","Extends the Nucleus Systems brand ecosystem"],
+    colors: ["#0b50c8","#54657c","#ffffff"],
+    colorNames: ["Trust Blue","Slate","White"],
+    ganttStart: 9,
+    ganttEnd: 10,
+    isOngoing: false,
+    timeline: [
+      { label: "Discovery", done: true, date: "Oct 2026" },
+      { label: "Brand Identity", done: true, date: "Oct 2026" },
+      { label: "Website", done: true, date: "Oct 2026" },
+      { label: "Content", done: true, date: "Oct 2026" },
+      { label: "Launch", done: true, date: "Oct 2026" },
+    ],
+    activity: [
+      { text: "Website launched", time: "Oct 2026", type: "milestone" },
+    ],
+  },
+  {
+    id: "dtff",
+    name: "Digital Trust Futures Foundation",
+    code: "DTF-008",
+    industry: "Non-Profit",
+    status: "Live",
+    statusColor: "#dfff00",
+    phase: "Live",
+    progress: 100,
+    startDate: "Oct 2026",
+    endDate: "Oct 2026",
+    lastUpdate: "Oct 2026",
+    nextMilestone: "Post-launch review",
+    health: "green",
+    url: "https://digitaltrustfuturesfoundation.org",
+    accent: "#6fa3d8",
+    tagline: "Digital public infrastructure is only as good as the protection around it.",
+    about: "Digital Trust Futures Foundation is an independent, non-profit public-benefit organisation protecting people, their rights and institutions as digital public infrastructure scales across Africa and the Global South.",
+    challenge: "A new foundation with five programme divisions needed a clear, credible voice for governments, digital public goods and civil society partners.",
+    services: ["Brand Identity","Foundation Website","Programme Division Architecture","Positioning & Content","Partnership Journey"],
+    outcomes: ["Clear positioning as the missing protection layer","Five programme divisions explained in one structure","Credible presence for government and civil-society partners","Partner-with-us journey built in"],
+    colors: ["#0e2b4a","#1b4b7d","#a9bfd2"],
+    colorNames: ["Deep Navy","Trust Blue","Mist"],
+    ganttStart: 9,
+    ganttEnd: 10,
+    isOngoing: false,
+    timeline: [
+      { label: "Discovery", done: true, date: "Oct 2026" },
+      { label: "Brand Identity", done: true, date: "Oct 2026" },
+      { label: "Website", done: true, date: "Oct 2026" },
+      { label: "Content", done: true, date: "Oct 2026" },
+      { label: "Launch", done: true, date: "Oct 2026" },
+    ],
+    activity: [
+      { text: "Website launched", time: "Oct 2026", type: "milestone" },
+    ],
+  },
 ];
 
-const PIPELINE = [
-  { name: "Attorney Client A", industry: "Legal Services", stage: "Proposal Sent", stageColor: "#dfff00", est: "R 5,000 – R 10,000", probability: 70 },
-  { name: "Attorney Client B", industry: "Legal Services", stage: "Proposal Sent", stageColor: "#dfff00", est: "R 5,000 – R 10,000", probability: 60 },
-];
+type Client = (typeof CLIENTS)[number];
+const ALL = "All";
+const pad = (n: number) => String(n).padStart(2, "0");
+const mono: React.CSSProperties = { fontFamily: "var(--font-geist-mono)", textTransform: "uppercase", letterSpacing: "0.18em" };
 
-const FEED = [
-  { text: "Monthly retainer content delivered", time: "Jun 26, 2026", type: "delivery", client: "Nucleus Systems", clientColor: "#dfff00" },
-  { text: "Proposal sent, Attorney websites", time: "Jun 18, 2026", type: "proposal", client: "Pipeline", clientColor: "#ff9500" },
-  { text: "OMN Season 2 scoping started", time: "Jun 10, 2026", type: "review", client: "Outdoor Movie Nights", clientColor: "#e63946" },
-  { text: "HOM deliverables signed off", time: "Jun 5, 2026", type: "milestone", client: "Hlophe Outdoor Media", clientColor: "#7c3aed" },
-  { text: "LPS website launched", time: "Jun 1, 2026", type: "milestone", client: "Lona Premium Shuttles", clientColor: "#d4af37" },
-];
-
-// ── Gantt: Jan 2026 → Jun 2026 = 6 months ────────────────────────────────────
-const GANTT_TOTAL = 6;
-const GANTT_LABELS = ["Jan '26", "Feb '26", "Mar '26", "Apr '26", "May '26", "Jun '26"];
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function LiveClock() {
-  const [t, setT] = useState("");
+// ── Horizontal chip rail: labelled, arrowed, edge-faded so it reads as navigation ──
+function ChipRail({ label, hint, items, active, onSelect }: {
+  label: string; hint: string;
+  items: { id: string; label: string; dot?: string }[];
+  active: string; onSelect: (id: string) => void;
+}) {
+  const track = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ left: false, right: false });
+  const update = () => {
+    const t = track.current; if (!t) return;
+    setEdges({ left: t.scrollLeft > 4, right: t.scrollLeft + t.clientWidth < t.scrollWidth - 4 });
+  };
   useEffect(() => {
-    const update = () => setT(new Date().toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
     update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.65rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em" }}>{t}</span>;
-}
-
-function ProgressRing({ pct, color, size = 60, stroke = 3 }: { pct: number; color: string; size?: number; stroke?: number }) {
-  const r = (size - stroke * 2) / 2;
-  const circ = 2 * Math.PI * r;
-  const cx = size / 2, cy = size / 2;
-  return (
-    <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={stroke} />
-      <motion.circle
-        cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={stroke} strokeLinecap="round"
-        strokeDasharray={circ}
-        initial={{ strokeDashoffset: circ }}
-        animate={{ strokeDashoffset: circ - (circ * pct / 100) }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-      />
-    </svg>
+    const t = track.current;
+    const el = t?.querySelector<HTMLElement>(`[data-id="${CSS.escape(active)}"]`);
+    if (t && el) t.scrollTo({ left: el.offsetLeft - t.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
+    addEventListener("resize", update);
+    return () => removeEventListener("resize", update);
+  }, [active, items.length]);
+  const nudge = (d: number) => track.current?.scrollBy({ left: d * track.current.clientWidth * 0.7, behavior: "smooth" });
+  const arrow = (d: number) => (
+    <button onClick={() => nudge(d)} aria-label={d > 0 ? "Scroll right" : "Scroll left"}
+      style={{ flexShrink: 0, width: 34, height: 34, borderRadius: "50%", border: "1px solid rgba(var(--accent-rgb),0.35)", background: "rgba(var(--accent-rgb),0.08)", color: "var(--accent)", cursor: "pointer", display: "grid", placeItems: "center", opacity: (d < 0 ? edges.left : edges.right) ? 1 : 0.3 }}>
+      {d > 0 ? "→" : "←"}
+    </button>
   );
-}
-
-function DonutChart({ data }: { data: { name: string; count: number; color: string }[] }) {
-  const total = data.reduce((s, d) => s + d.count, 0);
-  let offset = 0;
-  const cx = 70, cy = 70, r = 52, stroke = 18;
-  const circ = 2 * Math.PI * r;
   return (
-    <svg width={140} height={140} style={{ transform: "rotate(-90deg)" }}>
-      {data.map((d, i) => {
-        const pct = d.count / total;
-        const dash = circ * pct - 2;
-        const gap = circ - dash;
-        const slice = (
-          <motion.circle
-            key={i}
-            cx={cx} cy={cy} r={r}
-            fill="none" stroke={d.color} strokeWidth={stroke}
-            strokeDasharray={`${dash} ${gap}`}
-            strokeDashoffset={-(offset * circ) + circ * 0.005}
-            initial={{ opacity: 0, strokeDasharray: `0 ${circ}` }}
-            animate={{ opacity: 1, strokeDasharray: `${dash} ${gap}` }}
-            transition={{ duration: 1.0, delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-          />
-        );
-        offset += pct;
-        return slice;
-      })}
-    </svg>
-  );
-}
-
-function SitePortal({ url, accent, name }: { url: string; accent: string; name: string }) {
-  const [state, setState] = useState<"loading"|"loaded"|"blocked">("loading");
-  const [live, setLive] = useState(false);
-  return (
-    <div style={{ borderRadius: 12, overflow: "hidden", border: `1px solid ${accent}25`, background: "#0d0d0d" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.5rem 0.875rem", background: "rgba(16,16,16,0.99)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-        <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
-          {["#ff5f57","#ffbd2e","#28ca41"].map(c => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
-        </div>
-        <div style={{ flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 5, padding: "0.25rem 0.625rem", fontFamily: "var(--font-geist-mono)", fontSize: "0.68rem", color: "rgba(255,255,255,0.35)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{url.replace("https://","")}</div>
-        <button onClick={() => setLive(l => !l)} style={{ padding: "0.2rem 0.5rem", borderRadius: 4, fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.08em", textTransform: "uppercase", border: `1px solid ${live ? accent : "rgba(255,255,255,0.1)"}`, background: live ? `${accent}18` : "transparent", color: live ? accent : "rgba(255,255,255,0.35)", cursor: "pointer", transition: "all 0.2s" }}>{live ? "◉ Live" : "○ Preview"}</button>
-        <a href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", fontFamily: "var(--font-geist-mono)", color: "rgba(255,255,255,0.35)", textDecoration: "none", padding: "0.2rem 0.5rem", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 4 }}>↗</a>
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
+        <span style={{ ...mono, fontSize: "0.6rem", color: "var(--accent)" }}>{label}</span>
+        <span style={{ ...mono, fontSize: "0.56rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.45)", textAlign: "right" }}>{hint}</span>
       </div>
-      <div style={{ height: 420, position: "relative", background: "#0e0e0e", overflow: "hidden" }}>
-        {state === "loading" && (
-          <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", zIndex: 2 }}>
-            <div style={{ width: 28, height: 28, borderRadius: "50%", border: `2px solid ${accent}`, borderTopColor: "transparent", animation: "spin 0.8s linear infinite" }} />
-            <div style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.65rem", fontFamily: "var(--font-geist-mono)", letterSpacing: "0.12em" }}>LOADING</div>
-          </div>
-        )}
-        {state === "blocked" ? (
-          <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1rem", textAlign: "center", padding: "2rem" }}>
-            <div style={{ color: accent, fontSize: "2rem" }}>◎</div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", lineHeight: 1.7, maxWidth: "20rem" }}>Security headers prevent embedding. Open the site directly.</p>
-            <a href={url} target="_blank" rel="noopener noreferrer" className="btn-accent" style={{ fontSize: "0.75rem", padding: "0.6rem 1.25rem" }}>Visit Live Site ↗</a>
-          </div>
-        ) : (
-          <iframe
-            key={url}
-            src={url}
-            title={name}
-            className="previewer-frame"
-            style={{
-              position: "absolute",
-              top: 0, left: 0,
-              width: "100%",
-              maxWidth: "none",
-              height: "100%",
-              border: "none",
-              pointerEvents: live ? "auto" : "none",
-              opacity: state === "loading" ? 0 : 1,
-              transition: "opacity 0.4s",
-            }}
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
-            onLoad={() => setState("loaded")}
-            onError={() => setState("blocked")}
-            loading="lazy"
-          />
-        )}
-        {!live && state === "loaded" && (
-          <div
-            onClick={() => setLive(true)}
-            style={{ position: "absolute", inset: 0, cursor: "pointer", zIndex: 1, display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "0.875rem", pointerEvents: "auto", touchAction: "pan-y" }}
-          >
-            <div style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", border: `1px solid ${accent}35`, borderRadius: 6, padding: "0.4rem 0.75rem", fontSize: "0.65rem", fontFamily: "var(--font-geist-mono)", color: accent, textTransform: "uppercase", letterSpacing: "0.1em", pointerEvents: "none" }}>Click to interact ↑</div>
-          </div>
-        )}
-      </div>
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-    </div>
-  );
-}
-
-// ── Dashboard Overview ────────────────────────────────────────────────────────
-function Dashboard({ onOpen }: { onOpen: (id: string) => void }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={{ padding: "0 0 4rem" }}>
-
-      {/* Top bar */}
-      <div style={{ padding: "1rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(10,10,10,0.96)", backdropFilter: "blur(12px)" }}>
-        <div>
-          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.2rem" }}>Nuuhaven · Command Centre</div>
-          <div style={{ fontWeight: 800, fontSize: "1.1rem", letterSpacing: "-0.02em" }}>Portfolio Overview</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e", animation: "pulse 2s infinite" }} />
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em" }}>LIVE</span>
-          </div>
-          <LiveClock />
-        </div>
-      </div>
-
-      {/* KPI Cards */}
-      <div style={{ padding: isMobile ? "1rem" : "1.5rem 2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(3, 1fr)", gap: "0.75rem" }}>
-        {[
-          {
-            label: "Active Projects",
-            value: "4",
-            sub: "All currently ongoing",
-            icon: "◈",
-            color: "#dfff00",
-            bg: "rgba(223,255,0,0.05)",
-            border: "rgba(223,255,0,0.15)",
-          },
-          {
-            label: "Industries Served",
-            value: "4",
-            sub: "Tech · Transport · Ad · Entertainment",
-            icon: "◎",
-            color: "#a78bfa",
-            bg: "rgba(167,139,250,0.05)",
-            border: "rgba(167,139,250,0.15)",
-          },
-          {
-            label: "Pipeline",
-            value: "2",
-            sub: "Legal services prospects",
-            icon: "→",
-            color: "#ff9500",
-            bg: "rgba(255,149,0,0.05)",
-            border: "rgba(255,149,0,0.15)",
-          },
-        ].map((k, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            style={{ background: k.bg, border: `1px solid ${k.border}`, borderRadius: 14, padding: "1.25rem 1.375rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>{k.label}</span>
-              <span style={{ fontSize: "1rem", color: k.color, opacity: 0.8 }}>{k.icon}</span>
-            </div>
-            <div style={{ fontSize: "2.4rem", fontWeight: 900, color: k.color, lineHeight: 1, letterSpacing: "-0.03em", fontFamily: "var(--font-geist-mono)" }}>{k.value}</div>
-            <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.4 }}>{k.sub}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Gantt Timeline */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.35, duration: 0.5 }}
-        style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem", background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}
-      >
-        <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: "0.15rem" }}>Project Timeline</div>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>Jan 2026 → Jun 2026 · All active ecosystems</div>
-          </div>
-          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "var(--accent)", letterSpacing: "0.1em" }}>4 PROJECTS</div>
-        </div>
-
-        <div style={{ padding: "1.25rem 1.5rem" }}>
-          {/* Month axis */}
-          <div style={{ display: "flex", marginBottom: "0.75rem", marginLeft: 160, position: "relative" }}>
-            {GANTT_LABELS.map((l, i) => (
-              <div key={i} style={{ flex: 1, fontFamily: "var(--font-geist-mono)", fontSize: "0.5rem", color: l ? "rgba(255,255,255,0.2)" : "transparent", textAlign: "center", letterSpacing: "0.04em" }}>{l}</div>
-            ))}
-          </div>
-          {/* Grid lines */}
-          <div style={{ position: "relative", marginLeft: 160 }}>
-            <div style={{ position: "absolute", inset: 0, display: "flex", pointerEvents: "none" }}>
-              {GANTT_LABELS.map((_, i) => (
-                <div key={i} style={{ flex: 1, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.04)" }} />
-              ))}
-            </div>
-            {/* Today marker */}
-            <div style={{ position: "absolute", left: `${(GANTT_TOTAL / GANTT_TOTAL) * 100}%`, top: 0, bottom: 0, width: 1, background: "rgba(223,255,0,0.4)", zIndex: 10 }}>
-              <div style={{ position: "absolute", top: -18, left: -16, fontFamily: "var(--font-geist-mono)", fontSize: "0.5rem", color: "var(--accent)", whiteSpace: "nowrap", letterSpacing: "0.06em" }}>NOW</div>
-            </div>
-          </div>
-
-          {/* Project rows */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            {CLIENTS.map((c, i) => {
-              const startPct = (c.ganttStart / GANTT_TOTAL) * 100;
-              const widthPct = ((c.ganttEnd - c.ganttStart) / GANTT_TOTAL) * 100;
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        {arrow(-1)}
+        <div style={{ position: "relative", flex: 1, minWidth: 0 }}>
+          <div ref={track} onScroll={update} className="hide-scrollbar" role="tablist"
+            style={{ display: "flex", gap: 8, overflowX: "auto", scrollSnapType: "x proximity", padding: "2px 0" }}>
+            {items.map(it => {
+              const on = it.id === active;
               return (
-                <motion.div
-                  key={c.id}
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
-                  style={{ display: "flex", alignItems: "center", gap: "0", height: 38 }}
-                >
-                  {/* Label */}
-                  <div style={{ width: 160, flexShrink: 0, paddingRight: "1rem" }}>
-                    <button
-                      onClick={() => onOpen(c.id)}
-                      style={{ background: "none", border: "none", cursor: "pointer", textAlign: "right", width: "100%", padding: 0 }}
-                    >
-                      <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "rgba(255,255,255,0.8)", marginBottom: "0.1rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.name}</div>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", color: c.accent, opacity: 0.7 }}>{c.code}</div>
-                    </button>
-                  </div>
-                  {/* Bar track */}
-                  <div style={{ flex: 1, position: "relative", height: "100%" }}>
-                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center" }}>
-                      <div style={{ width: "100%", height: 2, background: "rgba(255,255,255,0.04)" }} />
-                    </div>
-                    <div style={{ position: "absolute", left: `${startPct}%`, width: `${widthPct}%`, top: "50%", transform: "translateY(-50%)" }}>
-                      <motion.div
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.9, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                        style={{
-                          height: 24,
-                          background: `linear-gradient(90deg, ${c.accent}CC, ${c.accent}66)`,
-                          borderRadius: c.isOngoing ? "6px 0 0 6px" : 6,
-                          transformOrigin: "left",
-                          display: "flex", alignItems: "center", paddingLeft: "0.4rem", paddingRight: "0.4rem", gap: "0.3rem",
-                          boxShadow: `0 0 12px ${c.accent}30`,
-                          position: "relative",
-                        }}
-                      >
-                        <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", color: "#000", fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", letterSpacing: "0.04em" }}>
-                          {c.startDate}
-                        </span>
-                        {c.isOngoing && (
-                          <div style={{ position: "absolute", right: -8, top: "50%", transform: "translateY(-50%)", width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <div style={{ width: 8, height: 8, borderRadius: "50%", background: c.accent, boxShadow: `0 0 8px ${c.accent}`, animation: "pulse 1.5s infinite" }} />
-                          </div>
-                        )}
-                      </motion.div>
-                    </div>
-                    {/* Phase dots */}
-                    {c.timeline.map((p, j) => {
-                      const phasePct = startPct + (j / (c.timeline.length - 1)) * widthPct * (c.isOngoing ? 0.18 : 1);
-                      return (
-                        <div key={j} style={{ position: "absolute", left: `${phasePct}%`, top: "50%", transform: "translate(-50%, -50%)", zIndex: 5 }}>
-                          <div style={{ width: 6, height: 6, borderRadius: "50%", background: c.accent, border: "1px solid #000", boxShadow: `0 0 4px ${c.accent}` }} />
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {/* End label */}
-                  <div style={{ width: 56, flexShrink: 0, paddingLeft: "0.5rem" }}>
-                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", color: c.accent, opacity: 0.7 }}>{c.isOngoing ? "Ongoing" : c.endDate}</div>
-                  </div>
-                </motion.div>
+                <button key={it.id} data-id={it.id} role="tab" aria-selected={on} onClick={() => onSelect(it.id)}
+                  style={{ flexShrink: 0, scrollSnapAlign: "center", display: "inline-flex", alignItems: "center", gap: 8, minHeight: 38, padding: "0 16px", borderRadius: 999, whiteSpace: "nowrap", cursor: "pointer", fontSize: "0.78rem", fontWeight: 600, transition: "all .2s",
+                    background: on ? "var(--accent)" : "rgba(255,255,255,0.06)", color: on ? "#000" : "rgba(255,255,255,0.78)", border: `1px solid ${on ? "var(--accent)" : "rgba(255,255,255,0.12)"}` }}>
+                  {it.dot && <span aria-hidden style={{ width: 7, height: 7, borderRadius: "50%", background: on ? "#000" : it.dot }} />}
+                  {it.label}
+                </button>
               );
             })}
           </div>
+          {edges.left && <div aria-hidden style={{ position: "absolute", inset: "0 auto 0 0", width: 32, pointerEvents: "none", background: "linear-gradient(90deg,#050505,rgba(5,5,5,0))" }} />}
+          {edges.right && <div aria-hidden style={{ position: "absolute", inset: "0 0 0 auto", width: 48, pointerEvents: "none", background: "linear-gradient(270deg,#050505,rgba(5,5,5,0))" }} />}
         </div>
-      </motion.div>
-
-      {/* Project Cards Grid */}
-      <div style={{ margin: isMobile ? "0 1rem 1.5rem" : "0 2rem 1.5rem" }}>
-        <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
-          <div style={{ fontWeight: 700, fontSize: "0.95rem" }}>Client Workspaces</div>
-          <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>Click any card to open workspace</div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "1rem" }}>
-          {CLIENTS.map((c, i) => (
-            <motion.button
-              key={c.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + i * 0.09, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              onClick={() => onOpen(c.id)}
-              style={{ textAlign: "left", cursor: "pointer", background: "none", border: "none", padding: 0 }}
-            >
-              <div
-                style={{ background: "var(--bg-card)", border: `1px solid rgba(255,255,255,0.09)`, borderRadius: 16, overflow: "hidden", transition: "border-color 0.2s, transform 0.2s", position: "relative" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `${c.accent}45`; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
-              >
-                {/* Accent header band */}
-                <div style={{ height: 4, background: `linear-gradient(90deg, ${c.accent}, ${c.accent}44)` }} />
-
-                <div style={{ padding: "1.25rem" }}>
-                  {/* Top row */}
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.25rem" }}>
-                        <div style={{ width: 7, height: 7, borderRadius: "50%", background: c.statusColor, boxShadow: `0 0 6px ${c.statusColor}`, flexShrink: 0 }} />
-                        <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.56rem", color: c.statusColor, letterSpacing: "0.1em", textTransform: "uppercase" }}>{c.status}</span>
-                      </div>
-                      <div style={{ fontWeight: 700, fontSize: "1rem", marginBottom: "0.15rem", letterSpacing: "-0.01em" }}>{c.name}</div>
-                      <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.57rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em" }}>{c.code} · {c.industry}</div>
-                    </div>
-                    {/* Progress ring */}
-                    <div style={{ position: "relative", flexShrink: 0 }}>
-                      <ProgressRing pct={c.progress} color={c.accent} size={56} stroke={3} />
-                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-                        <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", fontWeight: 800, color: c.accent, lineHeight: 1 }}>{c.progress}</span>
-                        <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.44rem", color: "rgba(255,255,255,0.3)" }}>%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Tagline */}
-                  <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.65, marginBottom: "1rem" }}>{c.tagline}</p>
-
-                  {/* Services tags */}
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginBottom: "1rem" }}>
-                    {c.services.slice(0, 4).map((s, j) => (
-                      <span key={j} style={{ fontSize: "0.62rem", padding: "0.2rem 0.5rem", borderRadius: 999, background: `${c.accent}0f`, border: `1px solid ${c.accent}20`, color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-geist-mono)" }}>{s}</span>
-                    ))}
-                    {c.services.length > 4 && (
-                      <span style={{ fontSize: "0.62rem", padding: "0.2rem 0.5rem", borderRadius: 999, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-geist-mono)" }}>+{c.services.length - 4}</span>
-                    )}
-                  </div>
-
-                  {/* Footer row */}
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "0.75rem", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                    <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
-                      {c.colors.map((col) => (
-                        <div key={col} style={{ width: 14, height: 14, borderRadius: 3, background: col, border: "1px solid rgba(255,255,255,0.1)" }} />
-                      ))}
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.375rem" }}>
-                      <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.35)" }}>{c.startDate}</span>
-                      <span style={{ fontSize: "0.55rem", color: "rgba(255,255,255,0.15)" }}>→</span>
-                      <span style={{ fontSize: "0.68rem", color: c.isOngoing ? c.accent : "rgba(255,255,255,0.35)" }}>{c.isOngoing ? "Ongoing" : c.endDate}</span>
-                    </div>
-                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: c.accent, opacity: 0.8, display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                      Open <span style={{ fontSize: "0.7rem" }}>↗</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.button>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom 2-col: Pipeline | Activity */}
-      <div style={{ margin: isMobile ? "0 1rem" : "0 2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "1rem" }}>
-
-        {/* Sales Pipeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.78, duration: 0.5 }}
-          style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem" }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Sales Pipeline</div>
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.56rem", color: "#ff9500", background: "rgba(255,149,0,0.1)", border: "1px solid rgba(255,149,0,0.2)", borderRadius: 999, padding: "0.15rem 0.5rem" }}>2 ACTIVE</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-            {PIPELINE.map((p, i) => (
-              <div key={i} style={{ padding: "1rem", background: "rgba(255,255,255,0.025)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.625rem" }}>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.82rem", marginBottom: "0.15rem" }}>{p.name}</div>
-                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.57rem", color: "rgba(255,255,255,0.3)" }}>{p.industry}</div>
-                  </div>
-                  <div style={{ fontSize: "0.58rem", padding: "0.15rem 0.5rem", borderRadius: 999, background: `${p.stageColor}12`, border: `1px solid ${p.stageColor}28`, color: p.stageColor, fontFamily: "var(--font-geist-mono)", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{p.stage}</div>
-                </div>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.78rem", fontWeight: 700, color: p.stageColor, marginBottom: "0.5rem" }}>{p.est}</div>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ flex: 1, height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 999, overflow: "hidden" }}>
-                    <motion.div initial={{ width: 0 }} animate={{ width: `${p.probability}%` }} transition={{ duration: 1.2, delay: 0.9, ease: [0.22,1,0.36,1] }} style={{ height: "100%", background: `linear-gradient(90deg, ${p.stageColor}88, ${p.stageColor})`, borderRadius: 999 }} />
-                  </div>
-                  <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: p.stageColor, flexShrink: 0 }}>{p.probability}%</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Activity Feed */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.86, duration: 0.5 }}
-          style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem", display: "flex", flexDirection: "column" }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Recent Activity</div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-              <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 6px #22c55e" }} />
-              <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.54rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.08em" }}>LIVE</span>
-            </div>
-          </div>
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.1rem" }}>
-            {FEED.map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9 + i * 0.06 }}
-                style={{ padding: "0.625rem 0.75rem", borderRadius: 8, background: "rgba(255,255,255,0.02)", display: "flex", gap: "0.5rem", alignItems: "flex-start" }}
-              >
-                <div style={{ width: 8, height: 8, borderRadius: "50%", background: f.clientColor, flexShrink: 0, marginTop: "0.25rem", boxShadow: `0 0 5px ${f.clientColor}60` }} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.5, marginBottom: "0.15rem" }}>{f.text}</div>
-                  <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.54rem", color: "rgba(255,255,255,0.2)" }}>{f.time}</span>
-                    <span style={{ fontSize: "0.5rem", color: "rgba(255,255,255,0.1)" }}>·</span>
-                    <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.54rem", color: f.clientColor, opacity: 0.7, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.client}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <Link href="/contact" className="btn-accent" style={{ display: "block", textAlign: "center", fontSize: "0.72rem", padding: "0.7rem 1rem", marginTop: "1rem" }}>Start Your Project →</Link>
-        </motion.div>
-      </div>
-
-      <style>{`
-        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
-      `}</style>
-    </div>
-  );
-}
-
-// ── Client Workspace ──────────────────────────────────────────────────────────
-function ClientWorkspace({ client, onBack }: { client: typeof CLIENTS[0]; onBack: () => void }) {
-  const isMobile = useIsMobile();
-  return (
-    <div>
-      {/* Header */}
-      <div style={{ padding: "1.25rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(10,10,10,0.96)", backdropFilter: "blur(12px)", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", position: "sticky", top: 68, zIndex: 20 }}>
-        <div>
-          <button onClick={onBack} style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", background: "none", border: "none", cursor: "pointer", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.3rem" }}>
-            <span>←</span> Portfolio
-          </button>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
-            <div style={{ width: 7, height: 7, borderRadius: "50%", background: client.statusColor, boxShadow: `0 0 6px ${client.statusColor}` }} />
-            <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>{client.code} · {client.status}</span>
-          </div>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: 800, margin: 0, marginBottom: "0.2rem", letterSpacing: "-0.02em" }}>{client.name}</h1>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.82rem", margin: 0 }}>{client.tagline}</p>
-        </div>
-        <div style={{ display: "flex", gap: "0.625rem", alignItems: "center" }}>
-          <a href={client.url} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: "0.7rem", padding: "0.55rem 1rem" }}>Open Site ↗</a>
-          <Link href="/contact" className="btn-accent" style={{ fontSize: "0.7rem", padding: "0.55rem 1rem" }}>Similar Project →</Link>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ padding: isMobile ? "1rem" : "2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 300px", gap: "1.5rem" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-
-          {/* Project stats row */}
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: "0.75rem" }}>
-            {[
-              { label: "Phase", value: client.phase, color: client.accent },
-              { label: "Started", value: client.startDate, color: "rgba(255,255,255,0.7)" },
-              { label: "Completed", value: client.isOngoing ? "Ongoing" : client.endDate, color: client.isOngoing ? client.accent : "rgba(255,255,255,0.7)" },
-              { label: "Deliverables", value: `${client.services.length}`, color: client.accent },
-            ].map((s, i) => (
-              <div key={i} style={{ background: "var(--bg-card)", border: `1px solid rgba(255,255,255,0.08)`, borderRadius: 10, padding: "0.875rem 1rem" }}>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.35rem" }}>{s.label}</div>
-                <div style={{ fontWeight: 700, fontSize: "0.9rem", color: s.color }}>{s.value}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Timeline */}
-          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "1.25rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-              <div style={{ fontWeight: 600, fontSize: "0.88rem" }}>Project Timeline</div>
-              <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.56rem", color: "rgba(255,255,255,0.25)" }}>{client.startDate} → {client.isOngoing ? "Ongoing" : client.endDate}</div>
-            </div>
-            <div style={{ display: "flex", position: "relative" }}>
-              {client.timeline.map((p, i) => (
-                <div key={i} style={{ flex: 1, position: "relative" }}>
-                  {i < client.timeline.length - 1 && (
-                    <div style={{ position: "absolute", top: 14, left: "50%", right: "-50%", height: 2, background: p.done ? client.accent : "rgba(255,255,255,0.06)", zIndex: 0, transition: "background 0.3s" }} />
-                  )}
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.1 + i * 0.12, type: "spring", stiffness: 200 }}
-                      style={{ width: 28, height: 28, borderRadius: "50%", background: p.done ? `${client.accent}20` : "rgba(255,255,255,0.04)", border: `2px solid ${p.done ? client.accent : "rgba(255,255,255,0.1)"}`, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1, boxShadow: p.done ? `0 0 12px ${client.accent}30` : "none" }}>
-                      {p.done && <div style={{ width: 8, height: 8, borderRadius: "50%", background: client.accent }} />}
-                    </motion.div>
-                    <div style={{ fontSize: "0.62rem", textAlign: "center", color: p.done ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.2)", lineHeight: 1.4, fontFamily: "var(--font-geist-mono)" }}>{p.label}</div>
-                    <div style={{ fontSize: "0.54rem", color: p.done ? client.accent : "rgba(255,255,255,0.15)", fontFamily: "var(--font-geist-mono)", opacity: 0.8 }}>{p.date}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Live portal */}
-          <div>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: client.accent, marginBottom: "0.75rem" }}>Live Website Portal</div>
-            <SitePortal url={client.url} accent={client.accent} name={client.name} />
-          </div>
-
-          {/* About + Challenge */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-            {[
-              { label: "About", body: client.about },
-              { label: "Challenge", body: client.challenge },
-            ].map((card) => (
-              <div key={card.label} style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
-                <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: client.accent, marginBottom: "0.625rem" }}>{card.label}</div>
-                <p style={{ color: "var(--text-muted)", fontSize: "0.78rem", lineHeight: 1.85, margin: 0 }}>{card.body}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Outcomes */}
-          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.25rem" }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: client.accent, marginBottom: "1rem" }}>Outcomes Delivered</div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem" }}>
-              {client.outcomes.map((o, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.07 }} style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
-                  <div style={{ width: 16, height: 16, borderRadius: "50%", background: `${client.accent}12`, border: `1px solid ${client.accent}25`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "0.15rem" }}>
-                    <span style={{ color: client.accent, fontSize: "0.55rem" }}>✓</span>
-                  </div>
-                  <span style={{ color: "var(--text-muted)", fontSize: "0.76rem", lineHeight: 1.7 }}>{o}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right sidebar */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          {/* Services */}
-          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Services Delivered</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-              {client.services.map((s, i) => (
-                <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 }} style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.4rem 0", borderBottom: i < client.services.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
-                  <div style={{ width: 5, height: 5, borderRadius: "50%", background: client.accent, flexShrink: 0 }} />
-                  <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.5)" }}>{s}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Brand colours */}
-          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem" }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Brand Palette</div>
-            <div style={{ display: "flex", gap: "0.75rem" }}>
-              {client.colors.map((col, i) => (
-                <div key={col} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-                  <div style={{ width: "100%", aspectRatio: "1", borderRadius: 8, background: col, border: "1px solid rgba(255,255,255,0.08)" }} />
-                  <div style={{ fontSize: "0.56rem", fontFamily: "var(--font-geist-mono)", color: "rgba(255,255,255,0.3)", textAlign: "center" }}>{client.colorNames[i]}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Activity */}
-          <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 14, padding: "1.125rem", flex: 1 }}>
-            <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "0.75rem" }}>Activity Log</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem" }}>
-              {client.activity.map((a, i) => (
-                <div key={i} style={{ padding: "0.5rem 0.625rem", borderRadius: 7, background: "rgba(255,255,255,0.02)", display: "flex", gap: "0.4rem" }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: client.accent, flexShrink: 0, marginTop: "0.25rem" }} />
-                  <div>
-                    <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.5, marginBottom: "0.1rem" }}>{a.text}</div>
-                    <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.54rem", color: "rgba(255,255,255,0.2)" }}>{a.time}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {arrow(1)}
       </div>
     </div>
   );
 }
 
-// ── Page ──────────────────────────────────────────────────────────────────────
-export default function PortfolioPage() {
-  const [active, setActive] = useState("overview");
-  const client = CLIENTS.find(c => c.id === active);
-
+// ── Project card ──
+function ProjectCard({ c, i, onOpen }: { c: Client; i: number; onOpen: () => void }) {
+  const host = c.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingTop: 68 }}>
-      {/* Mobile pills */}
-      <div className="lg:hidden hide-scrollbar" style={{ display: "flex", gap: "0.4rem", overflowX: "auto", padding: "0.625rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(5,5,5,0.95)", position: "sticky", top: 68, zIndex: 10 }}>
-        {[{ id: "overview", label: "Dashboard" }, ...CLIENTS.map(c => ({ id: c.id, label: c.name }))].map(item => (
-          <button key={item.id} onClick={() => setActive(item.id)}
-            style={{ flexShrink: 0, padding: "0.375rem 0.75rem", borderRadius: 999, fontSize: "0.7rem", fontWeight: 600, cursor: "pointer", background: active === item.id ? "var(--accent)" : "rgba(255,255,255,0.05)", color: active === item.id ? "#000" : "rgba(255,255,255,0.45)", border: "none", transition: "all 0.2s" }}>
-            {item.label}
+    <motion.article layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.3 }}
+      onClick={onOpen} role="button" tabIndex={0} onKeyDown={e => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onOpen())}
+      className="work-card"
+      style={{ position: "relative", cursor: "pointer", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.09)", background: `radial-gradient(120% 80% at 0% 0%, ${c.accent}26, transparent 55%), #0b0b0b`, padding: "clamp(1.25rem,3vw,1.75rem)", display: "flex", flexDirection: "column", gap: 14, minHeight: 300, ["--accent-c" as string]: c.accent }}>
+      <div style={{ margin: "calc(-1 * clamp(1.25rem,3vw,1.75rem)) calc(-1 * clamp(1.25rem,3vw,1.75rem)) 4px", borderBottom: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", aspectRatio: "16 / 9", background: "#111" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`/images/work/${c.id}.jpg`} alt={`${c.name} website`} loading="lazy" className="work-shot"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ ...mono, fontSize: "0.58rem", color: c.accent }}>{c.industry}</span>
+        <span style={{ ...mono, fontSize: "0.58rem", color: "rgba(255,255,255,0.3)" }}>{pad(i + 1)}</span>
+      </div>
+      <h3 style={{ fontFamily: "var(--font-display, inherit)", fontSize: "clamp(1.5rem,4vw,2rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "#fff" }}>{c.name}</h3>
+      <p style={{ margin: 0, fontSize: "0.9rem", lineHeight: 1.55, color: "rgba(255,255,255,0.62)", maxWidth: "46ch" }}>{c.tagline}</p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+        {c.services.slice(0, 3).map(s => (
+          <span key={s} style={{ fontSize: "0.68rem", padding: "4px 10px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)" }}>{s}</span>
+        ))}
+        {c.services.length > 3 && <span style={{ fontSize: "0.68rem", padding: "4px 10px", color: "rgba(255,255,255,0.4)" }}>+{c.services.length - 3}</span>}
+      </div>
+      <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+        <span style={{ fontWeight: 600, fontSize: "0.85rem", color: "#fff" }}>View case study <span style={{ color: c.accent }}>→</span></span>
+        <a href={c.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+          style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.66rem", color: "rgba(255,255,255,0.5)", textDecoration: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "50%" }}>
+          {host} ↗
+        </a>
+      </div>
+    </motion.article>
+  );
+}
+
+// ── Site preview: screenshot in a browser frame, links to the live site ──
+function LivePreview({ c }: { c: Client }) {
+  const host = c.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return (
+    <a href={c.url} target="_blank" rel="noopener noreferrer" className="site-preview" aria-label={`Open ${c.name} live website`}
+      style={{ display: "block", borderRadius: 16, overflow: "hidden", border: "1px solid var(--line-2)", background: "var(--surface-1)", textDecoration: "none" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: "var(--surface-2)", borderBottom: "1px solid var(--line-2)" }}>
+        <div style={{ display: "flex", gap: 6 }}>{["#ff5f57", "#ffbd2e", "#28ca41"].map(x => <span key={x} style={{ width: 10, height: 10, borderRadius: "50%", background: x }} />)}</div>
+        <span style={{ flex: 1, minWidth: 0, fontFamily: "var(--font-geist-mono)", fontSize: "0.7rem", color: "var(--text-2)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{host}</span>
+        <span style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--accent-ink)", whiteSpace: "nowrap" }}>Visit site ↗</span>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/images/work/${c.id}.jpg`} alt={`${c.name} website homepage`} loading="lazy"
+        style={{ display: "block", width: "100%", aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "top" }} />
+    </a>
+  );
+}
+
+// ── Case study ──
+function CaseStudy({ c, list, onOpen, onClose, isMobile }: { c: Client; list: Client[]; onOpen: (id: string) => void; onClose: () => void; isMobile: boolean }) {
+  const i = list.findIndex(x => x.id === c.id);
+  const prev = list[(i - 1 + list.length) % list.length];
+  const next = list[(i + 1) % list.length];
+  const section: React.CSSProperties = { borderRadius: 16, border: "1px solid rgba(255,255,255,0.08)", background: "#0b0b0b", padding: "clamp(1.25rem,3vw,1.75rem)" };
+  const h4: React.CSSProperties = { ...mono, fontSize: "0.6rem", color: c.accent, margin: "0 0 12px" };
+  return (
+    <motion.div key={c.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+      <header style={{ padding: "clamp(1.5rem,4vw,3rem) 0 clamp(1.25rem,3vw,2rem)", display: "grid", gap: 14 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontSize: "0.85rem", padding: "8px 0" }}>← All work</button>
+          <span style={{ ...mono, fontSize: "0.6rem", color: "rgba(255,255,255,0.4)" }}>{pad(i + 1)} / {pad(list.length)}</span>
+        </div>
+        <span style={{ ...mono, fontSize: "0.62rem", color: c.accent }}>{c.industry}</span>
+        <h1 style={{ margin: 0, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 0.98, fontSize: "clamp(2.2rem,7vw,4.5rem)", color: "#fff", textWrap: "balance" as React.CSSProperties["textWrap"] }}>{c.name}</h1>
+        <p style={{ margin: 0, fontSize: "clamp(1rem,2.4vw,1.2rem)", color: "rgba(255,255,255,0.65)", maxWidth: "52ch", lineHeight: 1.5 }}>{c.tagline}</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 6 }}>
+          <a href={c.url} target="_blank" rel="noopener noreferrer" className="btn-accent" style={{ fontSize: "0.8rem", padding: "0.75rem 1.4rem" }}>Visit live site ↗</a>
+          <Link href="/contact" style={{ fontSize: "0.8rem", padding: "0.75rem 1.4rem", borderRadius: 999, border: "1px solid rgba(255,255,255,0.18)", color: "#fff", textDecoration: "none" }}>Start a similar project</Link>
+        </div>
+      </header>
+
+      <LivePreview c={c} />
+
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.4fr 1fr", gap: 16, marginTop: 16 }}>
+        <div style={{ display: "grid", gap: 16 }}>
+          <section style={section}><h4 style={h4}>The client</h4><p style={{ margin: 0, color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>{c.about}</p></section>
+          <section style={section}><h4 style={h4}>The challenge</h4><p style={{ margin: 0, color: "rgba(255,255,255,0.72)", lineHeight: 1.7 }}>{c.challenge}</p></section>
+          <section style={section}>
+            <h4 style={h4}>Outcomes</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
+              {c.outcomes.map(o => (
+                <li key={o} style={{ display: "flex", gap: 10, color: "rgba(255,255,255,0.8)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+                  <span aria-hidden style={{ color: c.accent, flexShrink: 0 }}>✓</span>{o}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+        <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
+          <section style={section}>
+            <h4 style={h4}>What we delivered</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
+              {c.services.map(s => (
+                <li key={s} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.88rem", color: "rgba(255,255,255,0.8)" }}>
+                  <span aria-hidden style={{ width: 6, height: 6, borderRadius: "50%", background: c.accent }} />{s}
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section style={section}>
+            <h4 style={h4}>Brand palette</h4>
+            <div style={{ display: "flex", gap: 10 }}>
+              {c.colors.map((col, k) => (
+                <div key={col} style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ height: 48, borderRadius: 10, background: col, border: "1px solid rgba(255,255,255,0.12)" }} />
+                  <div style={{ fontSize: "0.68rem", marginTop: 6, color: "rgba(255,255,255,0.7)" }}>{c.colorNames[k]}</div>
+                  <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.4)" }}>{col}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <nav aria-label="More projects" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, margin: "28px 0 8px" }}>
+        {[{ c: prev, l: "← Previous" }, { c: next, l: "Next →" }].map(({ c: x, l }, k) => (
+          <button key={l} onClick={() => onOpen(x.id)}
+            style={{ textAlign: k ? "right" : "left", cursor: "pointer", borderRadius: 16, border: "1px solid rgba(255,255,255,0.09)", background: `radial-gradient(100% 100% at ${k ? "100%" : "0%"} 0%, ${x.accent}22, transparent 60%), #0b0b0b`, padding: "clamp(1rem,3vw,1.5rem)", color: "#fff", minWidth: 0 }}>
+            <div style={{ ...mono, fontSize: "0.56rem", color: "rgba(255,255,255,0.45)", marginBottom: 8 }}>{l}</div>
+            <div style={{ fontWeight: 700, fontSize: "clamp(0.95rem,2.6vw,1.3rem)", lineHeight: 1.2, overflow: "hidden", textOverflow: "ellipsis" }}>{x.name}</div>
           </button>
         ))}
+      </nav>
+    </motion.div>
+  );
+}
+
+// ── Page ──
+export default function WorkPage() {
+  const isMobile = useIsMobile();
+  const [filter, setFilter] = useState(ALL);
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sync = () => {
+      const h = decodeURIComponent(location.hash.slice(1));
+      setOpenId(CLIENTS.some(c => c.id === h) ? h : null);
+    };
+    sync();
+    addEventListener("hashchange", sync);
+    return () => removeEventListener("hashchange", sync);
+  }, []);
+
+  const industries = useMemo(() => [ALL, ...Array.from(new Set(CLIENTS.map(c => c.industry)))], []);
+  const list = useMemo(() => (filter === ALL ? CLIENTS : CLIENTS.filter(c => c.industry === filter)), [filter]);
+  const open = (id: string) => { if (location.hash !== `#${id}`) location.hash = id; window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const close = () => { history.pushState(null, "", location.pathname); setOpenId(null); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const current = CLIENTS.find(c => c.id === openId);
+  const caseList = current && list.some(c => c.id === current.id) ? list : CLIENTS;
+
+  const wrap: React.CSSProperties = { maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1rem,4vw,2.5rem)" };
+
+  return (
+    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", paddingTop: 68, color: "#fff", overflowX: "clip", ["--surface-1" as string]: "#0b0b0b", ["--surface-2" as string]: "rgba(255,255,255,0.04)", ["--line-2" as string]: "rgba(255,255,255,0.09)", ["--text-2" as string]: "rgba(255,255,255,0.55)", ["--accent-ink" as string]: "var(--accent)" }}>
+      <style>{`.work-card{transition:transform .25s ease,border-color .25s ease}.work-card:hover,.work-card:focus-visible{transform:translateY(-4px);border-color:var(--accent-c)!important;outline:none}.work-shot{transition:transform .5s ease}.work-card:hover .work-shot{transform:scale(1.04)}`}</style>
+
+      {!current && (
+        <section style={{ ...wrap, padding: `clamp(2.5rem,7vw,5rem) clamp(1rem,4vw,2.5rem) clamp(1.5rem,4vw,2.5rem)` }}>
+          <div style={{ ...mono, fontSize: "0.62rem", color: "var(--accent)", marginBottom: 14 }}>Portfolio</div>
+          <h1 style={{ margin: 0, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, fontSize: "clamp(2.2rem,7vw,4.8rem)", maxWidth: "16ch", textWrap: "balance" as React.CSSProperties["textWrap"] }}>
+            Brands and websites we&apos;ve <span style={{ color: "var(--accent)" }}>built</span>.
+          </h1>
+          <p style={{ margin: "18px 0 0", color: "rgba(255,255,255,0.62)", fontSize: "clamp(1rem,2.4vw,1.15rem)", lineHeight: 1.6, maxWidth: "54ch" }}>
+            Every project here is live. Pick an industry, open a case study, or visit the site itself.
+          </p>
+          <div style={{ display: "flex", gap: "clamp(1.25rem,5vw,3rem)", marginTop: 28, flexWrap: "wrap" }}>
+            {[
+              { v: CLIENTS.length, l: "Live projects" },
+              { v: industries.length - 1, l: "Industries" },
+              { v: CLIENTS.filter(c => c.isOngoing).length, l: "On retainer" },
+            ].map(s => (
+              <div key={s.l}>
+                <div style={{ fontWeight: 700, fontSize: "clamp(1.8rem,5vw,2.6rem)", lineHeight: 1, color: "#fff" }}>{s.v}</div>
+                <div style={{ ...mono, fontSize: "0.56rem", color: "rgba(255,255,255,0.45)", marginTop: 6 }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Sticky navigation bar */}
+      <div style={{ position: "sticky", top: 68, zIndex: 20, background: "rgba(5,5,5,0.95)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(var(--accent-rgb),0.18)" }}>
+        <div style={{ ...wrap, padding: `10px clamp(1rem,4vw,2.5rem) 12px` }}>
+          {current ? (
+            <ChipRail label="Browse projects" hint={isMobile ? "swipe or tap →" : "click to switch project"}
+              items={[{ id: "__all", label: "All work" }, ...caseList.map(c => ({ id: c.id, label: c.name, dot: c.accent }))]}
+              active={current.id} onSelect={id => (id === "__all" ? close() : open(id))} />
+          ) : (
+            <ChipRail label="Filter by industry" hint={`${list.length} project${list.length === 1 ? "" : "s"}${isMobile ? " · swipe →" : ""}`}
+              items={industries.map(x => ({ id: x, label: x }))} active={filter} onSelect={setFilter} />
+          )}
+        </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div key={active} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2 }}>
-          {active === "overview" ? (
-            <Dashboard onOpen={setActive} />
-          ) : client ? (
-            <ClientWorkspace client={client} onBack={() => setActive("overview")} />
-          ) : null}
-        </motion.div>
-      </AnimatePresence>
+      <main style={{ ...wrap, paddingBottom: "clamp(4rem,10vw,7rem)" }}>
+        <AnimatePresence mode="wait">
+          {current ? (
+            <CaseStudy key={current.id} c={current} list={caseList} onOpen={open} onClose={close} isMobile={isMobile} />
+          ) : (
+            <motion.div key="grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(340px, 1fr))", gap: 16, paddingTop: "clamp(1.25rem,3vw,2rem)" }}>
+              <AnimatePresence mode="popLayout">
+                {list.map((c, i) => <ProjectCard key={c.id} c={c} i={i} onOpen={() => open(c.id)} />)}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {!current && (
+          <section style={{ marginTop: 40, borderRadius: 18, border: "1px solid rgba(var(--accent-rgb),0.2)", background: "radial-gradient(80% 120% at 100% 0%, rgba(var(--accent-rgb),0.1), transparent 60%), #0b0b0b", padding: "clamp(1.5rem,4vw,2.5rem)", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: "clamp(1.3rem,3.5vw,1.8rem)", letterSpacing: "-0.02em" }}>Your business could be next.</div>
+              <div style={{ color: "rgba(255,255,255,0.6)", marginTop: 6 }}>Brand, website and everything in between, built to look as good as you operate.</div>
+            </div>
+            <Link href="/contact" className="btn-accent" style={{ fontSize: "0.85rem", padding: "0.85rem 1.6rem" }}>Start your project →</Link>
+          </section>
+        )}
+      </main>
     </div>
   );
 }

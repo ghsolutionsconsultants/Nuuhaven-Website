@@ -199,10 +199,10 @@ export default function CostEstimator() {
                         data-cursor="SELECT"
                         style={{
                           textAlign: "left", padding: "1.25rem 1.375rem", borderRadius: 12,
-                          background: isSelected ? "rgba(223,255,0,0.06)" : "rgba(255,255,255,0.025)",
-                          border: isSelected ? "1px solid rgba(223,255,0,0.45)" : "1px solid rgba(255,255,255,0.07)",
+                          background: isSelected ? "rgba(var(--accent-rgb),0.06)" : "rgba(255,255,255,0.025)",
+                          border: isSelected ? "1px solid rgba(var(--accent-rgb),0.45)" : "1px solid rgba(255,255,255,0.07)",
                           cursor: "pointer", transition: "border-color 0.2s, background 0.2s",
-                          boxShadow: isSelected ? "0 0 20px rgba(223,255,0,0.06)" : "none",
+                          boxShadow: isSelected ? "0 0 20px rgba(var(--accent-rgb),0.06)" : "none",
                         }}
                       >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.75rem", marginBottom: "0.75rem" }}>
@@ -263,7 +263,7 @@ export default function CostEstimator() {
             {/* Summary panel */}
             <div style={{ position: isMobile ? "static" : "sticky", top: 88 }}>
               <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, overflow: "hidden" }}>
-                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(223,255,0,0.03)" }}>
+                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(var(--accent-rgb),0.03)" }}>
                   <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)" }}>Project Summary</div>
                 </div>
 
@@ -290,7 +290,7 @@ export default function CostEstimator() {
                         style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
                       >
                         {/* Investment */}
-                        <div style={{ padding: "1.25rem", background: "rgba(223,255,0,0.05)", border: "1px solid rgba(223,255,0,0.15)", borderRadius: 12 }}>
+                        <div style={{ padding: "1.25rem", background: "rgba(var(--accent-rgb),0.05)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 12 }}>
                           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: "0.75rem" }}>Investment Range</div>
                           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "1.75rem", fontWeight: 900, color: "var(--accent)", lineHeight: 1, marginBottom: "0.3rem" }}>{formatZAR(totalMin)}</div>
                           <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.82rem", color: "rgba(255,255,255,0.4)" }}>to {formatZAR(totalMax)}</div>
@@ -334,7 +334,7 @@ export default function CostEstimator() {
 
                         {/* ── Inline advisory ── */}
                         {advisoryLine1 && (
-                          <div style={{ padding: "1.125rem 1.25rem", background: "rgba(223,255,0,0.03)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 10 }}>
+                          <div style={{ padding: "1.125rem 1.25rem", background: "rgba(var(--accent-rgb),0.03)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 10 }}>
                             <div style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.52rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "0.625rem" }}>
                               Our Take
                             </div>

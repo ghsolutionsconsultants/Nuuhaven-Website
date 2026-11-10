@@ -236,7 +236,7 @@ export default function FreelancerPage() {
               const isOpen = openRole === role.title;
               return (
                 <motion.div key={role.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}
-                  style={{ background: "rgba(17,17,17,0.85)", border: isOpen ? "1px solid rgba(223,255,0,0.35)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 12, overflow: "hidden", transition: "border-color 0.25s" }}>
+                  style={{ background: "rgba(17,17,17,0.85)", border: isOpen ? "1px solid rgba(var(--accent-rgb),0.35)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 12, overflow: "hidden", transition: "border-color 0.25s" }}>
                   <button onClick={() => setOpenRole(isOpen ? null : role.title)} style={{ width: "100%", textAlign: "left", padding: "1.5rem 2rem", display: "flex", alignItems: "center", gap: "1.5rem", background: "none", border: "none", cursor: "pointer" }}>
                     <span style={{ color: "var(--accent)", fontSize: "1.25rem", flexShrink: 0 }}>{role.icon}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -359,7 +359,7 @@ export default function FreelancerPage() {
                             value={(form as Record<string, string>)[f.id]}
                             onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
                             style={inputStyle}
-                            onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                            onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                             onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
                           />
                         </div>
@@ -375,7 +375,7 @@ export default function FreelancerPage() {
                         const sel = form.role === role.title;
                         return (
                           <button key={role.title} type="button" onClick={() => { setForm(f => ({ ...f, role: role.title })); setSelectedSkills([]); }}
-                            style={{ padding: "0.875rem 1rem", textAlign: "left", borderRadius: 10, background: sel ? "rgba(223,255,0,0.08)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid rgba(255,255,255,0.08)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.65)", fontSize: "0.82rem", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "0.625rem" }}>
+                            style={{ padding: "0.875rem 1rem", textAlign: "left", borderRadius: 10, background: sel ? "rgba(var(--accent-rgb),0.08)" : "rgba(255,255,255,0.03)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.08)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.65)", fontSize: "0.82rem", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "0.625rem" }}>
                             <span>{role.icon}</span> {role.title}
                           </button>
                         );
@@ -392,7 +392,7 @@ export default function FreelancerPage() {
                           const sel = selectedSkills.includes(skill);
                           return (
                             <button key={skill} type="button" onClick={() => toggleSkill(skill)}
-                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(223,255,0,0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
+                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
                               {sel ? "✓ " : ""}{skill}
                             </button>
                           );
@@ -431,7 +431,7 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>Expected Rate (optional)</label>
                         <input type="text" placeholder="e.g. R 500/hr or R 3,000/project" value={form.rate}
                           onChange={e => setForm(f => ({ ...f, rate: e.target.value }))} style={inputStyle}
-                          onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                          onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                           onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"} />
                       </div>
                     </div>
@@ -462,7 +462,7 @@ export default function FreelancerPage() {
                           const sel = selectedAiTools.includes(tool.id);
                           return (
                             <button key={tool.id} type="button" onClick={() => toggleAiTool(tool.id)}
-                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(223,255,0,0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(223,255,0,0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
+                              style={{ padding: "0.45rem 1rem", borderRadius: 999, fontSize: "0.78rem", background: sel ? "rgba(var(--accent-rgb),0.1)" : "rgba(255,255,255,0.04)", border: sel ? "1px solid rgba(var(--accent-rgb),0.4)" : "1px solid rgba(255,255,255,0.1)", color: sel ? "var(--accent)" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }}>
                               {sel ? "✓ " : ""}{tool.label}
                             </button>
                           );
@@ -481,7 +481,7 @@ export default function FreelancerPage() {
                         value={form.laptopModel}
                         onChange={e => setForm(f => ({ ...f, laptopModel: e.target.value }))}
                         style={inputStyle}
-                        onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                        onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                         onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"} />
                       <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)", marginTop: "0.4rem", lineHeight: 1.6 }}>
                         Nuuhaven does not provide or lend hardware. All freelancers must have their own capable equipment.
@@ -498,9 +498,9 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>CV / Resume (PDF) — optional</label>
                         <div
                           onClick={() => cvRef.current?.click()}
-                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: cvFile ? "rgba(223,255,0,0.04)" : "rgba(255,255,255,0.02)", borderColor: cvFile ? "rgba(223,255,0,0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
+                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: cvFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(255,255,255,0.02)", borderColor: cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
                           onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}
-                          onMouseLeave={e => (e.currentTarget.style.borderColor = cvFile ? "rgba(223,255,0,0.35)" : "rgba(255,255,255,0.15)")}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = cvFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)")}
                         >
                           <div style={{ fontSize: "1.5rem", color: cvFile ? "var(--accent)" : "rgba(255,255,255,0.25)", marginBottom: "0.5rem" }}>◳</div>
                           {cvFile ? (
@@ -523,9 +523,9 @@ export default function FreelancerPage() {
                         <label style={labelStyle}>Portfolio PDF *</label>
                         <div
                           onClick={() => portfolioRef.current?.click()}
-                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: portfolioFile ? "rgba(223,255,0,0.04)" : "rgba(255,255,255,0.02)", borderColor: portfolioFile ? "rgba(223,255,0,0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
+                          style={{ border: "1px dashed rgba(255,255,255,0.15)", borderRadius: 10, padding: "1.5rem", textAlign: "center", cursor: "pointer", background: portfolioFile ? "rgba(var(--accent-rgb),0.04)" : "rgba(255,255,255,0.02)", borderColor: portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)", transition: "all 0.2s" }}
                           onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)")}
-                          onMouseLeave={e => (e.currentTarget.style.borderColor = portfolioFile ? "rgba(223,255,0,0.35)" : "rgba(255,255,255,0.15)")}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = portfolioFile ? "rgba(var(--accent-rgb),0.35)" : "rgba(255,255,255,0.15)")}
                         >
                           <div style={{ fontSize: "1.5rem", color: portfolioFile ? "var(--accent)" : "rgba(255,255,255,0.25)", marginBottom: "0.5rem" }}>◈</div>
                           {portfolioFile ? (
@@ -553,7 +553,7 @@ export default function FreelancerPage() {
                       value={form.message}
                       onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                       style={{ ...inputStyle, resize: "vertical", lineHeight: 1.75 }}
-                      onFocus={e => e.currentTarget.style.borderColor = "rgba(223,255,0,0.45)"}
+                      onFocus={e => e.currentTarget.style.borderColor = "rgba(var(--accent-rgb),0.45)"}
                       onBlur={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}
                     />
                   </div>

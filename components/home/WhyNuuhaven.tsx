@@ -47,15 +47,15 @@ export default function WhyNuuhaven() {
             <div className="accent-line">
               <span className="label-mono">Why Nuuhaven</span>
             </div>
-            <h2 className="display-xl" style={{ maxWidth: "14ch", marginBottom: "2rem" }}>
+            <h2 className="display-xl" style={{ maxWidth: "14ch", marginBottom: isMobile ? "1.25rem" : "2rem" }}>
               The Standard<br />That Sets Us<br />Apart.
             </h2>
-            <p className="text-base" style={{ color: "var(--text-muted)", lineHeight: 2 }}>
+            <p className="text-base" style={{ color: "var(--text-muted)", lineHeight: isMobile ? 1.7 : 2 }}>
               Six principles that guide every engagement and ensure every client receives the level of execution their business deserves.
             </p>
           </div>
 
-          <div className="lg:w-3/5 grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "1rem" : "2rem" }}>
+          <div className="lg:w-3/5 grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "0.7rem" : "2rem" }}>
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
@@ -64,10 +64,21 @@ export default function WhyNuuhaven() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.6, delay: i * 0.07 }}
               >
+                {isMobile ? (
+                  <HolographicCard className="h-full" style={{ padding: "1.1rem 1.1rem 1.15rem" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 10, alignItems: "baseline" }}>
+                      <span className="font-mono font-bold" style={{ color: "var(--accent)", fontSize: "0.8rem" }}>{v.icon}</span>
+                      <div>
+                        <h3 className="font-semibold" style={{ fontSize: "0.98rem", lineHeight: 1.35, marginBottom: "0.4rem" }}>{v.title}</h3>
+                        <p style={{ color: "var(--text-muted)", fontSize: "0.86rem", lineHeight: 1.65, margin: 0 }}>{v.desc}</p>
+                      </div>
+                    </div>
+                  </HolographicCard>
+                ) : (
                 <HolographicCard className="h-full" style={{ padding: isMobile ? "1.25rem" : "2.5rem" }}>
                   <div
                     className="font-mono font-bold text-2xl"
-                    style={{ color: "rgba(223,255,0,0.35)", marginBottom: "2rem" }}
+                    style={{ color: "rgba(var(--accent-rgb),0.35)", marginBottom: "2rem" }}
                   >
                     {v.icon}
                   </div>
@@ -76,6 +87,7 @@ export default function WhyNuuhaven() {
                     {v.desc}
                   </p>
                 </HolographicCard>
+                )}
               </motion.div>
             ))}
           </div>

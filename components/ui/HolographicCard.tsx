@@ -39,7 +39,7 @@ export default function HolographicCard({ children, className = "", style, glowO
         rotateX: tilt.x,
         rotateY: tilt.y,
         boxShadow: hovered && glowOnHover
-          ? "0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(223,255,0,0.08)"
+          ? "0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(var(--accent-rgb),0.08)"
           : "0 10px 30px rgba(0,0,0,0.5)",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}

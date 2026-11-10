@@ -184,7 +184,7 @@ export default function ToolsPage() {
                     ))}
                   </div>
                   {tool.when && (
-                    <div style={{ marginTop: "1.75rem", padding: "0.875rem 1.125rem", background: "rgba(223,255,0,0.04)", border: "1px solid rgba(223,255,0,0.12)", borderRadius: 8 }}>
+                    <div style={{ marginTop: "1.75rem", padding: "0.875rem 1.125rem", background: "rgba(var(--accent-rgb),0.04)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 8 }}>
                       <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>When to use: </span>
                       <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.55)" }}>{tool.when}</span>
                     </div>
