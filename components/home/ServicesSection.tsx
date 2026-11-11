@@ -79,8 +79,8 @@ function ServiceAccordion() {
               </span>
               <span style={{ minWidth: 0 }}>
                 <span className="label-mono" style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: "0.56rem", marginBottom: 4 }}>
-                  {s.sub}
-                  {s.featured && <span style={{ fontSize: "0.46rem", fontWeight: 700, color: "#000", background: "var(--accent)", padding: "0.12rem 0.4rem", borderRadius: 3 }}>Most in-demand</span>}
+                  <span>{s.sub}</span>
+                  {s.featured && <span style={{ fontSize: "0.46rem", fontWeight: 700, color: "#000", background: "var(--accent)", padding: "0.12rem 0.4rem", borderRadius: 3, flexShrink: 0 }}>Most in-demand</span>}
                 </span>
                 <span style={{ display: "block", fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.35 }}>{s.title}</span>
               </span>

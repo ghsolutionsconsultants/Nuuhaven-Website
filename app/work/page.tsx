@@ -603,7 +603,7 @@ function CommandCentre({ onOpen, isMobile }: { onOpen: (id: string) => void; isM
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 10, padding: "0.65rem 1rem", borderRadius: 12, border: "1px solid rgba(var(--accent-rgb),0.2)", background: "rgba(var(--accent-rgb),0.04)" }}>
         <span style={{ ...mono, fontSize: "0.6rem", color: "var(--accent)" }}>Nuuhaven · Command Centre</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, ...mono, fontSize: "0.56rem", color: "#4ade80" }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 6, ...mono, fontSize: "0.56rem", color: "var(--live)" }}>
             <span className="live-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80" }} />All systems live
           </span>
           <LiveClock />

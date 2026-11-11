@@ -191,7 +191,7 @@ export default function EcosystemVisualizer() {
                     {/* Main bubble */}
                     <circle
                       cx={x} cy={y} r={NODE_R}
-                      fill={isActive ? "rgba(var(--accent-rgb),0.13)" : "rgba(var(--surface-rgb),0.96)"}
+                      fill={isActive ? "var(--lime-backing)" : "rgba(var(--surface-rgb),0.96)"}
                       stroke={isActive ? "var(--accent)" : "rgba(var(--ink-rgb),0.14)"}
                       strokeWidth={isActive ? 1.5 : 1}
                     />
@@ -213,7 +213,7 @@ export default function EcosystemVisualizer() {
                       textAnchor="middle"
                       fontSize={10}
                       fontWeight="700"
-                      fill={isActive ? "var(--accent)" : "rgba(160,160,160,0.85)"}
+                      fill={isActive ? "var(--accent-ink)" : "rgba(var(--ink-rgb),0.55)"}
                       letterSpacing="0.06em"
                       style={{ pointerEvents: "none", userSelect: "none" }}
                     >
@@ -227,7 +227,7 @@ export default function EcosystemVisualizer() {
               {/* Center bubble, on top of everything */}
               <circle
                 cx={CX} cy={CY} r={CENTER_R}
-                fill={active ? "rgba(var(--accent-rgb),0.11)" : "var(--surface)"}
+                fill={active ? "var(--lime-backing)" : "#0e0e0e"}
                 stroke={active ? "var(--accent)" : "rgba(var(--ink-rgb),0.2)"}
                 strokeWidth={active ? 1.5 : 1}
               />

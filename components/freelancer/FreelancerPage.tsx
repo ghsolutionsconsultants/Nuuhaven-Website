@@ -469,7 +469,7 @@ export default function FreelancerPage() {
                         })}
                       </div>
                       {selectedAiTools.length === 0 && (
-                        <p style={{ fontSize: "0.72rem", color: "rgba(var(--warn-rgb),0.6)", marginTop: "0.625rem", fontStyle: "italic" }}>
+                        <p style={{ fontSize: "0.72rem", color: "rgba(var(--warn-rgb),0.85)", marginTop: "0.625rem", fontStyle: "italic" }}>
                           No AI tools selected. Please note this may limit the projects you are eligible for.
                         </p>
                       )}

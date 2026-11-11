@@ -36,6 +36,10 @@
   --shadow-strong: 0.8;
   --shadow-soft: 0.5;
   --cursor: var(--accent);
+  /* Fill behind lime glyphs drawn in SVG, and lime text that has no backing */
+  --lime-backing: rgba(var(--accent-rgb), 0.12);
+  --accent-ink: var(--accent);
+  --live: #4ade80;
   --border-subtle: rgba(var(--ink-rgb), 0.06);
   --glow-accent: 0 0 40px rgba(var(--accent-rgb), 0.15);
   --glow-accent-strong: 0 0 80px rgba(var(--accent-rgb), 0.3);
@@ -61,6 +65,9 @@ html[data-theme="light"] {
   --shadow-strong: 0.14;
   --shadow-soft: 0.08;
   --cursor: #0e0e0e;
+  --lime-backing: #171717;
+  --accent-ink: #0e0e0e;
+  --live: #15803d;
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,6 +104,21 @@ a { color: inherit; }
 [style*="color: rgba(var(--ink-rgb),0.25)"],
 [style*="color: rgba(var(--ink-rgb),0.28)"] {
   color: rgba(var(--ink-rgb),0.45) !important;
+}
+
+/* On paper, translucent ink fades faster than on black: give faint text a
+   higher floor in light mode. Anchored to the `color` property only. */
+html[data-theme="light"] :is(
+  [style^="color:rgba(var(--ink-rgb),0.2"], [style*=";color:rgba(var(--ink-rgb),0.2"],
+  [style^="color:rgba(var(--ink-rgb),0.3"], [style*=";color:rgba(var(--ink-rgb),0.3"],
+  [style^="color:rgba(var(--ink-rgb),0.4"], [style*=";color:rgba(var(--ink-rgb),0.4"],
+  [style^="color:rgba(var(--ink-rgb),0.5"], [style*=";color:rgba(var(--ink-rgb),0.5"],
+  [style^="color: rgba(var(--ink-rgb),0.2"], [style*="; color: rgba(var(--ink-rgb),0.2"],
+  [style^="color: rgba(var(--ink-rgb),0.3"], [style*="; color: rgba(var(--ink-rgb),0.3"],
+  [style^="color: rgba(var(--ink-rgb),0.4"], [style*="; color: rgba(var(--ink-rgb),0.4"],
+  [style^="color: rgba(var(--ink-rgb),0.5"], [style*="; color: rgba(var(--ink-rgb),0.5"]
+) {
+  color: rgba(var(--ink-rgb),0.66) !important;
 }
 
 body {
@@ -397,18 +419,34 @@ iframe:not(.previewer-frame) { max-width: 100%; }
 
 /* ── Light theme refinements ──────────────────────────────────────────────── */
 
-/* Lime text is unreadable on white, so in light mode it sits on a charcoal chip.
-   Matches inline styles whose colour (not border/background colour) is the accent. */
-html[data-theme="light"] [style^="color:var(--accent)"],
-html[data-theme="light"] [style*=";color:var(--accent)"],
-html[data-theme="light"] [style^="color: var(--accent)"],
-html[data-theme="light"] [style*="; color: var(--accent)"],
+/* Lime text is unreadable on white, so in light mode LimeChips gives it a
+   charcoal backing. Plain text is highlighted with an oversized underline pulled
+   up behind the glyphs: it covers only the text runs on each line, so it never
+   stretches across a block-level element or paints over neighbouring lines.
+   Small elements with their own background get a full fill instead.
+   Both are sized from the cap height with equal space above the capitals and
+   below the baseline, so the text sits vertically centred in the charcoal. */
+html[data-theme="light"] .lime-band {
+  text-decoration-line: underline !important;
+  text-decoration-style: solid !important;
+  text-decoration-color: #171717 !important;
+  text-decoration-thickness: calc(1cap + 2 * var(--lime-pad, 0.2em)) !important;
+  text-underline-offset: calc(-1cap - var(--lime-pad, 0.2em)) !important;
+  text-decoration-skip-ink: none !important;
+}
+html[data-theme="light"] .lime-fill,
 html[data-theme="light"] .lime-chip {
   background-color: #171717 !important;
   border-radius: 5px;
   padding-inline: 0.32em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+html[data-theme="light"] .lime-chip,
+html[data-theme="light"] .lime-pad {
+  text-box: trim-both cap alphabetic;
+  padding-block: 0.36em !important;
+  line-height: 1;
 }
 
 /* Lime fills keep a hairline edge so they don't dissolve into the white page. */

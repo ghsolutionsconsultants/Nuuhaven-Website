@@ -9,6 +9,7 @@ import QuantumCursor from "@/components/ui/QuantumCursor";
 import NeuralMesh from "@/components/ui/NeuralMesh";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import FloatingActions from "@/components/ui/FloatingActions";
+import LimeChips from "@/components/ui/LimeChips";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const geistSans = Geist({
@@ -97,6 +98,7 @@ export default function RootLayout({
           <Footer />
         </LenisProvider>
         <FloatingActions />
+        <LimeChips />
       </body>
     </html>
   );
